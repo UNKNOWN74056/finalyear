@@ -49,7 +49,7 @@ class _transferformState extends State<transferform> {
             decoration: InputDecoration(
                 label: const Text("Enter Email"),
                 hintText: "Enter email",
-                prefixIcon: const Icon(Icons.person),
+                prefixIcon: const Icon(Icons.email),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
                 )),
