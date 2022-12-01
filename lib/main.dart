@@ -1,4 +1,5 @@
 import 'package:finalyear/pages/loginpage.dart';
+import 'package:finalyear/splashscreen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,6 +20,6 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.teal,
         ),
         debugShowCheckedModeBanner: false,
-        home: const loginpage());
+        home: const splashscreen());
   }
 }
