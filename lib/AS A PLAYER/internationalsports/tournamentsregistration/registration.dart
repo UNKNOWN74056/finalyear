@@ -19,53 +19,58 @@ class _registrationState extends State<registration> {
         title: const Text("Registration"),
       ),
       body: SingleChildScrollView(
+          child: Container(
+        margin: EdgeInsets.all(10.0),
+        child: Form(
           child: Column(
-        children: [
-          const Padding(
-            padding: EdgeInsets.only(
-              top: 25,
-            ),
-            child: Text(
-              "Registration Form",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(
+                  top: 25,
+                ),
+                child: Text(
+                  "Registration Form",
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Text(
+                "Team Name:",
+                style: TextStyle(fontSize: 20),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                    label: const Text("Enter Team Name"),
+                    hintText: "Enter Team Name",
+                    prefixIcon: const Icon(Icons.person),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    )),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const Text("Captain Name:", style: TextStyle(fontSize: 20)),
+              const SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                    label: const Text("Enter Captain Name"),
+                    hintText: "Enter Captain Name",
+                    prefixIcon: const Icon(Icons.person),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    )),
+              ),
+            ],
           ),
-          const SizedBox(
-            height: 20,
-          ),
-          const Text(
-            "Team Name:",
-            style: TextStyle(fontSize: 20),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          TextFormField(
-            decoration: InputDecoration(
-                label: const Text("Enter Team Name"),
-                hintText: "Enter Team Name",
-                prefixIcon: const Icon(Icons.person),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                )),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          const Text("Captain Name:", style: TextStyle(fontSize: 20)),
-          const SizedBox(
-            height: 10,
-          ),
-          TextFormField(
-            decoration: InputDecoration(
-                label: const Text("Enter Captain Name"),
-                hintText: "Enter Captain Name",
-                prefixIcon: const Icon(Icons.person),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                )),
-          ),
-        ],
+        ),
       )),
     ));
   }

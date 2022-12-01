@@ -15,24 +15,14 @@ class _FootballState extends State<Football> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(children: [
-        // const Padding(
-        //   padding: EdgeInsets.only(right: 20, top: 5),
-        //   child: Center(
-        //     child: Text(
-        //       "Coaches",
-        //       style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
-        //     ),
-        //   ),
-        // ),
+        Container(
+          margin: EdgeInsets.all(10.0),
+          child: TextFormField(
+            decoration: InputDecoration(hintText: "Search"),
+          ),
+        ),
         const SizedBox(height: 20),
         Expanded(
-            // child: Container(
-            //     height: 550,
-            //     decoration: const BoxDecoration(
-            //         borderRadius: BorderRadius.only(
-            //             topRight: Radius.circular(25.0),
-            //             topLeft: Radius.circular(25.0)),
-            //         color: Colors.grey),
             child: ListView.builder(
                 itemCount: coachdata.length,
                 itemBuilder: (BuildContext context, index) {
