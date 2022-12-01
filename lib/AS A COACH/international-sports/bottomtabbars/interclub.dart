@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../AS A PLAYER/internationalsports/Details/clubdetail.dart';
+import '../../../AS A PLAYER/internationalsports/dashboard/home.dart';
 import '../../../AS A PLAYER/internationalsports/dashboard/homedb.dart';
 import '../../../model/clubdata.dart';
 
@@ -24,7 +25,11 @@ class _interclubState extends State<interclub> {
                       Padding(
                         padding: const EdgeInsets.only(left: 20),
                         child: IconButton(
-                            onPressed: () => Get.to(() => (const Homedb())),
+                            onPressed: () {
+                              showSearch(
+                                  context: context,
+                                  delegate: CustomSearchDelegate());
+                            },
                             icon: const Icon(Icons.search)),
                       ),
                     ],
@@ -37,7 +42,7 @@ class _interclubState extends State<interclub> {
                       style:
                           TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                     ),
-                     flexibleSpace: FlexibleSpaceBar(
+                    flexibleSpace: FlexibleSpaceBar(
                         background: Image.asset(
                       "assets/mixsport.jpeg",
                       fit: BoxFit.cover,
@@ -50,11 +55,6 @@ class _interclubState extends State<interclub> {
                 height: 20,
               ),
               Expanded(
-                  // child: Container(
-                  //     decoration: BoxDecoration(
-                  //         borderRadius: BorderRadius.circular(25),
-                  //         color: Colors.grey),
-                  //     height: 450,
                   child: ListView.builder(
                       itemCount: clubdata.length,
                       itemBuilder: (BuildContext context, index) {

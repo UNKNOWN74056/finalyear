@@ -11,6 +11,8 @@ class loginpage extends StatefulWidget {
   State<loginpage> createState() => _loginpageState();
 }
 
+final _formKey = GlobalKey<FormState>();
+
 class _loginpageState extends State<loginpage> {
   @override
   Widget build(BuildContext context) {
@@ -18,6 +20,7 @@ class _loginpageState extends State<loginpage> {
         child: Scaffold(
             body: SingleChildScrollView(
       child: Form(
+        key: _formKey,
         child: Column(
           children: [
             Padding(
@@ -42,25 +45,44 @@ class _loginpageState extends State<loginpage> {
               padding: const EdgeInsets.all(15),
               child: Column(
                 children: [
-                  const TextForm(
-                    lable: "EMAIL",
-                    hint: "Enter your email",
-                    icon: Icon(Icons.person),
-                  ),
+                  TextFormField(
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          hintText: "Enter your email",
+                          labelText: "Enter email",
+                          prefixIcon: const Icon(Icons.person)),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "please enter your username";
+                        } else {
+                          return null;
+                        }
+                      }),
                   const SizedBox(
                     height: 25,
                   ),
-                  TextForm(
-                    lable: "PASSWORD",
-                    hint: "Enter your password",
-                    icon: Icon(Icons.lock),
-                    iccon: GestureDetector(
-                      onTap: () {
-                        setState(() {});
-                      },
-                      child: const Icon(Icons.visibility_off),
-                    ),
-                  ),
+                  TextFormField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        labelText: "PASSWORD",
+                        hintText: "Enter your password",
+                        prefixIcon: const Icon(Icons.lock),
+                        suffixIcon: GestureDetector(
+                          onTap: () {
+                            setState(() {});
+                          },
+                          child: const Icon(Icons.visibility_off),
+                        ),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "please enter your password";
+                        } else {
+                          return null;
+                        }
+                      }),
                 ],
               ),
             ),
@@ -70,13 +92,7 @@ class _loginpageState extends State<loginpage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: ((context) =>
-                                    const forgotpassword())));
-                      },
+                      onPressed: () => Get.to(() => (const forgotpassword())),
                       child: const Text("Forgot password"))
                 ],
               ),
@@ -87,6 +103,14 @@ class _loginpageState extends State<loginpage> {
                 padding: const EdgeInsets.only(left: 30, right: 30),
                 child: ElevatedButton(
                     // i use there also get
+                    // onPressed: () {
+                    //   if (_formKey.currentState!.validate()) {
+                    //     ScaffoldMessenger.of(context).showSnackBar(
+                    //       const SnackBar(content: Text('Processing Data')),
+                    //     );
+                    //   }
+                    // },
+
                     onPressed: () => Get.to(() => (const Homedb())),
                     child: const Text("LOGIN")),
               ),
@@ -116,12 +140,7 @@ class _loginpageState extends State<loginpage> {
               children: [
                 const Text("Do not have an account!"),
                 TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const signuppage()));
-                    },
+                    onPressed: () => Get.to(() => (const signuppage())),
                     child: const Text("SIGNUP"))
               ],
             ),
@@ -132,37 +151,37 @@ class _loginpageState extends State<loginpage> {
   }
 }
 
-class TextForm extends StatelessWidget {
-  const TextForm({
-    required this.lable,
-    required this.hint,
-    required this.icon,
-    this.iccon,
-    Key? key,
-  }) : super(key: key);
-  final lable;
-  final hint;
-  final icon;
-  final iccon;
+// class TextForm extends StatelessWidget {
+//   const TextForm({
+//     required this.lable,
+//     required this.hint,
+//     required this.icon,
+//     this.iccon,
+//     Key? key,
+//   }) : super(key: key);
+//   final lable;
+//   final hint;
+//   final icon;
+//   final iccon;
 
-  @override
-  Widget build(BuildContext context) {
-    var obscureText = true;
-    return TextFormField(
-        //obscureText: obscureText,
-        style: const TextStyle(color: Colors.black),
-        decoration: InputDecoration(
-          labelText: lable,
-          hintText: hint,
-          prefixIcon: icon,
-          suffixIcon: iccon,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.black),
-            borderRadius: BorderRadius.circular(20),
-          ),
-        ));
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     var obscureText = true;
+//     return TextFormField(
+//         //obscureText: obscureText,
+//         style: const TextStyle(color: Colors.black),
+//         decoration: InputDecoration(
+//           labelText: lable,
+//           hintText: hint,
+//           prefixIcon: icon,
+//           suffixIcon: iccon,
+//           border: OutlineInputBorder(
+//             borderRadius: BorderRadius.circular(20),
+//           ),
+//           enabledBorder: OutlineInputBorder(
+//             borderSide: const BorderSide(color: Colors.black),
+//             borderRadius: BorderRadius.circular(20),
+//           ),
+//         ));
+//   }
+// }

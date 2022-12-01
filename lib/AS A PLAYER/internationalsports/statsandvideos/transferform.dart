@@ -1,8 +1,7 @@
-import 'dart:ffi';
-
+import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input_test.dart';
+import 'package:get/get.dart';
 
 class transferform extends StatefulWidget {
   const transferform({super.key});
@@ -10,6 +9,8 @@ class transferform extends StatefulWidget {
   @override
   State<transferform> createState() => _transferformState();
 }
+
+final _formKey = GlobalKey<FormState>();
 
 class _transferformState extends State<transferform> {
   @override
@@ -24,6 +25,7 @@ class _transferformState extends State<transferform> {
           child: Container(
         margin: EdgeInsets.all(10.0),
         child: Form(
+          key: _formKey,
           child: Column(
             children: [
               Row(
@@ -50,14 +52,20 @@ class _transferformState extends State<transferform> {
                 ],
               ),
               TextFormField(
-                decoration: InputDecoration(
-                    label: const Text("Enter Email"),
-                    hintText: "Enter email",
-                    prefixIcon: const Icon(Icons.email),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    )),
-              ),
+                  decoration: InputDecoration(
+                      label: const Text("Enter Email"),
+                      hintText: "Enter email",
+                      prefixIcon: const Icon(Icons.email),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      )),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "please enter your username";
+                    } else {
+                      return null;
+                    }
+                  }),
               const SizedBox(
                 height: 30,
               ),
@@ -76,14 +84,20 @@ class _transferformState extends State<transferform> {
                 height: 30,
               ),
               TextFormField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25)),
-                  hintText: "Enter your message",
-                ),
-                maxLines: 10,
-                maxLength: 120,
-              ),
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25)),
+                    hintText: "Enter your message",
+                  ),
+                  maxLines: 10,
+                  maxLength: 120,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "please enter your username";
+                    } else {
+                      return null;
+                    }
+                  }),
               const SizedBox(
                 height: 40,
               ),
@@ -93,12 +107,18 @@ class _transferformState extends State<transferform> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       ElevatedButton.icon(
-                        onPressed: () {},
+                        onPressed: () => Get.to(const profile()),
                         icon: const FaIcon(FontAwesomeIcons.trash),
                         label: const Text("CANCEL"),
                       ),
                       ElevatedButton.icon(
-                        onPressed: () {},
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Processing Data')),
+                            );
+                          }
+                        },
                         icon: const FaIcon(FontAwesomeIcons.check),
                         label: const Text("CONFERM"),
                       ),

@@ -8,6 +8,7 @@ import 'package:finalyear/AS%20A%20COACH/international-sports/tabs/player-vulley
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../AS A PLAYER/internationalsports/dashboard/home.dart';
 import '../../../AS A PLAYER/internationalsports/dashboard/homedb.dart';
 
 class interhome extends StatefulWidget {
@@ -31,7 +32,11 @@ class _interhomeState extends State<interhome> {
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
                       child: IconButton(
-                          onPressed: () => Get.to(() => (const Homedb())),
+                          onPressed: () {
+                            showSearch(
+                                context: context,
+                                delegate: CustomSearchDelegate());
+                          },
                           icon: const Icon(Icons.search)),
                     ),
                     Padding(
@@ -49,7 +54,7 @@ class _interhomeState extends State<interhome> {
                     "Internation sport",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                   flexibleSpace: FlexibleSpaceBar(
+                  flexibleSpace: FlexibleSpaceBar(
                       background: Image.asset(
                     "assets/mixsport.jpeg",
                     fit: BoxFit.cover,

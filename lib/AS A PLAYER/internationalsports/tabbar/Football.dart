@@ -15,12 +15,6 @@ class _FootballState extends State<Football> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(children: [
-        Container(
-          margin: EdgeInsets.all(10.0),
-          child: TextFormField(
-            decoration: InputDecoration(hintText: "Search"),
-          ),
-        ),
         const SizedBox(height: 20),
         Expanded(
             child: ListView.builder(

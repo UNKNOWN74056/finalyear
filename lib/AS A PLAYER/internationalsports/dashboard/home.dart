@@ -33,7 +33,11 @@ class _homeState extends State<home> //with TickerProviderStateMixin
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
                       child: IconButton(
-                          onPressed: () => Get.to(() => (const Homedb())),
+                          onPressed: () {
+                            showSearch(
+                                context: context,
+                                delegate: CustomSearchDelegate());
+                          },
                           icon: const Icon(Icons.search)),
                     ),
                     Padding(
@@ -85,83 +89,67 @@ class _homeState extends State<home> //with TickerProviderStateMixin
         ),
       );
 }
- //Scaffold(
-//       appBar: PreferredSize(
-//           preferredSize: Size.fromHeight(100),
-//           child: AppBar(
-//             centerTitle: true,
-//             title: const Text(
-//               "International Sports",
-//               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-//             ),
-//             actions: [
-//               Padding(
-//                 padding: const EdgeInsets.only(left: 20),
-//                 child: IconButton(onPressed: () {}, icon: Icon(Icons.search)),
-//               ),
-//               Padding(
-//                   padding: const EdgeInsets.all(8.0),
-//                   child: IconButton(
-//                     onPressed: () {},
-//                     icon: const Icon(Icons.camera_alt),
-//                   ))
-//             ],
-//             shape: const RoundedRectangleBorder(
-//                 borderRadius: BorderRadius.only(
-//                     bottomLeft: Radius.circular(25),
-//                     bottomRight: Radius.circular(25))),
-//           )),
-//       body: Column(
-//         children: [
-//           const SizedBox(
-//             height: 25,
-//           ),
-//           Container(
-//             child: TabBar(
-//               indicator: BoxDecoration(
-//                   borderRadius: BorderRadius.circular(50), // Creates border
-//                   color: Colors.teal),
-//               isScrollable: true,
-//               controller: _TabController,
-//               labelColor: Colors.black,
-//               unselectedLabelColor: Colors.teal,
-//               tabs: const [
-//                 Tab(
-//                   text: "Football",
-//                 ),
-//                 Tab(
-//                   text: "Basketball",
-//                 ),
-//                 Tab(
-//                   text: "vulleyball",
-//                 ),
-//                 Tab(
-//                   text: "tabletenis",
-//                 ),
-//                 Tab(
-//                   text: "Cricket",
-//                 ),
-//                 Tab(
-//                   text: "Hockey",
-//                 ),
-//               ],
-//             ),
-//           ),
-//           Expanded(
-//             child: Container(
-//               width: double.maxFinite,
-//               height: double.maxFinite,
-//               child: TabBarView(controller: _TabController, children: const [
-//                 Football(),
-//                 Basketball(),
-//                 vulleyball(),
-//                 tabletenis(),
-//                 Cricket(),
-//                 Hockey()
-//               ]),
-//             ),
-//           )
-//         ],
-//       ),
-//     );
-//   }
+
+class CustomSearchDelegate extends SearchDelegate {
+  List<String> searchiterms = [
+    "ali",
+    "hamza",
+    "fahad",
+    "faizan",
+  ];
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(
+          onPressed: () {
+            query = "";
+          },
+          icon: const Icon(Icons.clear))
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+        onPressed: () {
+          close(context, null);
+        },
+        icon: Icon(Icons.arrow_back));
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    List<String> matchquery = [];
+    for (var friuts in searchiterms) {
+      if (friuts.toLowerCase().contains(query.toLowerCase())) {
+        matchquery.add(friuts);
+      }
+    }
+    return ListView.builder(
+        itemCount: matchquery.length,
+        itemBuilder: (context, index) {
+          var result = matchquery[index];
+          return ListTile(
+            title: Text(result),
+          );
+        });
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    List<String> matchquery = [];
+    for (var friuts in searchiterms) {
+      if (friuts.toLowerCase().contains(query.toLowerCase())) {
+        matchquery.add(friuts);
+      }
+    }
+    return ListView.builder(
+        itemCount: matchquery.length,
+        itemBuilder: (context, index) {
+          var result = matchquery[index];
+          return ListTile(
+            title: Text(result),
+          );
+        });
+  }
+}
