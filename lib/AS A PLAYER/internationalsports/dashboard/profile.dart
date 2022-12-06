@@ -33,7 +33,7 @@ class _profileState extends State<profile> with TickerProviderStateMixin {
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
               CircleAvatar(
-                radius: 40,
+                radius: 60,
                 backgroundImage: AssetImage("assets/images.jpg"),
               ),
             ],

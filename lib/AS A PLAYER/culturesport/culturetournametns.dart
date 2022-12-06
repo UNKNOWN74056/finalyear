@@ -1,4 +1,3 @@
-import 'package:finalyear/AS%20A%20PLAYER/culturesport/tabbar/archery.dart';
 import 'package:finalyear/AS%20A%20PLAYER/culturesport/tournaments%20tabs/tentpagging.dart';
 import 'package:finalyear/AS%20A%20PLAYER/culturesport/tournaments%20tabs/tourarchery.dart';
 import 'package:finalyear/AS%20A%20PLAYER/culturesport/tournaments%20tabs/tourgynamstic.dart';
