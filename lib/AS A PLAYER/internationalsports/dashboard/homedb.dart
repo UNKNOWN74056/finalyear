@@ -1,6 +1,6 @@
+import 'package:finalyear/AS%20A%20PLAYER/culturesport/culture_dashboard.dart';
 import 'package:finalyear/AS%20A%20PLAYER/culturesport/culture_home.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/dashboard.dart';
-import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/home.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -52,7 +52,7 @@ class _HomedbState extends State<Homedb> {
               Expanded(
                 child: InkWell(
                   onTap: () {
-                    Get.to(const culturehome());
+                    Get.to(const culturedashboard());
                   },
                   child: Container(
                     height: 300,

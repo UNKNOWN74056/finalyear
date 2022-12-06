@@ -1,4 +1,3 @@
-import 'package:finalyear/pages/loginpage.dart';
 import 'package:finalyear/splashscreen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

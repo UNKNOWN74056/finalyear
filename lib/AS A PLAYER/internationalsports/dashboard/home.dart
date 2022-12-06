@@ -15,11 +15,10 @@ class home extends StatefulWidget {
   State<home> createState() => _homeState();
 }
 
-class _homeState extends State<home> //with TickerProviderStateMixin
-{
+class _homeState extends State<home>{
   @override
   Widget build(BuildContext context) =>
-      //TabController _TabController = TabController(length: 6, vsync: this);
+      
 
       SafeArea(
         child: DefaultTabController(
@@ -74,7 +73,7 @@ class _homeState extends State<home> //with TickerProviderStateMixin
                         Text("Cricket"),
                         Text("Hockey"),
                       ]),
-                )
+                ),
               ],
               body: const TabBarView(children: [
                 Football(),
