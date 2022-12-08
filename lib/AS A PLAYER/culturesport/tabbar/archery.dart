@@ -1,4 +1,3 @@
-
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/Details/coachdetail.dart';
 import 'package:finalyear/model/coachmodel.dart';
 import 'package:flutter/material.dart';
@@ -15,31 +14,17 @@ class _archeryState extends State<archery> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 28, 32, 47),
       body: Column(children: [
-        // const Padding(
-        //   padding: EdgeInsets.only(right: 20, top: 5),
-        //   child: Center(
-        //     child: Text(
-        //       "Coaches",
-        //       style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
-        //     ),
-        //   ),
-        // ),
         const SizedBox(height: 20),
         Expanded(
-            // child: Container(
-            //     height: 550,
-            //     decoration: const BoxDecoration(
-            //         borderRadius: BorderRadius.only(
-            //             topRight: Radius.circular(25.0),
-            //             topLeft: Radius.circular(25.0)),
-            //         color: Colors.grey),
             child: ListView.builder(
                 itemCount: coachdata.length,
                 itemBuilder: (BuildContext context, index) {
                   return Container(
                     height: 80,
                     child: Card(
+                      color: Colors.blueGrey,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30)),
                       child: ListTile(

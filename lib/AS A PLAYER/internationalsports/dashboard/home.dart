@@ -15,12 +15,9 @@ class home extends StatefulWidget {
   State<home> createState() => _homeState();
 }
 
-class _homeState extends State<home>{
+class _homeState extends State<home> {
   @override
-  Widget build(BuildContext context) =>
-      
-
-      SafeArea(
+  Widget build(BuildContext context) => SafeArea(
         child: DefaultTabController(
           length: 6,
           child: Scaffold(
@@ -66,10 +63,10 @@ class _homeState extends State<home>{
                       isScrollable: true,
                       labelStyle: TextStyle(fontSize: 20),
                       tabs: [
-                        Text("football"),
-                        Text("Basketball"),
-                        Text("vulleyball"),
-                        Text("tabletenis"),
+                        Text("footBall"),
+                        Text("BasketBall"),
+                        Text("VulleyBall"),
+                        Text("TableTenis"),
                         Text("Cricket"),
                         Text("Hockey"),
                       ]),

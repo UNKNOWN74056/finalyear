@@ -75,34 +75,35 @@ class _clubdetailState extends State<clubdetail> {
           height: 250,
           width: 500,
           color: Colors.grey,
-          child: Column(
-            children: const [
-              Text(
-                "Deatails",
-                style: TextStyle(fontSize: 25),
-              ),
-              Text(
-                "Location:peshawar.",
-                
-                style: TextStyle(fontSize: 25),
-              ),
-              Text(
-                "Address: near to iqra school.",
-                style: TextStyle(fontSize: 25),
-              ),
-              Text(
-                "Motivation: We provide best trainning.",
-                style: TextStyle(fontSize: 25),
-              ),
-              Text(
-                "Contect: 0325343535",
-                style: TextStyle(fontSize: 25),
-              ),
-              Text(
-                "Email : hama@gmail.com",
-                style: TextStyle(fontSize: 25),
-              )
-            ],
+          child: Center(
+            child: Column(
+              children: const [
+                Text(
+                  "Deatails",
+                  style: TextStyle(fontSize: 25),
+                ),
+                Text(
+                  "Location:peshawar.",
+                  style: TextStyle(fontSize: 25),
+                ),
+                Text(
+                  "Address: near to iqra school.",
+                  style: TextStyle(fontSize: 25),
+                ),
+                Text(
+                  "Motivation: We provide best trainning.",
+                  style: TextStyle(fontSize: 25),
+                ),
+                Text(
+                  "Contect: 0325343535",
+                  style: TextStyle(fontSize: 25),
+                ),
+                Text(
+                  "Email : hama@gmail.com",
+                  style: TextStyle(fontSize: 25),
+                )
+              ],
+            ),
           ),
         )
       ]),

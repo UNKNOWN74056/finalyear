@@ -1,5 +1,4 @@
 import 'package:finalyear/AS%20A%20PLAYER/culturesport/culture_dashboard.dart';
-import 'package:finalyear/AS%20A%20PLAYER/culturesport/culture_home.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,6 +15,7 @@ class _HomedbState extends State<Homedb> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: const Color.fromARGB(255, 28, 32, 47),
         appBar: AppBar(centerTitle: true, title: const Text("Mr.Sports")),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -23,8 +23,19 @@ class _HomedbState extends State<Homedb> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
+                "WHAT SPORT DO YOU INTEREST?",
+                style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              ),
+              const SizedBox(height: 10),
+              const Text(
                 " International Sports",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: Colors.white),
               ),
               const SizedBox(height: 15.0),
               InkWell(
@@ -34,7 +45,6 @@ class _HomedbState extends State<Homedb> {
                 child: Container(
                   height: 300,
                   width: double.infinity,
-                  // color: Colors.amber,
                   decoration: const BoxDecoration(
                       image: DecorationImage(
                           fit: BoxFit.cover,
@@ -46,7 +56,10 @@ class _HomedbState extends State<Homedb> {
               const SizedBox(height: 30.0),
               const Text(
                 " Cultural Sports",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: Colors.white),
               ),
               const SizedBox(height: 15.0),
               Expanded(
