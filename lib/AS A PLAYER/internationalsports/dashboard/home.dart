@@ -48,7 +48,7 @@ class _homeState extends State<home> {
                   floating: true,
                   snap: true,
                   title: const Text(
-                    "Internation sport",
+                    "INTERNATIONAL",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   flexibleSpace: FlexibleSpaceBar(
