@@ -14,10 +14,10 @@ final _formKey = GlobalKey<FormState>();
 
 class _signuppageState extends State<signuppage> {
   final profession = ['Coache', 'Player'];
-  String? selectedval = 'Coache';
+  //String? selectedval = 'Coache';
 
   final gender = ['Male', 'Female', 'Other'];
-  String? selected = 'Male';
+  //String? selected = 'Male';
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -79,7 +79,8 @@ class _signuppageState extends State<signuppage> {
                           height: 25,
                         ),
                         DropdownButtonFormField(
-                            value: selectedval,
+
+                            //value: selectedval,
                             items: profession
                                 .map(
                                   (e) => DropdownMenuItem(
@@ -90,18 +91,20 @@ class _signuppageState extends State<signuppage> {
                                 .toList(),
                             onChanged: (val) {
                               setState(() {
-                                selectedval = val as String;
+                                //  selectedval = val as String;
                               });
                             },
                             icon: const Icon(
                               Icons.arrow_drop_down_circle,
                               color: Colors.purple,
                             ),
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                                 labelText: "Your profession",
-                                labelStyle: TextStyle(color: Colors.white),
-                                prefixIcon: Icon(Icons.sports),
-                                border: OutlineInputBorder()),
+                                labelStyle:
+                                    const TextStyle(color: Colors.white),
+                                prefixIcon: const Icon(Icons.sports),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20))),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return "please enter your profession";
@@ -113,7 +116,7 @@ class _signuppageState extends State<signuppage> {
                           height: 25,
                         ),
                         DropdownButtonFormField(
-                            value: selected,
+                            //value: selected,
                             items: gender
                                 .map(
                                   (e) => DropdownMenuItem(
@@ -124,18 +127,20 @@ class _signuppageState extends State<signuppage> {
                                 .toList(),
                             onChanged: (val) {
                               setState(() {
-                                selected = val as String;
+                                //  selected = val as String;
                               });
                             },
                             icon: const Icon(
                               Icons.arrow_drop_down_circle,
                               color: Colors.purple,
                             ),
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                                 labelText: "Your gender",
-                                labelStyle: TextStyle(color: Colors.white),
-                                prefixIcon: Icon(Icons.sports),
-                                border: OutlineInputBorder()),
+                                labelStyle:
+                                    const TextStyle(color: Colors.white),
+                                prefixIcon: const Icon(Icons.sports),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20))),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return "please enter your gender";

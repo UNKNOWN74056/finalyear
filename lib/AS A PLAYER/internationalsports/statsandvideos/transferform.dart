@@ -17,9 +17,10 @@ class _transferformState extends State<transferform> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+      backgroundColor: Color.fromARGB(255, 28, 32, 47),
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Transfer"),
+        title: const Text("TRANSFER"),
       ),
       body: SingleChildScrollView(
           child: Container(
@@ -34,8 +35,10 @@ class _transferformState extends State<transferform> {
                     padding: EdgeInsets.only(top: 25, left: 20),
                     child: Text(
                       "Transfer Request",
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
                     ),
                   ),
                 ],
@@ -46,15 +49,20 @@ class _transferformState extends State<transferform> {
                     padding: EdgeInsets.only(top: 50, left: 20),
                     child: Text(
                       "To:",
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 20, color: Colors.white),
                     ),
                   ),
                 ],
               ),
+              const SizedBox(
+                height: 10,
+              ),
               TextFormField(
                   decoration: InputDecoration(
-                      label: const Text("Enter Email"),
-                      hintText: "Enter email",
+                      label: const Text(
+                        "Enter Email",
+                        style: TextStyle(color: Colors.white),
+                      ),
                       prefixIcon: const Icon(Icons.email),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -75,7 +83,7 @@ class _transferformState extends State<transferform> {
                     padding: EdgeInsets.only(left: 15),
                     child: Text(
                       "Message:",
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 20, color: Colors.white),
                     ),
                   )
                 ],
@@ -85,10 +93,10 @@ class _transferformState extends State<transferform> {
               ),
               TextFormField(
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25)),
-                    hintText: "Enter your message",
-                  ),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25)),
+                      hintText: "Enter your message",
+                      hintStyle: const TextStyle(color: Colors.white)),
                   maxLines: 10,
                   maxLength: 120,
                   validator: (value) {
@@ -108,7 +116,10 @@ class _transferformState extends State<transferform> {
                     children: [
                       ElevatedButton.icon(
                         onPressed: () => Get.to(const profile()),
-                        icon: const FaIcon(FontAwesomeIcons.trash),
+                        icon: const FaIcon(
+                          FontAwesomeIcons.trash,
+                          color: Colors.red,
+                        ),
                         label: const Text("CANCEL"),
                       ),
                       ElevatedButton.icon(
@@ -119,7 +130,10 @@ class _transferformState extends State<transferform> {
                             );
                           }
                         },
-                        icon: const FaIcon(FontAwesomeIcons.check),
+                        icon: const FaIcon(
+                          FontAwesomeIcons.check,
+                          color: Colors.green,
+                        ),
                         label: const Text("CONFERM"),
                       ),
                     ]),

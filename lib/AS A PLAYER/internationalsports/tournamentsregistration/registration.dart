@@ -14,9 +14,13 @@ class _registrationState extends State<registration> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+      backgroundColor: Color.fromARGB(255, 28, 32, 47),
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Registration"),
+        title: const Text(
+          "REGISTRATION",
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: SingleChildScrollView(
           child: Container(
@@ -30,7 +34,10 @@ class _registrationState extends State<registration> {
                 ),
                 child: Text(
                   "Registration Form",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 ),
               ),
               const SizedBox(
@@ -38,15 +45,17 @@ class _registrationState extends State<registration> {
               ),
               const Text(
                 "Team Name:",
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 20, color: Colors.white),
               ),
               const SizedBox(
                 height: 10,
               ),
               TextFormField(
                 decoration: InputDecoration(
-                    label: const Text("Enter Team Name"),
-                    hintText: "Enter Team Name",
+                    label: const Text(
+                      "Enter Team Name",
+                      style: TextStyle(color: Colors.white),
+                    ),
                     prefixIcon: const Icon(Icons.person),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -55,14 +64,17 @@ class _registrationState extends State<registration> {
               const SizedBox(
                 height: 10,
               ),
-              const Text("Captain Name:", style: TextStyle(fontSize: 20)),
+              const Text("Captain Name:",
+                  style: TextStyle(fontSize: 20, color: Colors.white)),
               const SizedBox(
                 height: 10,
               ),
               TextFormField(
                 decoration: InputDecoration(
-                    label: const Text("Enter Captain Name"),
-                    hintText: "Enter Captain Name",
+                    label: const Text(
+                      "Enter Captain Name",
+                      style: TextStyle(color: Colors.white),
+                    ),
                     prefixIcon: const Icon(Icons.person),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),

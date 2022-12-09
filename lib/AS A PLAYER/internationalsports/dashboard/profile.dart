@@ -16,67 +16,72 @@ class _profileState extends State<profile> with TickerProviderStateMixin {
 
     return SafeArea(
         child: Scaffold(
+            backgroundColor: Color.fromARGB(255, 28, 32, 47),
             body: SingleChildScrollView(
-      child: Column(
-        children: [
-          const Padding(
-            padding: EdgeInsets.only(top: 15, right: 160),
-            child: Text(
-              "Profile",
-              style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
-            ),
-          ),
-          const SizedBox(
-            height: 25,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              CircleAvatar(
-                radius: 60,
-                backgroundImage: AssetImage("assets/images.jpg"),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Text(
-                "Your name",
-                style: TextStyle(fontSize: 20),
-              )
-            ],
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          Container(
-            child: TabBar(
-                labelColor: Colors.black,
-                unselectedLabelColor: Colors.green,
-                controller: _tabController,
-                tabs: const [
-                  Tab(
-                    text: "Stats",
+              child: Column(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(top: 20),
+                    child: Text(
+                      "Profile",
+                      style: TextStyle(
+                          fontSize: 50,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
                   ),
-                  Tab(
-                    text: "Videos",
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      CircleAvatar(
+                        radius: 60,
+                        backgroundImage: AssetImage("assets/images.jpg"),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        "Your name",
+                        style: TextStyle(fontSize: 20, color: Colors.white),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    child: TabBar(
+                        labelColor: Colors.white,
+                        unselectedLabelColor: Colors.green,
+                        controller: _tabController,
+                        tabs: const [
+                          Tab(
+                            text: "Stats",
+                          ),
+                          Tab(
+                            text: "Videos",
+                          )
+                        ]),
+                  ),
+                  Container(
+                    width: double.maxFinite,
+                    height: 500,
+                    child:
+                        TabBarView(controller: _tabController, children: const [
+                      stats(),
+                      videos(),
+                    ]),
                   )
-                ]),
-          ),
-          Container(
-            width: double.maxFinite,
-            height: 500,
-            child: TabBarView(controller: _tabController, children: const [
-              stats(),
-              videos(),
-            ]),
-          )
-        ],
-      ),
-    )));
+                ],
+              ),
+            )));
   }
 }
