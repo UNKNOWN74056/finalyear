@@ -56,7 +56,7 @@ class _registrationState extends State<registration> {
                       "Enter Team Name",
                       style: TextStyle(color: Colors.white),
                     ),
-                    prefixIcon: const Icon(Icons.person),
+                    prefixIcon: const Icon(Icons.group),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                     )),
@@ -80,6 +80,61 @@ class _registrationState extends State<registration> {
                       borderRadius: BorderRadius.circular(20),
                     )),
               ),
+              const Text("Address",
+                  style: TextStyle(fontSize: 20, color: Colors.white)),
+              const SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                    label: const Text(
+                      "Enter your address here",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    prefixIcon: const Icon(Icons.location_on),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    )),
+              ),
+              const Text("City",
+                  style: TextStyle(fontSize: 20, color: Colors.white)),
+              const SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                    label: const Text(
+                      "Enter your city here",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    prefixIcon: const Icon(Icons.location_city),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    )),
+              ),
+              const Text("Contact Email",
+                  style: TextStyle(fontSize: 20, color: Colors.white)),
+              const SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                    label: const Text(
+                      "Enter your email",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    prefixIcon: const Icon(Icons.mail),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    )),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              SizedBox(
+                  width: double.infinity,
+                  child:
+                      ElevatedButton(onPressed: () {}, child:const Text("submitt")))
             ],
           ),
         ),
