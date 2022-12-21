@@ -14,12 +14,10 @@ class _registrationState extends State<registration> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      backgroundColor: Color.fromARGB(255, 28, 32, 47),
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
           "REGISTRATION",
-          style: TextStyle(color: Colors.white),
         ),
       ),
       body: SingleChildScrollView(
@@ -35,9 +33,9 @@ class _registrationState extends State<registration> {
                 child: Text(
                   "Registration Form",
                   style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               const SizedBox(
@@ -45,7 +43,6 @@ class _registrationState extends State<registration> {
               ),
               const Text(
                 "Team Name:",
-                style: TextStyle(fontSize: 20, color: Colors.white),
               ),
               const SizedBox(
                 height: 10,
@@ -54,7 +51,6 @@ class _registrationState extends State<registration> {
                 decoration: InputDecoration(
                     label: const Text(
                       "Enter Team Name",
-                      style: TextStyle(color: Colors.white),
                     ),
                     prefixIcon: const Icon(Icons.group),
                     border: OutlineInputBorder(
@@ -64,8 +60,9 @@ class _registrationState extends State<registration> {
               const SizedBox(
                 height: 10,
               ),
-              const Text("Captain Name:",
-                  style: TextStyle(fontSize: 20, color: Colors.white)),
+              const Text(
+                "Captain Name:",
+              ),
               const SizedBox(
                 height: 10,
               ),
@@ -73,15 +70,15 @@ class _registrationState extends State<registration> {
                 decoration: InputDecoration(
                     label: const Text(
                       "Enter Captain Name",
-                      style: TextStyle(color: Colors.white),
                     ),
                     prefixIcon: const Icon(Icons.person),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                     )),
               ),
-              const Text("Address",
-                  style: TextStyle(fontSize: 20, color: Colors.white)),
+              const Text(
+                "Address",
+              ),
               const SizedBox(
                 height: 10,
               ),
@@ -89,15 +86,15 @@ class _registrationState extends State<registration> {
                 decoration: InputDecoration(
                     label: const Text(
                       "Enter your address here",
-                      style: TextStyle(color: Colors.white),
                     ),
                     prefixIcon: const Icon(Icons.location_on),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                     )),
               ),
-              const Text("City",
-                  style: TextStyle(fontSize: 20, color: Colors.white)),
+              const Text(
+                "City",
+              ),
               const SizedBox(
                 height: 10,
               ),
@@ -105,7 +102,6 @@ class _registrationState extends State<registration> {
                 decoration: InputDecoration(
                     label: const Text(
                       "Enter your city here",
-                      style: TextStyle(color: Colors.white),
                     ),
                     prefixIcon: const Icon(Icons.location_city),
                     border: OutlineInputBorder(
@@ -113,7 +109,9 @@ class _registrationState extends State<registration> {
                     )),
               ),
               const Text("Contact Email",
-                  style: TextStyle(fontSize: 20, color: Colors.white)),
+                  style: TextStyle(
+                    fontSize: 20,
+                  )),
               const SizedBox(
                 height: 10,
               ),
@@ -121,7 +119,6 @@ class _registrationState extends State<registration> {
                 decoration: InputDecoration(
                     label: const Text(
                       "Enter your email",
-                      style: TextStyle(color: Colors.white),
                     ),
                     prefixIcon: const Icon(Icons.mail),
                     border: OutlineInputBorder(
@@ -133,8 +130,8 @@ class _registrationState extends State<registration> {
               ),
               SizedBox(
                   width: double.infinity,
-                  child:
-                      ElevatedButton(onPressed: () {}, child:const Text("submitt")))
+                  child: ElevatedButton(
+                      onPressed: () {}, child: const Text("submitt")))
             ],
           ),
         ),

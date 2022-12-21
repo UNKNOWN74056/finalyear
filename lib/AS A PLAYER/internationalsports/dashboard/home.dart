@@ -51,11 +51,11 @@ class _homeState extends State<home> {
                     "INTERNATIONAL",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  flexibleSpace: FlexibleSpaceBar(
-                      background: Image.asset(
-                    "assets/mixsport.jpeg",
-                    fit: BoxFit.cover,
-                  )),
+                  // flexibleSpace: FlexibleSpaceBar(
+                  //     background: Image.asset(
+                  //   "assets/mixsport.jpeg",
+                  //   fit: BoxFit.cover,
+                  // )),
                   centerTitle: true,
                   bottom: const TabBar(
                       indicatorColor: Colors.orange,

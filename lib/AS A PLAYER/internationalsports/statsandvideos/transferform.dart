@@ -17,7 +17,6 @@ class _transferformState extends State<transferform> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      backgroundColor: Color.fromARGB(255, 28, 32, 47),
       appBar: AppBar(
         centerTitle: true,
         title: const Text("TRANSFER"),
@@ -36,9 +35,9 @@ class _transferformState extends State<transferform> {
                     child: Text(
                       "Transfer Request",
                       style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],
@@ -49,7 +48,6 @@ class _transferformState extends State<transferform> {
                     padding: EdgeInsets.only(top: 50, left: 20),
                     child: Text(
                       "To:",
-                      style: TextStyle(fontSize: 20, color: Colors.white),
                     ),
                   ),
                 ],
@@ -61,7 +59,6 @@ class _transferformState extends State<transferform> {
                   decoration: InputDecoration(
                       label: const Text(
                         "Enter Email",
-                        style: TextStyle(color: Colors.white),
                       ),
                       prefixIcon: const Icon(Icons.email),
                       border: OutlineInputBorder(
@@ -83,7 +80,6 @@ class _transferformState extends State<transferform> {
                     padding: EdgeInsets.only(left: 15),
                     child: Text(
                       "Message:",
-                      style: TextStyle(fontSize: 20, color: Colors.white),
                     ),
                   )
                 ],
@@ -93,10 +89,10 @@ class _transferformState extends State<transferform> {
               ),
               TextFormField(
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25)),
-                      hintText: "Enter your message",
-                      hintStyle: const TextStyle(color: Colors.white)),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25)),
+                    hintText: "Enter your message",
+                  ),
                   maxLines: 10,
                   maxLength: 120,
                   validator: (value) {

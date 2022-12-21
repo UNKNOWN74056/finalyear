@@ -12,7 +12,7 @@ class _tourarcheryState extends State<tourarchery> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 28, 32, 47),
+    
       body: Column(
         children: [
           // const Padding(
@@ -37,7 +37,7 @@ class _tourarcheryState extends State<tourarchery> {
                   return Container(
                     height: 80,
                     child: Card(
-                      color: Colors.blueGrey,
+                   
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30)),
                       child: Row(

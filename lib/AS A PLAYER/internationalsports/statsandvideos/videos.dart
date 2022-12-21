@@ -11,18 +11,17 @@ class _videosState extends State<videos> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 28, 32, 47),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(
-                child: InkWell(
-                    child: FloatingActionButton.extended(
-              onPressed: () {},
-              label: const Text("ADD VIDEOS"),
-              icon: const Icon(Icons.add),
-            )))
-          ],
-        ));
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Center(
+            child: InkWell(
+                child: FloatingActionButton.extended(
+          onPressed: () {},
+          label: const Text("ADD VIDEOS"),
+          icon: const Icon(Icons.add),
+        )))
+      ],
+    ));
   }
 }

@@ -14,7 +14,7 @@ class _FootballState extends State<Football> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 28, 32, 47),
+    
       body: Column(children: [
         const SizedBox(height: 20),
         Expanded(
@@ -24,7 +24,7 @@ class _FootballState extends State<Football> {
                   return Container(
                     height: 80,
                     child: Card(
-                      color: Colors.blueGrey,
+                     
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30)),
                       child: ListTile(

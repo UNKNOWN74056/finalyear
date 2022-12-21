@@ -35,7 +35,7 @@ class _dashboardState extends State<dashboard> {
             onTap: (value) => setState(() => currentIndex = value),
             items: const [
               BottomNavigationBarItem(
-                backgroundColor: Color.fromARGB(255, 28, 32, 47),
+             
                 icon: Icon(Icons.home),
                 label: "Home",
               ),

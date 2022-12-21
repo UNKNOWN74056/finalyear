@@ -15,7 +15,6 @@ class _HomedbState extends State<Homedb> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: const Color.fromARGB(255, 28, 32, 47),
         appBar: AppBar(centerTitle: true, title: const Text("Mr.Sports")),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -25,17 +24,17 @@ class _HomedbState extends State<Homedb> {
               const Text(
                 "WHAT SPORT DO YOU INTEREST?",
                 style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 10),
               const Text(
                 " International Sports",
                 style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: Colors.white),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
               ),
               const SizedBox(height: 15.0),
               InkWell(
@@ -57,9 +56,9 @@ class _HomedbState extends State<Homedb> {
               const Text(
                 " Cultural Sports",
                 style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: Colors.white),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
               ),
               const SizedBox(height: 15.0),
               Expanded(

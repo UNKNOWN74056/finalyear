@@ -17,7 +17,6 @@ class _clubsState extends State<clubs> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color.fromARGB(255, 28, 32, 47),
         body: NestedScrollView(
             headerSliverBuilder: (context, innerBoxIsScrolled) => [
                   SliverAppBar(
@@ -42,11 +41,11 @@ class _clubsState extends State<clubs> {
                       style:
                           TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                     ),
-                    flexibleSpace: FlexibleSpaceBar(
-                        background: Image.asset(
-                      "assets/mixsport.jpeg",
-                      fit: BoxFit.cover,
-                    )),
+                    // flexibleSpace: FlexibleSpaceBar(
+                    //     background: Image.asset(
+                    //   "assets/mixsport.jpeg",
+                    //   fit: BoxFit.cover,
+                    // )),
                     centerTitle: true,
                   )
                 ],
@@ -61,7 +60,6 @@ class _clubsState extends State<clubs> {
                         return Container(
                           height: 90,
                           child: Card(
-                            color: Colors.blueGrey,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30)),
                             child: ListTile(

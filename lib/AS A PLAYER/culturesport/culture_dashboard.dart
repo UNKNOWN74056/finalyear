@@ -33,7 +33,6 @@ class _culturedashboardState extends State<culturedashboard> {
             onTap: (value) => setState(() => currentIndex = value),
             items: const [
               BottomNavigationBarItem(
-                backgroundColor: Color.fromARGB(255, 28, 32, 47),
                 icon: Icon(Icons.home),
                 label: "Home",
               ),
