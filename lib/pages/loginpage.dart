@@ -28,7 +28,9 @@ class _loginpageState extends State<loginpage> {
               child: Container(
                 child: const Text(
                   "LOGIN ",
-                  style: TextStyle(fontSize: 30, color: Colors.white),
+                  style: TextStyle(
+                    fontSize: 30,
+                  ),
                 ),
               ),
             ),
