@@ -116,7 +116,9 @@ class _loginpageState extends State<loginpage> {
                     //   }
                     // },
 
-                    onPressed: () => Get.to(() => (const Homedb())),
+                    onPressed: () {
+                      Get.to(const Homedb());
+                    },
                     child: const Text("LOGIN")),
               ),
             ),
