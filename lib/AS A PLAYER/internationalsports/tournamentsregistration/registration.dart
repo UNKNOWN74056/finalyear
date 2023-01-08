@@ -41,9 +41,10 @@ class _registrationState extends State<registration> {
               const SizedBox(
                 height: 20,
               ),
-              const Text(
-                "Team Name:",
-              ),
+              const Text("Team Name:",
+                  style: TextStyle(
+                    fontSize: 15,
+                  )),
               const SizedBox(
                 height: 10,
               ),
@@ -60,9 +61,10 @@ class _registrationState extends State<registration> {
               const SizedBox(
                 height: 10,
               ),
-              const Text(
-                "Captain Name:",
-              ),
+              const Text("Captain Name:",
+                  style: TextStyle(
+                    fontSize: 15,
+                  )),
               const SizedBox(
                 height: 10,
               ),
@@ -76,9 +78,10 @@ class _registrationState extends State<registration> {
                       borderRadius: BorderRadius.circular(20),
                     )),
               ),
-              const Text(
-                "Address",
-              ),
+              const Text("Address",
+                  style: TextStyle(
+                    fontSize: 15,
+                  )),
               const SizedBox(
                 height: 10,
               ),
@@ -92,9 +95,10 @@ class _registrationState extends State<registration> {
                       borderRadius: BorderRadius.circular(20),
                     )),
               ),
-              const Text(
-                "City",
-              ),
+              const Text("City",
+                  style: TextStyle(
+                    fontSize: 15,
+                  )),
               const SizedBox(
                 height: 10,
               ),
@@ -110,7 +114,7 @@ class _registrationState extends State<registration> {
               ),
               const Text("Contact Email",
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 15,
                   )),
               const SizedBox(
                 height: 10,
