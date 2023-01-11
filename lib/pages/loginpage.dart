@@ -1,6 +1,7 @@
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/homedb.dart';
 import 'package:finalyear/pages/forgotpassword.dart';
 import 'package:finalyear/pages/signuppage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -14,6 +15,44 @@ class loginpage extends StatefulWidget {
 final _formKey = GlobalKey<FormState>();
 
 class _loginpageState extends State<loginpage> {
+  //these are the cotroller for eamil and password
+  bool _obsecure = true;
+  var email = "";
+  var password = "";
+  final _emailcontroller = TextEditingController();
+  final _passwordcontroller = TextEditingController();
+
+  // dispose function for the field
+  @override
+  void dispose() {
+    _emailcontroller.dispose();
+    _passwordcontroller.dispose();
+
+    super.dispose();
+  }
+
+  //login function for the user
+  loginuser() async {
+    try {
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      Get.to(const Homedb());
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+        Get.snackbar("No User", "No user is found for this Email",
+            duration: const Duration(seconds: 2),
+            snackPosition: SnackPosition.BOTTOM);
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+        Get.snackbar("Your password",
+            "Your password is wrong please correct your password",
+            duration: const Duration(seconds: 2),
+            snackPosition: SnackPosition.BOTTOM);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -48,11 +87,15 @@ class _loginpageState extends State<loginpage> {
               child: Column(
                 children: [
                   TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      controller: _emailcontroller,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)),
+                              borderRadius: BorderRadius.circular(15)),
                           labelText: "Enter your email",
                           prefixIcon: const Icon(Icons.person)),
+
+                      //form validaiton code
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return "please enter your username";
@@ -64,27 +107,34 @@ class _loginpageState extends State<loginpage> {
                     height: 25,
                   ),
                   TextFormField(
+                      obscureText: _obsecure,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      controller: _passwordcontroller,
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20)),
-                        labelText: "Enter your passwowrd",
-                        prefixIcon: const Icon(
-                          Icons.lock,
-                        ),
-                        suffixIcon: GestureDetector(
-                          onTap: () {
-                            setState(() {});
-                          },
-                          child: const Icon(Icons.visibility_off),
-                        ),
-                      ),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15)),
+                          labelText: "Enter your passwowrd",
+                          prefixIcon: const Icon(
+                            Icons.lock,
+                          ),
+                          suffixIcon: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                _obsecure = !_obsecure;
+                              });
+                            },
+                            child: Icon(_obsecure
+                                ? Icons.visibility
+                                : Icons.visibility_off),
+                          )),
+                      //form validaiton code
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return "please enter your password";
                         } else {
                           return null;
                         }
-                      }),
+                      })
                 ],
               ),
             ),
@@ -108,17 +158,19 @@ class _loginpageState extends State<loginpage> {
                 padding: const EdgeInsets.only(left: 30, right: 30),
                 child: ElevatedButton(
                     // i use there also get
-                    // onPressed: () {
-                    //   if (_formKey.currentState!.validate()) {
-                    //     ScaffoldMessenger.of(context).showSnackBar(
-                    //       const SnackBar(content: Text('Processing Data')),
-                    //     );
-                    //   }
-                    // },
-
                     onPressed: () {
-                      Get.to(const Homedb());
+                      if (_formKey.currentState!.validate()) {
+                        setState(() {
+                          email = _emailcontroller.text;
+                          password = _passwordcontroller.text;
+                        });
+                      }
+                      loginuser();
                     },
+
+                    // onPressed: () {
+                    //   Get.to(const Homedb());
+                    // },
                     child: const Text("LOGIN")),
               ),
             ),

@@ -67,23 +67,34 @@ class _signuppageState extends State<signuppage> {
 
   //function to create user
   Future signup() async {
-    if (passwrodconfirm()) {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailcontroller.text.trim(),
-        password: _passwordcontroller.text.trim(),
-      );
-
-      Adduserdeatial(
-        _firstnamecontroller.text.trim(),
-        _lastnamecontroller.text.trim(),
-        _professioncontroller.text.trim(),
-        _gendercontroller.text.trim(),
-        _sportcontroller.text.trim(),
-        _emailcontroller.text.trim(),
-        _passwordcontroller.text.trim(),
-        _confirmpasswordcontroller.text.trim(),
-        _phonenumbercontroller.text.trim(),
-      );
+    try {
+      if (passwrodconfirm()) {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailcontroller.text.trim(),
+          password: _passwordcontroller.text.trim(),
+        );
+        Adduserdeatial(
+          _firstnamecontroller.text.trim(),
+          _lastnamecontroller.text.trim(),
+          _professioncontroller.text.trim(),
+          _gendercontroller.text.trim(),
+          _sportcontroller.text.trim(),
+          _emailcontroller.text.trim(),
+          _passwordcontroller.text.trim(),
+          _confirmpasswordcontroller.text.trim(),
+          _phonenumbercontroller.text.trim(),
+        );
+        Get.snackbar("Registration",
+            "Your account has been register succefully please login again.");
+        Get.to(const loginpage());
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        Get.snackbar("Password weak", "Password is too weak!");
+      } else if (e.code == 'email-already-in-use') {
+        Get.snackbar(
+            "Email", "This email is already in use please try a valid email!");
+      }
     }
   }
 
@@ -155,10 +166,11 @@ class _signuppageState extends State<signuppage> {
             child: Column(
               children: [
                 TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     controller: _firstnamecontroller,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20)),
+                            borderRadius: BorderRadius.circular(15)),
                         labelText: "First Name",
                         prefixIcon: const Icon(Icons.person)),
                     validator: (value) {
@@ -172,10 +184,11 @@ class _signuppageState extends State<signuppage> {
                   height: 25,
                 ),
                 TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     controller: _lastnamecontroller,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20)),
+                            borderRadius: BorderRadius.circular(15)),
                         labelText: "Last Name",
                         prefixIcon: const Icon(Icons.person)),
                     validator: (value) {
@@ -189,7 +202,7 @@ class _signuppageState extends State<signuppage> {
                   height: 25,
                 ),
                 DropdownButtonFormField(
-                   // value: selectedval,
+                    // value: selectedval,
                     items: profession
                         .map(
                           (e) => DropdownMenuItem(
@@ -212,7 +225,7 @@ class _signuppageState extends State<signuppage> {
                         hintText: "select in option",
                         prefixIcon: const Icon(Icons.sports),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20))),
+                            borderRadius: BorderRadius.circular(15))),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "please enter your profession";
@@ -224,7 +237,7 @@ class _signuppageState extends State<signuppage> {
                   height: 25,
                 ),
                 DropdownButtonFormField(
-                   // value: selected,
+                    // value: selected,
                     items: gender
                         .map(
                           (e) => DropdownMenuItem(
@@ -244,10 +257,9 @@ class _signuppageState extends State<signuppage> {
                     ),
                     decoration: InputDecoration(
                         labelText: "Your gender",
-                        hintText: "select option",
                         prefixIcon: const Icon(Icons.sports),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20))),
+                            borderRadius: BorderRadius.circular(15))),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "please enter your gender";
@@ -259,7 +271,7 @@ class _signuppageState extends State<signuppage> {
                   height: 25,
                 ),
                 DropdownButtonFormField(
-                    value: selected1,
+                    //value: selected1,
                     items: sports
                         .map(
                           (e) => DropdownMenuItem(
@@ -279,10 +291,10 @@ class _signuppageState extends State<signuppage> {
                     ),
                     decoration: InputDecoration(
                         labelText: "Your sports",
-                        hintText: "select option",
+                        hintText: "Your sport",
                         prefixIcon: const Icon(Icons.sports),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20))),
+                            borderRadius: BorderRadius.circular(15))),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "please enter your sports";
@@ -294,10 +306,11 @@ class _signuppageState extends State<signuppage> {
                   height: 25,
                 ),
                 TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     controller: _emailcontroller,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20)),
+                            borderRadius: BorderRadius.circular(15)),
                         labelText: "EMAIL",
                         prefixIcon: const Icon(Icons.email)),
                     validator: (value) {
@@ -311,10 +324,11 @@ class _signuppageState extends State<signuppage> {
                   height: 25,
                 ),
                 TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     controller: _passwordcontroller,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20)),
+                            borderRadius: BorderRadius.circular(15)),
                         labelText: "PASSWORD",
                         prefixIcon: const Icon(Icons.lock)),
                     validator: (value) {
@@ -328,10 +342,11 @@ class _signuppageState extends State<signuppage> {
                   height: 25,
                 ),
                 TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     controller: _confirmpasswordcontroller,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20)),
+                            borderRadius: BorderRadius.circular(15)),
                         hintText: "confirm your password",
                         labelText: "confirm password",
                         prefixIcon: const Icon(Icons.lock)),
@@ -346,6 +361,7 @@ class _signuppageState extends State<signuppage> {
                   height: 25,
                 ),
                 InternationalPhoneNumberInput(
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
                     textFieldController: _phonenumbercontroller,
                     onInputChanged: (val) {},
                     inputDecoration: const InputDecoration(
@@ -367,20 +383,13 @@ class _signuppageState extends State<signuppage> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 30, right: 30),
                     child: ElevatedButton(
-                        //  onPressed: () {
-
-                        //   if (_formKey.currentState!.validate()) {
-                        //     ScaffoldMessenger.of(context).showSnackBar(
-                        //       const SnackBar(content: Text('Processing Data')),
-                        //     );
-                        //   }
-                        //},
                         onPressed: () {
-                          // i add here get for pop bottom
+                          if (_formKey.currentState!.validate()) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Processing Data')),
+                            );
+                          }
                           signup();
-                          Get.snackbar("Sing up", "Successfully",
-                              duration: const Duration(seconds: 1),
-                              snackPosition: SnackPosition.BOTTOM);
                         },
                         child: const Text("SIGIN UP")),
                   ),

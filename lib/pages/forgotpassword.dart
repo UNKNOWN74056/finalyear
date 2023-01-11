@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class forgotpassword extends StatefulWidget {
   const forgotpassword({super.key});
@@ -10,6 +12,24 @@ class forgotpassword extends StatefulWidget {
 final _formKey = GlobalKey<FormState>();
 
 class _forgotpasswordState extends State<forgotpassword> {
+  //controller for the verify eamil field
+  final _verifyemailcontroller = TextEditingController();
+  var email = "";
+
+  //function for the email verfication
+  emailverify() async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      Get.snackbar("Reset email",
+          "Passward reset email has been sent to your email please check.");
+    } on FirebaseException catch (e) {
+      if (e.code == 'user-not-found') {
+        Get.snackbar("Email not found",
+            "This enail is not found please enter valid email.");
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -28,11 +48,19 @@ class _forgotpasswordState extends State<forgotpassword> {
               ),
             ),
             const SizedBox(
+              height: 15,
+            ),
+            const Text(
+              "Please enter your email to verify it.",
+              style: TextStyle(fontSize: 15),
+            ),
+            const SizedBox(
               height: 30,
             ),
             Padding(
               padding: const EdgeInsets.all(15),
               child: TextFormField(
+                  controller: _verifyemailcontroller,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15)),
@@ -53,10 +81,11 @@ class _forgotpasswordState extends State<forgotpassword> {
                 ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Processing Data')),
-                        );
+                        setState(() {
+                          email = _verifyemailcontroller.text;
+                        });
                       }
+                      emailverify();
                     },
                     child: const Text("SEND EMAIL"))
               ],
