@@ -43,15 +43,15 @@ class _signuppageState extends State<signuppage> {
   }
 
   //options for profession
-  final profession = ['Coache', 'Player'];
-  String? selectedval = 'coache';
+  List profession = ['Coache', 'Player'];
+  String? profession1;
 
   //options for gender
-  final gender = ['Male', 'Female', 'Other'];
-  String? selected = 'Male';
+  List gender = ['Male', 'Female', 'Other'];
+  String? gender1;
 
   //options for type of sports
-  final sports = [
+  List sports = [
     'FootBall',
     'BasketBall',
     'VulleyBall',
@@ -63,7 +63,7 @@ class _signuppageState extends State<signuppage> {
     'Tent pagging',
     'Gymnastic'
   ];
-  String? selected1 = 'FootBall';
+  String? sport1;
 
   //function to create user
   Future signup() async {
@@ -112,9 +112,9 @@ class _signuppageState extends State<signuppage> {
     await FirebaseFirestore.instance.collection('users').add({
       'firstname': firstname,
       'lastname': lastname,
-      'profession': profession,
-      'gender': gender,
-      'sport': sports,
+      'profession': profession1,
+      'gender': gender1,
+      'sport': sport1,
       'email': email,
       'password': password,
       'confirmpassword': confirm,
@@ -202,42 +202,50 @@ class _signuppageState extends State<signuppage> {
                   height: 25,
                 ),
                 DropdownButtonFormField(
-                    // value: selectedval,
-                    items: profession
-                        .map(
-                          (e) => DropdownMenuItem(
-                            child: Text(e),
-                            value: e,
-                          ),
-                        )
-                        .toList(),
-                    onChanged: (val) {
-                      setState(() {
-                        selectedval = val as String;
-                      });
-                    },
-                    icon: const Icon(
-                      Icons.arrow_drop_down_circle,
-                      color: Colors.purple,
-                    ),
-                    decoration: InputDecoration(
-                        labelText: "Your profession",
-                        hintText: "select in option",
-                        prefixIcon: const Icon(Icons.sports),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15))),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "please enter your profession";
-                      } else {
-                        return null;
-                      }
-                    }),
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  value: profession1,
+                  onChanged: (newvalue) {
+                    setState(() {
+                      profession1 = newvalue as String;
+                    });
+                  },
+                  items: profession
+                      .map(
+                        (e) => DropdownMenuItem(
+                          child: Text(e),
+                          value: e,
+                        ),
+                      )
+                      .toList(),
+                  validator: (value) {
+                    if (value == null) {
+                      return "please enter your profession";
+                    } else {
+                      return null;
+                    }
+                  },
+                  icon: const Icon(
+                    Icons.arrow_drop_down_circle,
+                    color: Colors.purple,
+                  ),
+                  decoration: InputDecoration(
+                      labelText: "Your profession",
+                      hintText: "select in option",
+                      prefixIcon: const Icon(Icons.sports),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15))),
+                ),
                 const SizedBox(
                   height: 25,
                 ),
                 DropdownButtonFormField(
-                    // value: selected,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    value: gender1,
+                    onChanged: (newvalue) {
+                      setState(() {
+                        gender1 = newvalue as String;
+                      });
+                    },
                     items: gender
                         .map(
                           (e) => DropdownMenuItem(
@@ -246,11 +254,6 @@ class _signuppageState extends State<signuppage> {
                           ),
                         )
                         .toList(),
-                    onChanged: (val) {
-                      setState(() {
-                        selected = val as String;
-                      });
-                    },
                     icon: const Icon(
                       Icons.arrow_drop_down_circle,
                       color: Colors.purple,
@@ -261,7 +264,7 @@ class _signuppageState extends State<signuppage> {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15))),
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
+                      if (value == null) {
                         return "please enter your gender";
                       } else {
                         return null;
@@ -271,7 +274,13 @@ class _signuppageState extends State<signuppage> {
                   height: 25,
                 ),
                 DropdownButtonFormField(
-                    //value: selected1,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    value: sport1,
+                    onChanged: (val) {
+                      setState(() {
+                        sport1 = val as String;
+                      });
+                    },
                     items: sports
                         .map(
                           (e) => DropdownMenuItem(
@@ -280,11 +289,6 @@ class _signuppageState extends State<signuppage> {
                           ),
                         )
                         .toList(),
-                    onChanged: (val) {
-                      setState(() {
-                        selected1 = val as String;
-                      });
-                    },
                     icon: const Icon(
                       Icons.arrow_drop_down_circle,
                       color: Colors.purple,
@@ -296,7 +300,7 @@ class _signuppageState extends State<signuppage> {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15))),
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
+                      if (value == null) {
                         return "please enter your sports";
                       } else {
                         return null;

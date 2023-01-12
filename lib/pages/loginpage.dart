@@ -1,10 +1,12 @@
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/homedb.dart';
 import 'package:finalyear/pages/forgotpassword.dart';
 import 'package:finalyear/pages/signuppage.dart';
+import 'package:finalyear/service/internet_connection.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 class loginpage extends StatefulWidget {
   const loginpage({super.key});
@@ -15,8 +17,9 @@ class loginpage extends StatefulWidget {
 final _formKey = GlobalKey<FormState>();
 
 class _loginpageState extends State<loginpage> {
-  //these are the cotroller for eamil and password
+  //bool vareable for visibility of password
   bool _obsecure = true;
+  //these are the cotroller for eamil and password
   var email = "";
   var password = "";
   final _emailcontroller = TextEditingController();
@@ -34,6 +37,7 @@ class _loginpageState extends State<loginpage> {
   //login function for the user
   loginuser() async {
     try {
+      checkconnectivity();
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       Get.to(const Homedb());
@@ -51,6 +55,13 @@ class _loginpageState extends State<loginpage> {
             snackPosition: SnackPosition.BOTTOM);
       }
     }
+  }
+
+  //overide function for connectivity
+  @override
+  void iniState() {
+    super.initState();
+    checkconnectivity();
   }
 
   @override
@@ -124,8 +135,8 @@ class _loginpageState extends State<loginpage> {
                               });
                             },
                             child: Icon(_obsecure
-                                ? Icons.visibility
-                                : Icons.visibility_off),
+                                ? Icons.visibility_off
+                                : Icons.visibility),
                           )),
                       //form validaiton code
                       validator: (value) {
@@ -157,7 +168,6 @@ class _loginpageState extends State<loginpage> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 30, right: 30),
                 child: ElevatedButton(
-                    // i use there also get
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         setState(() {
@@ -165,12 +175,9 @@ class _loginpageState extends State<loginpage> {
                           password = _passwordcontroller.text;
                         });
                       }
+
                       loginuser();
                     },
-
-                    // onPressed: () {
-                    //   Get.to(const Homedb());
-                    // },
                     child: const Text("LOGIN")),
               ),
             ),

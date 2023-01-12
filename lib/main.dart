@@ -10,12 +10,11 @@ Future main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  // const MyApp({super.key});
+class MyApp extends StatelessWidget {MyApp({super.key});
 
   final Future<FirebaseApp> _initailization = Firebase.initializeApp();
 
-// comment
+ // comment
   @override
   Widget build(BuildContext context) {
     // i add get here GetMaterialApp
@@ -23,7 +22,7 @@ class MyApp extends StatelessWidget {
       future: _initailization,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          print("Something went wrong!!");
+          Get.snackbar("Error", "Somthing went wrong!");
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());

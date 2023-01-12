@@ -44,6 +44,8 @@ dependencies:
   # Firebase database
   cloud_firestore: ^4.3.1
   firebase_auth: ^4.2.5
+  connectivity_plus: ^3.0.2
+  
   
 
 dev_dependencies:

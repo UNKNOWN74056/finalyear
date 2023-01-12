@@ -1,3 +1,4 @@
+import 'package:finalyear/pages/loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,7 +20,9 @@ class _forgotpasswordState extends State<forgotpassword> {
   //function for the email verfication
   emailverify() async {
     try {
-      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      await FirebaseAuth.instance
+          .sendPasswordResetEmail(email: email)
+          .then((value) => Get.to(const loginpage()));
       Get.snackbar("Reset email",
           "Passward reset email has been sent to your email please check.");
     } on FirebaseException catch (e) {
