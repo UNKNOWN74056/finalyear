@@ -15,13 +15,13 @@ void checkconnectivity() async {
   } else {
     Get.rawSnackbar(
       messageText: const Text(
-        "No internet Connection please to internet connection",
+        "No internet Connection please connect to internet.",
         style: TextStyle(color: Color.fromARGB(255, 20, 3, 2)),
       ),
       isDismissible: true,
       backgroundColor: Color.fromARGB(255, 240, 29, 14),
       icon: const Icon(
-        Icons.wifi,
+        Icons.wifi_off,
         color: Colors.white,
       ),
     );

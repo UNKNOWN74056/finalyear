@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/pages/loginpage.dart';
+import 'package:finalyear/service/internet_connection.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,6 +22,7 @@ class _signuppageState extends State<signuppage> {
   final _professioncontroller = TextEditingController();
   final _gendercontroller = TextEditingController();
   final _sportcontroller = TextEditingController();
+  final _citycontroller = TextEditingController();
   final _emailcontroller = TextEditingController();
   final _passwordcontroller = TextEditingController();
   final _confirmpasswordcontroller = TextEditingController();
@@ -34,6 +36,7 @@ class _signuppageState extends State<signuppage> {
     _professioncontroller.dispose();
     _gendercontroller.dispose();
     _sportcontroller.dispose();
+    _citycontroller.dispose();
     _emailcontroller.dispose();
     _passwordcontroller.dispose();
     _confirmpasswordcontroller.dispose();
@@ -68,26 +71,26 @@ class _signuppageState extends State<signuppage> {
   //function to create user
   Future signup() async {
     try {
-      if (passwrodconfirm()) {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: _emailcontroller.text.trim(),
-          password: _passwordcontroller.text.trim(),
-        );
-        Adduserdeatial(
-          _firstnamecontroller.text.trim(),
-          _lastnamecontroller.text.trim(),
-          _professioncontroller.text.trim(),
-          _gendercontroller.text.trim(),
-          _sportcontroller.text.trim(),
-          _emailcontroller.text.trim(),
-          _passwordcontroller.text.trim(),
-          _confirmpasswordcontroller.text.trim(),
-          _phonenumbercontroller.text.trim(),
-        );
-        Get.snackbar("Registration",
-            "Your account has been register succefully please login again.");
-        Get.to(const loginpage());
-      }
+      checkconnectivity();
+      passwrodconfirm();
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailcontroller.text.trim(),
+        password: _passwordcontroller.text.trim(),
+      );
+      Adduserdeatial(
+        _firstnamecontroller.text.trim(),
+        _lastnamecontroller.text.trim(),
+        _professioncontroller.text.trim(),
+        _gendercontroller.text.trim(),
+        _sportcontroller.text.trim(),
+        _citycontroller.text.trim(),
+        _emailcontroller.text.trim(),
+        _passwordcontroller.text.trim(),
+        _phonenumbercontroller.text.trim(),
+      );
+      Get.snackbar("Registration",
+          "Your account has been register succefully please login again.");
+      Get.to(const loginpage());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         Get.snackbar("Password weak", "Password is too weak!");
@@ -105,9 +108,9 @@ class _signuppageState extends State<signuppage> {
       String profession,
       String gender,
       String sports,
+      String city,
       String email,
       String password,
-      String confirm,
       String phone) async {
     await FirebaseFirestore.instance.collection('users').add({
       'firstname': firstname,
@@ -115,20 +118,21 @@ class _signuppageState extends State<signuppage> {
       'profession': profession1,
       'gender': gender1,
       'sport': sport1,
+      'city': city,
       'email': email,
       'password': password,
-      'confirmpassword': confirm,
       'phoneNumber': phone,
     });
   }
 
   //bool function to confirm password
-  bool passwrodconfirm() {
+  void passwrodconfirm() {
     if (_passwordcontroller.text.trim() ==
         _confirmpasswordcontroller.text.trim()) {
-      return true;
+      return null;
     } else {
-      return false;
+      Get.snackbar(
+          "Passwrod", "The password and confirm password are not equal");
     }
   }
 
@@ -302,6 +306,24 @@ class _signuppageState extends State<signuppage> {
                     validator: (value) {
                       if (value == null) {
                         return "please enter your sports";
+                      } else {
+                        return null;
+                      }
+                    }),
+                const SizedBox(
+                  height: 25,
+                ),
+                TextFormField(
+                    controller: _citycontroller,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                        labelText: "City",
+                        prefixIcon: const Icon(Icons.room)),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "please enter your city name";
                       } else {
                         return null;
                       }
