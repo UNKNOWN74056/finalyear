@@ -1,6 +1,11 @@
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/statsandvideos/stats.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/statsandvideos/videos.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class profile extends StatefulWidget {
   const profile({super.key});
@@ -10,8 +15,28 @@ class profile extends StatefulWidget {
 }
 
 class _profileState extends State<profile> with TickerProviderStateMixin {
+
+  // TextEditingController img = TextEditingController();
+  // late File images;
+  // late String imgurl;
+
+  // senddata() async {
+  //   var storageimage= FirebaseStorage.instance.ref().child(images.path);
+  //   var task = storageimage.putFile(images);
+  //  final StorageTaskSnapshot snapshot = await task.onComplete;
+  //   await FirebaseFirestore.instance.collection("user").doc().set('img':images);
+  // }
+
+  // Future getimage() async {
+  //   var img = await ImagePicker.pickImage(source: ImageSource.gallery);
+  //   setState(() {
+  //     images = img as File;
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
+    //contriller for tabs
     TabController _tabController = TabController(length: 2, vsync: this);
 
     return SafeArea(
@@ -35,10 +60,13 @@ class _profileState extends State<profile> with TickerProviderStateMixin {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              CircleAvatar(
-                radius: 60,
-                backgroundImage: AssetImage("assets/images.jpg"),
-              ),
+              InkWell(
+               
+                child: CircleAvatar(
+                  radius: 60,
+                  backgroundImage: AssetImage("assets/images.jpg"),
+                ),
+              )
             ],
           ),
           const SizedBox(

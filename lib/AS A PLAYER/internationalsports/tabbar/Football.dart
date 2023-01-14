@@ -47,9 +47,9 @@ class _FootballState extends State<Football> {
                         ],
                       );
                     } else if (snapshot.hasError) {
-                      return const Text("Somthing is went wrong");
+                      return Text("Somthing is went wrong");
                     } else {
-                      return const Center(
+                      return Center(
                         child: CircularProgressIndicator(),
                       );
                     }
@@ -57,38 +57,3 @@ class _FootballState extends State<Football> {
             })));
   }
 }
-
-// body: Column(children: [
-
-//   const SizedBox(height: 20),
-//   Expanded(
-//       child: ListView.builder(
-//           itemCount: coachdata.length,
-//           itemBuilder: (BuildContext context, index) {
-//             return Container(
-//               height: 80,
-//               child: Card(
-
-//                 shape: RoundedRectangleBorder(
-//                     borderRadius: BorderRadius.circular(30)),
-//                 child: ListTile(
-//                   title: Text(
-//                     coachdata[index].name,
-//                     style: const TextStyle(fontSize: 20),
-//                   ),
-//                   leading: const CircleAvatar(
-//                       radius: 35,
-//                       backgroundImage: AssetImage("assets/mech.jpg"),
-//                       backgroundColor: Colors.green),
-//                   subtitle: Text(coachdata[index].discription,
-//                       style: const TextStyle(fontSize: 15)),
-//                   trailing: const Icon(Icons.arrow_forward),
-//                   onTap: () {
-//                     navigator?.push(MaterialPageRoute(
-//                         builder: ((context) => const coachdetail())));
-//                   },
-//                 ),
-//               ),
-//             );
-//           })),
-// ]),

@@ -1,4 +1,3 @@
-import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/homedb.dart';
 import 'package:finalyear/pages/forgotpassword.dart';
 import 'package:finalyear/pages/signuppage.dart';
 import 'package:finalyear/service/internet_connection.dart';
@@ -6,7 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
+
+import '../AS A PLAYER/internationalsports/dashboard/homedb.dart';
 
 class loginpage extends StatefulWidget {
   const loginpage({super.key});
@@ -175,7 +175,6 @@ class _loginpageState extends State<loginpage> {
                           password = _passwordcontroller.text;
                         });
                       }
-
                       loginuser();
                     },
                     child: const Text("LOGIN")),

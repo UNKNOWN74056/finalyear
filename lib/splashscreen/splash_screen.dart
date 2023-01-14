@@ -1,5 +1,4 @@
-import 'dart:async';
-import 'package:finalyear/pages/loginpage.dart';
+import 'package:finalyear/splashscreen/splashservices.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,13 +10,13 @@ class splashscreen extends StatefulWidget {
 }
 
 class _splashscreenState extends State<splashscreen> {
+  splashservice splash_screen = splashservice();
+
   @override
   void initState() {
     super.initState();
-    Timer(
-        Duration(seconds: 4),
-        () => navigator?.pushReplacement(
-            MaterialPageRoute(builder: (context) => const loginpage())));
+
+    splash_screen.islogin(BuildContext, context);
   }
 
   @override

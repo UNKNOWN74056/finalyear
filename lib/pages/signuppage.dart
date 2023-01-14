@@ -161,7 +161,7 @@ class _signuppageState extends State<signuppage> {
           style: TextStyle(fontSize: 20),
         ),
         const SizedBox(
-          height: 25,
+          height: 15,
         ),
         Form(
           key: _formKey,
