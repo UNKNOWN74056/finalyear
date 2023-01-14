@@ -15,7 +15,7 @@ class cultureplayerdb extends StatefulWidget {
 class _cultureplayerdbState extends State<cultureplayerdb> {
   int currentIndex = 0;
 
-  final screens = const [
+  final screens = [
     playerculturehome(),
     playerculturetournaments(),
     setting(),

@@ -15,7 +15,7 @@ class dashboard extends StatefulWidget {
 class _dashboardState extends State<dashboard> {
   int currentIndex = 0;
 
-  final screens = const [
+  final screens =  [
     home(),
     clubs(),
     tournaments(),

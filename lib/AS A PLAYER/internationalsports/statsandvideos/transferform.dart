@@ -111,7 +111,7 @@ class _transferformState extends State<transferform> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       ElevatedButton.icon(
-                        onPressed: () => Get.to(const profile()),
+                        onPressed: () => Get.to( profile()),
                         icon: const FaIcon(
                           FontAwesomeIcons.trash,
                           color: Colors.red,

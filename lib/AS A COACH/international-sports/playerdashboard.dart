@@ -16,7 +16,7 @@ class playerdashboeard extends StatefulWidget {
 class _playerdashboeardState extends State<playerdashboeard> {
    int currentIndex = 0;
 
-  final screens = const [
+  final screens =  [
    interhome(),
    interclub(),
    intertournaments(),
