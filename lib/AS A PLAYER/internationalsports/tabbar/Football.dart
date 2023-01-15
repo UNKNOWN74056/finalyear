@@ -19,7 +19,7 @@ class _FootballState extends State<Football> {
                 .collection("users")
                 .where("sport", isEqualTo: "FootBall")
                 .snapshots(),
-            builder: ((context, snapshot) {
+            builder:((context, snapshot) {
               return ListView.builder(
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (context, index) {
@@ -47,7 +47,7 @@ class _FootballState extends State<Football> {
                         ],
                       );
                     } else if (snapshot.hasError) {
-                      return Text("Somthing is went wrong");
+                      return Center(child: CircularProgressIndicator());
                     } else {
                       return Center(
                         child: CircularProgressIndicator(),

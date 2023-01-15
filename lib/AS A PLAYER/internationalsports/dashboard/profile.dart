@@ -77,7 +77,7 @@ class _profileState extends State<profile> with TickerProviderStateMixin {
           Container(
             width: double.maxFinite,
             height: 500,
-            child: TabBarView(controller: _tabController, children: const [
+            child: TabBarView(controller: _tabController, children: const  [
               stats(),
               videos(),
             ]),
