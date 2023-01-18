@@ -6,15 +6,15 @@ import 'package:get/get.dart';
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {MyApp({super.key});
+class MyApp extends StatelessWidget {
+  MyApp({super.key});
 
   final Future<FirebaseApp> _initailization = Firebase.initializeApp();
 
- // comment
+  // comment
   @override
   Widget build(BuildContext context) {
     // i add get here GetMaterialApp

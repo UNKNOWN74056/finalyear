@@ -426,7 +426,9 @@ class _signuppageState extends State<signuppage> {
                     const Text("All ready have an account!"),
                     TextButton(
                         // i use get for going to login screen
-                        onPressed: () => Get.to(() => (const loginpage())),
+                        onPressed: () {
+                          Get.back();
+                        },
                         child: const Text(
                           "LOGIN",
                         ))

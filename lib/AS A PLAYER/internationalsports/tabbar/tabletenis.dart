@@ -18,6 +18,7 @@ class _tabletenisState extends State<tabletenis> {
           stream: FirebaseFirestore.instance
               .collection("users")
               .where("sport", isEqualTo: "TableTenis")
+              .where("profession", isEqualTo: "Coache")
               .snapshots(),
           builder: ((context, snapshot) {
             return ListView.builder(

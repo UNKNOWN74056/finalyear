@@ -18,6 +18,7 @@ class _archeryState extends State<archery> {
             stream: FirebaseFirestore.instance
                 .collection("users")
                 .where("sport", isEqualTo: "Archery")
+                .where("profession", isEqualTo: "Coache")
                 .snapshots(),
             builder: ((context, snapshot) {
               return ListView.builder(

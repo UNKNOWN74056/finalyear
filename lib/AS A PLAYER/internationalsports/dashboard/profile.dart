@@ -1,6 +1,8 @@
+import 'package:finalyear/AS%20A%20PLAYER/internationalsports/statsandvideos/editprofile.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/statsandvideos/stats.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/statsandvideos/videos.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class profile extends StatefulWidget {
   const profile({super.key});
@@ -48,11 +50,14 @@ class _profileState extends State<profile> with TickerProviderStateMixin {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Text(
-                "Your name",
-                style: TextStyle(
-                  fontSize: 20,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Get.to(editprofile());
+                },
+                child: const Text(
+                  "Edit",
+                  style: TextStyle(fontSize: 18, color: Colors.blue),
                 ),
               )
             ],
@@ -77,7 +82,7 @@ class _profileState extends State<profile> with TickerProviderStateMixin {
           Container(
             width: double.maxFinite,
             height: 500,
-            child: TabBarView(controller: _tabController, children: const  [
+            child: TabBarView(controller: _tabController, children: const [
               stats(),
               videos(),
             ]),

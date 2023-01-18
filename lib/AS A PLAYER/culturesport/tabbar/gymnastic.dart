@@ -18,6 +18,7 @@ class _gymnasticState extends State<gymnastic> {
             stream: FirebaseFirestore.instance
                 .collection("users")
                 .where("sport", isEqualTo: "Gymnastic")
+                .where("profession", isEqualTo: "Coache")
                 .snapshots(),
             builder: ((context, snapshot) {
               return ListView.builder(
