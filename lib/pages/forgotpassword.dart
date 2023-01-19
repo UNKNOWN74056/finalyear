@@ -1,6 +1,8 @@
 import 'package:finalyear/pages/loginpage.dart';
+import 'package:finalyear/wedgets/reusebletextfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 class forgotpassword extends StatefulWidget {
@@ -62,21 +64,18 @@ class _forgotpasswordState extends State<forgotpassword> {
             ),
             Padding(
               padding: const EdgeInsets.all(15),
-              child: TextFormField(
+              child: reusebletextfield(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                autoValidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (Value) {
+                    return Value.isEmpty ? "enter your email" : null;
+                  },
                   controller: _verifyemailcontroller,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15)),
-                      hintText: "enter your email",
-                      labelText: "EMAIL",
-                      prefixIcon: const Icon(Icons.person)),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "please enter your username";
-                    } else {
-                      return null;
-                    }
-                  }),
+                  labelText: "EMAIL",
+                  icon: const Icon(
+                    FontAwesomeIcons.solidUser,
+                    color: Color.fromARGB(255, 4, 45, 119),
+                  )),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

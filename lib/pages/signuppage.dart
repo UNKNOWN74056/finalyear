@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/pages/loginpage.dart';
 import 'package:finalyear/service/internet_connection.dart';
+import 'package:finalyear/wedgets/reusebletextfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
@@ -169,39 +171,35 @@ class _signuppageState extends State<signuppage> {
             padding: const EdgeInsets.all(15),
             child: Column(
               children: [
-                TextFormField(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    controller: _firstnamecontroller,
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15)),
-                        labelText: "First Name",
-                        prefixIcon: const Icon(Icons.person)),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "please enter your firstname";
-                      } else {
-                        return null;
-                      }
-                    }),
+                reusebletextfield(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (Value) {
+                    return Value.isEmpty ? "enter your first name" : null;
+                  },
+                  labelText: "First Name",
+                  icon: const Icon(
+                    FontAwesomeIcons.solidUser,
+                    color: Color.fromARGB(255, 4, 45, 119),
+                  ),
+                  controller: _firstnamecontroller,
+                ),
                 const SizedBox(
                   height: 25,
                 ),
-                TextFormField(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    controller: _lastnamecontroller,
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15)),
-                        labelText: "Last Name",
-                        prefixIcon: const Icon(Icons.person)),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "please enter your lastname";
-                      } else {
-                        return null;
-                      }
-                    }),
+                reusebletextfield(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (Value) {
+                    return Value.isEmpty ? "enter your last name" : null;
+                  },
+                  controller: _lastnamecontroller,
+                  labelText: "Last Name",
+                  icon: const Icon(
+                    FontAwesomeIcons.solidUser,
+                    color: Color.fromARGB(255, 4, 45, 119),
+                  ),
+                ),
                 const SizedBox(
                   height: 25,
                 ),
@@ -233,11 +231,25 @@ class _signuppageState extends State<signuppage> {
                     color: Colors.purple,
                   ),
                   decoration: InputDecoration(
-                      labelText: "Your profession",
-                      hintText: "select in option",
-                      prefixIcon: const Icon(Icons.sports),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15))),
+                    filled: true,
+                    isDense: true,
+                    contentPadding: const EdgeInsets.symmetric(vertical: 10),
+                    prefixIcon: const Icon(
+                      FontAwesomeIcons.userTie,
+                      color: Color.fromARGB(255, 4, 45, 119),
+                    ),
+                    labelText: "Your profession",
+                    hintStyle: const TextStyle(
+                      color: Colors.grey,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      // borderSide: const BorderSide(
+                      //   width: 4,
+                      //   //  color: Colors.lightGreen,
+                      // ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
                 ),
                 const SizedBox(
                   height: 25,
@@ -263,10 +275,25 @@ class _signuppageState extends State<signuppage> {
                       color: Colors.purple,
                     ),
                     decoration: InputDecoration(
-                        labelText: "Your gender",
-                        prefixIcon: const Icon(Icons.sports),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15))),
+                      filled: true,
+                      isDense: true,
+                      contentPadding: const EdgeInsets.symmetric(vertical: 10),
+                      prefixIcon: const Icon(
+                        FontAwesomeIcons.venusMars,
+                        color: Color.fromARGB(255, 4, 45, 119),
+                      ),
+                      labelText: "Your gender",
+                      hintStyle: const TextStyle(
+                        color: Colors.grey,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        // borderSide: const BorderSide(
+                        //   width: 4,
+                        //   //  color: Colors.lightGreen,
+                        // ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
                     validator: (value) {
                       if (value == null) {
                         return "please enter your gender";
@@ -298,11 +325,25 @@ class _signuppageState extends State<signuppage> {
                       color: Colors.purple,
                     ),
                     decoration: InputDecoration(
-                        labelText: "Your sports",
-                        hintText: "Your sport",
-                        prefixIcon: const Icon(Icons.sports),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15))),
+                      filled: true,
+                      isDense: true,
+                      contentPadding: const EdgeInsets.symmetric(vertical: 10),
+                      prefixIcon: const Icon(
+                        FontAwesomeIcons.futbol,
+                        color: Color.fromARGB(255, 4, 45, 119),
+                      ),
+                      labelText: "Your sports",
+                      hintStyle: const TextStyle(
+                        color: Colors.grey,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        // borderSide: const BorderSide(
+                        //   width: 4,
+                        //   //  color: Colors.lightGreen,
+                        // ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
                     validator: (value) {
                       if (value == null) {
                         return "please enter your sports";
@@ -313,76 +354,60 @@ class _signuppageState extends State<signuppage> {
                 const SizedBox(
                   height: 25,
                 ),
-                TextFormField(
-                    controller: _citycontroller,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15)),
-                        labelText: "City",
-                        prefixIcon: const Icon(Icons.room)),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "please enter your city name";
-                      } else {
-                        return null;
-                      }
-                    }),
+                reusebletextfield(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (Value) {
+                    return Value.isEmpty ? "enter your city" : null;
+                  },
+                  labelText: "City",
+                  controller: _citycontroller,
+                  icon: const Icon(
+                    FontAwesomeIcons.locationDot,
+                    color: Color.fromARGB(255, 4, 45, 119),
+                  ),
+                ),
                 const SizedBox(
                   height: 25,
                 ),
-                TextFormField(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                reusebletextfield(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (Value) {
+                      return Value.isEmpty ? "enter your email" : null;
+                    },
                     controller: _emailcontroller,
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15)),
-                        labelText: "EMAIL",
-                        prefixIcon: const Icon(Icons.email)),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "please enter your email";
-                      } else {
-                        return null;
-                      }
-                    }),
+                    labelText: "EMAIL",
+                    icon: const Icon(
+                      FontAwesomeIcons.solidEnvelope,
+                      color: Color.fromARGB(255, 4, 45, 119),
+                    )),
                 const SizedBox(
                   height: 25,
                 ),
-                TextFormField(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                reusebletextfield(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (Value) {
+                      return Value.isEmpty ? "enter your password" : null;
+                    },
                     controller: _passwordcontroller,
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15)),
-                        labelText: "PASSWORD",
-                        prefixIcon: const Icon(Icons.lock)),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "please enter your password";
-                      } else {
-                        return null;
-                      }
-                    }),
+                    labelText: "PASSWORD",
+                    icon: const Icon(Icons.lock,
+                        color: Color.fromARGB(255, 4, 45, 119))),
                 const SizedBox(
                   height: 25,
                 ),
-                TextFormField(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                reusebletextfield(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (Value) {
+                      return Value.isEmpty ? "enter your email" : null;
+                    },
                     controller: _confirmpasswordcontroller,
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15)),
-                        hintText: "confirm your password",
-                        labelText: "confirm password",
-                        prefixIcon: const Icon(Icons.lock)),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "please enter your password";
-                      } else {
-                        return null;
-                      }
-                    }),
+                    labelText: "confirm password",
+                    icon: const Icon(Icons.lock,
+                        color: Color.fromARGB(255, 4, 45, 119))),
                 const SizedBox(
                   height: 25,
                 ),
@@ -390,9 +415,21 @@ class _signuppageState extends State<signuppage> {
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     textFieldController: _phonenumbercontroller,
                     onInputChanged: (val) {},
-                    inputDecoration: const InputDecoration(
-                      border: InputBorder.none,
-                      labelText: "phone number",
+                    inputDecoration: InputDecoration(
+                      filled: true,
+                      isDense: true,
+                      contentPadding: EdgeInsets.symmetric(vertical: 10),
+                      labelText: "Your phone number",
+                      hintStyle: TextStyle(
+                        color: Colors.grey,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        // borderSide: const BorderSide(
+                        //   width: 4,
+                        //   //  color: Colors.lightGreen,
+                        // ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {

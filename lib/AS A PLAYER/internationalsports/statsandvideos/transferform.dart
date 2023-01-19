@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/profile.dart';
+import 'package:finalyear/wedgets/reusebletextfield.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -13,6 +16,9 @@ class transferform extends StatefulWidget {
 final _formKey = GlobalKey<FormState>();
 
 class _transferformState extends State<transferform> {
+  //these are the controller
+  TextEditingController transfercontroller = TextEditingController();
+  TextEditingController messagecontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -55,22 +61,17 @@ class _transferformState extends State<transferform> {
               const SizedBox(
                 height: 10,
               ),
-              TextFormField(
-                  decoration: InputDecoration(
-                      label: const Text(
-                        "Enter Email",
-                      ),
-                      prefixIcon: const Icon(Icons.email),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      )),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "please enter your username";
-                    } else {
-                      return null;
-                    }
-                  }),
+              reusebletextfield(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                controller: transfercontroller,
+                validator: (Value) {
+                  return Value.isEmpty ? "enter your email" : null;
+                },
+                autoValidateMode: AutovalidateMode.onUserInteraction,
+                labelText: "Enter Email",
+                icon: const Icon(FontAwesomeIcons.solidEnvelope,
+                    color: Color.fromARGB(255, 4, 45, 119)),
+              ),
               const SizedBox(
                 height: 30,
               ),
@@ -87,21 +88,21 @@ class _transferformState extends State<transferform> {
               const SizedBox(
                 height: 30,
               ),
-              TextFormField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25)),
-                    hintText: "Enter your message",
-                  ),
-                  maxLines: 10,
-                  maxLength: 120,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "please enter your username";
-                    } else {
-                      return null;
-                    }
-                  }),
+              reusebletextfield(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                maxline: 10,
+                maxlength: 120,
+                controller: messagecontroller,
+                validator: (Value) {
+                  return Value.isEmpty ? "enter your message" : null;
+                },
+                autoValidateMode: AutovalidateMode.onUserInteraction,
+                icon: const Icon(
+                  FontAwesomeIcons.solidMessage,
+                  color: Color.fromARGB(255, 4, 45, 119),
+                ),
+                labelText: "Enter your message",
+              ),
               const SizedBox(
                 height: 40,
               ),
@@ -111,7 +112,7 @@ class _transferformState extends State<transferform> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       ElevatedButton.icon(
-                        onPressed: () => Get.to( profile()),
+                        onPressed: () => Get.to(const profile()),
                         icon: const FaIcon(
                           FontAwesomeIcons.trash,
                           color: Colors.red,

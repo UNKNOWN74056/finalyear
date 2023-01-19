@@ -1,15 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:finalyear/AS%20A%20COACH/culturehomedb.dart';
 import 'package:finalyear/pages/forgotpassword.dart';
 import 'package:finalyear/pages/signuppage.dart';
 import 'package:finalyear/service/internet_connection.dart';
+import 'package:finalyear/wedgets/reusebletextfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
-
 import '../AS A PLAYER/internationalsports/dashboard/homedb.dart';
 
 class loginpage extends StatefulWidget {
@@ -107,55 +104,45 @@ class _loginpageState extends State<loginpage> {
                 padding: const EdgeInsets.all(15),
                 child: Column(
                   children: [
-                    TextFormField(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        controller: _emailcontroller,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15)),
-                            labelText: "Enter your email",
-                            prefixIcon: const Icon(Icons.person)),
-
-                        //form validaiton code
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "please enter your username";
-                          } else {
-                            return null;
-                          }
-                        }),
+                    reusebletextfield(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      autoValidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (Value) {
+                        return Value.isEmpty ? "enter your email" : null;
+                      },
+                      labelText: "Enter your email",
+                      icon: const Icon(
+                        FontAwesomeIcons.solidEnvelope,
+                        color: Color.fromARGB(255, 4, 45, 119),
+                      ),
+                      controller: _emailcontroller,
+                    ),
                     const SizedBox(
                       height: 25,
                     ),
-                    TextFormField(
-                        obscureText: _obsecure,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        controller: _passwordcontroller,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15)),
-                            labelText: "Enter your passwowrd",
-                            prefixIcon: const Icon(
-                              Icons.lock,
-                            ),
-                            suffixIcon: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  _obsecure = !_obsecure;
-                                });
-                              },
-                              child: Icon(_obsecure
-                                  ? Icons.visibility_off
-                                  : Icons.visibility),
-                            )),
-                        //form validaiton code
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "please enter your password";
-                          } else {
-                            return null;
-                          }
-                        })
+                    reusebletextfield(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (Value) {
+                        return Value.isEmpty ? "enter your email" : null;
+                      },
+                      suffixIcon: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _obsecure = !_obsecure;
+                          });
+                        },
+                        child: Icon(_obsecure
+                            ? FontAwesomeIcons.eye
+                            : FontAwesomeIcons.eyeSlash),
+                      ),
+                      autoValidateMode: AutovalidateMode.onUserInteraction,
+                      controller: _passwordcontroller,
+                      labelText: "Enter your passwowrd",
+                      icon: const Icon(
+                        Icons.lock,
+                        color: Color.fromARGB(255, 4, 45, 119),
+                      ),
+                    ),
                   ],
                 ),
               ),
