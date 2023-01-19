@@ -441,6 +441,7 @@ class _signuppageState extends State<signuppage> {
                 const SizedBox(
                   height: 10,
                 ),
+                //this is signup button to create the user
                 SizedBox(
                   width: double.infinity,
                   child: Padding(
@@ -457,6 +458,8 @@ class _signuppageState extends State<signuppage> {
                         child: const Text("SIGIN UP")),
                   ),
                 ),
+
+                //login button if u have account
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

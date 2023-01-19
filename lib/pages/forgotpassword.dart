@@ -77,6 +77,8 @@ class _forgotpasswordState extends State<forgotpassword> {
                     color: Color.fromARGB(255, 4, 45, 119),
                   )),
             ),
+
+            //button for varification of oyur email to reset your password
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

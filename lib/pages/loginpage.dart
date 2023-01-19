@@ -160,6 +160,8 @@ class _loginpageState extends State<loginpage> {
                   ],
                 ),
               ),
+              
+              //this is login button
               SizedBox(
                 width: double.infinity,
                 child: Padding(
@@ -184,6 +186,8 @@ class _loginpageState extends State<loginpage> {
               const SizedBox(
                 height: 20,
               ),
+
+              //this is signin with google bitton
               Padding(
                 padding: const EdgeInsets.only(left: 25, right: 25),
                 child: SizedBox(
@@ -200,6 +204,7 @@ class _loginpageState extends State<loginpage> {
                   ),
                 ),
               ),
+              //this is the signup button
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -219,38 +224,3 @@ class _loginpageState extends State<loginpage> {
     ));
   }
 }
-
-// class TextForm extends StatelessWidget {
-//   const TextForm({
-//     required this.lable,
-//     required this.hint,
-//     required this.icon,
-//     this.iccon,
-//     Key? key,
-//   }) : super(key: key);
-//   final lable;
-//   final hint;
-//   final icon;
-//   final iccon;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     var obscureText = true;
-//     return TextFormField(
-//         //obscureText: obscureText,
-//         style: const TextStyle(color: Colors.black),
-//         decoration: InputDecoration(
-//           labelText: lable,
-//           hintText: hint,
-//           prefixIcon: icon,
-//           suffixIcon: iccon,
-//           border: OutlineInputBorder(
-//             borderRadius: BorderRadius.circular(20),
-//           ),
-//           enabledBorder: OutlineInputBorder(
-//             borderSide: const BorderSide(color: Colors.black),
-//             borderRadius: BorderRadius.circular(20),
-//           ),
-//         ));
-//   }
-// }
