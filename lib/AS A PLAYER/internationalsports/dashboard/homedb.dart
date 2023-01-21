@@ -15,7 +15,10 @@ class _HomedbState extends State<Homedb> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(centerTitle: true, title: const Text("Mr.Sports")),
+        appBar: AppBar(
+            automaticallyImplyLeading: false,
+            centerTitle: true,
+            title: const Text("Mr.Sports")),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(

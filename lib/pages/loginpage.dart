@@ -15,7 +15,7 @@ class loginpage extends StatefulWidget {
   State<loginpage> createState() => _loginpageState();
 }
 
-final _formKey = GlobalKey<FormState>();
+GlobalKey<FormState> _form_Key = GlobalKey<FormState>();
 
 class _loginpageState extends State<loginpage> {
   //bool vareable for visibility of password
@@ -77,7 +77,7 @@ class _loginpageState extends State<loginpage> {
       child: Scaffold(
           body: SingleChildScrollView(
         child: Form(
-          key: _formKey,
+          key: _form_Key,
           child: Column(
             children: [
               Padding(
@@ -160,7 +160,7 @@ class _loginpageState extends State<loginpage> {
                   ],
                 ),
               ),
-              
+
               //this is login button
               SizedBox(
                 width: double.infinity,
@@ -168,7 +168,7 @@ class _loginpageState extends State<loginpage> {
                   padding: const EdgeInsets.only(left: 30, right: 30),
                   child: ElevatedButton(
                       onPressed: () {
-                        if (_formKey.currentState!.validate()) {
+                        if (_form_Key.currentState!.validate()) {
                           setState(() {
                             email = _emailcontroller.text;
                             password = _passwordcontroller.text;

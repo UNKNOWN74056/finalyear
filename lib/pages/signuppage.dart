@@ -1,12 +1,16 @@
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/pages/loginpage.dart';
 import 'package:finalyear/service/internet_connection.dart';
 import 'package:finalyear/wedgets/reusebletextfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:path/path.dart';
 
 class signuppage extends StatefulWidget {
   const signuppage({super.key});
@@ -15,7 +19,7 @@ class signuppage extends StatefulWidget {
   State<signuppage> createState() => _signuppageState();
 }
 
-final _formKey = GlobalKey<FormState>();
+GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
 class _signuppageState extends State<signuppage> {
   //controllers for text fields
@@ -29,6 +33,27 @@ class _signuppageState extends State<signuppage> {
   final _passwordcontroller = TextEditingController();
   final _confirmpasswordcontroller = TextEditingController();
   final _phonenumbercontroller = TextEditingController();
+  //final _imagurl = TextEditingController();
+
+  //var for image
+  XFile? _image;
+  var _pickedimage;
+//function for image picker
+  // Future getimage() async {
+  //   final pickecdimage = await ImagePicker()
+  //       .pickImage(source: ImageSource.gallery, imageQuality: 30);
+  //   final pickedimagefile = File(pickecdimage!.path);
+  //   setState(() {
+  //     _pickedimage = pickedimagefile;
+  //   });
+  // }
+
+//function to upload the photo to storage
+  // Future uploadimage() async {
+  //   final ref = FirebaseStorage.instance.ref().child("image/");
+  //   await ref.putFile(_pickedimage);
+  //   String url = await ref.getDownloadURL();
+  // }
 
   // this is the dispose funtion to dispose the data
   @override
@@ -73,12 +98,14 @@ class _signuppageState extends State<signuppage> {
   //function to create user
   Future signup() async {
     try {
+      //  uploadimage();
       checkconnectivity();
       passwrodconfirm();
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: _emailcontroller.text.trim(),
         password: _passwordcontroller.text.trim(),
       );
+
       Adduserdeatial(
         _firstnamecontroller.text.trim(),
         _lastnamecontroller.text.trim(),
@@ -89,6 +116,7 @@ class _signuppageState extends State<signuppage> {
         _emailcontroller.text.trim(),
         _passwordcontroller.text.trim(),
         _phonenumbercontroller.text.trim(),
+        // url.toString(),
       );
       Get.snackbar("Registration",
           "Your account has been register succefully please login again.");
@@ -105,15 +133,17 @@ class _signuppageState extends State<signuppage> {
 
   //add user details to firestore database
   Future Adduserdeatial(
-      String firstname,
-      String lastname,
-      String profession,
-      String gender,
-      String sports,
-      String city,
-      String email,
-      String password,
-      String phone) async {
+    String firstname,
+    String lastname,
+    String profession,
+    String gender,
+    String sports,
+    String city,
+    String email,
+    String password,
+    String phone,
+    // String imgurl,
+  ) async {
     await FirebaseFirestore.instance.collection('users').add({
       'firstname': firstname,
       'lastname': lastname,
@@ -122,6 +152,7 @@ class _signuppageState extends State<signuppage> {
       'sport': sport1,
       'city': city,
       'email': email,
+      // 'image': url,
       'password': password,
       'phoneNumber': phone,
     });
@@ -171,6 +202,28 @@ class _signuppageState extends State<signuppage> {
             padding: const EdgeInsets.all(15),
             child: Column(
               children: [
+                GestureDetector(
+                    onTap: () async {
+                      //  getimage();
+                    },
+                    child: Container(
+                        child: _pickedimage == null
+                            ? CircleAvatar(
+                                radius: 60,
+                                child: Image.asset(
+                                  "assets/logo.png",
+                                  height: 90,
+                                  fit: BoxFit.cover,
+                                ))
+                            : CircleAvatar(
+                                radius: 60,
+                                backgroundImage:
+                                    FileImage(File(_pickedimage!.path)),
+                              ))),
+
+                const SizedBox(
+                  height: 15,
+                ),
                 reusebletextfield(
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   autoValidateMode: AutovalidateMode.onUserInteraction,
@@ -371,7 +424,7 @@ class _signuppageState extends State<signuppage> {
                   height: 25,
                 ),
                 reusebletextfield(
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (Value) {
                       return Value.isEmpty ? "enter your email" : null;
@@ -386,7 +439,7 @@ class _signuppageState extends State<signuppage> {
                   height: 25,
                 ),
                 reusebletextfield(
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (Value) {
                       return Value.isEmpty ? "enter your password" : null;
@@ -399,7 +452,7 @@ class _signuppageState extends State<signuppage> {
                   height: 25,
                 ),
                 reusebletextfield(
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (Value) {
                       return Value.isEmpty ? "enter your email" : null;
@@ -418,9 +471,9 @@ class _signuppageState extends State<signuppage> {
                     inputDecoration: InputDecoration(
                       filled: true,
                       isDense: true,
-                      contentPadding: EdgeInsets.symmetric(vertical: 10),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 10),
                       labelText: "Your phone number",
-                      hintStyle: TextStyle(
+                      hintStyle: const TextStyle(
                         color: Colors.grey,
                       ),
                       enabledBorder: OutlineInputBorder(
@@ -449,11 +502,8 @@ class _signuppageState extends State<signuppage> {
                     child: ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Processing Data')),
-                            );
+                            signup();
                           }
-                          signup();
                         },
                         child: const Text("SIGIN UP")),
                   ),
