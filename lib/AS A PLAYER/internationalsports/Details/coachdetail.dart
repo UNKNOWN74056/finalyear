@@ -1,8 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:finalyear/wedgets/reusraw.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:path/path.dart';
 
 class coachdetail extends StatefulWidget {
-  const coachdetail({super.key});
+  final DocumentSnapshot post;
+
+  const coachdetail({super.key, required this.post});
 
   @override
   State<coachdetail> createState() => _coachdetailState();
@@ -13,100 +20,77 @@ class _coachdetailState extends State<coachdetail> {
   @override
   Widget build(BuildContext context) {
     double _rating;
-    return Scaffold(
+
+    return SafeArea(
+      child: Scaffold(
         body: SingleChildScrollView(
-      child: Column(children: [
-        Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Row(
-            children: const [
-              Padding(
-                padding: EdgeInsets.only(top: 100),
-                child: Center(
-                  child: Text(
-                    "Coach name",
-                    style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ]),
-        const SizedBox(
-          height: 20,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            CircleAvatar(
-              radius: 90,
-              backgroundImage: AssetImage("assets/personlogo.jpg"),
-            ),
-          ],
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(
-              child: Text(
-                "RATING:$rating",
-                style: const TextStyle(fontSize: 25),
-              ),
-            )
-          ],
-        ),
-        Container(
-          child: RatingBar.builder(
-            minRating: 1,
-            itemBuilder: (context, _) => const Icon(Icons.star),
-            updateOnDrag: true,
-            onRatingUpdate: (rating) => setState(() {
-              this.rating = rating;
-            }),
-          ),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        Container(
-          height: 250,
-          width: 500,
-          color: Colors.grey,
           child: Column(
-            children: const [
-              Padding(
-                padding: EdgeInsets.only(left: 20),
-                child: Text(
-                  "Details",
-                  style: TextStyle(fontSize: 25),
+            children: [
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  CircleAvatar(
+                    radius: 70,
+                    backgroundImage: AssetImage("assets/personlogo.jpg"),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Center(
+                    child: Text(
+                      "RATING:$rating",
+                      style: const TextStyle(fontSize: 25),
+                    ),
+                  )
+                ],
+              ),
+              Container(
+                child: RatingBar.builder(
+                  minRating: 0,
+                  itemBuilder: (context, _) => const Icon(Icons.star),
+                  updateOnDrag: true,
+                  onRatingUpdate: (rating) => setState(() {
+                    this.rating = rating;
+                  }),
                 ),
               ),
-              Text(
-                "Location:peshawar.",
-                style: TextStyle(fontSize: 25),
-              ),
-              Text(
-                "Address: near to iqra school.",
-                style: TextStyle(fontSize: 25),
-              ),
-              Text(
-                "Motivation: iam professional trainner.",
-                style: TextStyle(fontSize: 25),
-              ),
-              Text(
-                "Contect: 0325343535",
-                style: TextStyle(fontSize: 25),
-              ),
-              Text(
-                "Email : hama@gmail.com",
-                style: TextStyle(fontSize: 25),
-              )
+              reusableraw(
+                  title: "Name",
+                  value: widget.post["firstname"],
+                  icondata: FontAwesomeIcons.solidUser),
+              reusableraw(
+                  title: "City:",
+                  value: widget.post["city"],
+                  icondata: FontAwesomeIcons.locationDot),
+              reusableraw(
+                  title: "Gender:",
+                  value: widget.post["gender"],
+                  icondata: FontAwesomeIcons.phone),
+              reusableraw(
+                  title: "Email:",
+                  value: widget.post["email"],
+                  icondata: FontAwesomeIcons.solidEnvelope),
+              reusableraw(
+                  title: "Contect:",
+                  value: widget.post["phoneNumber"],
+                  icondata: FontAwesomeIcons.phone),
+              reusableraw(
+                  title: "Sport:",
+                  value: widget.post["sport"],
+                  icondata: Icons.sports),
+              reusableraw(
+                  title: "Profession:",
+                  value: widget.post["profession"],
+                  icondata: FontAwesomeIcons.userTie),
             ],
           ),
-        )
-      ]),
-    ));
+        ),
+      ),
+    );
   }
 }

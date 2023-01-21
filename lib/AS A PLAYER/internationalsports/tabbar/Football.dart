@@ -2,12 +2,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/Details/coachdetail.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:path/path.dart';
 
 class Football extends StatefulWidget {
   const Football({super.key});
 
   @override
   State<Football> createState() => _FootballState();
+}
+
+navigatetodetail(DocumentSnapshot post) {
+  Get.to(coachdetail(post: post));
 }
 
 class _FootballState extends State<Football> {
@@ -43,9 +48,8 @@ class _FootballState extends State<Football> {
                                   subtitle: Text(users["city"],
                                       style: const TextStyle(fontSize: 15)),
                                   trailing: const Icon(Icons.arrow_forward),
-                                  onTap: () {
-                                    Get.to(const coachdetail());
-                                  })),
+                                  onTap: () => navigatetodetail(
+                                     users))),
                         ],
                       );
                     } else if (snapshot.hasError) {

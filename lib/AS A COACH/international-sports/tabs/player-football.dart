@@ -53,10 +53,10 @@ class _playerfootballState extends State<playerfootball> {
                             style: const TextStyle(fontSize: 15)),
                         trailing: const Icon(Icons.arrow_forward),
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const coachdetail()));
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => const coachdetail()));
                         },
                       ),
                     ),

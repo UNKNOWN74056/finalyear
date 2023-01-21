@@ -1,5 +1,7 @@
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/Details/coachdetail.dart';
+import 'package:finalyear/AS%20A%20PLAYER/internationalsports/tabbar/Football.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../model/coachmodel.dart';
 
 class playerculturearchery extends StatefulWidget {
@@ -13,7 +15,6 @@ class _playerculturearcheryState extends State<playerculturearchery> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       body: Column(children: [
         // const Padding(
         //   padding: EdgeInsets.only(right: 20, top: 5),
@@ -53,12 +54,7 @@ class _playerculturearcheryState extends State<playerculturearchery> {
                         subtitle: Text(coachdata[index].discription,
                             style: const TextStyle(fontSize: 15)),
                         trailing: const Icon(Icons.arrow_forward),
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const coachdetail()));
-                        },
+                        onTap: () {},
                       ),
                     ),
                   );
