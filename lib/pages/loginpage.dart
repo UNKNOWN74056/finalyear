@@ -182,28 +182,6 @@ class _loginpageState extends State<loginpage> {
               const SizedBox(
                 height: 20,
               ),
-              const Text("or"),
-              const SizedBox(
-                height: 20,
-              ),
-
-              //this is signin with google bitton
-              Padding(
-                padding: const EdgeInsets.only(left: 25, right: 25),
-                child: SizedBox(
-                  child: ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                        primary: Colors.teal,
-                        onPrimary: Colors.white,
-                        minimumSize: const Size(double.infinity, 40)),
-                    icon: const FaIcon(FontAwesomeIcons.google),
-                    label: const Text(
-                      "Sign in with google",
-                    ),
-                    onPressed: () {},
-                  ),
-                ),
-              ),
               //this is the signup button
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

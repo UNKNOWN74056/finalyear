@@ -22,6 +22,7 @@ class _profileState extends State<profile> with TickerProviderStateMixin {
     return SafeArea(
         child: Scaffold(
             appBar: AppBar(
+              automaticallyImplyLeading: false,
               title: const Text(
                 "Profile",
                 style: TextStyle(fontSize: 30),
