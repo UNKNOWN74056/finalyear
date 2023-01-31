@@ -31,12 +31,15 @@ class _coachdetailState extends State<coachdetail> {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   CircleAvatar(
-                    radius: 70,
-                    backgroundImage: AssetImage("assets/personlogo.jpg"),
+                    radius: 60,
+                    backgroundImage: NetworkImage(widget.post['Imageurl']),
                   ),
                 ],
+              ),
+              const SizedBox(
+                height: 5,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

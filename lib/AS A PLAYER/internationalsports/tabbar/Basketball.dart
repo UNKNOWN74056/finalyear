@@ -49,12 +49,8 @@ class _BasketballState extends State<Basketball> {
                                 })),
                       ],
                     );
-                  } else if (snapshot.hasError) {
-                    return const Text("Somthing is went wrong");
                   } else {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
+                    return const Center(child: CircularProgressIndicator());
                   }
                 });
           })),

@@ -22,6 +22,75 @@ class signuppage extends StatefulWidget {
 GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
 class _signuppageState extends State<signuppage> {
+  File? _image;
+  final ImagePicker picker = ImagePicker();
+  final _formKey = GlobalKey<FormState>();
+  TextEditingController titleController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+
+  Future getImageGallery() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        print("No Image Selected");
+      }
+    });
+  }
+
+  Future getCameraImage() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        print("No Image Selected");
+      }
+    });
+  }
+
+  void dialogAlert(context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            content: SizedBox(
+              height: 120,
+              child: Column(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      getCameraImage();
+                      Navigator.pop(context);
+                    },
+                    child: const ListTile(
+                      leading: Icon(Icons.camera_alt),
+                      title: Text("Camera"),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      getImageGallery();
+                      Navigator.pop(context);
+                    },
+                    child: const ListTile(
+                      leading: Icon(Icons.photo),
+                      title: Text("Gallery"),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
   //controllers for text fields
   final _firstnamecontroller = TextEditingController();
   final _lastnamecontroller = TextEditingController();
@@ -33,29 +102,7 @@ class _signuppageState extends State<signuppage> {
   final _passwordcontroller = TextEditingController();
   final _confirmpasswordcontroller = TextEditingController();
   final _phonenumbercontroller = TextEditingController();
-  //final _imagurl = TextEditingController();
 
-  //var for image
-  XFile? _image;
-  var _pickedimage;
-//function for image picker
-  // Future getimage() async {
-  //   final pickecdimage = await ImagePicker()
-  //       .pickImage(source: ImageSource.gallery, imageQuality: 30);
-  //   final pickedimagefile = File(pickecdimage!.path);
-  //   setState(() {
-  //     _pickedimage = pickedimagefile;
-  //   });
-  // }
-
-//function to upload the photo to storage
-  // Future uploadimage() async {
-  //   final ref = FirebaseStorage.instance.ref().child("image/");
-  //   await ref.putFile(_pickedimage);
-  //   String url = await ref.getDownloadURL();
-  // }
-
-  // this is the dispose funtion to dispose the data
   @override
   void dispose() {
     _firstnamecontroller.dispose();
@@ -98,13 +145,20 @@ class _signuppageState extends State<signuppage> {
   //function to create user
   Future signup() async {
     try {
-      //  uploadimage();
       checkconnectivity();
       passwrodconfirm();
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: _emailcontroller.text.trim(),
         password: _passwordcontroller.text.trim(),
       );
+      String email = _emailcontroller.text.toString();
+      var refer = await FirebaseStorage.instance
+          .ref("/MrSport$email")
+          .child('images')
+          .putFile(_image!.absolute);
+      TaskSnapshot uploadTask = refer;
+      await Future.value(uploadTask);
+      var newUrl = await refer.ref.getDownloadURL();
 
       Adduserdeatial(
         _firstnamecontroller.text.trim(),
@@ -116,7 +170,7 @@ class _signuppageState extends State<signuppage> {
         _emailcontroller.text.trim(),
         _passwordcontroller.text.trim(),
         _phonenumbercontroller.text.trim(),
-        // url.toString(),
+        newUrl.toString(),
       );
       Get.snackbar("Registration",
           "Your account has been register succefully please login again.");
@@ -142,7 +196,7 @@ class _signuppageState extends State<signuppage> {
     String email,
     String password,
     String phone,
-    // String imgurl,
+    String url,
   ) async {
     await FirebaseFirestore.instance.collection('users').add({
       'firstname': firstname,
@@ -152,7 +206,7 @@ class _signuppageState extends State<signuppage> {
       'sport': sport1,
       'city': city,
       'email': email,
-      // 'image': url,
+      'Imageurl': url,
       'password': password,
       'phoneNumber': phone,
     });
@@ -203,23 +257,26 @@ class _signuppageState extends State<signuppage> {
             child: Column(
               children: [
                 GestureDetector(
-                    onTap: () async {
-                      //  getimage();
-                    },
-                    child: Container(
-                        child: _pickedimage == null
-                            ? CircleAvatar(
-                                radius: 60,
-                                child: Image.asset(
-                                  "assets/logo.png",
-                                  height: 90,
-                                  fit: BoxFit.cover,
-                                ))
-                            : CircleAvatar(
-                                radius: 60,
-                                backgroundImage:
-                                    FileImage(File(_pickedimage!.path)),
-                              ))),
+                  onTap: () async {
+                    dialogAlert(context);
+                  },
+                  child: Container(
+                    child: _image == null
+                        ? CircleAvatar(
+                            radius: 60,
+                            child: Image.asset(
+                              "assets/logo.png",
+                              height: 90,
+                              fit: BoxFit.cover,
+                            ))
+                        : Image.file(
+                            _image!.absolute,
+                            height: 100,
+                            width: 100,
+                            fit: BoxFit.cover,
+                          ),
+                  ),
+                ),
 
                 const SizedBox(
                   height: 15,

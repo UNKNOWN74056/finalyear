@@ -45,16 +45,12 @@ class _tabletenisState extends State<tabletenis> {
                                     style: const TextStyle(fontSize: 15)),
                                 trailing: const Icon(Icons.arrow_forward),
                                 onTap: () {
-                                  Get.to( navigatetodetail(users));
+                                  Get.to(navigatetodetail(users));
                                 })),
                       ],
                     );
-                  } else if (snapshot.hasError) {
-                    return const Text("Somthing is went wrong");
                   } else {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
+                    return const Center(child: CircularProgressIndicator());
                   }
                 });
           })),
