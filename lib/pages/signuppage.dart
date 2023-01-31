@@ -19,8 +19,6 @@ class signuppage extends StatefulWidget {
   State<signuppage> createState() => _signuppageState();
 }
 
-GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
 class _signuppageState extends State<signuppage> {
   File? _image;
   final ImagePicker picker = ImagePicker();
@@ -28,6 +26,7 @@ class _signuppageState extends State<signuppage> {
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
 
+//pick image from gallery
   Future getImageGallery() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
@@ -40,6 +39,7 @@ class _signuppageState extends State<signuppage> {
     });
   }
 
+  // pick image from camera
   Future getCameraImage() async {
     final pickedFile = await picker.pickImage(source: ImageSource.camera);
 
@@ -52,6 +52,7 @@ class _signuppageState extends State<signuppage> {
     });
   }
 
+//dailog to select photo from camera or gallery
   void dialogAlert(context) {
     showDialog(
         context: context,

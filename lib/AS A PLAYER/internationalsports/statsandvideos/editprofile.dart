@@ -10,7 +10,7 @@ class editprofile extends StatefulWidget {
   State<editprofile> createState() => _editprofileState();
 }
 
-final _formKey = GlobalKey<FormState>();
+final key5 = GlobalKey<FormState>();
 
 class _editprofileState extends State<editprofile> {
   TextEditingController editfirstname = TextEditingController();
@@ -30,7 +30,7 @@ class _editprofileState extends State<editprofile> {
       ),
       body: SingleChildScrollView(
         child: Form(
-          key: _formKey,
+          key: key5,
           child: Padding(
             padding: const EdgeInsets.all(15),
             child: Column(children: [
@@ -137,7 +137,7 @@ class _editprofileState extends State<editprofile> {
               ),
               ElevatedButton(
                   onPressed: () {
-                    if (_formKey.currentState!.validate()) {
+                    if (key5.currentState!.validate()) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Processing Data')),
                       );

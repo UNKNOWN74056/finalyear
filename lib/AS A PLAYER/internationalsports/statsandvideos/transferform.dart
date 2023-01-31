@@ -13,7 +13,7 @@ class transferform extends StatefulWidget {
   State<transferform> createState() => _transferformState();
 }
 
-final _formKey = GlobalKey<FormState>();
+final key4= GlobalKey<FormState>();
 
 class _transferformState extends State<transferform> {
   //these are the controller
@@ -31,7 +31,7 @@ class _transferformState extends State<transferform> {
           child: Container(
         margin: EdgeInsets.all(10.0),
         child: Form(
-          key: _formKey,
+          key: key4,
           child: Column(
             children: [
               Row(
@@ -121,7 +121,7 @@ class _transferformState extends State<transferform> {
                       ),
                       ElevatedButton.icon(
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {
+                          if (key4.currentState!.validate()) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Processing Data')),
                             );

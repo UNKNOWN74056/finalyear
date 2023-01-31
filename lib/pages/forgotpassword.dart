@@ -12,7 +12,7 @@ class forgotpassword extends StatefulWidget {
   State<forgotpassword> createState() => _forgotpasswordState();
 }
 
-final _formKey = GlobalKey<FormState>();
+final key3 = GlobalKey<FormState>();
 
 class _forgotpasswordState extends State<forgotpassword> {
   //controller for the verify eamil field
@@ -41,7 +41,7 @@ class _forgotpasswordState extends State<forgotpassword> {
         child: Scaffold(
       body: SingleChildScrollView(
         child: Form(
-          key: _formKey,
+          key: key3,
           child: Column(children: [
             Padding(
               padding: const EdgeInsets.only(top: 20),
@@ -84,7 +84,7 @@ class _forgotpasswordState extends State<forgotpassword> {
               children: [
                 ElevatedButton(
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {
+                      if (key3.currentState!.validate()) {
                         setState(() {
                           email = _verifyemailcontroller.text;
                         });
