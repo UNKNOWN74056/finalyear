@@ -1,10 +1,6 @@
-import 'dart:ui';
-
-import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/profile.dart';
 import 'package:finalyear/wedgets/reusebletextfield.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
 
 class transferform extends StatefulWidget {
   const transferform({super.key});
@@ -13,12 +9,20 @@ class transferform extends StatefulWidget {
   State<transferform> createState() => _transferformState();
 }
 
-final key4= GlobalKey<FormState>();
+//these are the controller
+TextEditingController emailto = TextEditingController();
+TextEditingController message = TextEditingController();
+
+//dispose function
+@override
+void dispose() {
+  emailto.dispose();
+  message.dispose();
+}
+
+final key4 = GlobalKey<FormState>();
 
 class _transferformState extends State<transferform> {
-  //these are the controller
-  TextEditingController transfercontroller = TextEditingController();
-  TextEditingController messagecontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -63,7 +67,7 @@ class _transferformState extends State<transferform> {
               ),
               reusebletextfield(
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                controller: transfercontroller,
+                controller: emailto,
                 validator: (Value) {
                   return Value.isEmpty ? "enter your email" : null;
                 },
@@ -92,7 +96,7 @@ class _transferformState extends State<transferform> {
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 maxline: 10,
                 maxlength: 120,
-                controller: messagecontroller,
+                controller: message,
                 validator: (Value) {
                   return Value.isEmpty ? "enter your message" : null;
                 },
@@ -108,32 +112,21 @@ class _transferformState extends State<transferform> {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 50, right: 50),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ElevatedButton.icon(
-                        onPressed: () => Get.to(const profile()),
-                        icon: const FaIcon(
-                          FontAwesomeIcons.trash,
-                          color: Colors.red,
-                        ),
-                        label: const Text("CANCEL"),
+                child:
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Center(
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        if (key4.currentState!.validate()) {}
+                      },
+                      icon: const Icon(
+                        FontAwesomeIcons.check,
+                        color: Colors.green,
                       ),
-                      ElevatedButton.icon(
-                        onPressed: () {
-                          if (key4.currentState!.validate()) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Processing Data')),
-                            );
-                          }
-                        },
-                        icon: const FaIcon(
-                          FontAwesomeIcons.check,
-                          color: Colors.green,
-                        ),
-                        label: const Text("CONFERM"),
-                      ),
-                    ]),
+                      label: const Text("CONFERM"),
+                    ),
+                  ),
+                ]),
               ),
             ],
           ),

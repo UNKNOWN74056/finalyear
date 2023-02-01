@@ -10,7 +10,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:path/path.dart';
 
 class signuppage extends StatefulWidget {
   const signuppage({super.key});
@@ -199,7 +198,10 @@ class _signuppageState extends State<signuppage> {
     String phone,
     String url,
   ) async {
-    await FirebaseFirestore.instance.collection('users').add({
+    var userid = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.email);
+    userid.set({
       'firstname': firstname,
       'lastname': lastname,
       'profession': profession1,

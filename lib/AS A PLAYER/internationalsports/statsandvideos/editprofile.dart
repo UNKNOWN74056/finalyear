@@ -1,6 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/profile.dart';
 import 'package:finalyear/wedgets/reusebletextfield.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class editprofile extends StatefulWidget {
@@ -39,7 +43,7 @@ class _editprofileState extends State<editprofile> {
                 "please fill the following details \n in order to edit your profile.",
                 style: TextStyle(fontSize: 15),
               )),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Row(
@@ -75,7 +79,7 @@ class _editprofileState extends State<editprofile> {
               ),
               reusebletextfield(
                   autoValidateMode: AutovalidateMode.onUserInteraction,
-                  controller: editfirstname,
+                  controller: editlastname,
                   validator: (Value) {
                     return Value.isEmpty ? "enter your last name" : null;
                   },
@@ -90,7 +94,7 @@ class _editprofileState extends State<editprofile> {
               ),
               reusebletextfield(
                   autoValidateMode: AutovalidateMode.onUserInteraction,
-                  controller: editfirstname,
+                  controller: editemail,
                   validator: (Value) {
                     return Value.isEmpty ? "enter your email" : null;
                   },
@@ -108,20 +112,17 @@ class _editprofileState extends State<editprofile> {
               ),
               InternationalPhoneNumberInput(
                   autoValidateMode: AutovalidateMode.onUserInteraction,
+                  textFieldController: editephonenumber,
                   onInputChanged: (val) {},
                   inputDecoration: InputDecoration(
                     filled: true,
                     isDense: true,
                     contentPadding: EdgeInsets.symmetric(vertical: 10),
                     labelText: "Your phone number",
-                    hintStyle: TextStyle(
+                    hintStyle: const TextStyle(
                       color: Colors.grey,
                     ),
                     enabledBorder: OutlineInputBorder(
-                      // borderSide: const BorderSide(
-                      //   width: 4,
-                      //   //  color: Colors.lightGreen,
-                      // ),
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
@@ -137,11 +138,23 @@ class _editprofileState extends State<editprofile> {
               ),
               ElevatedButton(
                   onPressed: () {
-                    if (key5.currentState!.validate()) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Processing Data')),
-                      );
-                    }
+                    // if (key5.currentState!.validate()) {
+                    //   FirebaseFirestore.instance
+                    //       .collection("users")
+                    //       .doc(FirebaseAuth.instance.currentUser!.email)
+                    //       .update({
+                    //     'firstname': editfirstname.text.toString(),
+                    //     'lastname': editlastname.text.toString(),
+                    //     'email': editemail.text.toString(),
+                    //     'phoneNumber': editephonenumber.text.toString()
+                    //   }).then((value) => {
+                    //             editfirstname.clear(),
+                    //             editlastname.clear(),
+                    //             editephonenumber.clear(),
+                    //             editemail.clear()
+                    //           });
+                    //   Get.to(const profile());
+                    // }
                   },
                   child: const Text("Save changes"))
             ]),
