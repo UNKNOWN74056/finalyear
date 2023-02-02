@@ -16,14 +16,14 @@ Future<void> usernameupdate(BuildContext Context, String firstname) async {
             child: Column(
               children: [
                 reusebletextfield(
-                    labelText: "Username",
-                    icon: const Icon(FontAwesomeIcons.solidUser),
-                    controller: updatefirstname,
-                    validator: (Value) {
-                      return Value.isEmpty ? "enter your name" : null;
-                    },
-                    autoValidateMode: AutovalidateMode.onUserInteraction,
-                   ),
+                  labelText: "Username",
+                  icon: const Icon(FontAwesomeIcons.solidUser),
+                  controller: updatefirstname,
+                  validator: (Value) {
+                    return Value.isEmpty ? "enter your name" : null;
+                  },
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                ),
               ],
             ),
           ),
@@ -38,7 +38,9 @@ Future<void> usernameupdate(BuildContext Context, String firstname) async {
                   FirebaseFirestore.instance
                       .collection("users")
                       .doc(FirebaseAuth.instance.currentUser!.email)
-                      .update({'firstname': updatefirstname.text.toString()});
+                      .update({
+                    'firstname': updatefirstname.text.toString()
+                  }).then((value) => {updatefirstname.clear()});
 
                   Navigator.pop(context);
                 },
@@ -59,14 +61,14 @@ Future<void> cityupdate(BuildContext Context, String city) async {
             child: Column(
               children: [
                 reusebletextfield(
-                    labelText: "City",
-                    icon: const Icon(FontAwesomeIcons.locationDot),
-                    controller: updatecity,
-                    validator: (Value) {
-                      return Value.isEmpty ? "enter your city" : null;
-                    },
-                    autoValidateMode: AutovalidateMode.onUserInteraction,
-                    ),
+                  labelText: "City",
+                  icon: const Icon(FontAwesomeIcons.locationDot),
+                  controller: updatecity,
+                  validator: (Value) {
+                    return Value.isEmpty ? "enter your city" : null;
+                  },
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                ),
               ],
             ),
           ),
@@ -81,7 +83,8 @@ Future<void> cityupdate(BuildContext Context, String city) async {
                   FirebaseFirestore.instance
                       .collection("users")
                       .doc(FirebaseAuth.instance.currentUser!.email)
-                      .update({'city': updatecity.text.toString()});
+                      .update({'city': updatecity.text.toString()}).then(
+                          (value) => {updatecity.clear()});
 
                   Navigator.pop(context);
                 },
@@ -102,14 +105,14 @@ Future<void> genderupdate(BuildContext Context, String gender) async {
             child: Column(
               children: [
                 reusebletextfield(
-                    labelText: "gender",
-                    icon: const Icon(FontAwesomeIcons.solidUser),
-                    controller: updatecity,
-                    validator: (Value) {
-                      return Value.isEmpty ? "enter your gender" : null;
-                    },
-                    autoValidateMode: AutovalidateMode.onUserInteraction,
-                  ),
+                  labelText: "gender",
+                  icon: const Icon(FontAwesomeIcons.solidUser),
+                  controller: updatecity,
+                  validator: (Value) {
+                    return Value.isEmpty ? "enter your gender" : null;
+                  },
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                ),
               ],
             ),
           ),
@@ -124,7 +127,8 @@ Future<void> genderupdate(BuildContext Context, String gender) async {
                   FirebaseFirestore.instance
                       .collection("users")
                       .doc(FirebaseAuth.instance.currentUser!.email)
-                      .update({'gender': updategender.text.toString()});
+                      .update({'gender': updategender.text.toString()}).then(
+                          (value) => {updategender.clear()});
 
                   Navigator.pop(context);
                 },
@@ -146,15 +150,15 @@ Future<void> phoneupdate(BuildContext Context, String phone) async {
             child: Column(
               children: [
                 reusebletextfield(
-                    keyboard: TextInputType.phone,
-                    labelText: "Phone",
-                    icon: const Icon(FontAwesomeIcons.solidUser),
-                    controller: phoneupdate,
-                    validator: (Value) {
-                      return Value.isEmpty ? "enter your phone" : null;
-                    },
-                    autoValidateMode: AutovalidateMode.onUserInteraction,
-                    ),
+                  keyboard: TextInputType.phone,
+                  labelText: "Phone",
+                  icon: const Icon(FontAwesomeIcons.solidUser),
+                  controller: phoneupdate,
+                  validator: (Value) {
+                    return Value.isEmpty ? "enter your phone" : null;
+                  },
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                ),
               ],
             ),
           ),
@@ -169,7 +173,9 @@ Future<void> phoneupdate(BuildContext Context, String phone) async {
                   FirebaseFirestore.instance
                       .collection("users")
                       .doc(FirebaseAuth.instance.currentUser!.email)
-                      .update({'phoneNumber': phoneupdate.text.toString()});
+                      .update({
+                    'phoneNumber': phoneupdate.text.toString()
+                  }).then((value) => {phoneupdate.clear()});
                   Navigator.pop(context);
                 },
                 child: const Text("Ok"))
@@ -190,14 +196,14 @@ Future<void> sportupdate(BuildContext Context, String sport) async {
             child: Column(
               children: [
                 reusebletextfield(
-                    labelText: "sport update",
-                    icon: const Icon(FontAwesomeIcons.solidUser),
-                    controller: sportupdate,
-                    validator: (Value) {
-                      return Value.isEmpty ? "enter your sport" : null;
-                    },
-                    autoValidateMode: AutovalidateMode.onUserInteraction,
-                    ),
+                  labelText: "sport update",
+                  icon: const Icon(FontAwesomeIcons.solidUser),
+                  controller: sportupdate,
+                  validator: (Value) {
+                    return Value.isEmpty ? "enter your sport" : null;
+                  },
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                ),
               ],
             ),
           ),
@@ -212,7 +218,8 @@ Future<void> sportupdate(BuildContext Context, String sport) async {
                   FirebaseFirestore.instance
                       .collection("users")
                       .doc(FirebaseAuth.instance.currentUser!.email)
-                      .update({'sport': sportupdate.text.toString()});
+                      .update({'sport': sportupdate.text.toString()}).then(
+                          (value) => {sportupdate.clear()});
                   Navigator.pop(context);
                 },
                 child: const Text("Ok"))
