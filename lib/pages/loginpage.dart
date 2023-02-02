@@ -15,8 +15,8 @@ class loginpage extends StatefulWidget {
   State<loginpage> createState() => _loginpageState();
 }
 
-
 final _form_Key = GlobalKey<FormState>();
+
 class _loginpageState extends State<loginpage> {
   //bool vareable for visibility of password
   bool _obsecure = true;
@@ -105,7 +105,8 @@ class _loginpageState extends State<loginpage> {
                 child: Column(
                   children: [
                     reusebletextfield(
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      keyboard: TextInputType.emailAddress,
+                      
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                       validator: (Value) {
                         return Value.isEmpty ? "enter your email" : null;
@@ -121,7 +122,8 @@ class _loginpageState extends State<loginpage> {
                       height: 25,
                     ),
                     reusebletextfield(
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      keyboard: TextInputType.emailAddress,
+                    
                       validator: (Value) {
                         return Value.isEmpty ? "enter your email" : null;
                       },

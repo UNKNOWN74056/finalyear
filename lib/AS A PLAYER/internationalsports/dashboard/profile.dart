@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:finalyear/AS%20A%20PLAYER/internationalsports/statsandvideos/editprofile.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/statsandvideos/transferform.dart';
 import 'package:finalyear/wedgets/reusraw.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+
 
 import '../../../wedgets/update_page.dart';
 
@@ -21,8 +21,7 @@ final currentUser = FirebaseAuth.instance;
 final TextEditingController updatefirstname = TextEditingController();
 final TextEditingController updatecity = TextEditingController();
 final TextEditingController updategender = TextEditingController();
-final TextEditingController emailupdate = TextEditingController();
-final TextEditingController phoneupdate = TextEditingController();
+
 class _profileState extends State<profile> {
   @override
   Widget build(BuildContext context) {
@@ -79,7 +78,7 @@ class _profileState extends State<profile> {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  Get.to(const editprofile());
+                                //  Get.to(const editprofile());
                                 },
                                 child: const Text(
                                   "Edit",
@@ -115,32 +114,30 @@ class _profileState extends State<profile> {
                             child: reusableraw(
                                 title: "Gender:",
                                 value: data["gender"],
-                                icondata: FontAwesomeIcons.phone),
+                                icondata: FontAwesomeIcons.venusMars),
                           ),
+                          reusableraw(
+                              title: "Email:",
+                              value: data["email"],
+                              icondata: FontAwesomeIcons.solidEnvelope),
                           GestureDetector(
-                            onTap: (() {
-                              //   Get.to(emailupdate(Context,data['eamil']));
-                            }),
-                            child: reusableraw(
-                                title: "Email:",
-                                value: data["email"],
-                                icondata: FontAwesomeIcons.solidEnvelope),
-                          ),
-                          GestureDetector(
-                            onTap: (() {
-                              // Get.to(
-                              //     phoneupdate(context, data['phonerNumber'])
-                              //    );
-                            }),
+                            onTap: () {
+                              Get.to(phoneupdate(context, data['phoneNumber']));
+                            },
                             child: reusableraw(
                                 title: "Contect:",
                                 value: data["phoneNumber"],
                                 icondata: FontAwesomeIcons.phone),
                           ),
-                          reusableraw(
-                              title: "Sport:",
-                              value: data["sport"],
-                              icondata: Icons.sports),
+                          GestureDetector(
+                            onTap: () {
+                              Get.to(sportupdate(context, data['sport']));
+                            },
+                            child: reusableraw(
+                                title: "Sport:",
+                                value: data["sport"],
+                                icondata: Icons.sports),
+                          ),
                           reusableraw(
                               title: "Profession:",
                               value: data["profession"],

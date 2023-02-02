@@ -8,9 +8,11 @@ class reusebletextfield extends StatelessWidget {
   final suffixIcon;
   final maxline;
   final maxlength;
+  final keyboard;
 
   TextEditingController controller;
   reusebletextfield({
+    this.keyboard,
     required this.labelText,
     required this.icon,
     required this.controller,
@@ -19,7 +21,7 @@ class reusebletextfield extends StatelessWidget {
     this.maxline,
     this.suffixIcon,
     this.maxlength,
-    Key? key, required AutovalidateMode autovalidateMode,
+    Key? key,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,7 @@ class reusebletextfield extends StatelessWidget {
       style: const TextStyle(
         color: Colors.black,
       ),
-      keyboardType: TextInputType.emailAddress,
+      keyboardType: keyboard,
       textAlignVertical: TextAlignVertical.center,
       decoration: InputDecoration(
         filled: true,

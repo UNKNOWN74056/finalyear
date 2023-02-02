@@ -65,7 +65,6 @@ class _forgotpasswordState extends State<forgotpassword> {
             Padding(
               padding: const EdgeInsets.all(15),
               child: reusebletextfield(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
                 autoValidateMode: AutovalidateMode.onUserInteraction,
                   validator: (Value) {
                     return Value.isEmpty ? "enter your email" : null;

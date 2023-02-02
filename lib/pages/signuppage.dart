@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class signuppage extends StatefulWidget {
   const signuppage({super.key});
@@ -198,10 +197,10 @@ class _signuppageState extends State<signuppage> {
     String phone,
     String url,
   ) async {
-    var userid = await FirebaseFirestore.instance
+    await FirebaseFirestore.instance
         .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.email);
-    userid.set({
+        .doc(FirebaseAuth.instance.currentUser!.email)
+        .set({
       'firstname': firstname,
       'lastname': lastname,
       'profession': profession1,
@@ -285,7 +284,7 @@ class _signuppageState extends State<signuppage> {
                   height: 15,
                 ),
                 reusebletextfield(
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  keyboard: TextInputType.emailAddress,
                   autoValidateMode: AutovalidateMode.onUserInteraction,
                   validator: (Value) {
                     return Value.isEmpty ? "enter your first name" : null;
@@ -301,7 +300,7 @@ class _signuppageState extends State<signuppage> {
                   height: 25,
                 ),
                 reusebletextfield(
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  keyboard: TextInputType.emailAddress,
                   autoValidateMode: AutovalidateMode.onUserInteraction,
                   validator: (Value) {
                     return Value.isEmpty ? "enter your last name" : null;
@@ -468,7 +467,8 @@ class _signuppageState extends State<signuppage> {
                   height: 25,
                 ),
                 reusebletextfield(
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  keyboard: TextInputType.emailAddress,
+                
                   autoValidateMode: AutovalidateMode.onUserInteraction,
                   validator: (Value) {
                     return Value.isEmpty ? "enter your city" : null;
@@ -484,7 +484,8 @@ class _signuppageState extends State<signuppage> {
                   height: 25,
                 ),
                 reusebletextfield(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    keyboard: TextInputType.emailAddress,
+                   
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (Value) {
                       return Value.isEmpty ? "enter your email" : null;
@@ -499,7 +500,8 @@ class _signuppageState extends State<signuppage> {
                   height: 25,
                 ),
                 reusebletextfield(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    keyboard: TextInputType.emailAddress,
+                    
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (Value) {
                       return Value.isEmpty ? "enter your password" : null;
@@ -512,7 +514,8 @@ class _signuppageState extends State<signuppage> {
                   height: 25,
                 ),
                 reusebletextfield(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    keyboard: TextInputType.emailAddress,
+                    
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (Value) {
                       return Value.isEmpty ? "enter your email" : null;
@@ -524,33 +527,17 @@ class _signuppageState extends State<signuppage> {
                 const SizedBox(
                   height: 25,
                 ),
-                InternationalPhoneNumberInput(
+                reusebletextfield(
+                    keyboard: TextInputType.phone,
+                    labelText: "+ Code phone number",
+                    icon: const Icon(FontAwesomeIcons.phone,
+                        color: Color.fromARGB(255, 4, 45, 119)),
+                    controller: _phonenumbercontroller,
+                    validator: (Value) {
+                      return Value.isEmpty ? "enter your phnoe number" : null;
+                    },
                     autoValidateMode: AutovalidateMode.onUserInteraction,
-                    textFieldController: _phonenumbercontroller,
-                    onInputChanged: (val) {},
-                    inputDecoration: InputDecoration(
-                      filled: true,
-                      isDense: true,
-                      contentPadding: const EdgeInsets.symmetric(vertical: 10),
-                      labelText: "Your phone number",
-                      hintStyle: const TextStyle(
-                        color: Colors.grey,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        // borderSide: const BorderSide(
-                        //   width: 4,
-                        //   //  color: Colors.lightGreen,
-                        // ),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "please enter your phone number";
-                      } else {
-                        return null;
-                      }
-                    }),
+                   ),
                 const SizedBox(
                   height: 10,
                 ),

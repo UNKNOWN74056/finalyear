@@ -23,7 +23,7 @@ Future<void> usernameupdate(BuildContext Context, String firstname) async {
                       return Value.isEmpty ? "enter your name" : null;
                     },
                     autoValidateMode: AutovalidateMode.onUserInteraction,
-                    autovalidateMode: AutovalidateMode.onUserInteraction),
+                   ),
               ],
             ),
           ),
@@ -60,13 +60,13 @@ Future<void> cityupdate(BuildContext Context, String city) async {
               children: [
                 reusebletextfield(
                     labelText: "City",
-                    icon: const Icon(FontAwesomeIcons.solidUser),
+                    icon: const Icon(FontAwesomeIcons.locationDot),
                     controller: updatecity,
                     validator: (Value) {
                       return Value.isEmpty ? "enter your city" : null;
                     },
                     autoValidateMode: AutovalidateMode.onUserInteraction,
-                    autovalidateMode: AutovalidateMode.onUserInteraction),
+                    ),
               ],
             ),
           ),
@@ -109,7 +109,7 @@ Future<void> genderupdate(BuildContext Context, String gender) async {
                       return Value.isEmpty ? "enter your gender" : null;
                     },
                     autoValidateMode: AutovalidateMode.onUserInteraction,
-                    autovalidateMode: AutovalidateMode.onUserInteraction),
+                  ),
               ],
             ),
           ),
@@ -134,45 +134,89 @@ Future<void> genderupdate(BuildContext Context, String gender) async {
       });
 }
 
-// Future<void> phoneupdate(BuildContext Context, String phone) async {
-//   phoneupdate.text = phone;
-//   return showDialog(
-//       context: Context,
-//       builder: (context) {
-//         return AlertDialog(
-//           title: const Text("update gender"),
-//           content: SingleChildScrollView(
-//             child: Column(
-//               children: [
-//                 reusebletextfield(
-//                     labelText: "gender",
-//                     icon: const Icon(FontAwesomeIcons.solidUser),
-//                     controller: updatecity,
-//                     validator: (Value) {
-//                       return Value.isEmpty ? "enter your gender" : null;
-//                     },
-//                     autoValidateMode: AutovalidateMode.onUserInteraction,
-//                     autovalidateMode: AutovalidateMode.onUserInteraction),
-//               ],
-//             ),
-//           ),
-//           actions: [
-//             TextButton(
-//                 onPressed: () {
-//                   Navigator.pop(context);
-//                 },
-//                 child: const Text("Cancel")),
-//             TextButton(
-//                 onPressed: () {
-//                   FirebaseFirestore.instance
-//                       .collection("users")
-//                       .doc(FirebaseAuth.instance.currentUser!.email)
-//                       .update({'gender': updategender.text.toString()});
-//                   Navigator.pop(context);
-//                 },
-//                 child: const Text("Ok"))
-//           ],
-//         );
-//       });
-// }
+Future<void> phoneupdate(BuildContext Context, String phone) async {
+  final phoneupdate = TextEditingController();
+  phoneupdate.text = phone;
+  return showDialog(
+      context: Context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("update phone"),
+          content: SingleChildScrollView(
+            child: Column(
+              children: [
+                reusebletextfield(
+                    keyboard: TextInputType.phone,
+                    labelText: "Phone",
+                    icon: const Icon(FontAwesomeIcons.solidUser),
+                    controller: phoneupdate,
+                    validator: (Value) {
+                      return Value.isEmpty ? "enter your phone" : null;
+                    },
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
+                    ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text("Cancel")),
+            TextButton(
+                onPressed: () {
+                  FirebaseFirestore.instance
+                      .collection("users")
+                      .doc(FirebaseAuth.instance.currentUser!.email)
+                      .update({'phoneNumber': phoneupdate.text.toString()});
+                  Navigator.pop(context);
+                },
+                child: const Text("Ok"))
+          ],
+        );
+      });
+}
 
+Future<void> sportupdate(BuildContext Context, String sport) async {
+  final sportupdate = TextEditingController();
+  sportupdate.text = sport;
+  return showDialog(
+      context: Context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("update sport"),
+          content: SingleChildScrollView(
+            child: Column(
+              children: [
+                reusebletextfield(
+                    labelText: "sport update",
+                    icon: const Icon(FontAwesomeIcons.solidUser),
+                    controller: sportupdate,
+                    validator: (Value) {
+                      return Value.isEmpty ? "enter your sport" : null;
+                    },
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
+                    ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text("Cancel")),
+            TextButton(
+                onPressed: () {
+                  FirebaseFirestore.instance
+                      .collection("users")
+                      .doc(FirebaseAuth.instance.currentUser!.email)
+                      .update({'sport': sportupdate.text.toString()});
+                  Navigator.pop(context);
+                },
+                child: const Text("Ok"))
+          ],
+        );
+      });
+}
