@@ -66,7 +66,6 @@ class _transferformState extends State<transferform> {
                 height: 10,
               ),
               reusebletextfield(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
                 controller: emailto,
                 validator: (Value) {
                   return Value.isEmpty ? "enter your email" : null;
@@ -93,7 +92,6 @@ class _transferformState extends State<transferform> {
                 height: 30,
               ),
               reusebletextfield(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
                 maxline: 10,
                 maxlength: 120,
                 controller: message,
