@@ -1,6 +1,7 @@
 import 'package:finalyear/pages/forgotpassword.dart';
 import 'package:finalyear/pages/signuppage.dart';
 import 'package:finalyear/service/internet_connection.dart';
+import 'package:finalyear/wedgets/loginbutton.dart';
 import 'package:finalyear/wedgets/reusebletextfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -21,10 +22,44 @@ class _loginpageState extends State<loginpage> {
   //bool  for visibility of password
   bool _obsecure = true;
   //these are the cotroller for eamil and password
-  var email = "";
-  var password = "";
-  final TextEditingController _emailcontroller = TextEditingController();
-  final TextEditingController _passwordcontroller = TextEditingController();
+  // var email = "";
+  // var password = "";
+  final _emailcontroller = TextEditingController();
+  final _passwordcontroller = TextEditingController();
+
+  //login function for the user
+  loginuser() async {
+    try {
+      checkconnectivity();
+      showDialog(
+          context: context,
+          builder: (context) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          });
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailcontroller.text.toString(),
+          password: _passwordcontroller.text.toString());
+      Navigator.of(context).pop();
+      Get.to(const Homedb());
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+        Get.snackbar("No User", "No user is found for this Email",
+            duration: const Duration(seconds: 2),
+            snackPosition: SnackPosition.BOTTOM);
+        Navigator.of(context).pop();
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+        Get.snackbar("Your password",
+            "Your password is wrong please correct your password",
+            duration: const Duration(seconds: 2),
+            snackPosition: SnackPosition.BOTTOM);
+        Navigator.of(context).pop();
+      }
+    }
+  }
 
   // dispose function for the field
   @override
@@ -33,30 +68,6 @@ class _loginpageState extends State<loginpage> {
     _passwordcontroller.dispose();
 
     super.dispose();
-  }
-
-  //login function for the user
-  loginuser() async {
-    try {
-      checkconnectivity();
-      await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
-
-      Get.to(const Homedb());
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-        Get.snackbar("No User", "No user is found for this Email",
-            duration: const Duration(seconds: 2),
-            snackPosition: SnackPosition.BOTTOM);
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
-        Get.snackbar("Your password",
-            "Your password is wrong please correct your password",
-            duration: const Duration(seconds: 2),
-            snackPosition: SnackPosition.BOTTOM);
-      }
-    }
   }
 
   //overide function for connectivity
@@ -152,13 +163,13 @@ class _loginpageState extends State<loginpage> {
               ),
 
               //this is login button
-              ElevatedButton(
-                  onPressed: () {
+              loginbutton(
+                  onTap: () {
                     if (_form_Key.currentState!.validate()) {
                       loginuser();
                     }
                   },
-                  child: const Text("login")),
+                  child: const Text("Login")),
 
               const SizedBox(
                 height: 20,

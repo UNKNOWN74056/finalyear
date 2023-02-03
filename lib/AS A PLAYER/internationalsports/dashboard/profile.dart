@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
-
 import '../../../wedgets/update_page.dart';
 
 class profile extends StatefulWidget {
@@ -78,7 +77,7 @@ class _profileState extends State<profile> {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                //  Get.to(const editprofile());
+                                  //  Get.to(const editprofile());
                                 },
                                 child: const Text(
                                   "Edit",
@@ -131,7 +130,7 @@ class _profileState extends State<profile> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Get.to(sportupdate(context, data['sport']));
+                              //  Get.to(sportupdate(context, data['sport']));
                             },
                             child: reusableraw(
                                 title: "Sport:",

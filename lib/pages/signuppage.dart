@@ -147,6 +147,14 @@ class _signuppageState extends State<signuppage> {
     try {
       checkconnectivity();
       passwrodconfirm();
+      showDialog(
+          context: context,
+          builder: (context) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          });
+
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: _emailcontroller.text.trim(),
         password: _passwordcontroller.text.trim(),
@@ -159,7 +167,7 @@ class _signuppageState extends State<signuppage> {
       TaskSnapshot uploadTask = refer;
       await Future.value(uploadTask);
       var newUrl = await refer.ref.getDownloadURL();
-      
+
       Adduserdeatial(
         _firstnamecontroller.text.trim(),
         _lastnamecontroller.text.trim(),
@@ -174,13 +182,16 @@ class _signuppageState extends State<signuppage> {
       );
       Get.snackbar("Registration",
           "Your account has been register succefully please login again.");
+      Navigator.of(context).pop();
       Get.to(const loginpage());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         Get.snackbar("Password weak", "Password is too weak!");
+         Navigator.of(context).pop();
       } else if (e.code == 'email-already-in-use') {
         Get.snackbar(
             "Email", "This email is already in use please try a valid email!");
+             Navigator.of(context).pop();
       }
     }
   }

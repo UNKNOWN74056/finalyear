@@ -184,46 +184,46 @@ Future<void> phoneupdate(BuildContext Context, String phone) async {
       });
 }
 
-Future<void> sportupdate(BuildContext Context, String sport) async {
-  final sportupdate = TextEditingController();
-  sportupdate.text = sport;
-  return showDialog(
-      context: Context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text("update sport"),
-          content: SingleChildScrollView(
-            child: Column(
-              children: [
-                reusebletextfield(
-                  labelText: "sport update",
-                  icon: const Icon(FontAwesomeIcons.solidUser),
-                  controller: sportupdate,
-                  validator: (Value) {
-                    return Value.isEmpty ? "enter your sport" : null;
-                  },
-                  autoValidateMode: AutovalidateMode.onUserInteraction, keyboard: TextInputType.text,
-                ),
-              ],
-            ),
-          ),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text("Cancel")),
-            TextButton(
-                onPressed: () {
-                  FirebaseFirestore.instance
-                      .collection("users")
-                      .doc(FirebaseAuth.instance.currentUser!.email)
-                      .update({'sport': sportupdate.text.toString()}).then(
-                          (value) => {sportupdate.clear()});
-                  Navigator.pop(context);
-                },
-                child: const Text("Ok"))
-          ],
-        );
-      });
-}
+// Future<void> sportupdate(BuildContext Context, String sport) async {
+//   final sportupdate = TextEditingController();
+//   sportupdate.text = sport;
+//   return showDialog(
+//       context: Context,
+//       builder: (context) {
+//         return AlertDialog(
+//           title: const Text("update sport"),
+//           content: SingleChildScrollView(
+//             child: Column(
+//               children: [
+//                 reusebletextfield(
+//                   labelText: "sport update",
+//                   icon: const Icon(FontAwesomeIcons.solidUser),
+//                   controller: sportupdate,
+//                   validator: (Value) {
+//                     return Value.isEmpty ? "enter your sport" : null;
+//                   },
+//                   autoValidateMode: AutovalidateMode.onUserInteraction, keyboard: TextInputType.text,
+//                 ),
+//               ],
+//             ),
+//           ),
+//           actions: [
+//             TextButton(
+//                 onPressed: () {
+//                   Navigator.pop(context);
+//                 },
+//                 child: const Text("Cancel")),
+//             TextButton(
+//                 onPressed: () {
+//                   FirebaseFirestore.instance
+//                       .collection("users")
+//                       .doc(FirebaseAuth.instance.currentUser!.email)
+//                       .update({'sport': sportupdate.text.toString()}).then(
+//                           (value) => {sportupdate.clear()});
+//                   Navigator.pop(context);
+//                 },
+//                 child: const Text("Ok"))
+//           ],
+//         );
+//       });
+// }
