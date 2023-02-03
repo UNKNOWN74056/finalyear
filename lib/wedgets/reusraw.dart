@@ -16,8 +16,12 @@ class reusableraw extends StatelessWidget {
       child: Column(
         children: [
           ListTile(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+            //   color: Colors.grey.shade300,
+            shape: RoundedRectangleBorder(
+              side: const BorderSide(
+                  color: Color.fromARGB(255, 25, 9, 117), width: 1),
+              borderRadius: BorderRadius.circular(10),
+            ),
             tileColor: Colors.white70,
             title: Text(
               title,
@@ -25,13 +29,13 @@ class reusableraw extends StatelessWidget {
             ),
             leading: Icon(
               icondata,
-              color: Color.fromARGB(255, 4, 45, 119),
+              color: const Color.fromARGB(255, 4, 45, 119),
             ),
             trailing: Text(value),
           ),
           const Divider(
             height: 15,
-            color: Colors.black,
+            //   color: Colors.black,
           )
         ],
       ),

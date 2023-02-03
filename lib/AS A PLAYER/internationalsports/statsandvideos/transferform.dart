@@ -33,7 +33,7 @@ class _transferformState extends State<transferform> {
       ),
       body: SingleChildScrollView(
           child: Container(
-        margin:const EdgeInsets.all(10.0),
+        margin: const EdgeInsets.all(10.0),
         child: Form(
           key: key4,
           child: Column(
@@ -74,6 +74,7 @@ class _transferformState extends State<transferform> {
                 labelText: "Enter Email",
                 icon: const Icon(FontAwesomeIcons.solidEnvelope,
                     color: Color.fromARGB(255, 4, 45, 119)),
+                keyboard: TextInputType.emailAddress,
               ),
               const SizedBox(
                 height: 30,
@@ -104,6 +105,7 @@ class _transferformState extends State<transferform> {
                   color: Color.fromARGB(255, 4, 45, 119),
                 ),
                 labelText: "Enter your message",
+                keyboard: TextInputType.text,
               ),
               const SizedBox(
                 height: 40,

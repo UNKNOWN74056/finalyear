@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/pages/loginpage.dart';
 import 'package:finalyear/service/internet_connection.dart';
+import 'package:finalyear/wedgets/loginbutton.dart';
 import 'package:finalyear/wedgets/reusebletextfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -158,7 +159,7 @@ class _signuppageState extends State<signuppage> {
       TaskSnapshot uploadTask = refer;
       await Future.value(uploadTask);
       var newUrl = await refer.ref.getDownloadURL();
-
+      
       Adduserdeatial(
         _firstnamecontroller.text.trim(),
         _lastnamecontroller.text.trim(),
@@ -345,7 +346,7 @@ class _signuppageState extends State<signuppage> {
                   decoration: InputDecoration(
                     filled: true,
                     isDense: true,
-                    contentPadding: const EdgeInsets.symmetric(vertical: 10),
+                    contentPadding: const EdgeInsets.symmetric(vertical: 22),
                     prefixIcon: const Icon(
                       FontAwesomeIcons.userTie,
                       color: Color.fromARGB(255, 4, 45, 119),
@@ -389,7 +390,7 @@ class _signuppageState extends State<signuppage> {
                     decoration: InputDecoration(
                       filled: true,
                       isDense: true,
-                      contentPadding: const EdgeInsets.symmetric(vertical: 10),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 22),
                       prefixIcon: const Icon(
                         FontAwesomeIcons.venusMars,
                         color: Color.fromARGB(255, 4, 45, 119),
@@ -439,7 +440,7 @@ class _signuppageState extends State<signuppage> {
                     decoration: InputDecoration(
                       filled: true,
                       isDense: true,
-                      contentPadding: const EdgeInsets.symmetric(vertical: 10),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 22),
                       prefixIcon: const Icon(
                         FontAwesomeIcons.futbol,
                         color: Color.fromARGB(255, 4, 45, 119),
@@ -468,7 +469,6 @@ class _signuppageState extends State<signuppage> {
                 ),
                 reusebletextfield(
                   keyboard: TextInputType.emailAddress,
-                
                   autoValidateMode: AutovalidateMode.onUserInteraction,
                   validator: (Value) {
                     return Value.isEmpty ? "enter your city" : null;
@@ -485,7 +485,6 @@ class _signuppageState extends State<signuppage> {
                 ),
                 reusebletextfield(
                     keyboard: TextInputType.emailAddress,
-                   
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (Value) {
                       return Value.isEmpty ? "enter your email" : null;
@@ -501,7 +500,6 @@ class _signuppageState extends State<signuppage> {
                 ),
                 reusebletextfield(
                     keyboard: TextInputType.emailAddress,
-                    
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (Value) {
                       return Value.isEmpty ? "enter your password" : null;
@@ -515,7 +513,6 @@ class _signuppageState extends State<signuppage> {
                 ),
                 reusebletextfield(
                     keyboard: TextInputType.emailAddress,
-                    
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (Value) {
                       return Value.isEmpty ? "enter your email" : null;
@@ -528,31 +525,32 @@ class _signuppageState extends State<signuppage> {
                   height: 25,
                 ),
                 reusebletextfield(
-                    keyboard: TextInputType.phone,
-                    labelText: "+ Code phone number",
-                    icon: const Icon(FontAwesomeIcons.phone,
-                        color: Color.fromARGB(255, 4, 45, 119)),
-                    controller: _phonenumbercontroller,
-                    validator: (Value) {
-                      return Value.isEmpty ? "enter your phnoe number" : null;
-                    },
-                    autoValidateMode: AutovalidateMode.onUserInteraction,
-                   ),
+                  keyboard: TextInputType.phone,
+                  labelText: "+ Code phone number",
+                  icon: const Icon(FontAwesomeIcons.phone,
+                      color: Color.fromARGB(255, 4, 45, 119)),
+                  controller: _phonenumbercontroller,
+                  validator: (Value) {
+                    return Value.isEmpty ? "enter your phnoe number" : null;
+                  },
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                ),
                 const SizedBox(
                   height: 10,
                 ),
                 //this is signup button to create the user
-                SizedBox(
-                  width: double.infinity,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 30, right: 30),
-                    child: ElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            signup();
-                          }
-                        },
-                        child: const Text("SIGIN UP")),
+                loginbutton(
+                  onTap: () {
+                    if (_formKey.currentState!.validate()) {
+                      signup();
+                    }
+                  },
+                  child: const Text(
+                    "Sign in",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16),
                   ),
                 ),
 

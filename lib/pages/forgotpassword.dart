@@ -66,15 +66,17 @@ class _forgotpasswordState extends State<forgotpassword> {
               padding: const EdgeInsets.all(15),
               child: reusebletextfield(
                 autoValidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (Value) {
-                    return Value.isEmpty ? "enter your email" : null;
-                  },
-                  controller: _verifyemailcontroller,
-                  labelText: "EMAIL",
-                  icon: const Icon(
-                    FontAwesomeIcons.solidUser,
-                    color: Color.fromARGB(255, 4, 45, 119),
-                  )),
+                validator: (Value) {
+                  return Value.isEmpty ? "enter your email" : null;
+                },
+                controller: _verifyemailcontroller,
+                labelText: "EMAIL",
+                icon: const Icon(
+                  FontAwesomeIcons.solidUser,
+                  color: Color.fromARGB(255, 4, 45, 119),
+                ),
+                keyboard: TextInputType.emailAddress,
+              ),
             ),
 
             //button for varification of oyur email to reset your password

@@ -6,6 +6,7 @@ import 'package:finalyear/AS%20A%20PLAYER/internationalsports/tabbar/tabletenis.
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/tabbar/vulleyball.dart';
 import 'package:finalyear/as%20a%20player/internationalsports/dashboard/homedb.dart';
 import 'package:flutter/material.dart';
+//import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:get/get.dart';
 
 class home extends StatefulWidget {
@@ -51,11 +52,19 @@ class _homeState extends State<home> {
                     "INTERNATIONAL",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  // flexibleSpace: FlexibleSpaceBar(
-                  //     background: Image.asset(
-                  //   "assets/mixsport.jpeg",
-                  //   fit: BoxFit.cover,
-                  // )),
+                  flexibleSpace: FlexibleSpaceBar(
+                    // background: Swiper(
+                    //   itemBuilder: (BuildContext context, int index) {
+                    //     return Image.network(
+                    //       "https://in.pinterest.com/pin/684617580854927859/",
+                    //       fit: BoxFit.fill,
+                    //     );
+                    //   },
+                    //   itemCount: 3,
+                    //   pagination: SwiperPagination(),
+                    //   control: SwiperControl(),
+                    // ),
+                  ),
                   centerTitle: true,
                   bottom: const TabBar(
                       indicatorColor: Colors.orange,

@@ -18,13 +18,13 @@ class loginpage extends StatefulWidget {
 final _form_Key = GlobalKey<FormState>();
 
 class _loginpageState extends State<loginpage> {
-  //bool vareable for visibility of password
+  //bool  for visibility of password
   bool _obsecure = true;
   //these are the cotroller for eamil and password
   var email = "";
   var password = "";
-  final _emailcontroller = TextEditingController();
-  final _passwordcontroller = TextEditingController();
+  final TextEditingController _emailcontroller = TextEditingController();
+  final TextEditingController _passwordcontroller = TextEditingController();
 
   // dispose function for the field
   @override
@@ -106,7 +106,6 @@ class _loginpageState extends State<loginpage> {
                   children: [
                     reusebletextfield(
                       keyboard: TextInputType.emailAddress,
-                      
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                       validator: (Value) {
                         return Value.isEmpty ? "enter your email" : null;
@@ -123,20 +122,9 @@ class _loginpageState extends State<loginpage> {
                     ),
                     reusebletextfield(
                       keyboard: TextInputType.emailAddress,
-                    
                       validator: (Value) {
                         return Value.isEmpty ? "enter your email" : null;
                       },
-                      suffixIcon: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            _obsecure = !_obsecure;
-                          });
-                        },
-                        child: Icon(_obsecure
-                            ? FontAwesomeIcons.eye
-                            : FontAwesomeIcons.eyeSlash),
-                      ),
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                       controller: _passwordcontroller,
                       labelText: "Enter your passwowrd",
@@ -164,23 +152,14 @@ class _loginpageState extends State<loginpage> {
               ),
 
               //this is login button
-              SizedBox(
-                width: double.infinity,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 30, right: 30),
-                  child: ElevatedButton(
-                      onPressed: () {
-                        if (_form_Key.currentState!.validate()) {
-                          setState(() {
-                            email = _emailcontroller.text;
-                            password = _passwordcontroller.text;
-                          });
-                        }
-                        loginuser();
-                      },
-                      child: const Text("LOGIN")),
-                ),
-              ),
+              ElevatedButton(
+                  onPressed: () {
+                    if (_form_Key.currentState!.validate()) {
+                      loginuser();
+                    }
+                  },
+                  child: const Text("login")),
+
               const SizedBox(
                 height: 20,
               ),

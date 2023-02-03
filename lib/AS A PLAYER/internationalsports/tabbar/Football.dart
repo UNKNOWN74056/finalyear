@@ -34,9 +34,17 @@ class _FootballState extends State<Football> {
                   if (snapshot.hasData) {
                     return Column(
                       children: [
+                        const SizedBox(
+                          height: 5,
+                        ),
                         Card(
+                            color: Colors.grey.shade300,
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30)),
+                              side: const BorderSide(
+                                  color: Color.fromARGB(255, 25, 9, 117),
+                                  width: 1),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                             child: ListTile(
                                 title: Text(users["firstname"],
                                     style: const TextStyle(fontSize: 20)),
@@ -44,7 +52,7 @@ class _FootballState extends State<Football> {
                                     radius: 35,
                                     backgroundImage:
                                         NetworkImage(users['Imageurl']),
-                                    backgroundColor: Colors.green),
+                                    backgroundColor: Colors.white),
                                 subtitle: Text(users["city"],
                                     style: const TextStyle(fontSize: 15)),
                                 trailing: const Icon(Icons.arrow_forward),

@@ -1,28 +1,26 @@
 import 'package:flutter/material.dart';
 
 class reusebletextfield extends StatelessWidget {
-  final String labelText;
-  final Icon icon;
+  final controller;
   final validator;
-  final autoValidateMode;
-  final suffixIcon;
   final maxline;
   final maxlength;
+  final autoValidateMode;
   final keyboard;
+  final icon;
+  final labelText;
 
-  TextEditingController controller;
-  reusebletextfield({
-    this.keyboard,
-    required this.labelText,
-    required this.icon,
-    required this.controller,
-    required this.validator,
-    required this.autoValidateMode,
-    this.maxline,
-    this.suffixIcon,
-    this.maxlength,
-    Key? key,
-  }) : super(key: key);
+  const reusebletextfield(
+      {super.key,
+      required this.controller,
+      required this.autoValidateMode,
+      required this.keyboard,
+      this.maxlength,
+      this.maxline,
+      required this.validator,
+      required this.icon,
+      required this.labelText});
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -39,7 +37,7 @@ class reusebletextfield extends StatelessWidget {
       decoration: InputDecoration(
         filled: true,
         isDense: true,
-        contentPadding: const EdgeInsets.symmetric(vertical: 10),
+        contentPadding: const EdgeInsets.symmetric(vertical: 22),
         prefixIcon: icon,
         labelText: labelText,
         hintStyle: const TextStyle(

@@ -22,7 +22,7 @@ Future<void> usernameupdate(BuildContext Context, String firstname) async {
                   validator: (Value) {
                     return Value.isEmpty ? "enter your name" : null;
                   },
-                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  autoValidateMode: AutovalidateMode.onUserInteraction, keyboard: TextInputType.text,
                 ),
               ],
             ),
@@ -67,7 +67,7 @@ Future<void> cityupdate(BuildContext Context, String city) async {
                   validator: (Value) {
                     return Value.isEmpty ? "enter your city" : null;
                   },
-                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  autoValidateMode: AutovalidateMode.onUserInteraction, keyboard: TextInputType.text,
                 ),
               ],
             ),
@@ -111,7 +111,7 @@ Future<void> genderupdate(BuildContext Context, String gender) async {
                   validator: (Value) {
                     return Value.isEmpty ? "enter your gender" : null;
                   },
-                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  autoValidateMode: AutovalidateMode.onUserInteraction, keyboard: TextInputType.text,
                 ),
               ],
             ),
@@ -202,7 +202,7 @@ Future<void> sportupdate(BuildContext Context, String sport) async {
                   validator: (Value) {
                     return Value.isEmpty ? "enter your sport" : null;
                   },
-                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  autoValidateMode: AutovalidateMode.onUserInteraction, keyboard: TextInputType.text,
                 ),
               ],
             ),
