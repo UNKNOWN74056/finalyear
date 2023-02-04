@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/statsandvideos/transferform.dart';
 import 'package:finalyear/wedgets/reusraw.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../wedgets/update_page.dart';
 
@@ -15,6 +19,9 @@ class profile extends StatefulWidget {
   State<profile> createState() => _profileState();
 }
 
+File? _image;
+final ImagePicker picker = ImagePicker();
+
 final currentUser = FirebaseAuth.instance;
 
 final TextEditingController updatefirstname = TextEditingController();
@@ -22,6 +29,87 @@ final TextEditingController updatecity = TextEditingController();
 final TextEditingController updategender = TextEditingController();
 
 class _profileState extends State<profile> {
+  //dailog to select photo from camera or gallery
+  void dialogAlert(context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            content: SizedBox(
+              height: 120,
+              child: Column(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      getCameraImage();
+                      Navigator.pop(context);
+                    },
+                    child: const ListTile(
+                      leading: Icon(Icons.camera_alt),
+                      title: Text("Camera"),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      getImageGallery();
+                      Navigator.pop(context);
+                    },
+                    child: const ListTile(
+                      leading: Icon(Icons.photo),
+                      title: Text("Gallery"),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  //pick image from galler
+  Future getImageGallery() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        print("No Image Selected");
+      }
+    });
+  }
+
+// pick image from camera
+  Future getCameraImage() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        print("No Image Selected");
+      }
+    });
+  }
+
+  //update image function
+  Future updateimage() async {
+    var email = FirebaseAuth.instance.currentUser!.email;
+    var refer = await FirebaseStorage.instance
+        .ref("/MrSport$email")
+        .child('images')
+        .putFile(_image!.absolute);
+    TaskSnapshot uploadTask = refer;
+    await Future.value(uploadTask);
+    var newUrl = await refer.ref.getDownloadURL();
+
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(email)
+        .update({'Imageurl': newUrl});
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -64,28 +152,36 @@ class _profileState extends State<profile> {
                           const SizedBox(
                             height: 15,
                           ),
-                          CircleAvatar(
-                            radius: 70,
-                            backgroundImage: NetworkImage(data['Imageurl']),
-                            backgroundColor: Colors.white,
+                          Stack(
+                            children: [
+                              CircleAvatar(
+                                radius: 70,
+                                backgroundImage: NetworkImage(data['Imageurl']),
+                                backgroundColor: Colors.white,
+                              ),
+                              Positioned(
+                                  bottom: 0,
+                                  right: 0,
+                                  child: Container(
+                                    decoration: const BoxDecoration(
+                                      color: Colors.white,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: GestureDetector(
+                                      onTap: (() {
+                                        dialogAlert(context);
+                                        updateimage();
+                                      }),
+                                      child: const Icon(
+                                        Icons.edit,
+                                        size: 30,
+                                      ),
+                                    ),
+                                  )),
+                            ],
                           ),
                           const SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  //  Get.to(const editprofile());
-                                },
-                                child: const Text(
-                                  "Edit",
-                                  style: TextStyle(
-                                      fontSize: 18, color: Colors.blue),
-                                ),
-                              )
-                            ],
+                            height: 20,
                           ),
                           GestureDetector(
                             onTap: () {
