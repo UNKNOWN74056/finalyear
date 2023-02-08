@@ -59,9 +59,8 @@ class _FootballState extends State<Football> {
                                 onTap: () => navigatetodetail(users))),
                       ],
                     );
-                  } else {
-                    return const Center(child: CircularProgressIndicator());
                   }
+                  return const Center(child: CircularProgressIndicator());
                 });
           })),
     );
