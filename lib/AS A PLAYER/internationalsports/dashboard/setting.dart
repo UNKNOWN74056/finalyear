@@ -75,7 +75,7 @@ class _settingState extends State<setting> {
                                 delete();
                                 Get.to(const loginpage());
                               },
-                              child: const Text("Yas")),
+                              child: const Text("Yeas")),
                         ],
                       );
                     });
