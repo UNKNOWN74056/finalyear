@@ -1,4 +1,4 @@
-import 'package:finalyear/GETX/getxexx.dart';
+import 'package:finalyear/GETX/LoginGetX.dart';
 import 'package:finalyear/pages/forgotpassword.dart';
 import 'package:finalyear/pages/signuppage.dart';
 import 'package:finalyear/service/internet_connection.dart';
@@ -17,7 +17,7 @@ class loginpage extends StatefulWidget {
   State<loginpage> createState() => _loginpageState();
 }
 
-final _form_Key = GlobalKey<FormState>();
+//final _form_Key = GlobalKey<FormState>();
 
 class _loginpageState extends State<loginpage> {
   //bool  for visibility of password
@@ -27,8 +27,8 @@ class _loginpageState extends State<loginpage> {
   //these are the cotroller for eamil and password
   // var email = "";
   // var password = "";
-  final _emailcontroller = TextEditingController();
-  final _passwordcontroller = TextEditingController();
+  // final _emailcontroller = TextEditingController();
+  // final _passwordcontroller = TextEditingController();
 
   //login function for the user
   loginuser() async {
@@ -66,9 +66,8 @@ class _loginpageState extends State<loginpage> {
   // dispose function for the field
   @override
   void dispose() {
-    _emailcontroller.dispose();
-    _passwordcontroller.dispose();
-
+    controller.emailController.dispose();
+    controller.passwordController.dispose();
     super.dispose();
   }
 

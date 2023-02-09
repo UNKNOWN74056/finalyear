@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:finalyear/GETX/SignupGetX.dart';
 import 'package:finalyear/pages/loginpage.dart';
 import 'package:finalyear/service/internet_connection.dart';
 import 'package:finalyear/wedgets/loginbutton.dart';
@@ -19,6 +20,9 @@ class signuppage extends StatefulWidget {
 }
 
 class _signuppageState extends State<signuppage> {
+  //GETX contoller
+  final controller = Get.put(sighnupcontroller());
+
   File? _image;
   final ImagePicker picker = ImagePicker();
   final _formKey = GlobalKey<FormState>();
@@ -92,32 +96,30 @@ class _signuppageState extends State<signuppage> {
   }
 
   //controllers for text fields
-  final _firstnamecontroller = TextEditingController();
-  final _lastnamecontroller = TextEditingController();
+  // final _fullnamecontroller = TextEditingController();
   final _professioncontroller = TextEditingController();
   final _gendercontroller = TextEditingController();
   final _sportcontroller = TextEditingController();
-  final _citycontroller = TextEditingController();
-  final _emailcontroller = TextEditingController();
-  final _passwordcontroller = TextEditingController();
-  final _confirmpasswordcontroller = TextEditingController();
-  final _phonenumbercontroller = TextEditingController();
+  // final _citycontroller = TextEditingController();
+  // final _emailcontroller = TextEditingController();
+  // final _passwordcontroller = TextEditingController();
+  // final _confirmpasswordcontroller = TextEditingController();
+  // final _phonenumbercontroller = TextEditingController();
 
-  @override
-  void dispose() {
-    _firstnamecontroller.dispose();
-    _lastnamecontroller.dispose();
-    _professioncontroller.dispose();
-    _gendercontroller.dispose();
-    _sportcontroller.dispose();
-    _citycontroller.dispose();
-    _emailcontroller.dispose();
-    _passwordcontroller.dispose();
-    _confirmpasswordcontroller.dispose();
-    _phonenumbercontroller.dispose();
+  // @override
+  // void dispose() {
+  //   controller.fullnamecontroller.dispose();
+  //   _professioncontroller.dispose();
+  //   _gendercontroller.dispose();
+  //   _sportcontroller.dispose();
+  //   controller.citycontroller.dispose();
+  //   controller.emailController.dispose();
+  //   controller.passwordcontroller.dispose();
+  //   controller.confirmpasswordcontroller.dispose();
+  //   controller.phonenumbercontroller.dispose();
 
-    super.dispose();
-  }
+  //   super.dispose();
+  // }
 
   //options for profession
   List profession = ['Coache', 'Player'];
@@ -156,10 +158,10 @@ class _signuppageState extends State<signuppage> {
           });
 
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailcontroller.text.trim(),
-        password: _passwordcontroller.text.trim(),
+        email: controller.email.value.toString(),
+        password: controller.password.value.toString(),
       );
-      String email = _emailcontroller.text.toString();
+      String email = controller.emailController.text.toString();
       var refer = await FirebaseStorage.instance
           .ref("/MrSport$email")
           .child('images')
@@ -169,15 +171,14 @@ class _signuppageState extends State<signuppage> {
       var newUrl = await refer.ref.getDownloadURL();
 
       Adduserdeatial(
-        _firstnamecontroller.text.trim(),
-        _lastnamecontroller.text.trim(),
+        controller.fullnamecontroller.value.text.trim(),
         _professioncontroller.text.trim(),
         _gendercontroller.text.trim(),
         _sportcontroller.text.trim(),
-        _citycontroller.text.trim(),
-        _emailcontroller.text.trim(),
-        _passwordcontroller.text.trim(),
-        _phonenumbercontroller.text.trim(),
+        controller.citycontroller.value.text.trim(),
+        controller.emailController.value.text.trim(),
+        controller.passwordcontroller.value.text.trim(),
+        controller.phonenumbercontroller.value.text.trim(),
         newUrl.toString(),
       );
       Get.snackbar("Registration",
@@ -187,19 +188,18 @@ class _signuppageState extends State<signuppage> {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         Get.snackbar("Password weak", "Password is too weak!");
-         Navigator.of(context).pop();
+        Navigator.of(context).pop();
       } else if (e.code == 'email-already-in-use') {
         Get.snackbar(
             "Email", "This email is already in use please try a valid email!");
-             Navigator.of(context).pop();
+        Navigator.of(context).pop();
       }
     }
   }
 
   //add user details to firestore database
   Future Adduserdeatial(
-    String firstname,
-    String lastname,
+    String fullname,
     String profession,
     String gender,
     String sports,
@@ -213,8 +213,7 @@ class _signuppageState extends State<signuppage> {
         .collection('users')
         .doc(FirebaseAuth.instance.currentUser!.email)
         .set({
-      'firstname': firstname,
-      'lastname': lastname,
+      'firstname': fullname,
       'profession': profession1,
       'gender': gender1,
       'sport': sport1,
@@ -228,8 +227,8 @@ class _signuppageState extends State<signuppage> {
 
   //bool function to confirm password
   void passwrodconfirm() {
-    if (_passwordcontroller.text.trim() ==
-        _confirmpasswordcontroller.text.trim()) {
+    if (controller.passwordcontroller.text.trim() ==
+        controller.confirmpasswordcontroller.text.trim()) {
       return null;
     } else {
       Get.snackbar(
@@ -265,7 +264,7 @@ class _signuppageState extends State<signuppage> {
           height: 15,
         ),
         Form(
-          key: _formKey,
+          key: controller.keyForm,
           child: Padding(
             padding: const EdgeInsets.all(15),
             child: Column(
@@ -299,30 +298,17 @@ class _signuppageState extends State<signuppage> {
                   keyboard: TextInputType.emailAddress,
                   autoValidateMode: AutovalidateMode.onUserInteraction,
                   validator: (Value) {
-                    return Value.isEmpty ? "enter your first name" : null;
+                    return controller.validfullname(Value!);
                   },
-                  labelText: "First Name",
+                  labelText: "Full Name",
                   icon: const Icon(
                     FontAwesomeIcons.solidUser,
                     color: Color.fromARGB(255, 4, 45, 119),
                   ),
-                  controller: _firstnamecontroller,
+                  controller: controller.fullnamecontroller,
                 ),
                 const SizedBox(
                   height: 25,
-                ),
-                reusebletextfield(
-                  keyboard: TextInputType.emailAddress,
-                  autoValidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (Value) {
-                    return Value.isEmpty ? "enter your last name" : null;
-                  },
-                  controller: _lastnamecontroller,
-                  labelText: "Last Name",
-                  icon: const Icon(
-                    FontAwesomeIcons.solidUser,
-                    color: Color.fromARGB(255, 4, 45, 119),
-                  ),
                 ),
                 const SizedBox(
                   height: 25,
@@ -482,10 +468,10 @@ class _signuppageState extends State<signuppage> {
                   keyboard: TextInputType.emailAddress,
                   autoValidateMode: AutovalidateMode.onUserInteraction,
                   validator: (Value) {
-                    return Value.isEmpty ? "enter your city" : null;
+                    return controller.validcity(Value!);
                   },
                   labelText: "City",
-                  controller: _citycontroller,
+                  controller: controller.citycontroller,
                   icon: const Icon(
                     FontAwesomeIcons.locationDot,
                     color: Color.fromARGB(255, 4, 45, 119),
@@ -498,9 +484,9 @@ class _signuppageState extends State<signuppage> {
                     keyboard: TextInputType.emailAddress,
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (Value) {
-                      return Value.isEmpty ? "enter your email" : null;
+                      return controller.validEmail(Value!);
                     },
-                    controller: _emailcontroller,
+                    controller: controller.emailController,
                     labelText: "EMAIL",
                     icon: const Icon(
                       FontAwesomeIcons.solidEnvelope,
@@ -513,9 +499,9 @@ class _signuppageState extends State<signuppage> {
                     keyboard: TextInputType.emailAddress,
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (Value) {
-                      return Value.isEmpty ? "enter your password" : null;
+                      return controller.validPassword(Value!);
                     },
-                    controller: _passwordcontroller,
+                    controller: controller.passwordcontroller,
                     labelText: "PASSWORD",
                     icon: const Icon(Icons.lock,
                         color: Color.fromARGB(255, 4, 45, 119))),
@@ -526,9 +512,9 @@ class _signuppageState extends State<signuppage> {
                     keyboard: TextInputType.emailAddress,
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (Value) {
-                      return Value.isEmpty ? "enter your email" : null;
+                      return controller.validconfirmPassword(Value!);
                     },
-                    controller: _confirmpasswordcontroller,
+                    controller: controller.confirmpasswordcontroller,
                     labelText: "confirm password",
                     icon: const Icon(Icons.lock,
                         color: Color.fromARGB(255, 4, 45, 119))),
@@ -540,9 +526,9 @@ class _signuppageState extends State<signuppage> {
                   labelText: "+ Code phone number",
                   icon: const Icon(FontAwesomeIcons.phone,
                       color: Color.fromARGB(255, 4, 45, 119)),
-                  controller: _phonenumbercontroller,
+                  controller: controller.phonenumbercontroller,
                   validator: (Value) {
-                    return Value.isEmpty ? "enter your phnoe number" : null;
+                    return controller.validphonenumber(Value!);
                   },
                   autoValidateMode: AutovalidateMode.onUserInteraction,
                 ),
@@ -552,7 +538,8 @@ class _signuppageState extends State<signuppage> {
                 //this is signup button to create the user
                 loginbutton(
                   onTap: () {
-                    if (_formKey.currentState!.validate()) {
+                    controller.checksignup();
+                    if (controller.isformValidated == true) {
                       signup();
                     }
                   },

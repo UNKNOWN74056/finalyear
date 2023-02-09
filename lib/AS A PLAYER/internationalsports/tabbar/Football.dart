@@ -19,14 +19,13 @@ class _FootballState extends State<Football> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+      body: StreamBuilder(
           stream: FirebaseFirestore.instance
               .collection("users")
               .where("sport", isEqualTo: "FootBall")
               .where("profession", isEqualTo: "Coache")
               .snapshots(),
-          builder: ((BuildContext context,
-              AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+          builder: ((BuildContext context, snapshot) {
             return ListView.builder(
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
@@ -56,7 +55,8 @@ class _FootballState extends State<Football> {
                                 subtitle: Text(users["city"],
                                     style: const TextStyle(fontSize: 15)),
                                 trailing: const Icon(Icons.arrow_forward),
-                                onTap: () => navigatetodetail(users))),
+                                onTap: () => navigatetodetail(users)
+                                )),
                       ],
                     );
                   }

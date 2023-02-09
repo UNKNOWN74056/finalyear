@@ -1,8 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:finalyear/wedgets/reusraw.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class clubdetail extends StatefulWidget {
-  const clubdetail({super.key});
+  final DocumentSnapshot post;
+
+  const clubdetail({super.key, required this.post});
 
   @override
   State<clubdetail> createState() => _clubdetailState();
@@ -10,103 +15,71 @@ class clubdetail extends StatefulWidget {
 
 class _clubdetailState extends State<clubdetail> {
   double rating = 0;
-
   @override
   Widget build(BuildContext context) {
     double _rating;
-    return Scaffold(
+
+    return SafeArea(
+      child: Scaffold(
         body: SingleChildScrollView(
-      child: Column(children: [
-        Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Row(
-            children: const [
-              Padding(
-                padding: EdgeInsets.only(top: 100),
-                child: Center(
-                  child: Text(
-                    "Club name",
-                    style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircleAvatar(
+                    radius: 60,
+                    backgroundImage: NetworkImage(widget.post['Clubimage']),
                   ),
+                ],
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Center(
+                    child: Text(
+                      "RATING:$rating",
+                      style: const TextStyle(fontSize: 25),
+                    ),
+                  )
+                ],
+              ),
+              Container(
+                child: RatingBar.builder(
+                  minRating: 0,
+                  itemBuilder: (context, _) => const Icon(Icons.star),
+                  updateOnDrag: true,
+                  onRatingUpdate: (rating) => setState(() {
+                    this.rating = rating;
+                  }),
                 ),
               ),
+              reusableraw(
+                  title: "Club Name",
+                  value: widget.post["Clubname"],
+                  icondata: FontAwesomeIcons.solidUser),
+              reusableraw(
+                  title: "Location:",
+                  value: widget.post["Location"],
+                  icondata: FontAwesomeIcons.locationDot),
+              reusableraw(
+                  title: "Email:",
+                  value: widget.post["Email"],
+                  icondata: FontAwesomeIcons.solidEnvelope),
+              reusableraw(
+                  title: "Contect:",
+                  value: widget.post["Phone"],
+                  icondata: FontAwesomeIcons.phone),
             ],
           ),
-        ]),
-        const SizedBox(
-          height: 20,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            CircleAvatar(
-              radius: 90,
-              backgroundImage: AssetImage("assets/stadium.jpg"),
-            ),
-          ],
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(
-              child: Text(
-                "RATING:$rating",
-                style: const TextStyle(fontSize: 25),
-              ),
-            )
-          ],
-        ),
-        Container(
-          child: RatingBar.builder(
-            minRating: 1,
-            itemBuilder: (context, _) => const Icon(Icons.star),
-            updateOnDrag: true,
-            onRatingUpdate: (rating) => setState(() {
-              this.rating = rating;
-            }),
-          ),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        Container(
-          height: 250,
-          width: 500,
-          color: Colors.grey,
-          child: Center(
-            child: Column(
-              children: const [
-                Text(
-                  "Deatails",
-                  style: TextStyle(fontSize: 25),
-                ),
-                Text(
-                  "Location:peshawar.",
-                  style: TextStyle(fontSize: 25),
-                ),
-                Text(
-                  "Address: near to iqra school.",
-                  style: TextStyle(fontSize: 25),
-                ),
-                Text(
-                  "Motivation: We provide best trainning.",
-                  style: TextStyle(fontSize: 25),
-                ),
-                Text(
-                  "Contect: 0325343535",
-                  style: TextStyle(fontSize: 25),
-                ),
-                Text(
-                  "Email : hama@gmail.com",
-                  style: TextStyle(fontSize: 25),
-                )
-              ],
-            ),
-          ),
-        )
-      ]),
-    ));
+      ),
+    );
   }
 }

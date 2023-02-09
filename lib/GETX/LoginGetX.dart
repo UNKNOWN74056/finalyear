@@ -4,8 +4,9 @@ import 'package:get/get.dart';
 class LoginController extends GetxController {
   var email = "".obs;
   var password = "".obs;
-  var isformValidated = false;
+  bool isformValidated = false;
 
+  // contorller for the fieled
   late TextEditingController emailController, passwordController;
 
   @override
@@ -15,9 +16,9 @@ class LoginController extends GetxController {
     emailController = TextEditingController();
     passwordController = TextEditingController();
   }
-
+// form key for validaiton
   final keyForm = GlobalKey<FormState>();
-
+//these are the function for validation
   String? validEmail(String value) {
     if (value.isEmpty) {
       return "Please enter Email";
