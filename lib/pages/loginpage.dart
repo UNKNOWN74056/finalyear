@@ -1,3 +1,4 @@
+import 'package:finalyear/GETX/getxexx.dart';
 import 'package:finalyear/pages/forgotpassword.dart';
 import 'package:finalyear/pages/signuppage.dart';
 import 'package:finalyear/service/internet_connection.dart';
@@ -21,6 +22,8 @@ final _form_Key = GlobalKey<FormState>();
 class _loginpageState extends State<loginpage> {
   //bool  for visibility of password
   bool _obsecure = true;
+
+  final controller = Get.put(LoginController());
   //these are the cotroller for eamil and password
   // var email = "";
   // var password = "";
@@ -35,12 +38,11 @@ class _loginpageState extends State<loginpage> {
           context: context,
           builder: (context) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(color: Colors.red),
             );
           });
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: _emailcontroller.text.toString(),
-          password: _passwordcontroller.text.toString());
+          email: controller.email.value, password: controller.password.value);
       Navigator.of(context).pop();
       Get.to(const Homedb());
     } on FirebaseAuthException catch (e) {
@@ -88,7 +90,7 @@ class _loginpageState extends State<loginpage> {
       child: Scaffold(
           body: SingleChildScrollView(
         child: Form(
-          key: _form_Key,
+          key: controller.keyForm,
           child: Column(
             children: [
               Padding(
@@ -118,26 +120,26 @@ class _loginpageState extends State<loginpage> {
                     reusebletextfield(
                       keyboard: TextInputType.emailAddress,
                       autoValidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (Value) {
-                        return Value.isEmpty ? "enter your email" : null;
+                      validator: (value) {
+                        return controller.validEmail(value!);
                       },
                       labelText: "Enter your email",
                       icon: const Icon(
                         FontAwesomeIcons.solidEnvelope,
                         color: Color.fromARGB(255, 4, 45, 119),
                       ),
-                      controller: _emailcontroller,
+                      controller: controller.emailController,
                     ),
                     const SizedBox(
                       height: 25,
                     ),
                     reusebletextfield(
                       keyboard: TextInputType.emailAddress,
-                      validator: (Value) {
-                        return Value.isEmpty ? "enter your email" : null;
+                      validator: (value) {
+                        return controller.validPassword(value!);
                       },
                       autoValidateMode: AutovalidateMode.onUserInteraction,
-                      controller: _passwordcontroller,
+                      controller: controller.passwordController,
                       labelText: "Enter your passwowrd",
                       icon: const Icon(
                         Icons.lock,
@@ -165,7 +167,11 @@ class _loginpageState extends State<loginpage> {
               //this is login button
               loginbutton(
                   onTap: () {
-                    if (_form_Key.currentState!.validate()) {
+                    // if (_form_Key.currentState!.validate()) {
+                    //   loginuser();
+                    // }
+                    controller.checkLogin();
+                    if (controller.isformValidated == true) {
                       loginuser();
                     }
                   },

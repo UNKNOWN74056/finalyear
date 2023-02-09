@@ -12,9 +12,8 @@ class forgotpassword extends StatefulWidget {
   State<forgotpassword> createState() => _forgotpasswordState();
 }
 
-final key3 = GlobalKey<FormState>();
-
 class _forgotpasswordState extends State<forgotpassword> {
+  final key3 = GlobalKey<FormState>();
   //controller for the verify eamil field
   final _verifyemailcontroller = TextEditingController();
   var email = "";
