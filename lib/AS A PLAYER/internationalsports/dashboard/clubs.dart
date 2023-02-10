@@ -86,7 +86,9 @@ class _clubsState extends State<clubs> {
                                   trailing: const Icon(
                                     FontAwesomeIcons.arrowRight,
                                   ),
-                                  onTap: () => navigatetodetail(data))),
+                                  onTap: () => navigatetodetail(data)
+                                  )
+                                  ),
                         ],
                       );
                     });

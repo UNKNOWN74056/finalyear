@@ -15,45 +15,54 @@ class _tabletenisState extends State<tabletenis> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StreamBuilder(
-          stream: FirebaseFirestore.instance
-              .collection("users")
-              .where("sport", isEqualTo: "TableTenis")
-              .where("profession", isEqualTo: "Coache")
-              .snapshots(),
-          builder: ((context, snapshot) {
-            return ListView.builder(
-                itemCount: snapshot.data!.docs.length,
-                itemBuilder: (context, index) {
-                  DocumentSnapshot users = snapshot.data!.docs[index];
-
-                  if (snapshot.hasData) {
-                    return Column(
-                      children: [
-                        Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30)),
-                            child: ListTile(
-                                title: Text(users["firstname"],
-                                    style: const TextStyle(fontSize: 20)),
-                                leading: const CircleAvatar(
-                                    radius: 35,
-                                    backgroundImage:
-                                        AssetImage("assets/mech.jpg"),
-                                    backgroundColor: Colors.green),
-                                subtitle: Text(users["city"],
-                                    style: const TextStyle(fontSize: 15)),
-                                trailing: const Icon(Icons.arrow_forward),
-                                onTap: () {
-                                  Get.to(navigatetodetail(users));
-                                })),
-                      ],
-                    );
-                  } else {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                });
-          })),
-    );
+        body: StreamBuilder(
+            stream: FirebaseFirestore.instance
+                .collection("users")
+                .where("sport", isEqualTo: "TableTenis")
+                .where("profession", isEqualTo: "Coache")
+                .snapshots(),
+            builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (snapshot.hasData) {
+                return ListView.builder(
+                    itemCount: snapshot.data!.docs.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, i) {
+                      var data = snapshot.data!.docs[i];
+                      return Container(
+                        child: Column(
+                          children: [
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Card(
+                              color: Colors.grey.shade300,
+                              shape: RoundedRectangleBorder(
+                                side: const BorderSide(
+                                    color: Color.fromARGB(255, 25, 9, 117),
+                                    width: 1),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: ListTile(
+                                  title: Text(data['firstname'],
+                                      style: const TextStyle(fontSize: 20)),
+                                  leading: CircleAvatar(
+                                      radius: 35,
+                                      backgroundImage:
+                                          NetworkImage(data['Imageurl']),
+                                      backgroundColor: Colors.white),
+                                  trailing: const Icon(
+                                    Icons.arrow_forward,
+                                  ),
+                                  onTap: () => navigatetodetail(data),
+                                  subtitle: Text(data["city"],
+                                      style: const TextStyle(fontSize: 15))),
+                            )
+                          ],
+                        ),
+                      );
+                    });
+              }
+              return const Center(child: CircularProgressIndicator());
+            }));
   }
 }

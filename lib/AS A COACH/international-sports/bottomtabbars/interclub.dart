@@ -77,9 +77,9 @@ class _interclubState extends State<interclub> {
                                   style: const TextStyle(fontSize: 18)),
                               trailing: const Icon(Icons.arrow_forward),
                               onTap: () {
-                                navigator?.push(MaterialPageRoute(
-                                    builder: ((context) =>
-                                        const clubdetail())));
+                                // navigator?.push(MaterialPageRoute(
+                                //     builder: ((context) =>
+                                //         const clubdetail())));
                               },
                             ),
                           ),
