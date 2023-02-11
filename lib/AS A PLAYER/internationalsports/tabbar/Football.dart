@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/Details/coachdetail.dart';
+import 'package:finalyear/wedgets/reusebletextfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:path/path.dart';
@@ -19,7 +20,12 @@ class _FootballState extends State<Football> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: StreamBuilder(
+        body: Column(
+      children: [
+        const SizedBox(
+          height: 10,
+        ),
+        StreamBuilder(
             stream: FirebaseFirestore.instance
                 .collection("users")
                 .where("sport", isEqualTo: "FootBall")
@@ -67,7 +73,8 @@ class _FootballState extends State<Football> {
                     });
               }
               return const Center(child: CircularProgressIndicator());
-            })
-            );
+            }),
+      ],
+    ));
   }
 }

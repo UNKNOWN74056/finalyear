@@ -37,12 +37,6 @@ class _homeState extends State<home> {
                           },
                           icon: const Icon(Icons.search)),
                     ),
-                    Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: IconButton(
-                          onPressed: () => Get.to(() => (const Homedb())),
-                          icon: const Icon(Icons.camera_alt),
-                        ))
                   ],
                   expandedHeight: 200,
                   pinned: true,
@@ -53,18 +47,18 @@ class _homeState extends State<home> {
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   flexibleSpace: FlexibleSpaceBar(
-                    // background: Swiper(
-                    //   itemBuilder: (BuildContext context, int index) {
-                    //     return Image.network(
-                    //       "https://in.pinterest.com/pin/684617580854927859/",
-                    //       fit: BoxFit.fill,
-                    //     );
-                    //   },
-                    //   itemCount: 3,
-                    //   pagination: SwiperPagination(),
-                    //   control: SwiperControl(),
-                    // ),
-                  ),
+                      // background: Swiper(
+                      //   itemBuilder: (BuildContext context, int index) {
+                      //     return Image.network(
+                      //       "https://in.pinterest.com/pin/684617580854927859/",
+                      //       fit: BoxFit.fill,
+                      //     );
+                      //   },
+                      //   itemCount: 3,
+                      //   pagination: SwiperPagination(),
+                      //   control: SwiperControl(),
+                      // ),
+                      ),
                   centerTitle: true,
                   bottom: const TabBar(
                       indicatorColor: Colors.orange,
