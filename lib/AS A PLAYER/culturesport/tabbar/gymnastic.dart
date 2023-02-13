@@ -15,7 +15,7 @@ class _gymnasticState extends State<gymnastic> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body:  StreamBuilder(
+        body: StreamBuilder(
             stream: FirebaseFirestore.instance
                 .collection("users")
                 .where("sport", isEqualTo: "Gymnastic")
@@ -43,7 +43,7 @@ class _gymnasticState extends State<gymnastic> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: ListTile(
-                                  title: Text(data['firstname'],
+                                  title: Text(data['fullname'],
                                       style: const TextStyle(fontSize: 20)),
                                   leading: CircleAvatar(
                                       radius: 35,

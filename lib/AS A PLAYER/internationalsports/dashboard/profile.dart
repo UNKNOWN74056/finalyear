@@ -185,11 +185,11 @@ class _profileState extends State<profile> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              usernameupdate(context, data['firstname']);
+                              usernameupdate(context, data['fullname']);
                             },
                             child: reusableraw(
                               title: "Name:",
-                              value: data["firstname"],
+                              value: data["fullname"],
                               icondata: FontAwesomeIcons.solidUser,
                             ),
                           ),

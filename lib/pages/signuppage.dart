@@ -95,16 +95,9 @@ class _signuppageState extends State<signuppage> {
         });
   }
 
-  //controllers for text fields
-  // final _fullnamecontroller = TextEditingController();
   final _professioncontroller = TextEditingController();
   final _gendercontroller = TextEditingController();
   final _sportcontroller = TextEditingController();
-  // final _citycontroller = TextEditingController();
-  // final _emailcontroller = TextEditingController();
-  // final _passwordcontroller = TextEditingController();
-  // final _confirmpasswordcontroller = TextEditingController();
-  // final _phonenumbercontroller = TextEditingController();
 
   // @override
   // void dispose() {
@@ -171,14 +164,14 @@ class _signuppageState extends State<signuppage> {
       var newUrl = await refer.ref.getDownloadURL();
 
       Adduserdeatial(
-        controller.fullnamecontroller.value.text.trim(),
+        controller.fullnamecontroller.value.text,
         _professioncontroller.text.trim(),
         _gendercontroller.text.trim(),
         _sportcontroller.text.trim(),
-        controller.citycontroller.value.text.trim(),
-        controller.emailController.value.text.trim(),
-        controller.passwordcontroller.value.text.trim(),
-        controller.phonenumbercontroller.value.text.trim(),
+        controller.citycontroller.value.text,
+        controller.emailController.value.text,
+        controller.passwordcontroller.value.text,
+        controller.phonenumbercontroller.value.text,
         newUrl.toString(),
       );
       Get.snackbar("Registration",
@@ -213,7 +206,7 @@ class _signuppageState extends State<signuppage> {
         .collection('users')
         .doc(FirebaseAuth.instance.currentUser!.email)
         .set({
-      'firstname': fullname,
+      'fullname': fullname,
       'profession': profession1,
       'gender': gender1,
       'sport': sport1,
@@ -566,7 +559,12 @@ class _signuppageState extends State<signuppage> {
                           "LOGIN",
                         ))
                   ],
-                )
+                ),
+                // Obx(() => Text(controller.fullname.value)),
+                // Obx(() => Text(controller.city.value)),
+                // Obx(() => Text(controller.email.value)),
+                // Obx(() => Text(controller.phonenumber.value)),
+                // Obx(() => Text(controller.confirmpasswrod.value)),
               ],
             ),
           ),

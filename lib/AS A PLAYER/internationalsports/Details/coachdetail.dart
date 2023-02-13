@@ -64,7 +64,7 @@ class _coachdetailState extends State<coachdetail> {
               ),
               reusableraw(
                   title: "Name",
-                  value: widget.post["firstname"],
+                  value: widget.post["fullname"],
                   icondata: FontAwesomeIcons.solidUser),
               reusableraw(
                   title: "City:",

@@ -29,7 +29,6 @@ class _settingState extends State<setting> {
     FirebaseAuth.instance.currentUser!.delete();
     Get.off(const loginpage());
   }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
