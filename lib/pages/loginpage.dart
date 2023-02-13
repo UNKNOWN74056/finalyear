@@ -17,18 +17,12 @@ class loginpage extends StatefulWidget {
   State<loginpage> createState() => _loginpageState();
 }
 
-//final _form_Key = GlobalKey<FormState>();
-
 class _loginpageState extends State<loginpage> {
   //bool  for visibility of password
   bool _obsecure = true;
 
+  //putting getx controller her
   final controller = Get.put(LoginController());
-  //these are the cotroller for eamil and password
-  // var email = "";
-  // var password = "";
-  // final _emailcontroller = TextEditingController();
-  // final _passwordcontroller = TextEditingController();
 
   //login function for the user
   loginuser() async {
