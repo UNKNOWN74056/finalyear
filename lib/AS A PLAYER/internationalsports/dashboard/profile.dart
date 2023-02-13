@@ -24,7 +24,7 @@ final ImagePicker picker = ImagePicker();
 
 final currentUser = FirebaseAuth.instance;
 
-final TextEditingController updatefirstname = TextEditingController();
+final TextEditingController updatefullname = TextEditingController();
 final TextEditingController updatecity = TextEditingController();
 final TextEditingController updategender = TextEditingController();
 

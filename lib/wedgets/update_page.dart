@@ -5,24 +5,25 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-Future<void> usernameupdate(BuildContext Context, String firstname) async {
-  updatefirstname.text = firstname;
+Future<void> usernameupdate(BuildContext Context, String fullname) async {
+  updatefullname.text = fullname;
   return showDialog(
       context: Context,
       builder: (context) {
         return AlertDialog(
-          title: const Text("updat User Name"),
+          title: const Text("update User Name"),
           content: SingleChildScrollView(
             child: Column(
               children: [
                 reusebletextfield(
                   labelText: "Username",
                   icon: const Icon(FontAwesomeIcons.solidUser),
-                  controller: updatefirstname,
+                  controller: updatefullname,
                   validator: (Value) {
-                    return Value.isEmpty ? "enter your name" : null;
+                    return Value.isEmpty ? "Enter your fullname" : null;
                   },
-                  autoValidateMode: AutovalidateMode.onUserInteraction, keyboard: TextInputType.text,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  keyboard: TextInputType.text,
                 ),
               ],
             ),
@@ -39,8 +40,8 @@ Future<void> usernameupdate(BuildContext Context, String firstname) async {
                       .collection("users")
                       .doc(FirebaseAuth.instance.currentUser!.email)
                       .update({
-                    'firstname': updatefirstname.text.toString()
-                  }).then((value) => {updatefirstname.clear()});
+                    'fullname': updatefullname.text.toString()
+                  }).then((value) => {updatefullname.clear()});
 
                   Navigator.pop(context);
                 },
@@ -67,7 +68,8 @@ Future<void> cityupdate(BuildContext Context, String city) async {
                   validator: (Value) {
                     return Value.isEmpty ? "enter your city" : null;
                   },
-                  autoValidateMode: AutovalidateMode.onUserInteraction, keyboard: TextInputType.text,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  keyboard: TextInputType.text,
                 ),
               ],
             ),
@@ -111,7 +113,8 @@ Future<void> genderupdate(BuildContext Context, String gender) async {
                   validator: (Value) {
                     return Value.isEmpty ? "enter your gender" : null;
                   },
-                  autoValidateMode: AutovalidateMode.onUserInteraction, keyboard: TextInputType.text,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  keyboard: TextInputType.text,
                 ),
               ],
             ),
