@@ -1,25 +1,27 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LoginController extends GetxController {
-  var email = "".obs;
-  var password = "".obs;
+class TransFerForm extends GetxController {
+  var eamil = "".obs;
+  var message = "".obs;
+
   bool isformValidated = false;
 
-  // contorller for the fieled
-  late TextEditingController emailController, passwordController;
+  //controllers
+  late TextEditingController emailController, messagecontroller;
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
     emailController = TextEditingController();
-    passwordController = TextEditingController();
+    messagecontroller = TextEditingController();
   }
 
-// form key for validaiton
+  // form key for validaiton
   final keyForm = GlobalKey<FormState>();
-//these are the function for validation
+
+  //these are the function for validation
   String? validEmail(String value) {
     if (value.isEmpty) {
       return "Please enter Email";
@@ -28,15 +30,13 @@ class LoginController extends GetxController {
     }
   }
 
-  String? validPassword(String value) {
+  String? validmessage(String value) {
     if (value.isEmpty) {
-      return "Please enter Password";
-    } else if (value.length < 6) {
-      return "Password length should be 6";
+      return "Please enter your message";
     }
   }
 
-  checkLogin() {
+  checktransfer() {
     if (keyForm.currentState!.validate()) {
       final isValid = keyForm.currentState!.validate();
 
@@ -44,8 +44,8 @@ class LoginController extends GetxController {
         return null;
       }
       keyForm.currentState!.save();
-      email.value = emailController.value.text;
-      password.value = passwordController.value.text;
+      eamil.value = emailController.value.text;
+      message.value = messagecontroller.value.text;
       isformValidated = true;
       // User those values to send our auth request ...
     }

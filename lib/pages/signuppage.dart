@@ -25,7 +25,6 @@ class _signuppageState extends State<signuppage> {
 
   File? _image;
   final ImagePicker picker = ImagePicker();
-  final _formKey = GlobalKey<FormState>();
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
 
@@ -537,7 +536,7 @@ class _signuppageState extends State<signuppage> {
                     }
                   },
                   child: const Text(
-                    "Sign in",
+                    "Sign up",
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,

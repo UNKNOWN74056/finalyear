@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:finalyear/GETX/forgotpassword.dart';
 import 'package:finalyear/pages/loginpage.dart';
+import 'package:finalyear/wedgets/loginbutton.dart';
 import 'package:finalyear/wedgets/reusebletextfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -13,16 +16,14 @@ class forgotpassword extends StatefulWidget {
 }
 
 class _forgotpasswordState extends State<forgotpassword> {
-  final key3 = GlobalKey<FormState>();
-  //controller for the verify eamil field
-  final _verifyemailcontroller = TextEditingController();
-  var email = "";
+  //getx controller
+  final controller = Get.put(ForgotPassword());
 
   //function for the email verfication
   emailverify() async {
     try {
       await FirebaseAuth.instance
-          .sendPasswordResetEmail(email: email)
+          .sendPasswordResetEmail(email: controller.email.value)
           .then((value) => Get.to(const loginpage()));
       Get.snackbar("Reset email",
           "Passward reset email has been sent to your email please check.");
@@ -40,14 +41,16 @@ class _forgotpasswordState extends State<forgotpassword> {
         child: Scaffold(
       body: SingleChildScrollView(
         child: Form(
-          key: key3,
+          key: controller.keyForm,
           child: Column(children: [
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: Container(
-                child: const Text(
-                  "FORGOT\n PASSWORD ",
-                  style: TextStyle(fontSize: 30),
+                child: const Center(
+                  child: Text(
+                    "FORGOT PASSWORD ",
+                    style: TextStyle(fontSize: 30),
+                  ),
                 ),
               ),
             ),
@@ -66,9 +69,9 @@ class _forgotpasswordState extends State<forgotpassword> {
               child: reusebletextfield(
                 autoValidateMode: AutovalidateMode.onUserInteraction,
                 validator: (Value) {
-                  return Value.isEmpty ? "enter your email" : null;
+                  return controller.validEmail(Value!);
                 },
-                controller: _verifyemailcontroller,
+                controller: controller.emailverify,
                 labelText: "EMAIL",
                 icon: const Icon(
                   FontAwesomeIcons.solidUser,
@@ -78,22 +81,15 @@ class _forgotpasswordState extends State<forgotpassword> {
               ),
             ),
 
-            //button for varification of oyur email to reset your password
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                    onPressed: () {
-                      if (key3.currentState!.validate()) {
-                        setState(() {
-                          email = _verifyemailcontroller.text;
-                        });
-                      }
-                      emailverify();
-                    },
-                    child: const Text("SEND EMAIL"))
-              ],
-            )
+            //button for varification of your email to reset your password
+            loginbutton(
+                onTap: () {
+                  controller.checkemailverify();
+                  if (controller.isformValidated == true) {
+                    emailverify();
+                  }
+                },
+                child: const Text("Send Email"))
           ]),
         ),
       ),

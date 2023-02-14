@@ -29,6 +29,7 @@ class _settingState extends State<setting> {
     FirebaseAuth.instance.currentUser!.delete();
     Get.off(const loginpage());
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -53,7 +54,7 @@ class _settingState extends State<setting> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30)),
               tileColor: Colors.grey.shade300,
-              title: const Text("Delete"),
+              title: const Text("Delete Account"),
               leading: const Icon(FontAwesomeIcons.trash),
               iconColor: const Color.fromARGB(255, 4, 45, 119),
               onTap: () {

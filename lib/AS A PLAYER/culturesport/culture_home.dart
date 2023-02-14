@@ -35,12 +35,6 @@ class _culturehomeState extends State<culturehome>
                           onPressed: () => Get.to(() => (const Homedb())),
                           icon: const Icon(Icons.search)),
                     ),
-                    Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: IconButton(
-                          onPressed: () => Get.to(() => (const Homedb())),
-                          icon: const Icon(Icons.camera_alt),
-                        ))
                   ],
                   expandedHeight: 200,
                   pinned: true,
@@ -71,4 +65,3 @@ class _culturehomeState extends State<culturehome>
         ),
       );
 }
-

@@ -49,7 +49,7 @@ class sighnupcontroller extends GetxController {
   String? validEmail(String value) {
     if (value.isEmpty) {
       return "Please enter Email";
-    } else if (!value.contains("@gmail.com")) {
+    } else if (!value.contains("@gmail.com") && !value.contains("@yahoo.com")) {
       return "Please enter correct email";
     }
   }

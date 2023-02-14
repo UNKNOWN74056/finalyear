@@ -160,9 +160,6 @@ class _loginpageState extends State<loginpage> {
               //this is login button
               loginbutton(
                   onTap: () {
-                    // if (_form_Key.currentState!.validate()) {
-                    //   loginuser();
-                    // }
                     controller.checkLogin();
                     if (controller.isformValidated == true) {
                       loginuser();

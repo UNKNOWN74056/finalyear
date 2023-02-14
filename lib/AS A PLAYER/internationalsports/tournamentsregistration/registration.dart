@@ -1,6 +1,9 @@
-import 'dart:ffi';
-
+import 'package:finalyear/GETX/tournamentRegister.dart';
+import 'package:finalyear/wedgets/loginbutton.dart';
+import 'package:finalyear/wedgets/reusebletextfield.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 
 class registration extends StatefulWidget {
   const registration({super.key});
@@ -8,6 +11,8 @@ class registration extends StatefulWidget {
   @override
   State<registration> createState() => _registrationState();
 }
+
+final controller = Get.put(TournamentsRegistration());
 
 class _registrationState extends State<registration> {
   @override
@@ -22,8 +27,9 @@ class _registrationState extends State<registration> {
       ),
       body: SingleChildScrollView(
           child: Container(
-        margin: EdgeInsets.all(10.0),
+        margin: const EdgeInsets.all(10.0),
         child: Form(
+          key: controller.keyForm,
           child: Column(
             children: [
               const Padding(
@@ -48,16 +54,15 @@ class _registrationState extends State<registration> {
               const SizedBox(
                 height: 10,
               ),
-              TextFormField(
-                decoration: InputDecoration(
-                    label: const Text(
-                      "Enter Team Name",
-                    ),
-                    prefixIcon: const Icon(Icons.group),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    )),
-              ),
+              reusebletextfield(
+                  controller: controller.teamnamecontroller,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  keyboard: TextInputType.name,
+                  validator: (Value) {
+                    return controller.validteamname(Value!);
+                  },
+                  icon: const Icon(FontAwesomeIcons.users),
+                  labelText: "Enter your team name"),
               const SizedBox(
                 height: 10,
               ),
@@ -68,16 +73,15 @@ class _registrationState extends State<registration> {
               const SizedBox(
                 height: 10,
               ),
-              TextFormField(
-                decoration: InputDecoration(
-                    label: const Text(
-                      "Enter Captain Name",
-                    ),
-                    prefixIcon: const Icon(Icons.person),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    )),
-              ),
+              reusebletextfield(
+                  controller: controller.teamnamecontroller,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  keyboard: TextInputType.name,
+                  validator: (Value) {
+                    return controller.validcaptainname(Value!);
+                  },
+                  icon: const Icon(FontAwesomeIcons.solidUser),
+                  labelText: "Enter captain name"),
               const Text("Address",
                   style: TextStyle(
                     fontSize: 15,
@@ -85,16 +89,15 @@ class _registrationState extends State<registration> {
               const SizedBox(
                 height: 10,
               ),
-              TextFormField(
-                decoration: InputDecoration(
-                    label: const Text(
-                      "Enter your address here",
-                    ),
-                    prefixIcon: const Icon(Icons.location_on),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    )),
-              ),
+              reusebletextfield(
+                  controller: controller.addresscontroller,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  keyboard: TextInputType.name,
+                  validator: (Value) {
+                    return controller.validaddress(Value!);
+                  },
+                  icon: const Icon(FontAwesomeIcons.locationDot),
+                  labelText: "Enter your address"),
               const Text("City",
                   style: TextStyle(
                     fontSize: 15,
@@ -102,16 +105,15 @@ class _registrationState extends State<registration> {
               const SizedBox(
                 height: 10,
               ),
-              TextFormField(
-                decoration: InputDecoration(
-                    label: const Text(
-                      "Enter your city here",
-                    ),
-                    prefixIcon: const Icon(Icons.location_city),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    )),
-              ),
+              reusebletextfield(
+                  controller: controller.citycontroller,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  keyboard: TextInputType.name,
+                  validator: (Value) {
+                    return controller.validcitye(Value!);
+                  },
+                  icon: Icon(FontAwesomeIcons.city),
+                  labelText: "Enter your city"),
               const Text("Contact Email",
                   style: TextStyle(
                     fontSize: 15,
@@ -119,23 +121,24 @@ class _registrationState extends State<registration> {
               const SizedBox(
                 height: 10,
               ),
-              TextFormField(
-                decoration: InputDecoration(
-                    label: const Text(
-                      "Enter your email",
-                    ),
-                    prefixIcon: const Icon(Icons.mail),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    )),
-              ),
+              reusebletextfield(
+                  controller: controller.emailcontroller,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  keyboard: TextInputType.emailAddress,
+                  validator: (Value) {
+                    return controller.validEmail(Value!);
+                  },
+                  icon: const Icon(FontAwesomeIcons.solidEnvelope),
+                  labelText: "Enter your email"),
               const SizedBox(
                 height: 10,
               ),
-              SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                      onPressed: () {}, child: const Text("submitt")))
+              loginbutton(
+                  onTap: () {
+                    controller.checkregisteration();
+                    if (controller.isformValidated == true) {}
+                  },
+                  child: const Text("Submitt"))
             ],
           ),
         ),
