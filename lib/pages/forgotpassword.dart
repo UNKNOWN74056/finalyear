@@ -41,7 +41,7 @@ class _forgotpasswordState extends State<forgotpassword> {
         child: Scaffold(
       body: SingleChildScrollView(
         child: Form(
-          key: controller.keyForm,
+          key: controller.forgotkeyForm,
           child: Column(children: [
             Padding(
               padding: const EdgeInsets.only(top: 20),

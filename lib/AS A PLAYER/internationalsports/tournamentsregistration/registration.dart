@@ -29,7 +29,7 @@ class _registrationState extends State<registration> {
           child: Container(
         margin: const EdgeInsets.all(10.0),
         child: Form(
-          key: controller.keyForm,
+          key: controller.regkeyForm,
           child: Column(
             children: [
               const Padding(

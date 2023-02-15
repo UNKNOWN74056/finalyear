@@ -28,7 +28,7 @@ class TournamentsRegistration extends GetxController {
   }
 
   // form key for validaiton
-  final keyForm = GlobalKey<FormState>();
+  final regkeyForm = GlobalKey<FormState>();
 
   //these are the function for validation
   String? validEmail(String value) {
@@ -64,13 +64,13 @@ class TournamentsRegistration extends GetxController {
   }
 
   checkregisteration() {
-    if (keyForm.currentState!.validate()) {
-      final isValid = keyForm.currentState!.validate();
+    if (regkeyForm.currentState!.validate()) {
+      final isValid = regkeyForm.currentState!.validate();
 
       if (!isValid) {
         return null;
       }
-      keyForm.currentState!.save();
+      regkeyForm.currentState!.save();
       email.value = emailcontroller.value.text;
       teamname.value = teamnamecontroller.value.text;
       captainname.value = captainnamecontroller.value.text;

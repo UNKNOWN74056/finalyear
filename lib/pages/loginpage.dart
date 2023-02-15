@@ -176,7 +176,12 @@ class _loginpageState extends State<loginpage> {
                 children: [
                   const Text("Do not have an account!"),
                   TextButton(
-                      onPressed: () => Get.to(() => (const signuppage())),
+                      onPressed: () {
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) => const signuppage()),
+                            (Route<dynamic> route) => false);
+                      },
                       child: const Text(
                         "SIGNUP",
                         style: TextStyle(color: Colors.blue),

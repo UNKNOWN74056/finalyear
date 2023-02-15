@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/GETX/SignupGetX.dart';
+import 'package:finalyear/GETX/dropdown.dart';
 import 'package:finalyear/pages/loginpage.dart';
 import 'package:finalyear/service/internet_connection.dart';
 import 'package:finalyear/wedgets/loginbutton.dart';
@@ -22,7 +23,7 @@ class signuppage extends StatefulWidget {
 class _signuppageState extends State<signuppage> {
   //GETX contoller
   final controller = Get.put(sighnupcontroller());
-
+  final dropcontroller = Get.put(dropdownmanu());
   File? _image;
   final ImagePicker picker = ImagePicker();
   TextEditingController titleController = TextEditingController();
@@ -150,8 +151,8 @@ class _signuppageState extends State<signuppage> {
           });
 
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: controller.email.value.toString(),
-        password: controller.password.value.toString(),
+        email: controller.email.value,
+        password: controller.password.value,
       );
       String email = controller.emailController.text.toString();
       var refer = await FirebaseStorage.instance
@@ -164,7 +165,7 @@ class _signuppageState extends State<signuppage> {
 
       Adduserdeatial(
         controller.fullnamecontroller.value.text,
-        _professioncontroller.text.trim(),
+        dropcontroller.Frofession.value,
         _gendercontroller.text.trim(),
         _sportcontroller.text.trim(),
         controller.citycontroller.value.text,
@@ -176,7 +177,9 @@ class _signuppageState extends State<signuppage> {
       Get.snackbar("Registration",
           "Your account has been register succefully please login again.");
       Navigator.of(context).pop();
-      Get.to(const loginpage());
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => const loginpage()),
+          (Route<dynamic> route) => false);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         Get.snackbar("Password weak", "Password is too weak!");
@@ -206,7 +209,7 @@ class _signuppageState extends State<signuppage> {
         .doc(FirebaseAuth.instance.currentUser!.email)
         .set({
       'fullname': fullname,
-      'profession': profession1,
+      'profession': dropcontroller.Frofession.value,
       'gender': gender1,
       'sport': sport1,
       'city': city,
@@ -256,7 +259,7 @@ class _signuppageState extends State<signuppage> {
           height: 15,
         ),
         Form(
-          key: controller.keyForm,
+          key: controller.signupkeyForm,
           child: Padding(
             padding: const EdgeInsets.all(15),
             child: Column(
@@ -309,9 +312,7 @@ class _signuppageState extends State<signuppage> {
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   value: profession1,
                   onChanged: (newvalue) {
-                    setState(() {
-                      profession1 = newvalue as String;
-                    });
+                    dropcontroller.Frofession.value = newvalue.toString();
                   },
                   items: profession
                       .map(
@@ -360,9 +361,7 @@ class _signuppageState extends State<signuppage> {
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     value: gender1,
                     onChanged: (newvalue) {
-                      setState(() {
-                        gender1 = newvalue as String;
-                      });
+                      dropcontroller.Gender.value = newvalue.toString();
                     },
                     items: gender
                         .map(
@@ -409,10 +408,8 @@ class _signuppageState extends State<signuppage> {
                 DropdownButtonFormField(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     value: sport1,
-                    onChanged: (val) {
-                      setState(() {
-                        sport1 = val as String;
-                      });
+                    onChanged: (newvalue) {
+                      dropcontroller.Sport.value = newvalue.toString();
                     },
                     items: sports
                         .map(
@@ -529,7 +526,7 @@ class _signuppageState extends State<signuppage> {
                 ),
                 //this is signup button to create the user
                 loginbutton(
-                  onTap: () {
+                  onTap: () async {
                     controller.checksignup();
                     if (controller.isformValidated == true) {
                       signup();

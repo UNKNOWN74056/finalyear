@@ -17,7 +17,7 @@ class ForgotPassword extends GetxController {
   }
 
   // form key for validaiton
-  final keyForm = GlobalKey<FormState>();
+  final forgotkeyForm = GlobalKey<FormState>();
 
 //these are the function for validation
   String? validEmail(String value) {
@@ -29,13 +29,13 @@ class ForgotPassword extends GetxController {
   }
 
   checkemailverify() {
-    if (keyForm.currentState!.validate()) {
-      final isValid = keyForm.currentState!.validate();
+    if (forgotkeyForm.currentState!.validate()) {
+      final isValid = forgotkeyForm.currentState!.validate();
 
       if (!isValid) {
         return null;
       }
-      keyForm.currentState!.save();
+      forgotkeyForm.currentState!.save();
       email.value = emailverify.value.text;
       isformValidated = true;
       // User those values to send our auth request ...

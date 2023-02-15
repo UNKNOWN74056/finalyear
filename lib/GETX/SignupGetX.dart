@@ -32,13 +32,15 @@ class sighnupcontroller extends GetxController {
   }
 
   // form key for validation
-  final keyForm = GlobalKey<FormState>();
+ GlobalKey<FormState> signupkeyForm = GlobalKey<FormState>();
 //these are the function for validation
   String? validfullname(String value) {
     if (value.isEmpty) {
       return "Please enter fulll name";
     }
   }
+
+  
 
   String? validcity(String value) {
     if (value.isEmpty) {
@@ -77,13 +79,13 @@ class sighnupcontroller extends GetxController {
   }
 
   checksignup() {
-    if (keyForm.currentState!.validate()) {
-      final isValid = keyForm.currentState!.validate();
+    if (signupkeyForm.currentState!.validate()) {
+      final isValid = signupkeyForm.currentState!.validate();
 
       if (!isValid) {
         return null;
       }
-      keyForm.currentState!.save();
+     signupkeyForm.currentState!.save();
       fullname.value = fullnamecontroller.value.text;
       city.value = citycontroller.value.text;
       email.value = emailController.value.text;
