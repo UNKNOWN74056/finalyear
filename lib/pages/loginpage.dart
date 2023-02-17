@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:finalyear/AS%20A%20COACH/culturehomedb.dart';
+import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/profile.dart';
 import 'package:finalyear/GETX/LoginGetX.dart';
 import 'package:finalyear/pages/forgotpassword.dart';
 import 'package:finalyear/pages/signuppage.dart';
@@ -37,8 +40,20 @@ class _loginpageState extends State<loginpage> {
           });
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: controller.email.value, password: controller.password.value);
-      Navigator.of(context).pop();
-      Get.to(const Homedb());
+      FirebaseFirestore.instance
+          .collection("users")
+          .doc(currentUser.currentUser!.email)
+          .get()
+          .then((value) {
+        if (value['profession'] == 'Player') {
+          Get.to(const culturehomedb());
+          print("as a coach dashboard");
+        } else {
+          Get.to(const Homedb());
+          print("as a player dashboard");
+        }
+      });
+      //Get.to(const Homedb());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');

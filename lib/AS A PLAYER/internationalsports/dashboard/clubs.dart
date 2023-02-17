@@ -108,12 +108,14 @@ class _clubsState extends State<clubs> {
                                   onTap: () => navigatetodetail(data))),
                         ],
                       );
-                    });
+                    }
+                    );
               }
               return const Center(
                 child: CircularProgressIndicator(),
               );
-            }),
+            }
+            ),
       ),
     ));
   }

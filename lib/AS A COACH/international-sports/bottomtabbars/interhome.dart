@@ -6,6 +6,7 @@ import 'package:finalyear/AS%20A%20COACH/international-sports/tabs/player-hockey
 import 'package:finalyear/AS%20A%20COACH/international-sports/tabs/player-tabletenis.dart';
 import 'package:finalyear/AS%20A%20COACH/international-sports/tabs/player-vulleyball.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:get/get.dart';
 
 import '../../../AS A PLAYER/internationalsports/dashboard/home.dart';
@@ -17,6 +18,16 @@ class interhome extends StatefulWidget {
   @override
   State<interhome> createState() => _interhomeState();
 }
+
+//images for swiper
+var images = [
+  'assets/football.jpg',
+  'assets/basketball.jpg',
+  'assets/vullyball.jpg',
+  'assets/tabletanis.jpg',
+  'assets/cricket.jpg',
+  'assets/hockey.jpg',
+];
 
 class _interhomeState extends State<interhome> {
   @override
@@ -39,26 +50,30 @@ class _interhomeState extends State<interhome> {
                           },
                           icon: const Icon(Icons.search)),
                     ),
-                    Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: IconButton(
-                          onPressed: () => Get.to(() => (const Homedb())),
-                          icon: const Icon(Icons.camera_alt),
-                        ))
                   ],
                   expandedHeight: 200,
                   pinned: true,
                   floating: true,
                   snap: true,
                   title: const Text(
-                    "Internation sport",
+                    "INTERNATION",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   flexibleSpace: FlexibleSpaceBar(
-                      background: Image.asset(
-                    "assets/mixsport.jpeg",
-                    fit: BoxFit.cover,
-                  )),
+                    background: Swiper(
+                      autoplay: true,
+                      itemBuilder: (BuildContext context, int index) {
+                        return ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: Image(
+                            image: AssetImage(images[index]),
+                            fit: BoxFit.cover,
+                          ),
+                        );
+                      },
+                      itemCount: 6,
+                    ),
+                  ),
                   centerTitle: true,
                   bottom: const TabBar(
                       indicatorColor: Colors.orange,

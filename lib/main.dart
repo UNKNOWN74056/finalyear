@@ -9,7 +9,6 @@ Future main() async {
   await Firebase.initializeApp();
   runApp(MyApp());
 }
-
 class MyApp extends StatelessWidget {
   MyApp({key});
 

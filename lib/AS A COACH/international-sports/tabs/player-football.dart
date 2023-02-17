@@ -43,7 +43,7 @@ class _playerfootballState extends State<playerfootball> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: ListTile(
-                                title: Text(data['fulllname'],
+                                title: Text(data['fullname'],
                                     style: const TextStyle(fontSize: 20)),
                                 leading: CircleAvatar(
                                     radius: 35,

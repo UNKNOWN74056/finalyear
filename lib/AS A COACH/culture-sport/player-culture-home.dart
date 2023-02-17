@@ -3,6 +3,7 @@ import 'package:finalyear/AS%20A%20COACH/culture-sport/tabs/player-culture-gymna
 import 'package:finalyear/AS%20A%20COACH/culture-sport/tabs/player-culture-kabaddi.dart';
 import 'package:finalyear/AS%20A%20COACH/culture-sport/tabs/player-culture-tent-pagging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:get/get.dart';
 
 import '../../AS A PLAYER/internationalsports/dashboard/homedb.dart';
@@ -13,6 +14,13 @@ class playerculturehome extends StatefulWidget {
   @override
   State<playerculturehome> createState() => _playerculturehomeState();
 }
+
+var images = [
+  'assets/culture1.jpg',
+  'assets/culture2.jpg',
+  'assets/culture3.jpg',
+  'assets/culture4.jpg',
+];
 
 class _playerculturehomeState extends State<playerculturehome> {
   @override
@@ -43,14 +51,25 @@ class _playerculturehomeState extends State<playerculturehome> {
                   floating: true,
                   snap: true,
                   title: const Text(
-                    "Culture sport",
+                    "Culture",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                   flexibleSpace: FlexibleSpaceBar(
-                      background: Image.asset(
-                    "assets/mixsport.jpeg",
-                    fit: BoxFit.cover,
-                  )),
+                  flexibleSpace: FlexibleSpaceBar(
+                    background: Swiper(
+                      autoplay: true,
+                      itemBuilder: (BuildContext context, int index) {
+                        return ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: Image(
+                            image: AssetImage(images[index]),
+                            fit: BoxFit.cover,
+                          ),
+                        );
+                      },
+                      itemCount: 4,
+                    ),
+                    centerTitle: true,
+                  ),
                   centerTitle: true,
                   bottom: const TabBar(
                       indicatorColor: Colors.orange,
