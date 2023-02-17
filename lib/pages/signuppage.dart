@@ -210,8 +210,8 @@ class _signuppageState extends State<signuppage> {
         .set({
       'fullname': fullname,
       'profession': dropcontroller.Frofession.value,
-      'gender': gender1,
-      'sport': sport1,
+      'gender': dropcontroller.Gender.value,
+      'sport': dropcontroller.Sport.value,
       'city': city,
       'email': email,
       'Imageurl': url,

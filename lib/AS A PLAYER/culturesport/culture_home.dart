@@ -4,6 +4,7 @@ import 'package:finalyear/AS%20A%20PLAYER/culturesport/tabbar/kabaddi.dart';
 import 'package:finalyear/AS%20A%20PLAYER/culturesport/tabbar/tent_pagging.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/homedb.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:get/get.dart';
 
 class culturehome extends StatefulWidget {
@@ -16,6 +17,13 @@ class culturehome extends StatefulWidget {
 class _culturehomeState extends State<culturehome>
 //with TickerProviderStateMixin
 {
+  var images = [
+    'assets/culture1.jpg',
+    'assets/culture2.jpg',
+    'assets/culture3.jpg',
+    'assets/culture4.jpg',
+  ];
+
   @override
   Widget build(BuildContext context) =>
 
@@ -43,6 +51,22 @@ class _culturehomeState extends State<culturehome>
                   title: const Text(
                     "Culture sport",
                     style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  flexibleSpace: FlexibleSpaceBar(
+                    background: Swiper(
+                      autoplay: true,
+                      itemBuilder: (BuildContext context, int index) {
+                        return ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: Image(
+                            image: AssetImage(images[index]),
+                            fit: BoxFit.cover,
+                          ),
+                        );
+                      },
+                      itemCount: 4,
+                    ),
+                    centerTitle: true,
                   ),
                   centerTitle: true,
                   bottom: const TabBar(

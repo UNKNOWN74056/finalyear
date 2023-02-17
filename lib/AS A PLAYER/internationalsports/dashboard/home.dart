@@ -6,7 +6,7 @@ import 'package:finalyear/AS%20A%20PLAYER/internationalsports/tabbar/tabletenis.
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/tabbar/vulleyball.dart';
 import 'package:finalyear/as%20a%20player/internationalsports/dashboard/homedb.dart';
 import 'package:flutter/material.dart';
-//import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:get/get.dart';
 
 class home extends StatefulWidget {
@@ -17,6 +17,16 @@ class home extends StatefulWidget {
 }
 
 class _homeState extends State<home> {
+  //images for swiper
+  var images = [
+    'assets/football.jpg',
+    'assets/basketball.jpg',
+    'assets/vullyball.jpg',
+    'assets/tabletanis.jpg',
+    'assets/cricket.jpg',
+    'assets/hockey.jpg',
+  ];
+
   @override
   Widget build(BuildContext context) => SafeArea(
         child: DefaultTabController(
@@ -47,18 +57,20 @@ class _homeState extends State<home> {
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   flexibleSpace: FlexibleSpaceBar(
-                      // background: Swiper(
-                      //   itemBuilder: (BuildContext context, int index) {
-                      //     return Image.network(
-                      //       "https://in.pinterest.com/pin/684617580854927859/",
-                      //       fit: BoxFit.fill,
-                      //     );
-                      //   },
-                      //   itemCount: 3,
-                      //   pagination: SwiperPagination(),
-                      //   control: SwiperControl(),
-                      // ),
-                      ),
+                    background: Swiper(
+                      autoplay: true,
+                      itemBuilder: (BuildContext context, int index) {
+                        return ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: Image(
+                            image: AssetImage(images[index]),
+                            fit: BoxFit.cover,
+                          ),
+                        );
+                      },
+                      itemCount: 6,
+                    ),
+                  ),
                   centerTitle: true,
                   bottom: const TabBar(
                       indicatorColor: Colors.orange,

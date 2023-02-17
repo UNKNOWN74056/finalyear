@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/Details/clubdetail.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/home.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
@@ -17,6 +18,15 @@ navigatetodetail(DocumentSnapshot post) {
 }
 
 class _clubsState extends State<clubs> {
+  var images = [
+    'assets/club1.jpg',
+    'assets/club2.jpg',
+    'assets/club3.jpg',
+    'assets/club4.jpg',
+    'assets/club5.jpg',
+    'assets/club6.jpg',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -24,32 +34,41 @@ class _clubsState extends State<clubs> {
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverAppBar(
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20),
-                child: IconButton(
-                    onPressed: () {
-                      showSearch(
-                          context: context, delegate: CustomSearchDelegate());
-                    },
-                    icon: const Icon(Icons.search)),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: IconButton(
+                      onPressed: () {
+                        showSearch(
+                            context: context, delegate: CustomSearchDelegate());
+                      },
+                      icon: const Icon(Icons.search)),
+                ),
+              ],
+              expandedHeight: 200,
+              pinned: true,
+              floating: true,
+              snap: true,
+              title: const Text(
+                "Clubs",
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
-            ],
-            expandedHeight: 200,
-            pinned: true,
-            floating: true,
-            snap: true,
-            title: const Text(
-              "Clubs",
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-            ),
-            // flexibleSpace: FlexibleSpaceBar(
-            //     background: Image.asset(
-            //   "assets/mixsport.jpeg",
-            //   fit: BoxFit.cover,
-            // )),
-            centerTitle: true,
-          )
+              flexibleSpace: FlexibleSpaceBar(
+                background: Swiper(
+                  autoplay: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ClipRRect(
+                      borderRadius: BorderRadius.circular(5),
+                      child: Image(
+                        image: AssetImage(images[index]),
+                        fit: BoxFit.cover,
+                      ),
+                    );
+                  },
+                  itemCount: 6,
+                ),
+                centerTitle: true,
+              ))
         ],
         body: StreamBuilder(
             stream: FirebaseFirestore.instance.collection('clubs').snapshots(),
@@ -86,9 +105,7 @@ class _clubsState extends State<clubs> {
                                   trailing: const Icon(
                                     FontAwesomeIcons.arrowRight,
                                   ),
-                                  onTap: () => navigatetodetail(data)
-                                  )
-                                  ),
+                                  onTap: () => navigatetodetail(data))),
                         ],
                       );
                     });

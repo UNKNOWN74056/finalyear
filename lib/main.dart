@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:finalyear/splashscreen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,7 @@ Future main() async {
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  MyApp({key});
 
   final Future<FirebaseApp> _initailization = Firebase.initializeApp();
 
