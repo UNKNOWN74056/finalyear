@@ -19,6 +19,7 @@ class _playerculturetentpaggingState extends State<playerculturetentpagging> {
           stream: FirebaseFirestore.instance
               .collection("users")
               .where("sport", isEqualTo: "Gymnastic")
+              .where("profession", isEqualTo: 'Player')
               .snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasData) {

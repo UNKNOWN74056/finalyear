@@ -18,6 +18,7 @@ class _playerculturearcheryState extends State<playerculturearchery> {
             stream: FirebaseFirestore.instance
                 .collection("users")
                 .where("sport", isEqualTo: "Archery")
+                .where("profession", isEqualTo: 'Player')
                 .snapshots(),
             builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.hasData) {

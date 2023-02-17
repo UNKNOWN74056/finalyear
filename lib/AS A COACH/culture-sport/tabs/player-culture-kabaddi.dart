@@ -18,6 +18,7 @@ class _playerculturekabaddiState extends State<playerculturekabaddi> {
           stream: FirebaseFirestore.instance
               .collection("users")
               .where("sport", isEqualTo: "Tent Pagging")
+              .where("profession", isEqualTo: 'Player')
               .snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasData) {

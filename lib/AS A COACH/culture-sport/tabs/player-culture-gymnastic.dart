@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import '../../../AS A PLAYER/internationalsports/dashboard/clubs.dart';
+import '../../../AS A PLAYER/internationalsports/tabbar/Football.dart';
 
 class playerculturegymnastic extends StatefulWidget {
   const playerculturegymnastic({super.key});
@@ -18,6 +18,7 @@ class _playerculturegymnasticState extends State<playerculturegymnastic> {
           stream: FirebaseFirestore.instance
               .collection("users")
               .where("sport", isEqualTo: "Kabaddi")
+              .where("profession", isEqualTo: 'Player')
               .snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasData) {
