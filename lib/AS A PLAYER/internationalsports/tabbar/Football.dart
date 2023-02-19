@@ -25,55 +25,57 @@ class _FootballState extends State<Football> {
         const SizedBox(
           height: 10,
         ),
-        StreamBuilder(
-            stream: FirebaseFirestore.instance
-                .collection("users")
-                .where("sport", isEqualTo: "FootBall")
-                .where("profession", isEqualTo: "Coache")
-                .snapshots(),
-            builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (snapshot.hasData) {
-                return ListView.builder(
-                    itemCount: snapshot.data!.docs.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, i) {
-                      var data = snapshot.data!.docs[i];
-                      return Container(
-                        child: Column(
-                          children: [
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Card(
-                              color: Colors.grey.shade300,
-                              shape: RoundedRectangleBorder(
-                                side: const BorderSide(
-                                    color: Color.fromARGB(255, 25, 9, 117),
-                                    width: 1),
-                                borderRadius: BorderRadius.circular(10),
+        Flexible(
+          child: StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection("users")
+                  .where("sport", isEqualTo: "FootBall")
+                  .where("profession", isEqualTo: "Coache")
+                  .snapshots(),
+              builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.hasData) {
+                  return ListView.builder(
+                      itemCount: snapshot.data!.docs.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, i) {
+                        var data = snapshot.data!.docs[i];
+                        return Container(
+                          child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 10,
                               ),
-                              child: ListTile(
-                                  title: Text(data['fullname'],
-                                      style: const TextStyle(fontSize: 20)),
-                                  leading: CircleAvatar(
-                                      radius: 35,
-                                      backgroundImage:
-                                          NetworkImage(data['Imageurl']),
-                                      backgroundColor: Colors.white),
-                                  trailing: const Icon(
-                                    Icons.arrow_forward,
-                                  ),
-                                  onTap: () => navigatetodetail(data),
-                                  subtitle: Text(data["city"],
-                                      style: const TextStyle(fontSize: 15))),
-                            )
-                          ],
-                        ),
-                      );
-                    });
-              }
-              return const Center(child: CircularProgressIndicator());
-            }),
+                              Card(
+                                color: Colors.grey.shade300,
+                                shape: RoundedRectangleBorder(
+                                  side: const BorderSide(
+                                      color: Color.fromARGB(255, 25, 9, 117),
+                                      width: 1),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: ListTile(
+                                    title: Text(data['fullname'],
+                                        style: const TextStyle(fontSize: 20)),
+                                    leading: CircleAvatar(
+                                        radius: 35,
+                                        backgroundImage:
+                                            NetworkImage(data['Imageurl']),
+                                        backgroundColor: Colors.white),
+                                    trailing: const Icon(
+                                      Icons.arrow_forward,
+                                    ),
+                                    onTap: () => navigatetodetail(data),
+                                    subtitle: Text(data["city"],
+                                        style: const TextStyle(fontSize: 15))),
+                              )
+                            ],
+                          ),
+                        );
+                      });
+                }
+                return const Center(child: CircularProgressIndicator());
+              }),
+        ),
       ],
     ));
   }

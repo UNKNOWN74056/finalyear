@@ -75,7 +75,7 @@ class _settingState extends State<setting> {
                                 delete();
                                 Get.to(const loginpage());
                               },
-                              child: const Text("Yeas")),
+                              child: const Text("Yes")),
                         ],
                       );
                     });
@@ -92,7 +92,28 @@ class _settingState extends State<setting> {
               leading: const Icon(FontAwesomeIcons.rightFromBracket),
               iconColor: const Color.fromARGB(255, 4, 45, 119),
               onTap: () {
-                signout();
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: const Text("Signout Account"),
+                        content:
+                            const Text("Are you sure you want to Signout?"),
+                        actions: [
+                          TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text("Cancel")),
+                          TextButton(
+                              onPressed: () {
+                                signout();
+                                Get.to(const loginpage());
+                              },
+                              child: const Text("Yes")),
+                        ],
+                      );
+                    });
               },
             ),
           ],
