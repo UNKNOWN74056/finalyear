@@ -19,6 +19,13 @@ class _forgotpasswordState extends State<forgotpassword> {
   //getx controller
   final controller = Get.put(ForgotPassword());
 
+  @override
+  void dispose() {
+    controller.emailverify.text = " ";
+    controller.dispose();
+    super.dispose();
+  }
+
   //function for the email verfication
   emailverify() async {
     try {
@@ -88,6 +95,7 @@ class _forgotpasswordState extends State<forgotpassword> {
                   if (controller.isformValidated == true) {
                     emailverify();
                   }
+                  dispose();
                 },
                 child: const Text("Send Email"))
           ]),

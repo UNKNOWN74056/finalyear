@@ -95,24 +95,20 @@ class _signuppageState extends State<signuppage> {
         });
   }
 
-  final _professioncontroller = TextEditingController();
-  final _gendercontroller = TextEditingController();
-  final _sportcontroller = TextEditingController();
-
-  // @override
-  // void dispose() {
-  //   controller.fullnamecontroller.dispose();
-  //   _professioncontroller.dispose();
-  //   _gendercontroller.dispose();
-  //   _sportcontroller.dispose();
-  //   controller.citycontroller.dispose();
-  //   controller.emailController.dispose();
-  //   controller.passwordcontroller.dispose();
-  //   controller.confirmpasswordcontroller.dispose();
-  //   controller.phonenumbercontroller.dispose();
-
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    controller.citycontroller.text = "";
+    controller.confirmpasswordcontroller.text = "";
+    controller.emailController.text = "";
+    controller.fullnamecontroller.text = "";
+    controller.passwordcontroller.text = "";
+    controller.phonenumbercontroller.text = "";
+    dropcontroller.Frofession.value = " ";
+    dropcontroller.Gender.value = "";
+    dropcontroller.Sport.value = "";
+    controller.dispose();
+    super.dispose();
+  }
 
   //options for profession
   List profession = ['Coache', 'Player'];
@@ -166,8 +162,8 @@ class _signuppageState extends State<signuppage> {
       Adduserdeatial(
         controller.fullnamecontroller.value.text,
         dropcontroller.Frofession.value,
-        _gendercontroller.text.trim(),
-        _sportcontroller.text.trim(),
+        dropcontroller.Gender.value,
+        dropcontroller.Sport.value,
         controller.citycontroller.value.text,
         controller.emailController.value.text,
         controller.passwordcontroller.value.text,
@@ -549,18 +545,17 @@ class _signuppageState extends State<signuppage> {
                     TextButton(
                         // i use get for going to login screen
                         onPressed: () {
-                          Get.back();
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (context) => const loginpage()),
+                              (Route<dynamic> route) => false);
+                          dispose();
                         },
                         child: const Text(
                           "LOGIN",
                         ))
                   ],
                 ),
-                // Obx(() => Text(controller.fullname.value)),
-                // Obx(() => Text(controller.city.value)),
-                // Obx(() => Text(controller.email.value)),
-                // Obx(() => Text(controller.phonenumber.value)),
-                // Obx(() => Text(controller.confirmpasswrod.value)),
               ],
             ),
           ),

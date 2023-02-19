@@ -75,8 +75,9 @@ class _loginpageState extends State<loginpage> {
   // dispose function for the field
   @override
   void dispose() {
-    controller.emailController.dispose();
-    controller.passwordController.dispose();
+    controller.emailController.text = "";
+    controller.passwordController.text = "";
+    controller.dispose();
     super.dispose();
   }
 
@@ -196,6 +197,7 @@ class _loginpageState extends State<loginpage> {
                             MaterialPageRoute(
                                 builder: (context) => const signuppage()),
                             (Route<dynamic> route) => false);
+                        dispose();
                       },
                       child: const Text(
                         "SIGNUP",
