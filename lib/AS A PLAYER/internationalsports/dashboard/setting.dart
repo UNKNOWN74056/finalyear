@@ -108,7 +108,7 @@ class _settingState extends State<setting> {
                           TextButton(
                               onPressed: () {
                                 signout();
-                                Get.to(const loginpage());
+                                Get.to(() => const loginpage());
                               },
                               child: const Text("Yes")),
                         ],
