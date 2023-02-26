@@ -22,12 +22,24 @@ class _coachdetailState extends State<coachdetail> {
   final TextEditingController _commentcontroler = TextEditingController();
   //add comment in firestore
   Future addcommnet(String name, String image) async {
+    
     FirebaseFirestore.instance.collection("comments").doc(currentuser).set({
       'Email': currentuser,
       'comment': _commentcontroler.text.toString(),
       'commented_user': widget.post['email'],
       'name': name,
+      'time': FieldValue.serverTimestamp(),
       'image': image,
+    });
+  }
+
+//reating funtion
+  Future addrating() async {
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(widget.post['email'])
+        .update({
+      'rating': rating,
     });
   }
 
@@ -52,8 +64,6 @@ class _coachdetailState extends State<coachdetail> {
   double rating = 0;
   @override
   Widget build(BuildContext context) {
-    double _rating;
-
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -96,6 +106,7 @@ class _coachdetailState extends State<coachdetail> {
                   updateOnDrag: true,
                   onRatingUpdate: (rating) => setState(() {
                     this.rating = rating;
+                    addrating();
                   }),
                 ),
               ),
@@ -201,60 +212,52 @@ class _coachdetailState extends State<coachdetail> {
                                 var data = snapshot.data!.docs[i];
                                 final _namecontroller = data['fullname'];
                                 final image = data['Imageurl'];
-                                return Container(
-                                  width: MediaQuery.of(context).size.width - 55,
-                                  child: Card(
-                                    margin: const EdgeInsets.only(
-                                        left: 9, right: 2, bottom: 8),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(9)),
-                                    color: Colors.white60,
-                                    child: Column(
-                                      children: [
-                                        TextFormField(
-                                          cursorColor: Colors.black,
-                                          cursorHeight: 20,
-                                          controller: _commentcontroler,
-                                          textAlignVertical:
-                                              TextAlignVertical.center,
-                                          keyboardType: TextInputType.multiline,
-                                          maxLines: 5,
-                                          minLines: 2,
-                                          decoration: InputDecoration(
-                                              hintText:
-                                                  "Write your comment....",
-                                              prefixIcon: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 20),
-                                                child: CircleAvatar(
-                                                  radius: 30,
-                                                  backgroundImage: NetworkImage(
-                                                      data['Imageurl']),
-                                                ),
-                                              ),
-                                              suffixIcon: Row(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  GestureDetector(
-                                                    onTap: (() {
-                                                      addcommnet(
-                                                          _namecontroller
-                                                              .toString(),
-                                                          image.toString());
-                                                    }),
-                                                    child: const Icon(
-                                                        FontAwesomeIcons
-                                                            .solidPaperPlane,
-                                                        color: Colors.red),
-                                                  ),
-                                                ],
-                                              ),
-                                              contentPadding:
-                                                  const EdgeInsets.all(5)),
-                                        ),
-                                      ],
+                                return Column(
+                                  children: [
+                                    const SizedBox(
+                                      height: 30,
                                     ),
-                                  ),
+                                    TextFormField(
+                                      cursorColor: Colors.black,
+                                      cursorHeight: 20,
+                                      controller: _commentcontroler,
+                                      textAlignVertical:
+                                          TextAlignVertical.center,
+                                      keyboardType: TextInputType.multiline,
+                                      maxLines: 5,
+                                      minLines: 2,
+                                      decoration: InputDecoration(
+                                          hintText: "Write your comment....",
+                                          prefixIcon: Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 20),
+                                            child: CircleAvatar(
+                                              radius: 30,
+                                              backgroundImage: NetworkImage(
+                                                  data['Imageurl']),
+                                            ),
+                                          ),
+                                          suffixIcon: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              GestureDetector(
+                                                onTap: (() {
+                                                  addcommnet(
+                                                      _namecontroller
+                                                          .toString(),
+                                                      image.toString());
+                                                }),
+                                                child: const Icon(
+                                                    FontAwesomeIcons
+                                                        .solidPaperPlane,
+                                                    color: Colors.red),
+                                              ),
+                                            ],
+                                          ),
+                                          contentPadding:
+                                              const EdgeInsets.all(5)),
+                                    ),
+                                  ],
                                 );
                               });
                         }

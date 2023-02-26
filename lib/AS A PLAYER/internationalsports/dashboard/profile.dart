@@ -1,7 +1,7 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/statsandvideos/transferform.dart';
+import 'package:finalyear/AS%20A%20PLAYER/internationalsports/statsandvideos/videos.dart';
 import 'package:finalyear/wedgets/reusraw.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -237,6 +237,11 @@ class _profileState extends State<profile> {
                               title: "Profession:",
                               value: data["profession"],
                               icondata: FontAwesomeIcons.userTie),
+                          GestureDetector(
+                              onTap: (() {
+                                Get.to(videos());
+                              }),
+                              child: const Center(child: Text("Videos")))
                         ],
                       ),
                     );
