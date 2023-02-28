@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:video_player/video_player.dart';
 
 import '../../../wedgets/update_page.dart';
 
@@ -29,6 +30,7 @@ final TextEditingController updatecity = TextEditingController();
 final TextEditingController updategender = TextEditingController();
 
 class _profileState extends State<profile> {
+  VideoPlayerController? videoPlayerController;
   //dailog to select photo from camera or gallery
   void dialogAlert(context) {
     showDialog(
