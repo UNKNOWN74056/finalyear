@@ -76,6 +76,10 @@ class _clubdetailState extends State<clubdetail> {
                   title: "Contect:",
                   value: widget.post["Phone"],
                   icondata: FontAwesomeIcons.phone),
+              reusableraw(
+                  title: "Sport:",
+                  value: widget.post["sport"],
+                  icondata: FontAwesomeIcons.futbol),
             ],
           ),
         ),
