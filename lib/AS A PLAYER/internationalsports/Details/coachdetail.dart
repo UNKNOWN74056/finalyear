@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/profile.dart';
 import 'package:finalyear/wedgets/reusraw.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -130,7 +131,16 @@ class _coachdetailState extends State<coachdetail> {
                                                           backgroundColor:
                                                               Colors.white),
                                                       trailing: GestureDetector(
-                                                        onTap: (() {}),
+                                                        onTap: () {
+                                                          if (data[
+                                                                  'commenter'] ==
+                                                              currentuser) {
+                                                            data.reference
+                                                                .delete();
+                                                          } else {
+                                                            return null;
+                                                          }
+                                                        },
                                                         child: const Icon(
                                                           FontAwesomeIcons
                                                               .trash,
