@@ -44,11 +44,24 @@ class _coachdetailState extends State<coachdetail> {
 
 //rating funtion
   Future addrating() async {
+    double totalrating = 0;
+    var querySnapshot = await FirebaseFirestore.instance
+        .collection('ratings')
+        .where('email', isEqualTo: widget.post['email'])
+        .get();
+
+    int numRatings = querySnapshot.docs.length;
+    for (var doc in querySnapshot.docs) {
+      totalrating += doc.data()['rating'] as double;
+    }
+    double ratingavg = totalrating / numRatings;
+    print('Average rating: $ratingavg');
     await FirebaseFirestore.instance
-        .collection("users")
-        .doc(widget.post['email'])
-        .update({
-      'rating': rating,
+        .collection("ratings")
+        .doc(currentuser)
+        .set({
+      'email': widget.post['email'],
+      'rating': ratingavg,
     });
   }
 
@@ -68,6 +81,7 @@ class _coachdetailState extends State<coachdetail> {
       child: Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.black,
           onPressed: () {
             showModalBottomSheet(
                 isScrollControlled: true,
@@ -99,7 +113,11 @@ class _coachdetailState extends State<coachdetail> {
                                   itemBuilder: (context, i) {
                                     var data = snapshot.data!.docs[i];
                                     return ListTile(
-                                      title: Text(data['name']),
+                                      title: Text(
+                                        data['name'],
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                       leading: CircleAvatar(
                                           radius: 30,
                                           backgroundImage:
@@ -201,7 +219,9 @@ class _coachdetailState extends State<coachdetail> {
                   );
                 });
           },
-          child: const Icon(FontAwesomeIcons.solidComment),
+          child: const Icon(
+            FontAwesomeIcons.commentDots,
+          ),
         ),
         appBar: AppBar(
           title: const Text("Profile"),
