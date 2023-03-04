@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/wedgets/reusraw.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -75,174 +75,131 @@ class _coachdetailState extends State<coachdetail> {
                     borderRadius:
                         BorderRadius.vertical(top: Radius.circular(10))),
                 context: context,
-                builder: (context) => Container(
-                      margin: const EdgeInsets.all(20),
-                      padding: const EdgeInsets.all(8),
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                            bottom: MediaQuery.of(context).viewInsets.bottom),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              const SizedBox(
-                                height: 1,
-                              ),
-                              const Text(
-                                "Comments",
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              StreamBuilder(
-                                  stream: FirebaseFirestore.instance
-                                      .collection("comments")
-                                      .where("commented_on",
-                                          isEqualTo: widget.post['email'])
-                                      .snapshots(),
-                                  builder: (context,
-                                      AsyncSnapshot<QuerySnapshot> snapshot) {
-                                    if (snapshot.hasData) {
-                                      return ListView.builder(
-                                          itemCount: snapshot.data!.docs.length,
-                                          shrinkWrap: true,
-                                          itemBuilder: (context, i) {
-                                            var data = snapshot.data!.docs[i];
-                                            return Container(
-                                              child: Column(
-                                                children: [
-                                                  const SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  ListTile(
-                                                      title: Text(data['name'],
-                                                          style:
-                                                              const TextStyle(
-                                                                  fontSize:
-                                                                      20)),
-                                                      leading: CircleAvatar(
-                                                          radius: 35,
-                                                          backgroundImage:
-                                                              NetworkImage(data[
-                                                                  'image']),
-                                                          backgroundColor:
-                                                              Colors.white),
-                                                      trailing: GestureDetector(
-                                                        onTap: () {
-                                                          if (data[
-                                                                  'commenter'] ==
-                                                              currentuser) {
-                                                            data.reference
-                                                                .delete();
-                                                          } else {
-                                                            return null;
-                                                          }
-                                                        },
-                                                        child: const Icon(
-                                                          FontAwesomeIcons
-                                                              .trash,
-                                                          color: Colors.red,
-                                                        ),
-                                                      ),
-                                                      subtitle: Text(
-                                                          data["comment"],
-                                                          style: const TextStyle(
-                                                              fontSize: 15))),
-                                                ],
-                                              ),
-                                            );
-                                          });
-                                    }
-                                    return const Center(
-                                        child: CircularProgressIndicator());
-                                  }),
-                              StreamBuilder(
-                                  stream: FirebaseFirestore.instance
-                                      .collection("users")
-                                      .where("email",
-                                          isEqualTo: FirebaseAuth
-                                              .instance.currentUser!.email)
-                                      .snapshots(),
-                                  builder: (context,
-                                      AsyncSnapshot<QuerySnapshot> snapshot) {
-                                    if (snapshot.hasData) {
-                                      return ListView.builder(
-                                          itemCount: snapshot.data!.docs.length,
-                                          shrinkWrap: true,
-                                          itemBuilder: (context, i) {
-                                            var data = snapshot.data!.docs[i];
-                                            final _namecontroller =
-                                                data['fullname'];
-                                            final image = data['Imageurl'];
-                                            return Column(
-                                              children: [
-                                                const SizedBox(
-                                                  height: 30,
-                                                ),
-                                                TextFormField(
-                                                  cursorColor: Colors.black,
-                                                  cursorHeight: 20,
-                                                  controller: _commentcontroler,
-                                                  textAlignVertical:
-                                                      TextAlignVertical.center,
-                                                  keyboardType:
-                                                      TextInputType.multiline,
-                                                  maxLines: 5,
-                                                  minLines: 2,
-                                                  decoration: InputDecoration(
-                                                      hintText:
-                                                          "Write your comment....",
-                                                      prefixIcon: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                right: 20),
-                                                        child: CircleAvatar(
-                                                          radius: 30,
-                                                          backgroundImage:
-                                                              NetworkImage(data[
-                                                                  'Imageurl']),
-                                                        ),
-                                                      ),
-                                                      suffixIcon: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        children: [
-                                                          GestureDetector(
-                                                            onTap: (() {
-                                                              addcommnet(
-                                                                  _namecontroller
-                                                                      .toString(),
-                                                                  image
-                                                                      .toString(),
-                                                                  _commentcontroler
-                                                                      .text
-                                                                      .toString());
-                                                            }),
-                                                            child: const Icon(
-                                                                FontAwesomeIcons
-                                                                    .solidPaperPlane,
-                                                                color:
-                                                                    Colors.red),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      contentPadding:
-                                                          const EdgeInsets.all(
-                                                              5)),
-                                                ),
-                                              ],
-                                            );
-                                          });
-                                    }
-                                    return const Center(
-                                        child: CircularProgressIndicator());
-                                  }),
-                            ],
-                          ),
+                builder: (context) {
+                  return Column(
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.only(top: 40),
+                        child: Text(
+                          "Comments",
+                          style: TextStyle(fontSize: 20),
                         ),
                       ),
-                    ));
+                      StreamBuilder(
+                        stream: FirebaseFirestore.instance
+                            .collection("comments")
+                            .snapshots(),
+                        builder:
+                            (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                          if (snapshot.hasData) {
+                            return Expanded(
+                              child: ListView.builder(
+                                  itemCount: snapshot.data!.docs.length,
+                                  shrinkWrap: true,
+                                  itemBuilder: (context, i) {
+                                    var data = snapshot.data!.docs[i];
+                                    return ListTile(
+                                      title: Text(data['name']),
+                                      leading: CircleAvatar(
+                                          radius: 30,
+                                          backgroundImage:
+                                              NetworkImage(data['image'])),
+                                      trailing: GestureDetector(
+                                        onTap: () {
+                                          if (data['commenter'] ==
+                                              currentuser) {
+                                            data.reference.delete();
+                                          } else {
+                                            return null;
+                                          }
+                                        },
+                                        child: const Icon(
+                                          FontAwesomeIcons.trash,
+                                          color: Colors.red,
+                                        ),
+                                      ),
+                                      subtitle: Text(data['comment']),
+                                    );
+                                  }),
+                            );
+                          }
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
+                      ),
+                      StreamBuilder(
+                          stream: FirebaseFirestore.instance
+                              .collection("users")
+                              .where("email", isEqualTo: currentuser)
+                              .snapshots(),
+                          builder:
+                              (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                            if (snapshot.hasData) {
+                              return ListView.builder(
+                                  itemCount: snapshot.data!.docs.length,
+                                  shrinkWrap: true,
+                                  itemBuilder: (context, i) {
+                                    var data = snapshot.data!.docs[i];
+                                    final _namecontroller = data['fullname'];
+                                    final image = data['Imageurl'];
+                                    return Padding(
+                                      padding: EdgeInsets.only(
+                                          bottom: MediaQuery.of(context)
+                                              .viewInsets
+                                              .bottom),
+                                      child: TextFormField(
+                                        cursorColor: Colors.black,
+                                        cursorHeight: 20,
+                                        controller: _commentcontroler,
+                                        textAlignVertical:
+                                            TextAlignVertical.center,
+                                        keyboardType: TextInputType.multiline,
+                                        maxLines: 5,
+                                        minLines: 2,
+                                        decoration: InputDecoration(
+                                            hintText: "Write your comment....",
+                                            prefixIcon: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 20),
+                                              child: CircleAvatar(
+                                                radius: 30,
+                                                backgroundImage: NetworkImage(
+                                                    data['Imageurl']),
+                                              ),
+                                            ),
+                                            suffixIcon: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                GestureDetector(
+                                                  onTap: (() {
+                                                    addcommnet(
+                                                        _namecontroller
+                                                            .toString(),
+                                                        image.toString(),
+                                                        _commentcontroler.text
+                                                            .toString());
+                                                  }),
+                                                  child: const Icon(
+                                                      FontAwesomeIcons
+                                                          .solidPaperPlane,
+                                                      color: Color.fromARGB(
+                                                          255, 0, 1, 5)),
+                                                ),
+                                              ],
+                                            ),
+                                            contentPadding:
+                                                const EdgeInsets.all(5)),
+                                      ),
+                                    );
+                                  });
+                            }
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          }),
+                    ],
+                  );
+                });
           },
           child: const Icon(FontAwesomeIcons.solidComment),
         ),
