@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/wedgets/reusraw.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -68,12 +69,17 @@ class _coachdetailState extends State<coachdetail> {
     }
     double ratingavg = totalrating / numRatings;
     print('Average rating: $ratingavg');
-
     await FirebaseFirestore.instance
         .collection("users")
         .doc(widget.post['email'])
         .collection("ratings")
         .doc(currentuser)
+        .update({
+      'rating': ratingavg,
+    });
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(widget.post['email'])
         .update({
       'rating': ratingavg,
     });
@@ -257,15 +263,40 @@ class _coachdetailState extends State<coachdetail> {
                 ],
               ),
               const SizedBox(
-                height: 5,
+                height: 20,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Center(
-                    child: Text('Rating:$rating')
-                    )
-                    ],
+              Container(
+                width: 200,
+                height: 26,
+                child: StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection("users")
+                      .where("email", isEqualTo: widget.post["email"])
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (context, i) {
+                          var data = snapshot.data!.docs[i];
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text(
+                                "Rating:",
+                                style: TextStyle(fontSize: 17),
+                              ),
+                              Text(data['rating'].toString())
+                            ],
+                          );
+                        },
+                      );
+                    }
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                ),
               ),
               Container(
                 child: RatingBar.builder(
