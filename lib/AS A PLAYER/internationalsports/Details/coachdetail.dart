@@ -45,8 +45,20 @@ class _coachdetailState extends State<coachdetail> {
 //rating funtion
   Future addrating() async {
     double totalrating = 0;
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(widget.post['email'])
+        .collection("ratings")
+        .doc(currentuser)
+        .set({
+      'email': widget.post['email'],
+      'rating': rating,
+    });
+
     var querySnapshot = await FirebaseFirestore.instance
-        .collection('ratings')
+        .collection('users')
+        .doc(widget.post['email'])
+        .collection("ratings")
         .where('email', isEqualTo: widget.post['email'])
         .get();
 
@@ -56,11 +68,13 @@ class _coachdetailState extends State<coachdetail> {
     }
     double ratingavg = totalrating / numRatings;
     print('Average rating: $ratingavg');
+
     await FirebaseFirestore.instance
+        .collection("users")
+        .doc(widget.post['email'])
         .collection("ratings")
         .doc(currentuser)
-        .set({
-      'email': widget.post['email'],
+        .update({
       'rating': ratingavg,
     });
   }
@@ -141,7 +155,7 @@ class _coachdetailState extends State<coachdetail> {
                                   }),
                             );
                           }
-                          return Center(
+                          return const Center(
                             child: CircularProgressIndicator(),
                           );
                         },
@@ -249,16 +263,14 @@ class _coachdetailState extends State<coachdetail> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Center(
-                    child: Text(
-                      "RATING:$rating",
-                      style: const TextStyle(fontSize: 25),
-                    ),
-                  )
-                ],
+                    child: Text('Rating:$rating')
+                    )
+                    ],
               ),
               Container(
                 child: RatingBar.builder(
                   minRating: 0,
+                  allowHalfRating: true,
                   itemBuilder: (context, _) => const Icon(Icons.star),
                   updateOnDrag: true,
                   onRatingUpdate: (rating) => setState(() {
