@@ -1,3 +1,4 @@
+import 'package:finalyear/main.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/wedgets/reusraw.dart';
@@ -22,16 +23,12 @@ class _coachdetailState extends State<coachdetail> {
   final TextEditingController _commentcontroler = TextEditingController();
   //add comment in firestore
   Future addcommnet(String name, String image, String comment) async {
-    // final FirebaseStorage storage = FirebaseStorage.instance;
-    // final Reference ref = storage.ref().child('comments');
-    // final TaskSnapshot task =
-    //     await ref.putString(_commentcontroler.text.toString()).whenComplete(() {
-    //   _commentcontroler.clear();
-    // });
-    // final String commenturl = await task.ref.getDownloadURL();
-    // final http.Response response = await http.get(Uri.parse(commenturl));
-    // final String commentData = response.body;
-    await FirebaseFirestore.instance.collection('comments').doc(comment).set({
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(widget.post['email'])
+        .collection("comments")
+        .doc(comment)
+        .set({
       'image': image,
       'commented_on': widget.post['email'],
       'name': name,
@@ -121,10 +118,11 @@ class _coachdetailState extends State<coachdetail> {
                       ),
                       StreamBuilder(
                         stream: FirebaseFirestore.instance
+                            .collection("users")
+                            .doc(widget.post['email'])
                             .collection("comments")
                             .snapshots(),
-                        builder:
-                            (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                        builder: (context, snapshot) {
                           if (snapshot.hasData) {
                             return Expanded(
                               child: ListView.builder(
@@ -132,31 +130,102 @@ class _coachdetailState extends State<coachdetail> {
                                   shrinkWrap: true,
                                   itemBuilder: (context, i) {
                                     var data = snapshot.data!.docs[i];
-                                    return ListTile(
-                                      title: Text(
-                                        data['name'],
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      leading: CircleAvatar(
-                                          radius: 30,
-                                          backgroundImage:
-                                              NetworkImage(data['image'])),
-                                      trailing: GestureDetector(
-                                        onTap: () {
-                                          if (data['commenter'] ==
-                                              currentuser) {
-                                            data.reference.delete();
-                                          } else {
-                                            return null;
-                                          }
-                                        },
-                                        child: const Icon(
-                                          FontAwesomeIcons.trash,
-                                          color: Colors.red,
-                                        ),
-                                      ),
-                                      subtitle: Text(data['comment']),
+                                    Timestamp timestamp = data['time'];
+                                    DateTime dateTime = timestamp.toDate();
+
+                                    return Container(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.25,
+                                      width: MediaQuery.of(context).size.width,
+                                      child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10),
+                                              child: Row(
+                                                children: [
+                                                  CircleAvatar(
+                                                    backgroundImage:
+                                                        NetworkImage(
+                                                            data['image']),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 8.0),
+                                                    child: Container(
+                                                      child: Row(children: [
+                                                        Text(
+                                                          data['name'],
+                                                          style: const TextStyle(
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                      ]),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  1,
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 15),
+                                                child: Row(children: [
+                                                  const Icon(
+                                                    Icons
+                                                        .arrow_forward_ios_outlined,
+                                                    size: 15,
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 10),
+                                                    child: Container(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.75,
+                                                      child:
+                                                          Text(data['comment']),
+                                                    ),
+                                                  ),
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      if (data['commenter'] ==
+                                                          currentuser) {
+                                                        data.reference.delete();
+                                                      } else {
+                                                        null;
+                                                      }
+                                                    },
+                                                    child: const Icon(
+                                                      FontAwesomeIcons.trash,
+                                                      color: Colors.red,
+                                                    ),
+                                                  ),
+                                                ]),
+                                              ),
+                                            ),
+                                            const Divider(
+                                              color: Colors.black,
+                                            )
+                                          ]),
                                     );
                                   }),
                             );
@@ -186,26 +255,29 @@ class _coachdetailState extends State<coachdetail> {
                                           bottom: MediaQuery.of(context)
                                               .viewInsets
                                               .bottom),
-                                      child: TextFormField(
-                                        cursorColor: Colors.black,
-                                        cursorHeight: 20,
-                                        controller: _commentcontroler,
-                                        textAlignVertical:
-                                            TextAlignVertical.center,
-                                        keyboardType: TextInputType.multiline,
-                                        maxLines: 5,
-                                        minLines: 2,
-                                        decoration: InputDecoration(
+                                      child: Padding(
+                                        padding: EdgeInsets.all(15),
+                                        child: TextFormField(
+                                          cursorColor: Colors.black,
+                                          cursorWidth: 5,
+                                          cursorHeight: 20,
+                                          controller: _commentcontroler,
+                                          textAlignVertical:
+                                              TextAlignVertical.center,
+                                          keyboardType: TextInputType.multiline,
+                                          maxLines: 3,
+                                          minLines: 2,
+                                          decoration: InputDecoration(
+                                            filled: true,
+                                            isDense: true,
+                                            contentPadding:
+                                                const EdgeInsets.symmetric(
+                                                    vertical: 10),
+                                            fillColor: Colors.white70,
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10)),
                                             hintText: "Write your comment....",
-                                            prefixIcon: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 20),
-                                              child: CircleAvatar(
-                                                radius: 30,
-                                                backgroundImage: NetworkImage(
-                                                    data['Imageurl']),
-                                              ),
-                                            ),
                                             suffixIcon: Row(
                                               mainAxisSize: MainAxisSize.min,
                                               children: [
@@ -221,13 +293,14 @@ class _coachdetailState extends State<coachdetail> {
                                                   child: const Icon(
                                                       FontAwesomeIcons
                                                           .solidPaperPlane,
+                                                      size: 20,
                                                       color: Color.fromARGB(
                                                           255, 0, 1, 5)),
                                                 ),
                                               ],
                                             ),
-                                            contentPadding:
-                                                const EdgeInsets.all(5)),
+                                          ),
+                                        ),
                                       ),
                                     );
                                   });
