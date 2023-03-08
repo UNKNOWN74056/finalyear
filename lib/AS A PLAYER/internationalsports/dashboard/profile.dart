@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/statsandvideos/transferform.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/statsandvideos/videos.dart';
@@ -127,8 +128,22 @@ class _profileState extends State<profile> {
             Padding(
               padding: const EdgeInsets.only(right: 15),
               child: InkWell(
-                onTap: () {
-                  Get.to(const transferform());
+                onTap: () async {
+                  String email = 'recipient@example.com';
+                  String subject = 'Transfer Request';
+                  String body = '';
+                  final Uri params = Uri(
+                    scheme: 'mailto',
+                    path: email,
+                    query: 'subject=$subject&body=$body',
+                  );
+                  if (await canLaunch(params.toString())) {
+                    await launch(params.toString());
+                  } else {
+                    throw 'Could not launch email.';
+                  }
+
+                  // Get.to(const transferform());
                 },
                 child: const Icon(FontAwesomeIcons.rightLeft),
               ),

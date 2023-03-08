@@ -50,7 +50,7 @@ class _coachdetailState extends State<coachdetail> {
         .doc(currentuser)
         .set({
       'email': widget.post['email'],
-      'rating': rating,
+      'rating': rating.toString(),
     });
 
     var querySnapshot = await FirebaseFirestore.instance
@@ -72,13 +72,13 @@ class _coachdetailState extends State<coachdetail> {
         .collection("ratings")
         .doc(currentuser)
         .update({
-      'rating': ratingavg,
+      'rating': ratingavg.toString(),
     });
     await FirebaseFirestore.instance
         .collection("users")
         .doc(widget.post['email'])
         .update({
-      'rating': ratingavg,
+      'rating': ratingavg.toString(),
     });
   }
 

@@ -1,3 +1,4 @@
+
 import 'package:finalyear/GETX/transferform.dart';
 import 'package:finalyear/wedgets/loginbutton.dart';
 import 'package:finalyear/wedgets/reusebletextfield.dart';
@@ -103,7 +104,7 @@ class _transferformState extends State<transferform> {
                 height: 40,
               ),
               loginbutton(
-                  onTap: () {
+                  onTap: () async {
                     controller.checktransfer();
                     if (controller.isformValidated == true) {}
                   },

@@ -1,4 +1,5 @@
 // @dart=2.9
+import 'package:finalyear/GETX/getdatafromfirebase.dart';
 import 'package:finalyear/splashscreen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -9,10 +10,18 @@ Future main() async {
   await Firebase.initializeApp();
   runApp(MyApp());
 }
-class MyApp extends StatelessWidget {
+
+class MyApp extends StatefulWidget {
   MyApp({key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   final Future<FirebaseApp> _initailization = Firebase.initializeApp();
+
+  final controller = Get.put(FetchDataFirebase());
 
   // comment
   @override
@@ -37,5 +46,12 @@ class MyApp extends StatelessWidget {
             home: const splashscreen());
       },
     );
+  }
+
+  @override
+  void initState() {
+    controller.GetDataFirebase(); 
+    // TODO: implement initState
+    super.initState();
   }
 }
