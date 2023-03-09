@@ -11,6 +11,7 @@ class Football extends StatefulWidget {
 }
 
 class _FootballState extends State<Football> {
+  // getx controller
   final controller = Get.put(FetchDataFirebase());
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:finalyear/GETX/getdatafromfirebase.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/statsandvideos/transferform.dart';
@@ -117,158 +118,268 @@ class _profileState extends State<profile> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: const Text(
-            "Profile",
-            style: TextStyle(fontSize: 30),
-          ),
-          centerTitle: true,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 15),
-              child: InkWell(
-                onTap: () async {
-                  String email = 'recipient@example.com';
-                  String subject = 'Transfer Request';
-                  String body = '';
-                  final Uri params = Uri(
-                    scheme: 'mailto',
-                    path: email,
-                    query: 'subject=$subject&body=$body',
-                  );
-                  if (await canLaunch(params.toString())) {
-                    await launch(params.toString());
-                  } else {
-                    throw 'Could not launch email.';
-                  }
-
-                  // Get.to(const transferform());
-                },
-                child: const Icon(FontAwesomeIcons.rightLeft),
-              ),
-            )
-          ],
-        ),
-        body: StreamBuilder(
-            stream: FirebaseFirestore.instance
-                .collection('users')
-                .where('email', isEqualTo: currentUser.currentUser!.email)
-                .snapshots(),
-            builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (snapshot.hasData) {
-                return ListView.builder(
-                  itemCount: snapshot.data!.docs.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context, i) {
-                    var data = snapshot.data!.docs[i];
-                    return Container(
-                      margin: const EdgeInsets.all(10),
-                      child: Column(
-                        children: [
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          Stack(
-                            children: [
-                              CircleAvatar(
-                                radius: 70,
-                                backgroundImage: NetworkImage(data['Imageurl']),
-                                backgroundColor: Colors.white,
-                              ),
-                              Positioned(
-                                  bottom: 0,
-                                  right: 0,
-                                  child: Container(
-                                    decoration: const BoxDecoration(
-                                      color: Colors.white,
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: GestureDetector(
-                                      onTap: (() {
-                                        dialogAlert(context);
-                                        updateimage();
-                                      }),
-                                      child: const Icon(
-                                        Icons.edit,
-                                        size: 30,
-                                      ),
-                                    ),
-                                  )),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              usernameupdate(context, data['fullname']);
-                            },
-                            child: reusableraw(
-                              title: "Name:",
-                              value: data["fullname"],
-                              icondata: FontAwesomeIcons.solidUser,
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Get.to(cityupdate(context, data['city']));
-                            },
-                            child: reusableraw(
-                                title: "City:",
-                                value: data["city"],
-                                icondata: FontAwesomeIcons.locationDot),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Get.to(genderupdate(context, data['gender']));
-                            },
-                            child: reusableraw(
-                                title: "Gender:",
-                                value: data["gender"],
-                                icondata: FontAwesomeIcons.venusMars),
-                          ),
-                          reusableraw(
-                              title: "Email:",
-                              value: data["email"],
-                              icondata: FontAwesomeIcons.solidEnvelope),
-                          GestureDetector(
-                            onTap: () {
-                              Get.to(phoneupdate(context, data['phoneNumber']));
-                            },
-                            child: reusableraw(
-                                title: "Contect:",
-                                value: data["phoneNumber"],
-                                icondata: FontAwesomeIcons.phone),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              //  Get.to(sportupdate(context, data['sport']));
-                            },
-                            child: reusableraw(
-                                title: "Sport:",
-                                value: data["sport"],
-                                icondata: Icons.sports),
-                          ),
-                          reusableraw(
-                              title: "Profession:",
-                              value: data["profession"],
-                              icondata: FontAwesomeIcons.userTie),
-                          GestureDetector(
-                              onTap: (() {
-                                Get.to(videos());
-                              }),
-                              child: const Center(child: Text("Videos")))
-                        ],
-                      ),
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            title: const Text(
+              "Profile",
+              style: TextStyle(fontSize: 30),
+            ),
+            centerTitle: true,
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 15),
+                child: InkWell(
+                  onTap: () async {
+                    String email = 'recipient@example.com';
+                    String subject = 'Transfer Request';
+                    String body = '';
+                    final Uri params = Uri(
+                      scheme: 'mailto',
+                      path: email,
+                      query: 'subject=$subject&body=$body',
                     );
+                    if (await canLaunch(params.toString())) {
+                      await launch(params.toString());
+                    } else {
+                      throw 'Could not launch email.';
+                    }
                   },
+                  child: const Icon(FontAwesomeIcons.rightLeft),
+                ),
+              )
+            ],
+          ),
+          body: GetBuilder(
+              init: FetchDataFirebase(),
+              builder: (controller) {
+                return ListView(
+                  children: controller.mylist
+                      .where((e) =>
+                          e.email == FirebaseAuth.instance.currentUser!.email)
+                      .map((element) => Container(
+                            margin: const EdgeInsets.all(10),
+                            child: Column(
+                              children: [
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                Stack(
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 70,
+                                      backgroundImage:
+                                          NetworkImage(element.image_Url),
+                                      backgroundColor: Colors.white,
+                                    ),
+                                    Positioned(
+                                        bottom: 0,
+                                        right: 0,
+                                        child: Container(
+                                          decoration: const BoxDecoration(
+                                            color: Colors.white,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: GestureDetector(
+                                            onTap: (() {
+                                              dialogAlert(context);
+                                              updateimage();
+                                            }),
+                                            child: const Icon(
+                                              Icons.edit,
+                                              size: 30,
+                                            ),
+                                          ),
+                                        )),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    usernameupdate(context, element.fullname);
+                                  },
+                                  child: reusableraw(
+                                    title: "Name:",
+                                    value: element.fullname,
+                                    icondata: FontAwesomeIcons.solidUser,
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.to(cityupdate(context, element.city));
+                                  },
+                                  child: reusableraw(
+                                      title: "City:",
+                                      value: element.city,
+                                      icondata: FontAwesomeIcons.locationDot),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.to(
+                                        genderupdate(context, element.gender));
+                                  },
+                                  child: reusableraw(
+                                      title: "Gender:",
+                                      value: element.gender,
+                                      icondata: FontAwesomeIcons.venusMars),
+                                ),
+                                reusableraw(
+                                    title: "Email:",
+                                    value: element.email,
+                                    icondata: FontAwesomeIcons.solidEnvelope),
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.to(phoneupdate(
+                                        context, element.phoneNumber));
+                                  },
+                                  child: reusableraw(
+                                      title: "Contect:",
+                                      value: element.phoneNumber,
+                                      icondata: FontAwesomeIcons.phone),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    //  Get.to(sportupdate(context, data['sport']));
+                                  },
+                                  child: reusableraw(
+                                      title: "Sport:",
+                                      value: element.sport,
+                                      icondata: Icons.sports),
+                                ),
+                                reusableraw(
+                                    title: "Profession:",
+                                    value: element.profession,
+                                    icondata: FontAwesomeIcons.userTie),
+                                GestureDetector(
+                                    onTap: (() {
+                                      Get.to(videos());
+                                    }),
+                                    child: const Center(child: Text("Videos")))
+                              ],
+                            ),
+                          ))
+                      .toList(),
                 );
-              } else {
-                return const Center(child: CircularProgressIndicator());
-              }
-            }),
-      ),
+              })),
     );
   }
 }
+// StreamBuilder(
+//             stream: FirebaseFirestore.instance
+//                 .collection('users')
+//                 .where('email', isEqualTo: currentUser.currentUser!.email)
+//                 .snapshots(),
+//             builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+//               if (snapshot.hasData) {
+//                 return ListView.builder(
+//                   itemCount: snapshot.data!.docs.length,
+//                   shrinkWrap: true,
+//                   itemBuilder: (context, i) {
+//                     var data = snapshot.data!.docs[i];
+//                     return Container(
+//                       margin: const EdgeInsets.all(10),
+//                       child: Column(
+//                         children: [
+//                           const SizedBox(
+//                             height: 15,
+//                           ),
+//                           Stack(
+//                             children: [
+//                               CircleAvatar(
+//                                 radius: 70,
+//                                 backgroundImage: NetworkImage(data['Imageurl']),
+//                                 backgroundColor: Colors.white,
+//                               ),
+//                               Positioned(
+//                                   bottom: 0,
+//                                   right: 0,
+//                                   child: Container(
+//                                     decoration: const BoxDecoration(
+//                                       color: Colors.white,
+//                                       shape: BoxShape.circle,
+//                                     ),
+//                                     child: GestureDetector(
+//                                       onTap: (() {
+//                                         dialogAlert(context);
+//                                         updateimage();
+//                                       }),
+//                                       child: const Icon(
+//                                         Icons.edit,
+//                                         size: 30,
+//                                       ),
+//                                     ),
+//                                   )),
+//                             ],
+//                           ),
+//                           const SizedBox(
+//                             height: 20,
+//                           ),
+//                           GestureDetector(
+//                             onTap: () {
+//                               usernameupdate(context, data['fullname']);
+//                             },
+//                             child: reusableraw(
+//                               title: "Name:",
+//                               value: data["fullname"],
+//                               icondata: FontAwesomeIcons.solidUser,
+//                             ),
+//                           ),
+//                           GestureDetector(
+//                             onTap: () {
+//                               Get.to(cityupdate(context, data['city']));
+//                             },
+//                             child: reusableraw(
+//                                 title: "City:",
+//                                 value: data["city"],
+//                                 icondata: FontAwesomeIcons.locationDot),
+//                           ),
+//                           GestureDetector(
+//                             onTap: () {
+//                               Get.to(genderupdate(context, data['gender']));
+//                             },
+//                             child: reusableraw(
+//                                 title: "Gender:",
+//                                 value: data["gender"],
+//                                 icondata: FontAwesomeIcons.venusMars),
+//                           ),
+//                           reusableraw(
+//                               title: "Email:",
+//                               value: data["email"],
+//                               icondata: FontAwesomeIcons.solidEnvelope),
+//                           GestureDetector(
+//                             onTap: () {
+//                               Get.to(phoneupdate(context, data['phoneNumber']));
+//                             },
+//                             child: reusableraw(
+//                                 title: "Contect:",
+//                                 value: data["phoneNumber"],
+//                                 icondata: FontAwesomeIcons.phone),
+//                           ),
+//                           GestureDetector(
+//                             onTap: () {
+//                               //  Get.to(sportupdate(context, data['sport']));
+//                             },
+//                             child: reusableraw(
+//                                 title: "Sport:",
+//                                 value: data["sport"],
+//                                 icondata: Icons.sports),
+//                           ),
+//                           reusableraw(
+//                               title: "Profession:",
+//                               value: data["profession"],
+//                               icondata: FontAwesomeIcons.userTie),
+//                           GestureDetector(
+//                               onTap: (() {
+//                                 Get.to(videos());
+//                               }),
+//                               child: const Center(child: Text("Videos")))
+//                         ],
+//                       ),
+//                     );
+//                   },
+//                 );
+//               } else {
+//                 return const Center(child: CircularProgressIndicator());
+//               }
+//             }),

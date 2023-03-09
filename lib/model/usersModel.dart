@@ -9,6 +9,7 @@ class Users {
   final dynamic password;
   final dynamic phoneNumber;
   final dynamic profession;
+  final dynamic rating;
   final dynamic sport;
 
   Users({
@@ -20,6 +21,7 @@ class Users {
     required this.password,
     required this.phoneNumber,
     required this.profession,
+    required this.rating,
     required this.sport,
   });
 }

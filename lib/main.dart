@@ -21,6 +21,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final Future<FirebaseApp> _initailization = Firebase.initializeApp();
 
+ // getx controller to fetch firebase data
   final controller = Get.put(FetchDataFirebase());
 
   // comment
@@ -51,7 +52,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     controller.GetDataFirebase(); 
-    // TODO: implement initState
     super.initState();
   }
 }

@@ -21,6 +21,7 @@ class FetchDataFirebase extends GetxController {
           password: f['password'],
           phoneNumber: f['phoneNumber'],
           profession: f['profession'],
+          rating: f['rating'],
           sport: f['sport'],
         ));
       });
