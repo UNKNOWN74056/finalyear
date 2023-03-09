@@ -1,14 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-
 import '../../../AS A PLAYER/internationalsports/Details/clubdetail.dart';
-import '../../../AS A PLAYER/internationalsports/dashboard/clubs.dart';
 import '../../../AS A PLAYER/internationalsports/dashboard/home.dart';
-import '../../../AS A PLAYER/internationalsports/dashboard/homedb.dart';
-import '../../../model/clubdata.dart';
+import '../../../GETX/clubdatafirebase.dart';
 
 class interclub extends StatefulWidget {
   const interclub({super.key});
@@ -72,49 +68,37 @@ class _interclubState extends State<interclub> {
               centerTitle: true,
             )
           ],
-          body: StreamBuilder(
-              stream:
-                  FirebaseFirestore.instance.collection('clubs').snapshots(),
-              builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                      itemCount: snapshot.data!.docs.length,
-                      shrinkWrap: true,
-                      itemBuilder: (context, i) {
-                        var data = snapshot.data!.docs[i];
-                        return Column(
-                          children: [
-                            const SizedBox(
-                              height: 10,
+          body: GetBuilder(
+              init: Getclubdata(),
+              builder: (clubcontroller) {
+                return Column(
+                  children: clubcontroller.clublist
+                      .map(
+                        (element) => Card(
+                            color: Colors.grey.shade300,
+                            shape: RoundedRectangleBorder(
+                              side: const BorderSide(
+                                  color: Color.fromARGB(255, 25, 9, 117),
+                                  width: 1),
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                            Card(
-                                color: Colors.grey.shade300,
-                                shape: RoundedRectangleBorder(
-                                  side: const BorderSide(
-                                      color: Color.fromARGB(255, 25, 9, 117),
-                                      width: 1),
-                                  borderRadius: BorderRadius.circular(10),
+                            child: ListTile(
+                                title: Text(element.clubname,
+                                    style: const TextStyle(fontSize: 20)),
+                                leading: CircleAvatar(
+                                    radius: 35,
+                                    backgroundImage:
+                                        NetworkImage(element.clubimage),
+                                    backgroundColor: Colors.white),
+                                subtitle: Text(element.location,
+                                    style: const TextStyle(fontSize: 15)),
+                                trailing: const Icon(
+                                  FontAwesomeIcons.arrowRight,
                                 ),
-                                child: ListTile(
-                                    title: Text(data["Clubname"],
-                                        style: const TextStyle(fontSize: 20)),
-                                    leading: CircleAvatar(
-                                        radius: 35,
-                                        backgroundImage:
-                                            NetworkImage(data['Clubimage']),
-                                        backgroundColor: Colors.white),
-                                    subtitle: Text(data["Location"],
-                                        style: const TextStyle(fontSize: 15)),
-                                    trailing: const Icon(
-                                      FontAwesomeIcons.arrowRight,
-                                    ),
-                                    onTap: () => navigatetodetail(data))),
-                          ],
-                        );
-                      });
-                }
-                return const Center(
-                  child: CircularProgressIndicator(),
+                                onTap: () =>
+                                    Get.to(clubdetail(post: element)))),
+                      )
+                      .toList(),
                 );
               }),
         ),

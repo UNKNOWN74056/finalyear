@@ -1,12 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:finalyear/GETX/clubdatafirebase.dart';
 import 'package:finalyear/wedgets/reusraw.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
 
 class clubdetail extends StatefulWidget {
-  final DocumentSnapshot post;
+  final post;
 
   const clubdetail({super.key, required this.post});
 
@@ -21,12 +23,12 @@ class _clubdetailState extends State<clubdetail> {
   Future addcommnet(String name, String image, String comment) async {
     await FirebaseFirestore.instance
         .collection('clubs')
-        .doc(widget.post['Email'])
+        .doc(widget.post.email)
         .collection("comments")
         .doc(comment)
         .set({
       'image': image,
-      'commented_on': widget.post['Email'],
+      'commented_on': widget.post.email,
       'name': name,
       'time': DateTime.now(),
       'commenter': currentuser.toString(),
@@ -85,6 +87,10 @@ class _clubdetailState extends State<clubdetail> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Club"),
+          centerTitle: true,
+        ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         floatingActionButton: FloatingActionButton(
             backgroundColor: Colors.black,
@@ -108,7 +114,7 @@ class _clubdetailState extends State<clubdetail> {
                         StreamBuilder(
                           stream: FirebaseFirestore.instance
                               .collection("clubs")
-                              .doc(widget.post['Email'])
+                              .doc(widget.post.email)
                               .collection("comments")
                               .snapshots(),
                           builder: (context, snapshot) {
@@ -318,7 +324,7 @@ class _clubdetailState extends State<clubdetail> {
                 children: [
                   CircleAvatar(
                     radius: 60,
-                    backgroundImage: NetworkImage(widget.post['Clubimage']),
+                    backgroundImage: NetworkImage(widget.post.clubimage),
                   ),
                 ],
               ),
@@ -328,35 +334,20 @@ class _clubdetailState extends State<clubdetail> {
               Container(
                 width: 200,
                 height: 26,
-                child: StreamBuilder(
-                  stream: FirebaseFirestore.instance
-                      .collection("clubs")
-                      .where("Email", isEqualTo: widget.post["Email"])
-                      .snapshots(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return ListView.builder(
-                        itemCount: snapshot.data!.docs.length,
-                        itemBuilder: (context, i) {
-                          var data = snapshot.data!.docs[i];
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                "Rating:",
-                                style: TextStyle(fontSize: 17),
-                              ),
-                              Text(data['rating'].toString())
-                            ],
-                          );
-                        },
+                child: GetBuilder(
+                    init: Getclubdata(),
+                    builder: (controller) {
+                      return ListView(
+                        children: controller.clublist
+                            .where((e) => e.email == widget.post.email)
+                            .map((element) => Center(
+                                    child: Text(
+                                  element.rating.toString(),
+                                  style: TextStyle(fontSize: 18),
+                                )))
+                            .toList(),
                       );
-                    }
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  },
-                ),
+                    }),
               ),
               Container(
                 child: RatingBar.builder(
@@ -371,23 +362,23 @@ class _clubdetailState extends State<clubdetail> {
               ),
               reusableraw(
                   title: "Club Name",
-                  value: widget.post["Clubname"],
+                  value: widget.post.clubname,
                   icondata: FontAwesomeIcons.solidUser),
               reusableraw(
                   title: "Location:",
-                  value: widget.post["Location"],
+                  value: widget.post.location,
                   icondata: FontAwesomeIcons.locationDot),
               reusableraw(
                   title: "Email:",
-                  value: widget.post["Email"],
+                  value: widget.post.email,
                   icondata: FontAwesomeIcons.solidEnvelope),
               reusableraw(
                   title: "Contect:",
-                  value: widget.post["Phone"],
+                  value: widget.post.phonenumber,
                   icondata: FontAwesomeIcons.phone),
               reusableraw(
                   title: "Sport:",
-                  value: widget.post["sport"],
+                  value: widget.post.sport,
                   icondata: FontAwesomeIcons.futbol),
             ],
           ),

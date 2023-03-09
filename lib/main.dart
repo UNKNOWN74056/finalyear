@@ -1,4 +1,5 @@
 // @dart=2.9
+import 'package:finalyear/GETX/clubdatafirebase.dart';
 import 'package:finalyear/GETX/getdatafromfirebase.dart';
 import 'package:finalyear/splashscreen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -21,8 +22,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final Future<FirebaseApp> _initailization = Firebase.initializeApp();
 
- // getx controller to fetch firebase data
-  final controller = Get.put(FetchDataFirebase());
+  // getx controller to fetch firebase data
+  final usercontroller = Get.put(FetchDataFirebase());
+  final clubcontroller = Get.put(Getclubdata());
 
   // comment
   @override
@@ -51,7 +53,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    controller.GetDataFirebase(); 
+    usercontroller.GetDataFirebase();
+    clubcontroller.Getclubdatafirebase();
     super.initState();
   }
 }

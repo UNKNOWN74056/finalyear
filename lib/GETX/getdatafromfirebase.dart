@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/model/usersModel.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class FetchDataFirebase extends GetxController {
   RxList mylist = <Users>[].obs;
 
+  // get all the data of users from firebase
   GetDataFirebase() async {
     await FirebaseFirestore.instance
         .collection("users")

@@ -10,6 +10,8 @@ class TransFerForm extends GetxController {
   //controllers
   late TextEditingController emailController, messagecontroller;
 
+  get clublist => null;
+
   @override
   void onInit() {
     // TODO: implement onInit

@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/Details/clubdetail.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/home.dart';
+import 'package:finalyear/GETX/clubdatafirebase.dart';
+import 'package:finalyear/GETX/getdatafromfirebase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -11,10 +13,6 @@ class clubs extends StatefulWidget {
 
   @override
   State<clubs> createState() => _clubsState();
-}
-
-navigatetodetail(DocumentSnapshot post) {
-  Get.to(clubdetail(post: post));
 }
 
 class _clubsState extends State<clubs> {
@@ -70,52 +68,38 @@ class _clubsState extends State<clubs> {
                 centerTitle: true,
               ))
         ],
-        body: StreamBuilder(
-            stream: FirebaseFirestore.instance.collection('clubs').snapshots(),
-            builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (snapshot.hasData) {
-                return ListView.builder(
-                    itemCount: snapshot.data!.docs.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, i) {
-                      var data = snapshot.data!.docs[i];
-                      return Column(
-                        children: [
-                          const SizedBox(
-                            height: 10,
+        body: GetBuilder(
+            init: Getclubdata(),
+            builder: (clubcontroller) {
+              return Column(
+                children: clubcontroller.clublist
+                    .map(
+                      (element) => Card(
+                          color: Colors.grey.shade300,
+                          shape: RoundedRectangleBorder(
+                            side: const BorderSide(
+                                color: Color.fromARGB(255, 25, 9, 117),
+                                width: 1),
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                          Card(
-                              color: Colors.grey.shade300,
-                              shape: RoundedRectangleBorder(
-                                side: const BorderSide(
-                                    color: Color.fromARGB(255, 25, 9, 117),
-                                    width: 1),
-                                borderRadius: BorderRadius.circular(10),
+                          child: ListTile(
+                              title: Text(element.clubname,
+                                  style: const TextStyle(fontSize: 20)),
+                              leading: CircleAvatar(
+                                  radius: 35,
+                                  backgroundImage:
+                                      NetworkImage(element.clubimage),
+                                  backgroundColor: Colors.white),
+                              subtitle: Text(element.location,
+                                  style: const TextStyle(fontSize: 15)),
+                              trailing: const Icon(
+                                FontAwesomeIcons.arrowRight,
                               ),
-                              child: ListTile(
-                                  title: Text(data["Clubname"],
-                                      style: const TextStyle(fontSize: 20)),
-                                  leading: CircleAvatar(
-                                      radius: 35,
-                                      backgroundImage:
-                                          NetworkImage(data['Clubimage']),
-                                      backgroundColor: Colors.white),
-                                  subtitle: Text(data["Location"],
-                                      style: const TextStyle(fontSize: 15)),
-                                  trailing: const Icon(
-                                    FontAwesomeIcons.arrowRight,
-                                  ),
-                                  onTap: () => navigatetodetail(data))),
-                        ],
-                      );
-                    }
-                    );
-              }
-              return const Center(
-                child: CircularProgressIndicator(),
+                              onTap: () => Get.to(clubdetail(post: element)))),
+                    )
+                    .toList(),
               );
-            }
-            ),
+            }),
       ),
     ));
   }
