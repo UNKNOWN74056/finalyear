@@ -1,13 +1,15 @@
+import 'dart:ffi';
+
 class Users {
-  final String image_Url;
-  final String city;
-  final String email;
-  final String fullname;
-  final String gender;
-  final String password;
-  final String phoneNumber;
-  final String profession;
-  final String sport;
+  final dynamic image_Url;
+  final dynamic city;
+  final dynamic email;
+  final dynamic fullname;
+  final dynamic gender;
+  final dynamic password;
+  final dynamic phoneNumber;
+  final dynamic profession;
+  final dynamic sport;
 
   Users({
     required this.image_Url,
