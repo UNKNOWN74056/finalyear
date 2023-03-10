@@ -14,6 +14,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class signuppage extends StatefulWidget {
+  static const String routname = 'sign_up_page';
   const signuppage({super.key});
 
   @override
@@ -536,24 +537,29 @@ class _signuppageState extends State<signuppage> {
                         fontSize: 16),
                   ),
                 ),
+                const SizedBox(
+                  height: 10,
+                ),
 
                 //login button if u have account
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("All ready have an account!"),
-                    TextButton(
-                        // i use get for going to login screen
-                        onPressed: () {
-                          Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (context) => const loginpage()),
-                              (Route<dynamic> route) => false);
-                          dispose();
+                    const Padding(
+                      padding: EdgeInsets.only(right: 3),
+                      child: Text("All ready have an account!"),
+                    ),
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, loginpage.routname);
                         },
                         child: const Text(
                           "LOGIN",
-                        ))
+                          style: TextStyle(color: Colors.blue),
+                        )),
+                    const SizedBox(
+                      height: 10,
+                    ),
                   ],
                 ),
               ],

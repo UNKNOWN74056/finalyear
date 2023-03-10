@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Homedb extends StatefulWidget {
+  //route name
+  static const String routname = 'Home_db';
   const Homedb({super.key});
 
   @override

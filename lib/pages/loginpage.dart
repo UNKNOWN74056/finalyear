@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/AS%20A%20COACH/culturehomedb.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/profile.dart';
@@ -15,6 +17,8 @@ import 'package:get/get.dart';
 import '../AS A PLAYER/internationalsports/dashboard/homedb.dart';
 
 class loginpage extends StatefulWidget {
+  //route
+  static const String routname = 'login_page';
   const loginpage({super.key});
   @override
   State<loginpage> createState() => _loginpageState();
@@ -163,15 +167,18 @@ class _loginpageState extends State<loginpage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    TextButton(
-                        onPressed: () => Get.to(() => (const forgotpassword())),
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, forgotpassword.routname);
+                        },
                         child: const Text(
                           "Forgot password",
                           style: TextStyle(color: Colors.blue),
-                        ))
+                        )),
                   ],
                 ),
               ),
+              const SizedBox(height: 15),
 
               //this is login button
               loginbutton(
@@ -190,19 +197,21 @@ class _loginpageState extends State<loginpage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Do not have an account!"),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                                builder: (context) => const signuppage()),
-                            (Route<dynamic> route) => false);
-                        dispose();
+                  const Padding(
+                    padding: EdgeInsets.only(right: 3),
+                    child: Text("Do not have an account!"),
+                  ),
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, signuppage.routname);
                       },
                       child: const Text(
                         "SIGNUP",
                         style: TextStyle(color: Colors.blue),
-                      ))
+                      )),
+                  const SizedBox(
+                    height: 10,
+                  ),
                 ],
               ),
             ],
