@@ -8,6 +8,7 @@ class Getclubdata extends GetxController {
 
   //get data for clubs from firebase
   Getclubdatafirebase() async {
+    clublist.clear();
     await FirebaseFirestore.instance
         .collection("clubs")
         .get()

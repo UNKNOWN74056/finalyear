@@ -6,7 +6,6 @@ import 'package:finalyear/pages/forgotpassword.dart';
 import 'package:finalyear/pages/loginpage.dart';
 import 'package:finalyear/pages/signuppage.dart';
 import 'package:finalyear/splashscreen/splash_screen.dart';
-import 'package:finalyear/wedgets/homedbwedget.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -51,9 +50,9 @@ class _MyAppState extends State<MyApp> {
             primarySwatch: Colors.blueGrey,
           ),
           debugShowCheckedModeBanner: false,
-          initialRoute: splashscreen.routname,
+          initialRoute: loginpage.routname,
           routes: {
-            splashscreen.routname: (context) => const splashscreen(),
+            //  splashscreen.routname: (context) => const splashscreen(),
             loginpage.routname: (context) => const loginpage(),
             Homedb.routname: (context) => const Homedb(),
             forgotpassword.routname: (context) => const forgotpassword(),
