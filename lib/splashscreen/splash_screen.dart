@@ -26,40 +26,9 @@ class _splashscreenState extends State<splashscreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomRight,
-                colors: [Color(0xffac255e), Color(0xffca485c)])),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Column(
-              children: const [
-                CircleAvatar(
-                  radius: 130,
-                  backgroundImage: AssetImage("assets/mixsport.jpeg"),
-                ),
-                SizedBox(
-                  height: 40,
-                ),
-                Text(
-                  "Welcome To Mr.Sports",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 35,
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            const CircularProgressIndicator()
-          ],
-        ),
-      ),
+          width: double.infinity,
+          height: double.infinity,
+          child: Center(child: const CircularProgressIndicator())),
     );
   }
 }
