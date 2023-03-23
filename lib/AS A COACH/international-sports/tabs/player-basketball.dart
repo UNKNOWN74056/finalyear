@@ -1,25 +1,18 @@
+import 'package:finalyear/functions/functions.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import '../../../AS A PLAYER/internationalsports/Details/coachdetail.dart';
 import '../../../GETX/getdatafromfirebase.dart';
-import '../../../functions/functions.dart';
 
-class playerbasketball extends StatefulWidget {
+class playerbasketball extends StatelessWidget {
   const playerbasketball({super.key});
 
-  @override
-  State<playerbasketball> createState() => _playerbasketballState();
-}
-
-class _playerbasketballState extends State<playerbasketball> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: RefreshIndicator(
       onRefresh: () async {
-        setState(() {
-          functions.refresh_user_data();
-        });
+        functions.refresh_user_data();
       },
       child: GetBuilder(
         init: FetchDataFirebase(),

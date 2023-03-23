@@ -17,9 +17,7 @@ class _BasketballState extends State<Basketball> {
     return Scaffold(
         body: RefreshIndicator(
       onRefresh: () async {
-        setState(() {
-          functions.refresh_user_data();
-        });
+        functions.refresh_user_data();
       },
       child: GetBuilder(
         init: FetchDataFirebase(),
