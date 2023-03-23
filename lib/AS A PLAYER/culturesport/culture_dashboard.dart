@@ -5,6 +5,7 @@ import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/setting.
 import 'package:flutter/material.dart';
 
 class culturedashboard extends StatefulWidget {
+  static const String routname = "culturedashboard";
   const culturedashboard({super.key});
 
   @override
@@ -14,7 +15,7 @@ class culturedashboard extends StatefulWidget {
 class _culturedashboardState extends State<culturedashboard> {
   int currentIndex = 0;
 
-  final screens =  [
+  final screens = [
     culturehome(),
     culturetournaments(),
     setting(),

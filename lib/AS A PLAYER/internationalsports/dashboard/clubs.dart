@@ -1,10 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/Details/clubdetail.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/home.dart';
-import 'package:finalyear/AS%20A%20PLAYER/internationalsports/statsandvideos/transferform.dart';
 import 'package:finalyear/GETX/clubdatafirebase.dart';
-import 'package:finalyear/GETX/getdatafromfirebase.dart';
-import 'package:finalyear/model/clubsModel.dart';
+import 'package:finalyear/functions/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -26,7 +23,6 @@ class _clubsState extends State<clubs> {
     'assets/club5.jpg',
     'assets/club6.jpg',
   ];
-  final clubcontroller = Get.put(Getclubdata());
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +30,9 @@ class _clubsState extends State<clubs> {
       child: Scaffold(
         body: RefreshIndicator(
           onRefresh: () async {
-            await clubcontroller.Getclubdatafirebase();
+            setState(() {
+              functions.refresh_club_data();
+            }); 
           },
           child: NestedScrollView(
             headerSliverBuilder: (context, innerBoxIsScrolled) => [

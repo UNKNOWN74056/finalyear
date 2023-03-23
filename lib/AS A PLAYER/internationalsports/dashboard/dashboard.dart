@@ -6,6 +6,8 @@ import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/tourname
 import 'package:flutter/material.dart';
 
 class dashboard extends StatefulWidget {
+  static const String routname = "dashboard";
+
   const dashboard({super.key});
 
   @override
@@ -15,7 +17,7 @@ class dashboard extends StatefulWidget {
 class _dashboardState extends State<dashboard> {
   int currentIndex = 0;
 
-  final screens = const   [
+  final screens = const [
     home(),
     clubs(),
     tournaments(),
@@ -35,7 +37,6 @@ class _dashboardState extends State<dashboard> {
             onTap: (value) => setState(() => currentIndex = value),
             items: const [
               BottomNavigationBarItem(
-             
                 icon: Icon(Icons.home),
                 label: "Home",
               ),

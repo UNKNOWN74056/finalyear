@@ -47,13 +47,12 @@ class _HomedbState extends State<Homedb> {
                 ),
                 //this is the home wedget
                 homedbwedget(
-                  imagepath: "assets/interna.jpeg",
-                  child: InkWell(
-                    onTap: () {
-                      Get.to(const dashboard());
-                    },
-                  ),
-                ),
+                    imagepath: "assets/interna.jpeg",
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, dashboard.routname);
+                      },
+                    )),
                 const Padding(
                   padding: EdgeInsets.only(right: 130),
                   child: Text(
@@ -63,13 +62,12 @@ class _HomedbState extends State<Homedb> {
                 ),
                 //this is the home wedget
                 homedbwedget(
-                  imagepath: "assets/culture.jpeg",
-                  child: InkWell(
-                    onTap: () {
-                      Get.to(const culturedashboard());
-                    },
-                  ),
-                ),
+                    imagepath: "assets/culture.jpeg",
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, culturedashboard.routname);
+                      },
+                    )),
               ],
             ),
           )),

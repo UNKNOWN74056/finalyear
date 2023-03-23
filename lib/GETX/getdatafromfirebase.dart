@@ -7,6 +7,7 @@ class FetchDataFirebase extends GetxController {
 
   // get all the data of users from firebase
   GetDataFirebase() async {
+    mylist.clear();
     await FirebaseFirestore.instance
         .collection("users")
         .get()
