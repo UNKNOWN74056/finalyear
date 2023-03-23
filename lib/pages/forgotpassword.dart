@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/GETX/forgotpassword.dart';
+import 'package:finalyear/functions/functions.dart';
 import 'package:finalyear/pages/loginpage.dart';
 import 'package:finalyear/wedgets/loginbutton.dart';
 import 'package:finalyear/wedgets/reusebletextfield.dart';
@@ -25,22 +26,6 @@ class _forgotpasswordState extends State<forgotpassword> {
     controller.emailverify.text = " ";
     controller.dispose();
     super.dispose();
-  }
-
-  //function for the email verfication
-  emailverify() async {
-    try {
-      await FirebaseAuth.instance
-          .sendPasswordResetEmail(email: controller.email.value)
-          .then((value) => Get.to(const loginpage()));
-      Get.snackbar("Reset email",
-          "Passward reset email has been sent to your email please check.");
-    } on FirebaseException catch (e) {
-      if (e.code == 'user-not-found') {
-        Get.snackbar("Email not found",
-            "This enail is not found please enter valid email.");
-      }
-    }
   }
 
   @override
@@ -94,7 +79,7 @@ class _forgotpasswordState extends State<forgotpassword> {
                 onTap: () {
                   controller.checkemailverify();
                   if (controller.isformValidated == true) {
-                    emailverify();
+                    functions.emailverify();
                   }
                   dispose();
                 },

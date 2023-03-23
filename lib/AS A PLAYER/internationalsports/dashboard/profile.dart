@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:finalyear/GETX/getdatafromfirebase.dart';
+import 'package:finalyear/functions/functions.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/statsandvideos/videos.dart';
@@ -22,9 +23,7 @@ class profile extends StatefulWidget {
 
 File? _image;
 final ImagePicker picker = ImagePicker();
-
 final currentUser = FirebaseAuth.instance;
-
 final TextEditingController updatefullname = TextEditingController();
 final TextEditingController updatecity = TextEditingController();
 final TextEditingController updategender = TextEditingController();
@@ -128,19 +127,7 @@ class _profileState extends State<profile> {
                 padding: const EdgeInsets.only(right: 15),
                 child: InkWell(
                   onTap: () async {
-                    String email = 'recipient@example.com';
-                    String subject = 'Transfer Request';
-                    String body = '';
-                    final Uri params = Uri(
-                      scheme: 'mailto',
-                      path: email,
-                      query: 'subject=$subject&body=$body',
-                    );
-                    if (await canLaunch(params.toString())) {
-                      await launch(params.toString());
-                    } else {
-                      throw 'Could not launch email.';
-                    }
+                    functions.transfer_request_email();
                   },
                   child: const Icon(FontAwesomeIcons.rightLeft),
                 ),

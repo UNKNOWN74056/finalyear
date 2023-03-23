@@ -1,10 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/profile.dart';
+import 'package:finalyear/functions/functions.dart';
 import 'package:finalyear/pages/loginpage.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
 
 class setting extends StatefulWidget {
   const setting({super.key});
@@ -14,22 +11,6 @@ class setting extends StatefulWidget {
 }
 
 class _settingState extends State<setting> {
-  //logout function
-  Future signout() async {
-    await FirebaseAuth.instance.signOut();
-    Get.to(const loginpage());
-  }
-
-  //delete accuont function
-  Future delete() async {
-    FirebaseFirestore.instance
-        .collection("users")
-        .doc(currentUser.currentUser!.email)
-        .delete();
-    FirebaseAuth.instance.currentUser!.delete();
-    Get.off(const loginpage());
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -72,8 +53,9 @@ class _settingState extends State<setting> {
                               child: const Text("Cancel")),
                           TextButton(
                               onPressed: () {
-                                delete();
-                                Get.to(const loginpage());
+                                functions.delete();
+                                Navigator.pushNamed(
+                                    context, loginpage.routname);
                               },
                               child: const Text("Yes")),
                         ],
@@ -107,8 +89,9 @@ class _settingState extends State<setting> {
                               child: const Text("Cancel")),
                           TextButton(
                               onPressed: () {
-                                signout();
-                                Get.to(() => const loginpage());
+                                functions.signout();
+                                Navigator.pushNamed(
+                                    context, loginpage.routname);
                               },
                               child: const Text("Yes")),
                         ],

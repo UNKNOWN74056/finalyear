@@ -348,10 +348,6 @@ class _signuppageState extends State<signuppage> {
                       color: Colors.grey,
                     ),
                     enabledBorder: OutlineInputBorder(
-                      // borderSide: const BorderSide(
-                      //   width: 4,
-                      //   //  color: Colors.lightGreen,
-                      // ),
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
@@ -438,10 +434,6 @@ class _signuppageState extends State<signuppage> {
                         color: Colors.grey,
                       ),
                       enabledBorder: OutlineInputBorder(
-                        // borderSide: const BorderSide(
-                        //   width: 4,
-                        //   //  color: Colors.lightGreen,
-                        // ),
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
