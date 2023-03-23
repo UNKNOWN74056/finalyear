@@ -119,6 +119,9 @@ class _signuppageState extends State<signuppage> {
   List gender = ['Male', 'Female', 'Other'];
   String? gender1;
 
+  //initial rating of a player
+  var rating = 0;
+
   //options for type of sports
   List sports = [
     'FootBall',
@@ -159,7 +162,6 @@ class _signuppageState extends State<signuppage> {
       TaskSnapshot uploadTask = refer;
       await Future.value(uploadTask);
       var newUrl = await refer.ref.getDownloadURL();
-
       Adduserdeatial(
         controller.fullnamecontroller.value.text,
         dropcontroller.Frofession.value,
@@ -170,6 +172,7 @@ class _signuppageState extends State<signuppage> {
         controller.passwordcontroller.value.text,
         controller.phonenumbercontroller.value.text,
         newUrl.toString(),
+        rating.toString(),
       );
       Get.snackbar("Registration",
           "Your account has been register succefully please login again.");
@@ -200,6 +203,7 @@ class _signuppageState extends State<signuppage> {
     String password,
     String phone,
     String url,
+    String rating,
   ) async {
     await FirebaseFirestore.instance
         .collection('users')
@@ -214,6 +218,7 @@ class _signuppageState extends State<signuppage> {
       'Imageurl': url,
       'password': password,
       'phoneNumber': phone,
+      'rating': rating,
     });
   }
 
