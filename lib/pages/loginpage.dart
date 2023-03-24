@@ -85,7 +85,7 @@ class _loginpageState extends State<loginpage> {
 
   //overide function for connectivity
   @override
-  void iniState() {
+  void initState() {
     super.initState();
     checkconnectivity();
   }

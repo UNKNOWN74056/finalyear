@@ -6,7 +6,6 @@ import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/dashboar
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/homedb.dart';
 import 'package:finalyear/GETX/clubdatafirebase.dart';
 import 'package:finalyear/GETX/getdatafromfirebase.dart';
-import 'package:finalyear/functions/functions.dart';
 import 'package:finalyear/pages/forgotpassword.dart';
 import 'package:finalyear/pages/loginpage.dart';
 import 'package:finalyear/pages/signuppage.dart';
