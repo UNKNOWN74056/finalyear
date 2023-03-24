@@ -56,7 +56,7 @@ class _interhomeState extends State<interhome> {
                   floating: true,
                   snap: true,
                   title: const Text(
-                    "INTERNATION",
+                    "INTERNATIONAL",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   flexibleSpace: FlexibleSpaceBar(

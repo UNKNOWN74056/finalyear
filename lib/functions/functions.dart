@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:finalyear/AS%20A%20COACH/culturehomedb.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/profile.dart';
 import 'package:finalyear/GETX/clubdatafirebase.dart';
 import 'package:finalyear/GETX/forgotpassword.dart';
@@ -6,6 +7,7 @@ import 'package:finalyear/pages/loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../AS A PLAYER/internationalsports/dashboard/homedb.dart';
 import '../GETX/getdatafromfirebase.dart';
 
 class functionservices {
@@ -72,6 +74,19 @@ class functionservices {
             "This enail is not found please enter valid email.");
       }
     }
+  }
+
+  loginischeck() {
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(currentUser.currentUser!.email)
+        .get()
+        .then((value) {
+      if (value['profession'] == 'Player') {
+        Get.toNamed(culturehomedb.routname);
+        print("as a coach dashboard");
+      } else {}
+    });
   }
 }
 

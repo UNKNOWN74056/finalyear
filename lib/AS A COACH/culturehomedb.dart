@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import '../wedgets/homedbwedget.dart';
 
 class culturehomedb extends StatefulWidget {
+  static const String routname = "culturehomedb";
   const culturehomedb({super.key});
 
   @override
