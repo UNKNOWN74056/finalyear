@@ -85,7 +85,9 @@ class functionservices {
       if (value['profession'] == 'Player') {
         Get.toNamed(culturehomedb.routname);
         print("as a coach dashboard");
-      } else {}
+      } else {
+        Get.to(Homedb());
+      }
     });
   }
 }

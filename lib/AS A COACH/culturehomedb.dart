@@ -1,8 +1,6 @@
 import 'package:finalyear/AS%20A%20COACH/culture-sport/cultureplayerdb.dart';
 import 'package:finalyear/AS%20A%20COACH/international-sports/playerdashboard.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
 import '../wedgets/homedbwedget.dart';
 
 class culturehomedb extends StatefulWidget {
@@ -48,13 +46,12 @@ class _culturehomedbState extends State<culturehomedb> {
                 ),
                 //this is the home wedget
                 homedbwedget(
-                  imagepath: "assets/interna.jpeg",
-                  child: InkWell(
-                    onTap: () {
-                      Get.to(const playerdashboeard());
-                    },
-                  ),
-                ),
+                    imagepath: "assets/interna.jpeg",
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, playerdashboeard.routname);
+                      },
+                    )),
                 const Padding(
                   padding: EdgeInsets.only(right: 130),
                   child: Text(
@@ -65,11 +62,11 @@ class _culturehomedbState extends State<culturehomedb> {
                 //this is the home wedget
                 homedbwedget(
                   imagepath: "assets/culture.jpeg",
-                  child: InkWell(
-                    onTap: () {
-                      Get.to(const cultureplayerdb());
-                    },
-                  ),
+                  child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, cultureplayerdb.routname);
+                      },
+                    )
                 ),
               ],
             ),

@@ -1,11 +1,11 @@
 import 'package:finalyear/AS%20A%20COACH/culture-sport/player-culture-home.dart';
 import 'package:finalyear/AS%20A%20COACH/culture-sport/player-culture-tournaments.dart';
 import 'package:flutter/material.dart';
-
 import '../../AS A PLAYER/internationalsports/dashboard/profile.dart';
 import '../../AS A PLAYER/internationalsports/dashboard/setting.dart';
 
 class cultureplayerdb extends StatefulWidget {
+  static const String routname = "cultureplayerdb";
   const cultureplayerdb({super.key});
 
   @override
@@ -15,7 +15,7 @@ class cultureplayerdb extends StatefulWidget {
 class _cultureplayerdbState extends State<cultureplayerdb> {
   int currentIndex = 0;
 
-  final screens = [
+  final screens = const [
     playerculturehome(),
     playerculturetournaments(),
     setting(),

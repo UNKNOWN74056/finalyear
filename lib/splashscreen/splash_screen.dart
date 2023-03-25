@@ -1,6 +1,5 @@
 import 'package:finalyear/splashscreen/splashservices.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class splashscreen extends StatefulWidget {
   //route name
@@ -19,7 +18,7 @@ class _splashscreenState extends State<splashscreen> {
   void initState() {
     super.initState();
 
-    splash_screen.islogin(BuildContext, context);
+    splash_screen.islogin(context);
   }
 
   @override

@@ -6,22 +6,22 @@ import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/setting.
 import 'package:flutter/material.dart';
 
 class playerdashboeard extends StatefulWidget {
+  static const String routname = "playerdashboard";
   const playerdashboeard({super.key});
 
   @override
   State<playerdashboeard> createState() => _playerdashboeardState();
 }
 
-
 class _playerdashboeardState extends State<playerdashboeard> {
-   int currentIndex = 0;
+  int currentIndex = 0;
 
-  final screens =  [
-   interhome(),
-   interclub(),
-   intertournaments(),
-   setting(),
-   profile(),
+  final screens = const [
+    interhome(),
+    interclub(),
+    intertournaments(),
+    setting(),
+    profile(),
   ];
   @override
   Widget build(BuildContext context) {
