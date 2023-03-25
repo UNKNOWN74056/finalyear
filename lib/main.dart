@@ -60,8 +60,8 @@ class _MyAppState extends State<MyApp> {
           routes: {
             splashscreen.routname: (context) => const splashscreen(),
             loginpage.routname: (context) => const loginpage(),
-            interhome.routname: (context) => interhome(),
-            playerculturehome.routname: (context) => playerculturehome(),
+            interhome.routname: (context) => const interhome(),
+            playerculturehome.routname: (context) => const  playerculturehome(),
             playerdashboeard.routname: (context) => const playerdashboeard(),
             cultureplayerdb.routname: (context) => const cultureplayerdb(),
             forgotpassword.routname: (context) => const forgotpassword(),
