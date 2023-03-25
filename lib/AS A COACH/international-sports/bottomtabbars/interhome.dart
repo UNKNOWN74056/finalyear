@@ -1,4 +1,5 @@
-import 'package:finalyear/AS%20A%20COACH/international-sports/playerdashboard.dart';
+import 'package:finalyear/AS%20A%20COACH/culture-sport/cultureplayerdb.dart';
+import 'package:finalyear/AS%20A%20COACH/culture-sport/player-culture-home.dart';
 import 'package:finalyear/AS%20A%20COACH/international-sports/tabs/player-basketball.dart';
 import 'package:finalyear/AS%20A%20COACH/international-sports/tabs/player-cricket.dart';
 import 'package:finalyear/AS%20A%20COACH/international-sports/tabs/player-football.dart';
@@ -7,12 +8,10 @@ import 'package:finalyear/AS%20A%20COACH/international-sports/tabs/player-tablet
 import 'package:finalyear/AS%20A%20COACH/international-sports/tabs/player-vulleyball.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:get/get.dart';
-
 import '../../../AS A PLAYER/internationalsports/dashboard/home.dart';
-import '../../../AS A PLAYER/internationalsports/dashboard/homedb.dart';
 
 class interhome extends StatefulWidget {
+  static const String routname = "interhome";
   const interhome({super.key});
 
   @override
@@ -41,7 +40,7 @@ class _interhomeState extends State<interhome> {
                 SliverAppBar(
                   actions: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 20),
+                      padding: const EdgeInsets.only(left: 70),
                       child: IconButton(
                           onPressed: () {
                             showSearch(
@@ -50,7 +49,22 @@ class _interhomeState extends State<interhome> {
                           },
                           icon: const Icon(Icons.search)),
                     ),
+                    PopupMenuButton(
+                      position: PopupMenuPosition.under,
+                      icon: const Icon(Icons.more_horiz),
+                      itemBuilder: ((context) => [
+                            PopupMenuItem(
+                                child: GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, cultureplayerdb.routname);
+                              },
+                              child: const Text("Culture sports"),
+                            ))
+                          ]),
+                    )
                   ],
+                  automaticallyImplyLeading: false,
                   expandedHeight: 200,
                   pinned: true,
                   floating: true,

@@ -32,7 +32,7 @@ class _clubsState extends State<clubs> {
           onRefresh: () async {
             setState(() {
               functions.refresh_club_data();
-            }); 
+            });
           },
           child: NestedScrollView(
             headerSliverBuilder: (context, innerBoxIsScrolled) => [
@@ -49,12 +49,13 @@ class _clubsState extends State<clubs> {
                           icon: const Icon(Icons.search)),
                     ),
                   ],
+                  automaticallyImplyLeading: false,
                   expandedHeight: 200,
                   pinned: true,
                   floating: true,
                   snap: true,
                   title: const Text(
-                    "Clubs",
+                    "CLUBS",
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                   flexibleSpace: FlexibleSpaceBar(

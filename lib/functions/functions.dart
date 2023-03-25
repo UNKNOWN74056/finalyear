@@ -1,5 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:finalyear/AS%20A%20COACH/culturehomedb.dart';
+import 'package:finalyear/AS%20A%20COACH/culture-sport/cultureplayerdb.dart';
+import 'package:finalyear/AS%20A%20COACH/international-sports/bottomtabbars/interhome.dart';
+import 'package:finalyear/AS%20A%20COACH/international-sports/playerdashboard.dart';
+import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/dashboard.dart';
+import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/home.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/profile.dart';
 import 'package:finalyear/GETX/clubdatafirebase.dart';
 import 'package:finalyear/GETX/forgotpassword.dart';
@@ -7,7 +11,6 @@ import 'package:finalyear/pages/loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../AS A PLAYER/internationalsports/dashboard/homedb.dart';
 import '../GETX/getdatafromfirebase.dart';
 
 class functionservices {
@@ -83,10 +86,10 @@ class functionservices {
         .get()
         .then((value) {
       if (value['profession'] == 'Player') {
-        Get.toNamed(culturehomedb.routname);
+        Get.toNamed(playerdashboeard.routname);
         print("as a coach dashboard");
       } else {
-        Get.to(Homedb());
+        Get.to(const dashboard());
       }
     });
   }

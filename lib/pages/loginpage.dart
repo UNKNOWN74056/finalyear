@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:finalyear/AS%20A%20COACH/culturehomedb.dart';
+import 'package:finalyear/AS%20A%20COACH/international-sports/bottomtabbars/interhome.dart';
+import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/dashboard.dart';
+import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/home.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/profile.dart';
 import 'package:finalyear/GETX/LoginGetX.dart';
 import 'package:finalyear/pages/forgotpassword.dart';
@@ -12,7 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import '../AS A PLAYER/internationalsports/dashboard/homedb.dart';
 
 class loginpage extends StatefulWidget {
   //route
@@ -48,10 +49,10 @@ class _loginpageState extends State<loginpage> {
           .get()
           .then((value) {
         if (value['profession'] == 'Player') {
-          Get.to(const culturehomedb());
+          Get.to(const interhome());
           print("as a coach dashboard");
         } else {
-          Get.to(const Homedb());
+          Get.to(const dashboard());
           print("as a player dashboard");
         }
       });

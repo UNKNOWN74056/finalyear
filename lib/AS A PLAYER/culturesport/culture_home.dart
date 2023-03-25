@@ -2,7 +2,7 @@ import 'package:finalyear/AS%20A%20PLAYER/culturesport/tabbar/archery.dart';
 import 'package:finalyear/AS%20A%20PLAYER/culturesport/tabbar/gymnastic.dart';
 import 'package:finalyear/AS%20A%20PLAYER/culturesport/tabbar/kabaddi.dart';
 import 'package:finalyear/AS%20A%20PLAYER/culturesport/tabbar/tent_pagging.dart';
-import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/homedb.dart';
+import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:get/get.dart';
@@ -40,16 +40,16 @@ class _culturehomeState extends State<culturehome>
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
                       child: IconButton(
-                          onPressed: () => Get.to(() => (const Homedb())),
-                          icon: const Icon(Icons.search)),
+                          onPressed: () {}, icon: const Icon(Icons.search)),
                     ),
                   ],
+                  automaticallyImplyLeading: false,
                   expandedHeight: 200,
                   pinned: true,
                   floating: true,
                   snap: true,
                   title: const Text(
-                    "Culture sport",
+                    "CULTURE",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   flexibleSpace: FlexibleSpaceBar(
@@ -66,9 +66,7 @@ class _culturehomeState extends State<culturehome>
                       },
                       itemCount: 4,
                     ),
-                    centerTitle: true,
                   ),
-                  centerTitle: true,
                   bottom: const TabBar(
                       indicatorColor: Colors.orange,
                       indicatorWeight: 5,

@@ -42,12 +42,13 @@ class _interclubState extends State<interclub> {
                       icon: const Icon(Icons.search)),
                 ),
               ],
+              automaticallyImplyLeading: false,
               expandedHeight: 200,
               pinned: true,
               floating: true,
               snap: true,
               title: const Text(
-                "Clubs",
+                "CLUBS",
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
               flexibleSpace: FlexibleSpaceBar(
@@ -65,7 +66,6 @@ class _interclubState extends State<interclub> {
                   itemCount: 4,
                 ),
               ),
-              centerTitle: true,
             )
           ],
           body: GetBuilder(

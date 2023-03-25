@@ -4,11 +4,9 @@ import 'package:finalyear/AS%20A%20COACH/culture-sport/tabs/player-culture-kabad
 import 'package:finalyear/AS%20A%20COACH/culture-sport/tabs/player-culture-tent-pagging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:get/get.dart';
-
-import '../../AS A PLAYER/internationalsports/dashboard/homedb.dart';
 
 class playerculturehome extends StatefulWidget {
+  static const String routname = "playerculturehome";
   const playerculturehome({super.key});
 
   @override
@@ -36,22 +34,16 @@ class _playerculturehomeState extends State<playerculturehome> {
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
                       child: IconButton(
-                          onPressed: () => Get.to(() => (const Homedb())),
-                          icon: const Icon(Icons.search)),
+                          onPressed: () {}, icon: const Icon(Icons.search)),
                     ),
-                    Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: IconButton(
-                          onPressed: () => Get.to(() => (const Homedb())),
-                          icon: const Icon(Icons.camera_alt),
-                        ))
                   ],
+                  automaticallyImplyLeading: false,
                   expandedHeight: 200,
                   pinned: true,
                   floating: true,
                   snap: true,
                   title: const Text(
-                    "Culture",
+                    "CULTURE",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   flexibleSpace: FlexibleSpaceBar(
@@ -68,9 +60,7 @@ class _playerculturehomeState extends State<playerculturehome> {
                       },
                       itemCount: 4,
                     ),
-                    centerTitle: true,
                   ),
-                  centerTitle: true,
                   bottom: const TabBar(
                       indicatorColor: Colors.orange,
                       indicatorWeight: 5,

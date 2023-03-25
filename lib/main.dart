@@ -1,14 +1,13 @@
 // @dart=2.9
 import 'dart:async';
 import 'package:finalyear/AS%20A%20COACH/culture-sport/cultureplayerdb.dart';
-import 'package:finalyear/AS%20A%20COACH/culturehomedb.dart';
+import 'package:finalyear/AS%20A%20COACH/culture-sport/player-culture-home.dart';
+import 'package:finalyear/AS%20A%20COACH/international-sports/bottomtabbars/interhome.dart';
 import 'package:finalyear/AS%20A%20COACH/international-sports/playerdashboard.dart';
 import 'package:finalyear/AS%20A%20PLAYER/culturesport/culture_dashboard.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/dashboard.dart';
-import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/homedb.dart';
 import 'package:finalyear/GETX/clubdatafirebase.dart';
 import 'package:finalyear/GETX/getdatafromfirebase.dart';
-import 'package:finalyear/functions/functions.dart';
 import 'package:finalyear/pages/forgotpassword.dart';
 import 'package:finalyear/pages/loginpage.dart';
 import 'package:finalyear/pages/signuppage.dart';
@@ -61,10 +60,8 @@ class _MyAppState extends State<MyApp> {
           routes: {
             splashscreen.routname: (context) => const splashscreen(),
             loginpage.routname: (context) => const loginpage(),
-            Homedb.routname: (context) =>
-                const Homedb(), // as a coach dashboard
-            culturehomedb.routname: (context) =>
-                const culturehomedb(), // as a player dashboard
+            interhome.routname: (context) => interhome(),
+            playerculturehome.routname: (context) => playerculturehome(),
             playerdashboeard.routname: (context) => const playerdashboeard(),
             cultureplayerdb.routname: (context) => const cultureplayerdb(),
             forgotpassword.routname: (context) => const forgotpassword(),

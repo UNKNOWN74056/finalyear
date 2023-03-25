@@ -1,13 +1,12 @@
+import 'package:finalyear/AS%20A%20PLAYER/culturesport/culture_dashboard.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/tabbar/Basketball.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/tabbar/Cricket.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/tabbar/Football.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/tabbar/Hockey.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/tabbar/tabletenis.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/tabbar/vulleyball.dart';
-import 'package:finalyear/as%20a%20player/internationalsports/dashboard/homedb.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:get/get.dart';
 
 class home extends StatefulWidget {
   const home({super.key});
@@ -38,16 +37,32 @@ class _homeState extends State<home> {
                 SliverAppBar(
                   actions: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 20),
+                      padding: const EdgeInsets.only(left: 70),
                       child: IconButton(
-                          onPressed: () {
-                            showSearch(
-                                context: context,
-                                delegate: CustomSearchDelegate());
-                          },
-                          icon: const Icon(Icons.search)),
+                        onPressed: () {
+                          showSearch(
+                              context: context,
+                              delegate: CustomSearchDelegate());
+                        },
+                        icon: const Icon(Icons.search),
+                      ),
                     ),
+                    PopupMenuButton(
+                      position: PopupMenuPosition.under,
+                      icon: const Icon(Icons.more_horiz),
+                      itemBuilder: ((context) => [
+                            PopupMenuItem(
+                                child: GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, culturedashboard.routname);
+                              },
+                              child: const Text("Culture sports"),
+                            ))
+                          ]),
+                    )
                   ],
+                  automaticallyImplyLeading: false,
                   expandedHeight: 200,
                   pinned: true,
                   floating: true,
