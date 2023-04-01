@@ -29,7 +29,7 @@ final TextEditingController updatecity = TextEditingController();
 final TextEditingController updategender = TextEditingController();
 
 class _profileState extends State<profile> {
-  VideoPlayerController? videoPlayerController;
+  VideoPlayerController? controller;
   //dailog to select photo from camera or gallery
   void dialogAlert(context) {
     showDialog(
@@ -115,138 +115,138 @@ class _profileState extends State<profile> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            title: const Text(
-              "Profile",
-              style: TextStyle(fontSize: 30),
-            ),
-            centerTitle: true,
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(right: 15),
-                child: InkWell(
-                  onTap: () async {
-                    functions.transfer_request_email();
-                  },
-                  child: const Icon(FontAwesomeIcons.rightLeft),
-                ),
-              )
-            ],
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: const Text(
+            "Profile",
+            style: TextStyle(fontSize: 30),
           ),
-          body: GetBuilder(
-              init: FetchDataFirebase(),
-              builder: (controller) {
-                return ListView(
-                  children: controller.mylist
-                      .where((e) =>
-                          e.email == FirebaseAuth.instance.currentUser!.email)
-                      .map((element) => Container(
-                            margin: const EdgeInsets.all(10),
-                            child: Column(
-                              children: [
-                                const SizedBox(
-                                  height: 15,
-                                ),
-                                Stack(
-                                  children: [
-                                    CircleAvatar(
-                                      radius: 70,
-                                      backgroundImage:
-                                          NetworkImage(element.image_Url),
-                                      backgroundColor: Colors.white,
-                                    ),
-                                    Positioned(
-                                        bottom: 0,
-                                        right: 0,
-                                        child: Container(
-                                          decoration: const BoxDecoration(
-                                            color: Colors.white,
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: GestureDetector(
-                                            onTap: (() {
-                                              dialogAlert(context);
-                                              updateimage();
-                                            }),
-                                            child: const Icon(
-                                              Icons.edit,
-                                              size: 30,
-                                            ),
-                                          ),
-                                        )),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    usernameupdate(context, element.fullname);
-                                  },
-                                  child: reusableraw(
-                                    title: "Name:",
-                                    value: element.fullname,
-                                    icondata: FontAwesomeIcons.solidUser,
+          centerTitle: true,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 15),
+              child: InkWell(
+                onTap: () async {
+                  functions.transfer_request_email();
+                },
+                child: const Icon(FontAwesomeIcons.rightLeft),
+              ),
+            )
+          ],
+        ),
+        body: GetBuilder(
+            init: FetchDataFirebase(),
+            builder: (controller) {
+              return ListView(
+                children: controller.mylist
+                    .where((e) =>
+                        e.email == FirebaseAuth.instance.currentUser!.email)
+                    .map((element) => Container(
+                          margin: const EdgeInsets.all(10),
+                          child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              Stack(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 70,
+                                    backgroundImage:
+                                        NetworkImage(element.image_Url),
+                                    backgroundColor: Colors.white,
                                   ),
+                                  Positioned(
+                                      bottom: 0,
+                                      right: 0,
+                                      child: Container(
+                                        decoration: const BoxDecoration(
+                                          color: Colors.white,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: GestureDetector(
+                                          onTap: (() {
+                                            dialogAlert(context);
+                                            updateimage();
+                                          }),
+                                          child: const Icon(
+                                            Icons.edit,
+                                            size: 30,
+                                          ),
+                                        ),
+                                      )),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  usernameupdate(context, element.fullname);
+                                },
+                                child: reusableraw(
+                                  title: "Name:",
+                                  value: element.fullname,
+                                  icondata: FontAwesomeIcons.solidUser,
                                 ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Get.to(cityupdate(context, element.city));
-                                  },
-                                  child: reusableraw(
-                                      title: "City:",
-                                      value: element.city,
-                                      icondata: FontAwesomeIcons.locationDot),
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Get.to(
-                                        genderupdate(context, element.gender));
-                                  },
-                                  child: reusableraw(
-                                      title: "Gender:",
-                                      value: element.gender,
-                                      icondata: FontAwesomeIcons.venusMars),
-                                ),
-                                reusableraw(
-                                    title: "Email:",
-                                    value: element.email,
-                                    icondata: FontAwesomeIcons.solidEnvelope),
-                                GestureDetector(
-                                  onTap: () {
-                                    Get.to(phoneupdate(
-                                        context, element.phoneNumber));
-                                  },
-                                  child: reusableraw(
-                                      title: "Contect:",
-                                      value: element.phoneNumber,
-                                      icondata: FontAwesomeIcons.phone),
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    //  Get.to(sportupdate(context, data['sport']));
-                                  },
-                                  child: reusableraw(
-                                      title: "Sport:",
-                                      value: element.sport,
-                                      icondata: Icons.sports),
-                                ),
-                                reusableraw(
-                                    title: "Profession:",
-                                    value: element.profession,
-                                    icondata: FontAwesomeIcons.userTie),
-                                GestureDetector(
-                                    onTap: (() {
-                                      Get.to(videos());
-                                    }),
-                                    child: const Center(child: Text("Videos")))
-                              ],
-                            ),
-                          ))
-                      .toList(),
-                );
-              })),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Get.to(cityupdate(context, element.city));
+                                },
+                                child: reusableraw(
+                                    title: "City:",
+                                    value: element.city,
+                                    icondata: FontAwesomeIcons.locationDot),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Get.to(genderupdate(context, element.gender));
+                                },
+                                child: reusableraw(
+                                    title: "Gender:",
+                                    value: element.gender,
+                                    icondata: FontAwesomeIcons.venusMars),
+                              ),
+                              reusableraw(
+                                  title: "Email:",
+                                  value: element.email,
+                                  icondata: FontAwesomeIcons.solidEnvelope),
+                              GestureDetector(
+                                onTap: () {
+                                  Get.to(phoneupdate(
+                                      context, element.phoneNumber));
+                                },
+                                child: reusableraw(
+                                    title: "Contect:",
+                                    value: element.phoneNumber,
+                                    icondata: FontAwesomeIcons.phone),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  //  Get.to(sportupdate(context, data['sport']));
+                                },
+                                child: reusableraw(
+                                    title: "Sport:",
+                                    value: element.sport,
+                                    icondata: Icons.sports),
+                              ),
+                              reusableraw(
+                                  title: "Profession:",
+                                  value: element.profession,
+                                  icondata: FontAwesomeIcons.userTie),
+                              GestureDetector(
+                                  onTap: (() {
+                                    Get.to(const videos());
+                                  }),
+                                  child: const Center(child: Text("Videos"))),
+                            ],
+                          ),
+                        ))
+                    .toList(),
+              );
+            }),
+      ),
     );
   }
 }

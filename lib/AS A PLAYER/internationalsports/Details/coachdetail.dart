@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get_time_ago/get_time_ago.dart';
 
 class coachdetail extends StatefulWidget {
   //object to the wigdet data
@@ -131,8 +132,10 @@ class _coachdetailState extends State<coachdetail> {
                                   shrinkWrap: true,
                                   itemBuilder: (context, i) {
                                     var data = snapshot.data!.docs[i];
-                                    Timestamp timestamp = data['time'];
-                                    DateTime dateTime = timestamp.toDate();
+                                    Timestamp date =
+                                        snapshot.data!.docs[i]['time'];
+                                    var finaldate = DateTime.parse(
+                                        date.toDate().toString());
 
                                     return Container(
                                       height:
@@ -221,6 +224,16 @@ class _coachdetailState extends State<coachdetail> {
                                                     ),
                                                   ),
                                                 ]),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 20),
+                                              child: Row(
+                                                children: [
+                                                  Text(GetTimeAgo.parse(
+                                                      finaldate))
+                                                ],
                                               ),
                                             ),
                                             const Divider(

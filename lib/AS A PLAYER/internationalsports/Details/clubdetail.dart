@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:get_time_ago/get_time_ago.dart';
 
 class clubdetail extends StatefulWidget {
   final post;
@@ -125,8 +126,10 @@ class _clubdetailState extends State<clubdetail> {
                                     shrinkWrap: true,
                                     itemBuilder: (context, i) {
                                       var data = snapshot.data!.docs[i];
-                                      // Timestamp timestamp = data['time'];
-                                      // DateTime dateTime = timestamp.toDate();
+                                      Timestamp date =
+                                          snapshot.data!.docs[i]['time'];
+                                      var finaldate = DateTime.parse(
+                                          date.toDate().toString());
                                       return Container(
                                         height:
                                             MediaQuery.of(context).size.height *
@@ -217,6 +220,16 @@ class _clubdetailState extends State<clubdetail> {
                                                       ),
                                                     ),
                                                   ]),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 20),
+                                                child: Row(
+                                                  children: [
+                                                    Text(GetTimeAgo.parse(
+                                                        finaldate))
+                                                  ],
                                                 ),
                                               ),
                                               const Divider(

@@ -21,26 +21,8 @@ final picker = ImagePicker();
 
 class _videosState extends State<videos> {
   final currentuser = FirebaseAuth.instance.currentUser!.email;
-  //function to pick vedios form gallery
-  // Future pickvideo() async {
-  //   final result = await FilePicker.platform.pickFiles(allowMultiple: true);
-  //   if (result == null) return null;
-
-  //   final path = result.files.single.path;
-
-  //   setState(() => _video = File(path!));
-  //   if (_video == null) return;
-  //   final location = 'file/$currentuser';
-  //   task = FirebaseApi.uploadfile(location, _video!);
-  //   if (task == null) return;
-  //   final snapshot = await task!.whenComplete(() {});
-  //   final urldownload = await snapshot.ref.getDownloadURL();
-  //   FirebaseFirestore.instance
-  //       .collection("users")
-  //       .doc(FirebaseAuth.instance.currentUser!.email)
-  //       .update({'vediourl': urldownload});
-  // }
   File? _videoFile;
+
   Future<void> _pickVideo() async {
     FilePickerResult? result =
         await FilePicker.platform.pickFiles(type: FileType.video);
@@ -57,7 +39,7 @@ class _videosState extends State<videos> {
     Reference reference = FirebaseStorage.instance.ref().child(fileName);
     UploadTask uploadTask = reference.putFile(_videoFile!);
     TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() => null);
-    String downloadURL = await taskSnapshot.ref.getDownloadURL().toString();
+    final downloadURL = await taskSnapshot.ref.getDownloadURL();
     FirebaseFirestore.instance.collection("vedios").add({
       "download_link": downloadURL,
     });
@@ -83,12 +65,12 @@ class _videosState extends State<videos> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (_videoFile != null) Text(_videoFile!.path),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: _pickVideo,
-              child: Text('Pick Video'),
+              child: const Text('Pick Video'),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: _uploadVideo,
               child: const Text('Upload Video'),
