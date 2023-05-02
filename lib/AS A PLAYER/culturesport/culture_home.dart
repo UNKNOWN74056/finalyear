@@ -2,10 +2,10 @@ import 'package:finalyear/AS%20A%20PLAYER/culturesport/tabbar/archery.dart';
 import 'package:finalyear/AS%20A%20PLAYER/culturesport/tabbar/gymnastic.dart';
 import 'package:finalyear/AS%20A%20PLAYER/culturesport/tabbar/kabaddi.dart';
 import 'package:finalyear/AS%20A%20PLAYER/culturesport/tabbar/tent_pagging.dart';
-import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/home.dart';
+import 'package:finalyear/wedgets/search_engine_for_user.dart';
+import "package:get/get.dart";
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:get/get.dart';
 
 class culturehome extends StatefulWidget {
   const culturehome({super.key});
@@ -40,7 +40,10 @@ class _culturehomeState extends State<culturehome>
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
                       child: IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.search)),
+                          onPressed: () {
+                            Get.to(usersearchengine());
+                          },
+                          icon: const Icon(Icons.search)),
                     ),
                   ],
                   automaticallyImplyLeading: false,

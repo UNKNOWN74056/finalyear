@@ -1,5 +1,6 @@
 import 'package:finalyear/AS%20A%20COACH/culture-sport/cultureplayerdb.dart';
-import 'package:finalyear/AS%20A%20COACH/culture-sport/player-culture-home.dart';
+import 'package:finalyear/wedgets/search_engine_for_user.dart';
+import 'package:get/get.dart';
 import 'package:finalyear/AS%20A%20COACH/international-sports/tabs/player-basketball.dart';
 import 'package:finalyear/AS%20A%20COACH/international-sports/tabs/player-cricket.dart';
 import 'package:finalyear/AS%20A%20COACH/international-sports/tabs/player-football.dart';
@@ -43,9 +44,7 @@ class _interhomeState extends State<interhome> {
                       padding: const EdgeInsets.only(left: 70),
                       child: IconButton(
                           onPressed: () {
-                            showSearch(
-                                context: context,
-                                delegate: CustomSearchDelegate());
+                            Get.to(usersearchengine());
                           },
                           icon: const Icon(Icons.search)),
                     ),

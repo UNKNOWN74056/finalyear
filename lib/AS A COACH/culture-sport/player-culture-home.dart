@@ -2,7 +2,9 @@ import 'package:finalyear/AS%20A%20COACH/culture-sport/tabs/player-culture-arche
 import 'package:finalyear/AS%20A%20COACH/culture-sport/tabs/player-culture-gymnastic.dart';
 import 'package:finalyear/AS%20A%20COACH/culture-sport/tabs/player-culture-kabaddi.dart';
 import 'package:finalyear/AS%20A%20COACH/culture-sport/tabs/player-culture-tent-pagging.dart';
+import 'package:finalyear/wedgets/search_engine_for_user.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 class playerculturehome extends StatefulWidget {
@@ -34,7 +36,10 @@ class _playerculturehomeState extends State<playerculturehome> {
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
                       child: IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.search)),
+                          onPressed: () {
+                            Get.to(usersearchengine());
+                          },
+                          icon: const Icon(Icons.search)),
                     ),
                   ],
                   automaticallyImplyLeading: false,

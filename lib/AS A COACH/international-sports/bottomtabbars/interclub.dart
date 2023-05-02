@@ -1,3 +1,4 @@
+import 'package:finalyear/wedgets/search_engine_for_club.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -36,8 +37,7 @@ class _interclubState extends State<interclub> {
                   padding: const EdgeInsets.only(left: 20),
                   child: IconButton(
                       onPressed: () {
-                        showSearch(
-                            context: context, delegate: CustomSearchDelegate());
+                        Get.to(clubsearchengine());
                       },
                       icon: const Icon(Icons.search)),
                 ),
