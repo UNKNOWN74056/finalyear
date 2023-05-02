@@ -50,7 +50,7 @@ class _MyAppState extends State<MyApp> {
         }
 
         return GetMaterialApp(
-          title: 'Flutter Demo',
+          title: 'Mr Sports',
           theme: ThemeData(
             primarySwatch: Colors.blueGrey,
           ),

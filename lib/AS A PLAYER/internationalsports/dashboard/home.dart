@@ -5,7 +5,9 @@ import 'package:finalyear/AS%20A%20PLAYER/internationalsports/tabbar/Football.da
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/tabbar/Hockey.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/tabbar/tabletenis.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/tabbar/vulleyball.dart';
+import 'package:finalyear/wedgets/search_engine_for_user.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 class home extends StatefulWidget {
@@ -40,9 +42,7 @@ class _homeState extends State<home> {
                       padding: const EdgeInsets.only(left: 70),
                       child: IconButton(
                         onPressed: () {
-                          showSearch(
-                              context: context,
-                              delegate: CustomSearchDelegate());
+                          Get.to(usersearchengine());
                         },
                         icon: const Icon(Icons.search),
                       ),
@@ -140,7 +140,7 @@ class CustomSearchDelegate extends SearchDelegate {
         onPressed: () {
           close(context, null);
         },
-        icon: Icon(Icons.arrow_back));
+        icon: const Icon(Icons.arrow_back));
   }
 
   @override
