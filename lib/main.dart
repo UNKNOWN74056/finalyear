@@ -16,6 +16,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'GETX/allvideos.dart';
+
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -28,12 +30,14 @@ class MyApp extends StatefulWidget {
   @override
   State<MyApp> createState() => _MyAppState();
 }
+
 class _MyAppState extends State<MyApp> {
   final Future<FirebaseApp> _initailization = Firebase.initializeApp();
 
   // getx controller to fetch firebase data
   final usercontroller = Get.put(FetchDataFirebase());
   final clubcontroller = Get.put(Getclubdata());
+  final videocontorller = Get.put(FetchVideoFirebase());
 
   // comment
   @override
@@ -60,7 +64,7 @@ class _MyAppState extends State<MyApp> {
             splashscreen.routname: (context) => const splashscreen(),
             loginpage.routname: (context) => const loginpage(),
             interhome.routname: (context) => const interhome(),
-            playerculturehome.routname: (context) => const  playerculturehome(),
+            playerculturehome.routname: (context) => const playerculturehome(),
             playerdashboeard.routname: (context) => const playerdashboeard(),
             cultureplayerdb.routname: (context) => const cultureplayerdb(),
             forgotpassword.routname: (context) => const forgotpassword(),
@@ -71,12 +75,13 @@ class _MyAppState extends State<MyApp> {
         );
       },
     );
-  } 
+  }
 
   @override
   void initState() {
     usercontroller.GetDataFirebase();
     clubcontroller.Getclubdatafirebase();
+    videocontorller.Getallvideos();
     super.initState();
   }
 }

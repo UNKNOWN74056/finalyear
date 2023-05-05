@@ -93,6 +93,10 @@ class functionservices {
       }
     });
   }
+
+  Allvideos() {
+    FirebaseFirestore.instance.collection("videos").snapshots();
+  }
 }
 
 var functions = new functionservices();
