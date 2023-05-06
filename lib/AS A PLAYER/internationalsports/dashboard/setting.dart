@@ -14,94 +14,149 @@ class _settingState extends State<setting> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-          body: Container(
-        margin: EdgeInsets.all(10),
-        child: Column(
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(top: 10),
-              child: Center(
-                child: Text(
-                  "Settings",
-                  style: TextStyle(fontSize: 40),
+        child: Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: const Text('Settings'),
+        centerTitle: true,
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'General',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            ListTile(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30)),
-              tileColor: Colors.grey.shade300,
-              title: const Text("Delete Account"),
-              leading: const Icon(FontAwesomeIcons.trash),
-              iconColor: const Color.fromARGB(255, 4, 45, 119),
-              onTap: () {
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: const Text("Delete Account"),
-                        content: const Text("Are you sure you want to delete?"),
-                        actions: [
-                          TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: const Text("Cancel")),
-                          TextButton(
-                              onPressed: () {
-                                functions.delete();
-                                Navigator.pushNamed(
-                                    context, loginpage.routname);
-                              },
-                              child: const Text("Yes")),
-                        ],
-                      );
-                    });
-              },
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            ListTile(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30)),
-              tileColor: Colors.grey.shade300,
-              title: const Text("Logout"),
-              leading: const Icon(FontAwesomeIcons.rightFromBracket),
-              iconColor: const Color.fromARGB(255, 4, 45, 119),
-              onTap: () {
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: const Text("Signout Account"),
-                        content:
-                            const Text("Are you sure you want to Signout?"),
-                        actions: [
-                          TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: const Text("Cancel")),
-                          TextButton(
-                              onPressed: () {
-                                functions.signout();
-                                Navigator.pushNamed(
-                                    context, loginpage.routname);
-                              },
-                              child: const Text("Yes")),
-                        ],
-                      );
-                    });
-              },
-            ),
-          ],
+              const SizedBox(height: 10),
+              GestureDetector(
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text("Delete Account"),
+                            content:
+                                const Text("Are you sure you want to delete?"),
+                            actions: [
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Text("Cancel")),
+                              TextButton(
+                                  onPressed: () {
+                                    functions.delete();
+                                    Navigator.pushNamed(
+                                        context, loginpage.routname);
+                                  },
+                                  child: const Text("Yes")),
+                            ],
+                          );
+                        });
+                  },
+                  child: _buildListTile(
+                      context, "Delete", FontAwesomeIcons.trashCan)),
+              const SizedBox(height: 10),
+              GestureDetector(
+                onTap: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: const Text("Signout Account"),
+                          content:
+                              const Text("Are you sure you want to Signout?"),
+                          actions: [
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text("Cancel")),
+                            TextButton(
+                                onPressed: () {
+                                  functions.signout();
+                                  Navigator.pushNamed(
+                                      context, loginpage.routname);
+                                },
+                                child: const Text("Yes")),
+                          ],
+                        );
+                      });
+                },
+                child: _buildListTile(
+                    context, "Logout", FontAwesomeIcons.rightFromBracket),
+              ),
+              const SizedBox(height: 10),
+              _buildSwitchListTile(
+                context,
+                'Dark mode',
+                false,
+                (bool value) {},
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                'Account',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
+              const SizedBox(height: 10),
+              _buildListTile(
+                context,
+                'Change password',
+                Icons.lock_outline,
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                'About',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
+              const SizedBox(height: 10),
+              _buildListTile(
+                context,
+                'Privacy policy',
+                Icons.privacy_tip_outlined,
+              ),
+              _buildListTile(
+                context,
+                'Terms of service',
+                Icons.description_outlined,
+              ),
+            ],
+          ),
         ),
-      )),
+      ),
+    ));
+  }
+
+  // these are widgets
+  Widget _buildListTile(BuildContext context, String title, IconData icon) {
+    return ListTile(
+      leading: Icon(icon),
+      title: Text(title),
+    );
+  }
+
+  Widget _buildSwitchListTile(
+    BuildContext context,
+    String title,
+    bool value,
+    Function(bool) onChanged,
+  ) {
+    return SwitchListTile(
+      title: Text(title),
+      value: value,
+      onChanged: onChanged,
     );
   }
 }

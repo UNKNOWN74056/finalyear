@@ -1,9 +1,8 @@
 import 'dart:io';
+import 'package:chewie/chewie.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/profile.dart';
 import 'package:finalyear/GETX/allvideos.dart';
-import 'package:finalyear/functions/functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +20,7 @@ class videos extends StatefulWidget {
 }
 
 class _videosState extends State<videos> {
-  final controller = Get.put(FetchVideoFirebase());
+  final vidcontroller = Get.put(FetchVideoFirebase());
   final currentuser = FirebaseAuth.instance.currentUser!.email;
   File? _videoFile;
   UploadTask? task;
@@ -31,7 +30,6 @@ class _videosState extends State<videos> {
   @override
   void dispose() {
     super.dispose();
-    _controller.dispose();
   }
 
   //picked upload function
@@ -52,37 +50,14 @@ class _videosState extends State<videos> {
 
     //adding download link to firestore database
     FirebaseFirestore.instance.collection("videos").add({
-      "videourl": downloadURL,
+      "videourl": downloadURL.toString(),
     });
-    Get.to(const profile());
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    _controller = VideoPlayerController.network("")
-      ..initialize().then((_) {
-        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-        setState(() {});
-      });
+    Get.snackbar("Message", "Your video has been uploaded");
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            _controller.value.isPlaying
-                ? _controller.pause()
-                : _controller.play();
-          });
-        },
-        child: Icon(
-          _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-        ),
-      ),
       appBar: AppBar(
         title: const Text("Videos"),
         centerTitle: true,
@@ -95,42 +70,88 @@ class _videosState extends State<videos> {
           )
         ],
       ),
-      body:
-          //  _controller.value.isInitialized
-          //     ? AspectRatio(
-          //         aspectRatio: 16 / 9,
-          //         child: VideoPlayer(_controller),
-          //       )
-          //     : Container(),
-
-          //   Column(
-          //     mainAxisAlignment: MainAxisAlignment.center,
-          //     children: [
-          //       if (_videoFile != null) Text(_videoFile!.path),
-          //     ],
-          //   ),
-          // ),
-          StreamBuilder(
-              stream:
-                  FirebaseFirestore.instance.collection("videos").snapshots(),
-              builder: ((context, snapshot) {
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                      itemCount: snapshot.data!.docs.length,
-                      itemBuilder: (context, i) {
-                        var data = snapshot.data!.docs[i];
-                        return _controller.value.isInitialized
-                            ? AspectRatio(
-                                aspectRatio: 16 / 9,
-                                child: VideoPlayer(_controller),
-                              )
-                            : Container();
-                      });
-                }
-                return const Center(
-                  child: CircularProgressIndicator(),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 8.0,
+            mainAxisSpacing: 8.0,
+            childAspectRatio: 16 / 9,
+          ),
+          itemCount: vidcontroller.videolist.length,
+          itemBuilder: (BuildContext context, int index) {
+            final VideoPlayerController _controller =
+                VideoPlayerController.network(
+                    vidcontroller.videolist[index].videolink);
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Scaffold(
+                      body: Chewie(
+                        controller: ChewieController(
+                          videoPlayerController: _controller,
+                          autoPlay: true,
+                          looping: false,
+                          errorBuilder: (context, errorMessage) {
+                            return Center(
+                              child: Text(
+                                errorMessage,
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            );
+                          },
+                          placeholder: Container(
+                            color: Colors.grey[200],
+                          ),
+                          materialProgressColors: ChewieProgressColors(
+                            playedColor: Colors.red,
+                            handleColor: Colors.red,
+                            // backgroundColor: Colors.grey[300],
+                            // bufferedColor: Colors.grey[400],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 );
-              })),
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 1,
+                      blurRadius: 5,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: FutureBuilder(
+                  future: _controller.initialize(),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return AspectRatio(
+                        aspectRatio: _controller.value.aspectRatio ?? 16 / 9,
+                        child: VideoPlayer(_controller),
+                      );
+                    } else {
+                      return Container(
+                        height: 200.0,
+                        color: Colors.grey[200],
+                      );
+                    }
+                  },
+                ),
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 }
