@@ -1,5 +1,4 @@
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/Details/clubdetail.dart';
-import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/home.dart';
 import 'package:finalyear/GETX/clubdatafirebase.dart';
 import 'package:finalyear/functions/functions.dart';
 import 'package:finalyear/wedgets/search_engine_for_club.dart';

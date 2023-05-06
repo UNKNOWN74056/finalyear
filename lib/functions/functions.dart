@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/AS%20A%20COACH/international-sports/playerdashboard.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/dashboard.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/profile.dart';
+import 'package:finalyear/GETX/allvideos.dart';
 import 'package:finalyear/GETX/clubdatafirebase.dart';
 import 'package:finalyear/GETX/forgotpassword.dart';
 import 'package:finalyear/pages/loginpage.dart';
@@ -16,11 +17,14 @@ import '../wedgets/reusebletextfield.dart';
 class functionservices {
   //controller
   final usercontroller = Get.put(FetchDataFirebase());
+  final videocontorller = Get.put(FetchVideoFirebase());
   //refresh function for the users
   void refresh_user_data() async {
     await Future.delayed(Duration(seconds: 2));
     usercontroller.GetDataFirebase();
   }
+
+
 
   // controller
   final clubcontroller = Get.put(Getclubdata());

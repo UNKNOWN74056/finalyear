@@ -4,9 +4,21 @@ import 'package:get/get.dart';
 
 class FetchVideoFirebase extends GetxController {
   RxList videolist = <video>[].obs;
+  @override
+  void onInit() {
+    super.onInit();
+    // Call Getallvideos() function when the controller is initialized
+    Getallvideos();
+  }
+
+  // Function to refresh videolist
+  Future<void> refresh_videos() async {
+    await Getallvideos();
+  }
 
   // get all the data of users from firebase
   Getallvideos() async {
+    videolist.clear();
     await FirebaseFirestore.instance
         .collection("videos")
         .get()
@@ -15,6 +27,5 @@ class FetchVideoFirebase extends GetxController {
         videolist.add(video(videolink: f['videourl']));
       });
     });
-    print(videolist[0].videolink.toString());
   }
 }
