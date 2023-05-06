@@ -1,17 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:finalyear/AS%20A%20COACH/culture-sport/cultureplayerdb.dart';
-import 'package:finalyear/AS%20A%20COACH/international-sports/bottomtabbars/interhome.dart';
 import 'package:finalyear/AS%20A%20COACH/international-sports/playerdashboard.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/dashboard.dart';
-import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/home.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/profile.dart';
 import 'package:finalyear/GETX/clubdatafirebase.dart';
 import 'package:finalyear/GETX/forgotpassword.dart';
 import 'package:finalyear/pages/loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../GETX/getdatafromfirebase.dart';
+import '../wedgets/reusebletextfield.dart';
 
 class functionservices {
   //controller

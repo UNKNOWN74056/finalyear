@@ -136,7 +136,7 @@ class _videosState extends State<videos> {
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
                       return AspectRatio(
-                        aspectRatio: _controller.value.aspectRatio ?? 16 / 9,
+                        aspectRatio: 16 / 9,
                         child: VideoPlayer(_controller),
                       );
                     } else {
