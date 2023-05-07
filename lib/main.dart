@@ -6,8 +6,6 @@ import 'package:finalyear/AS%20A%20COACH/international-sports/bottomtabbars/inte
 import 'package:finalyear/AS%20A%20COACH/international-sports/playerdashboard.dart';
 import 'package:finalyear/AS%20A%20PLAYER/culturesport/culture_dashboard.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/dashboard.dart';
-import 'package:finalyear/GETX/clubdatafirebase.dart';
-import 'package:finalyear/GETX/getdatafromfirebase.dart';
 import 'package:finalyear/pages/forgotpassword.dart';
 import 'package:finalyear/pages/loginpage.dart';
 import 'package:finalyear/pages/signuppage.dart';
@@ -15,7 +13,6 @@ import 'package:finalyear/splashscreen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'GETX/allvideos.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,11 +29,6 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final Future<FirebaseApp> _initailization = Firebase.initializeApp();
-
-  // getx controller to fetch firebase data
-  final usercontroller = Get.put(FetchDataFirebase());
-  final clubcontroller = Get.put(Getclubdata());
-  final videocontorller = Get.put(FetchVideoFirebase());
 
   // comment
   @override
@@ -74,13 +66,5 @@ class _MyAppState extends State<MyApp> {
         );
       },
     );
-  }
-
-  @override
-  void initState() {
-    usercontroller.GetDataFirebase();
-    clubcontroller.Getclubdatafirebase();
-    videocontorller.Getallvideos();
-    super.initState();
   }
 }

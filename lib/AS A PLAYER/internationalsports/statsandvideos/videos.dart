@@ -76,7 +76,12 @@ class _videosState extends State<videos> {
               return Obx(
                 () => Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ListView.builder(
+                  child: GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 16 / 9,
+                    ),
                     itemCount: controller.videolist
                         .where((e) => e.email == currentuser)
                         .length,

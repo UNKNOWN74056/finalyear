@@ -27,7 +27,7 @@ class _splashscreenState extends State<splashscreen> {
       body: Container(
           width: double.infinity,
           height: double.infinity,
-          child: const Center(child: CircularProgressIndicator())),
+          child: const Center(child: Text("Loading...."))),
     );
   }
 }
