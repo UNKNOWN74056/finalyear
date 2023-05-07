@@ -15,6 +15,8 @@ class clubs extends StatefulWidget {
 }
 
 class _clubsState extends State<clubs> {
+  //getx controller
+  final clubcontroller = Get.put(Getclubdata());
   var images = [
     'assets/club1.jpg',
     'assets/club2.jpg',
@@ -30,9 +32,7 @@ class _clubsState extends State<clubs> {
       child: Scaffold(
         body: RefreshIndicator(
           onRefresh: () async {
-            setState(() {
-              functions.refresh_club_data();
-            });
+            clubcontroller.Getclubdatafirebase();
           },
           child: NestedScrollView(
             headerSliverBuilder: (context, innerBoxIsScrolled) => [
@@ -76,34 +76,36 @@ class _clubsState extends State<clubs> {
             body: GetBuilder(
                 init: Getclubdata(),
                 builder: (clubcontroller) {
-                  return Column(
-                    children: clubcontroller.clublist
-                        .map(
-                          (element) => Card(
-                              color: Colors.grey.shade300,
-                              shape: RoundedRectangleBorder(
-                                side: const BorderSide(
-                                    color: Color.fromARGB(255, 25, 9, 117),
-                                    width: 1),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: ListTile(
-                                  title: Text(element.clubname,
-                                      style: const TextStyle(fontSize: 20)),
-                                  leading: CircleAvatar(
-                                      radius: 35,
-                                      backgroundImage:
-                                          NetworkImage(element.clubimage),
-                                      backgroundColor: Colors.white),
-                                  subtitle: Text(element.location,
-                                      style: const TextStyle(fontSize: 15)),
-                                  trailing: const Icon(
-                                    FontAwesomeIcons.arrowRight,
-                                  ),
-                                  onTap: () =>
-                                      Get.to(clubdetail(post: element)))),
-                        )
-                        .toList(),
+                  return Obx(()
+                    => Column(
+                      children: clubcontroller.clublist
+                          .map(
+                            (element) => Card(
+                                color: Colors.grey.shade300,
+                                shape: RoundedRectangleBorder(
+                                  side: const BorderSide(
+                                      color: Color.fromARGB(255, 25, 9, 117),
+                                      width: 1),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: ListTile(
+                                    title: Text(element.clubname,
+                                        style: const TextStyle(fontSize: 20)),
+                                    leading: CircleAvatar(
+                                        radius: 35,
+                                        backgroundImage:
+                                            NetworkImage(element.clubimage),
+                                        backgroundColor: Colors.white),
+                                    subtitle: Text(element.location,
+                                        style: const TextStyle(fontSize: 15)),
+                                    trailing: const Icon(
+                                      FontAwesomeIcons.arrowRight,
+                                    ),
+                                    onTap: () =>
+                                        Get.to(clubdetail(post: element)))),
+                          )
+                          .toList(),
+                    ),
                   );
                 }),
           ),

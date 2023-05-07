@@ -2,10 +2,7 @@ import 'dart:io';
 import 'package:chewie/chewie.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/profile.dart';
-import 'package:finalyear/AS%20A%20PLAYER/internationalsports/statsandvideos/transferform.dart';
 import 'package:finalyear/GETX/allvideos.dart';
-import 'package:finalyear/functions/functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +21,7 @@ class videos extends StatefulWidget {
 }
 
 class _videosState extends State<videos> {
+  //getx controller
   final vidcontroller = Get.put(FetchVideoFirebase());
   final currentuser = FirebaseAuth.instance.currentUser!.email;
   File? _videoFile;
@@ -56,116 +54,125 @@ class _videosState extends State<videos> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Videos"),
-        centerTitle: true,
-        actions: [
-          GestureDetector(
-            onTap: () {
-              _pickVideo();
-            },
-            child: const Icon(Icons.add),
-          )
-        ],
-      ),
-      body: Obx(
-        () => RefreshIndicator(
+        appBar: AppBar(
+          title: const Text("Videos"),
+          centerTitle: true,
+          actions: [
+            GestureDetector(
+              onTap: () {
+                _pickVideo();
+              },
+              child: const Icon(Icons.add),
+            )
+          ],
+        ),
+        body: RefreshIndicator(
           onRefresh: () async {
-            vidcontroller.refresh_videos();
+            vidcontroller.Getallvideos();
           },
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 8.0,
-                mainAxisSpacing: 8.0,
-                childAspectRatio: 16 / 9,
-              ),
-              itemCount: vidcontroller.videolist.length,
-              itemBuilder: (BuildContext context, int index) {
-                final VideoPlayerController _controller =
-                    VideoPlayerController.network(
-                        vidcontroller.videolist[index].videolink);
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Scaffold(
-                          body: Chewie(
-                            controller: ChewieController(
-                              videoPlayerController: _controller,
-                              autoPlay: true,
-                              looping: false,
-                              additionalOptions: (context) {
-                                return <OptionItem>[
-                                  OptionItem(
-                                      onTap: () {},
-                                      iconData: FontAwesomeIcons.trash,
-                                      title: "Delete")
-                                ];
-                              },
-                              errorBuilder: (context, errorMessage) {
-                                return Center(
-                                  child: Text(
-                                    errorMessage,
-                                    style: const TextStyle(color: Colors.white),
+          child: GetBuilder(
+            init: FetchVideoFirebase(),
+            builder: (controller) {
+              return Obx(
+                () => Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListView.builder(
+                    itemCount: controller.videolist
+                        .where((e) => e.email == currentuser)
+                        .length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final video = controller.videolist
+                          .where((e) =>
+                              e.email ==
+                              FirebaseAuth.instance.currentUser!.email)
+                          .toList()[index];
+                      final VideoPlayerController _controller =
+                          VideoPlayerController.network(video.videolink);
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Scaffold(
+                                body: Chewie(
+                                  controller: ChewieController(
+                                    videoPlayerController: _controller,
+                                    autoPlay: true,
+                                    looping: false,
+                                    additionalOptions: (context) {
+                                      return <OptionItem>[
+                                        OptionItem(
+                                            onTap: () {},
+                                            iconData: FontAwesomeIcons.trash,
+                                            title: "Delete")
+                                      ];
+                                    },
+                                    errorBuilder: (context, errorMessage) {
+                                      return Center(
+                                        child: Text(
+                                          errorMessage,
+                                          style: const TextStyle(
+                                              color: Colors.white),
+                                        ),
+                                      );
+                                    },
+                                    placeholder: Container(
+                                      color: Colors.grey[200],
+                                    ),
+                                    materialProgressColors:
+                                        ChewieProgressColors(
+                                      playedColor: Colors.red,
+                                      handleColor: Colors.red,
+                                      backgroundColor: const Color.fromARGB(
+                                          78, 158, 158, 158),
+                                      bufferedColor: Colors.grey,
+                                    ),
                                   ),
-                                );
-                              },
-                              placeholder: Container(
-                                color: Colors.grey[200],
-                              ),
-                              materialProgressColors: ChewieProgressColors(
-                                playedColor: Colors.red,
-                                handleColor: Colors.red,
-                                backgroundColor:
-                                    const Color.fromARGB(78, 158, 158, 158),
-                                bufferedColor: Colors.grey,
+                                ),
                               ),
                             ),
+                          );
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white70,
+                            borderRadius: BorderRadius.circular(8.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 1,
+                                blurRadius: 5,
+                                offset: const Offset(0, 3),
+                              ),
+                            ],
+                          ),
+                          child: FutureBuilder(
+                            future: _controller.initialize(),
+                            builder:
+                                (BuildContext context, AsyncSnapshot snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.done) {
+                                return AspectRatio(
+                                  aspectRatio: 16 / 9,
+                                  child: VideoPlayer(_controller),
+                                );
+                              } else {
+                                return Container(
+                                  height: 200.0,
+                                  color: Colors.grey[200],
+                                );
+                              }
+                            },
                           ),
                         ),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(8.0),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 1,
-                          blurRadius: 5,
-                          offset: Offset(0, 3),
-                        ),
-                      ],
-                    ),
-                    child: FutureBuilder(
-                      future: _controller.initialize(),
-                      builder: (BuildContext context, AsyncSnapshot snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          return AspectRatio(
-                            aspectRatio: 16 / 9,
-                            child: VideoPlayer(_controller),
-                          );
-                        } else {
-                          return Container(
-                            height: 200.0,
-                            color: Colors.grey[200],
-                          );
-                        }
-                      },
-                    ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
-        ),
-      ),
-    );
+        ));
   }
 }

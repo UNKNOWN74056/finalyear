@@ -5,6 +5,17 @@ import 'package:get/get.dart';
 
 class FetchDataFirebase extends GetxController {
   RxList mylist = <Users>[].obs;
+  @override
+  void onInit() {
+    super.onInit();
+    // Call Getallvideos() function when the controller is initialized
+    GetDataFirebase();
+  }
+
+  // Function to refresh videolist
+  Future<void> refresh_videos() async {
+    await GetDataFirebase();
+  }
 
   // get all the data of users from firebase
   GetDataFirebase() async {

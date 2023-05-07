@@ -5,6 +5,17 @@ import '../model/clubsModel.dart';
 
 class Getclubdata extends GetxController {
   RxList clublist = <Clubs>[].obs;
+  @override
+  void onInit() {
+    super.onInit();
+    // Call Getallvideos() function when the controller is initialized
+    Getclubdatafirebase();
+  }
+
+  // Function to refresh videolist
+  Future<void> refresh_videos() async {
+    await Getclubdatafirebase();
+  }
 
   //get data for clubs from firebase
   Getclubdatafirebase() async {
