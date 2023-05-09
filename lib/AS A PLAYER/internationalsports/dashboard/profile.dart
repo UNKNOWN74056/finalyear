@@ -29,9 +29,11 @@ final currentUser = FirebaseAuth.instance;
 class _profileState extends State<profile> {
   //getx controller
   final vidcontroller = Get.put(FetchVideoFirebase());
+  final List<VideoPlayerController> _controllers = [];
   final updateprofilecontroller = Get.put(updateuserprofile());
   final currentuser = FirebaseAuth.instance.currentUser!.email;
-  VideoPlayerController? controller;
+
+  get documentReference => null;
   //dailog to select photo from camera or gallery
   void dialogAlert(context) {
     showDialog(
@@ -115,10 +117,13 @@ class _profileState extends State<profile> {
 
   @override
   void dispose() {
-    super.dispose();
+    for (var controller in _controllers) {
+      controller.dispose();
+    }
     updateprofilecontroller.updatefullnamecontroller.dispose();
     updateprofilecontroller.updatecitycontroller.dispose();
     updateprofilecontroller.updatephonecontroller.dispose();
+    super.dispose();
   }
 
   @override
@@ -528,11 +533,12 @@ class _profileState extends State<profile> {
                                                                             .currentUser!
                                                                             .email)
                                                                     .toList()[index];
-                                                                final VideoPlayerController
-                                                                    _controller =
+                                                                final _controller =
                                                                     VideoPlayerController
                                                                         .network(
                                                                             video.videolink);
+                                                                _controllers.add(
+                                                                    _controller);
                                                                 return GestureDetector(
                                                                   onTap: () {
                                                                     Navigator
@@ -620,6 +626,10 @@ class _profileState extends State<profile> {
                                                                             child:
                                                                                 VideoPlayer(_controller),
                                                                           );
+                                                                        } else if (snapshot
+                                                                            .hasError) {
+                                                                          return Text(
+                                                                              'Error loading video');
                                                                         } else {
                                                                           return Container(
                                                                             height:

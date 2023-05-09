@@ -12,13 +12,16 @@ import 'package:finalyear/GETX/updataprofile.dart';
 import 'package:finalyear/pages/loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../GETX/getdatafromfirebase.dart';
+import '../model/videomodel.dart';
 
 class functionservices {
   //controller
   final usercontroller = Get.put(FetchDataFirebase());
+  final vidcontroller = Get.put(FetchVideoFirebase());
   final updateprofilecontroller = Get.put(updateuserprofile());
   final currentuser = FirebaseAuth.instance.currentUser!.email;
   File? _videoFile;
@@ -146,6 +149,8 @@ class functionservices {
       'Imageurl': newUrl.toString(),
     });
   }
+
+ 
 }
 
 var functions = new functionservices();

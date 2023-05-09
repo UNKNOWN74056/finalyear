@@ -21,17 +21,22 @@ class _settingState extends State<setting> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Text('Settings'),
-        centerTitle: true,
-      ),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+             const  SizedBox(
+                height: 20,
+              ),
+              const Text(
+                "Settings",
+                style: TextStyle(fontSize: 40),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
               const Text(
                 'General',
                 style: TextStyle(
