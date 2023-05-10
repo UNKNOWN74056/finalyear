@@ -87,316 +87,356 @@ class _clubdetailState extends State<clubdetail> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text("Club"),
-          centerTitle: true,
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-        floatingActionButton: FloatingActionButton(
-            backgroundColor: Colors.black,
-            onPressed: () {
-              showModalBottomSheet(
-                  isScrollControlled: true,
-                  shape: const RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(10))),
-                  context: context,
-                  builder: (context) {
-                    return Column(
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.only(top: 40),
-                          child: Text(
-                            "Comments",
-                            style: TextStyle(fontSize: 20),
-                          ),
-                        ),
-                        StreamBuilder(
-                          stream: FirebaseFirestore.instance
-                              .collection("clubs")
-                              .doc(widget.post.email)
-                              .collection("comments")
-                              .snapshots(),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              return Expanded(
-                                child: ListView.builder(
-                                    itemCount: snapshot.data!.docs.length,
-                                    shrinkWrap: true,
-                                    itemBuilder: (context, i) {
-                                      var data = snapshot.data!.docs[i];
-                                      Timestamp date =
-                                          snapshot.data!.docs[i]['time'];
-                                      var finaldate = DateTime.parse(
-                                          date.toDate().toString());
-                                      return Container(
-                                        height:
-                                            MediaQuery.of(context).size.height *
+        child: Scaffold(
+            appBar: AppBar(
+              title: const Text("Club"),
+              centerTitle: true,
+            ),
+            floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+            floatingActionButton: FloatingActionButton(
+                onPressed: () {
+                  showModalBottomSheet(
+                      isScrollControlled: true,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.vertical(top: Radius.circular(10))),
+                      context: context,
+                      builder: (context) {
+                        return Column(
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.only(top: 40),
+                              child: Text(
+                                "Comments",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            ),
+                            StreamBuilder(
+                              stream: FirebaseFirestore.instance
+                                  .collection("clubs")
+                                  .doc(widget.post.email)
+                                  .collection("comments")
+                                  .snapshots(),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  return Expanded(
+                                    child: ListView.builder(
+                                        itemCount: snapshot.data!.docs.length,
+                                        shrinkWrap: true,
+                                        itemBuilder: (context, i) {
+                                          var data = snapshot.data!.docs[i];
+                                          Timestamp date =
+                                              snapshot.data!.docs[i]['time'];
+                                          var finaldate = DateTime.parse(
+                                              date.toDate().toString());
+                                          return Container(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
                                                 0.25,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 10),
-                                                child: Row(
-                                                  children: [
-                                                    CircleAvatar(
-                                                      backgroundImage:
-                                                          NetworkImage(
-                                                              data['image']),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 8.0),
-                                                      child: Container(
-                                                        child: Row(children: [
-                                                          Text(
-                                                            data['name'],
-                                                            style: const TextStyle(
-                                                                fontSize: 15,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 10),
+                                                    child: Row(
+                                                      children: [
+                                                        CircleAvatar(
+                                                          backgroundImage:
+                                                              NetworkImage(data[
+                                                                  'image']),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 8.0),
+                                                          child: Container(
+                                                            child:
+                                                                Row(children: [
+                                                              Text(
+                                                                data['name'],
+                                                                style: const TextStyle(
+                                                                    fontSize:
+                                                                        15,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                              ),
+                                                            ]),
                                                           ),
-                                                        ]),
-                                                      ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 10,
-                                              ),
-                                              Container(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    1,
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 15),
-                                                  child: Row(children: [
-                                                    const Icon(
-                                                      Icons
-                                                          .arrow_forward_ios_outlined,
-                                                      size: 15,
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 10),
-                                                      child: Container(
-                                                        width: MediaQuery.of(
-                                                                    context)
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  Container(
+                                                    width:
+                                                        MediaQuery.of(context)
                                                                 .size
                                                                 .width *
-                                                            0.75,
-                                                        child: Text(
-                                                            data['comment']),
-                                                      ),
+                                                            1,
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 15),
+                                                      child: Row(children: [
+                                                        const Icon(
+                                                          Icons
+                                                              .arrow_forward_ios_outlined,
+                                                          size: 15,
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 10),
+                                                          child: Container(
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.75,
+                                                            child: Text(data[
+                                                                'comment']),
+                                                          ),
+                                                        ),
+                                                        GestureDetector(
+                                                          onTap: () {
+                                                            if (data[
+                                                                    'commenter'] ==
+                                                                currentuser) {
+                                                              data.reference
+                                                                  .delete();
+                                                            } else {
+                                                              null;
+                                                            }
+                                                          },
+                                                          child: const Icon(
+                                                            FontAwesomeIcons
+                                                                .trash,
+                                                            color: Colors.red,
+                                                          ),
+                                                        ),
+                                                      ]),
                                                     ),
-                                                    GestureDetector(
-                                                      onTap: () {
-                                                        if (data['commenter'] ==
-                                                            currentuser) {
-                                                          data.reference
-                                                              .delete();
-                                                        } else {
-                                                          null;
-                                                        }
-                                                      },
-                                                      child: const Icon(
-                                                        FontAwesomeIcons.trash,
-                                                        color: Colors.red,
-                                                      ),
-                                                    ),
-                                                  ]),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 20),
-                                                child: Row(
-                                                  children: [
-                                                    Text(GetTimeAgo.parse(
-                                                        finaldate))
-                                                  ],
-                                                ),
-                                              ),
-                                              const Divider(
-                                                color: Colors.black,
-                                              )
-                                            ]),
-                                      );
-                                    }),
-                              );
-                            }
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          },
-                        ),
-                        StreamBuilder(
-                            stream: FirebaseFirestore.instance
-                                .collection("users")
-                                .where("email", isEqualTo: currentuser)
-                                .snapshots(),
-                            builder: (context,
-                                AsyncSnapshot<QuerySnapshot> snapshot) {
-                              if (snapshot.hasData) {
-                                return ListView.builder(
-                                    itemCount: snapshot.data!.docs.length,
-                                    shrinkWrap: true,
-                                    itemBuilder: (context, i) {
-                                      var data = snapshot.data!.docs[i];
-                                      final _namecontroller = data['fullname'];
-                                      final image = data['Imageurl'];
-                                      return Padding(
-                                        padding: EdgeInsets.only(
-                                            bottom: MediaQuery.of(context)
-                                                .viewInsets
-                                                .bottom),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(15),
-                                          child: TextFormField(
-                                            cursorColor: Colors.black,
-                                            cursorWidth: 5,
-                                            cursorHeight: 20,
-                                            controller: _commentcontroler,
-                                            textAlignVertical:
-                                                TextAlignVertical.center,
-                                            keyboardType:
-                                                TextInputType.multiline,
-                                            maxLines: 3,
-                                            minLines: 2,
-                                            decoration: InputDecoration(
-                                              filled: true,
-                                              isDense: true,
-                                              contentPadding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 10),
-                                              fillColor: Colors.white70,
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10)),
-                                              hintText:
-                                                  "Write your comment....",
-                                              suffixIcon: Row(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  GestureDetector(
-                                                    onTap: (() {
-                                                      addcommnet(
-                                                          _namecontroller
-                                                              .toString(),
-                                                          image.toString(),
-                                                          _commentcontroler.text
-                                                              .toString());
-                                                    }),
-                                                    child: const Icon(
-                                                        FontAwesomeIcons
-                                                            .solidPaperPlane,
-                                                        size: 20,
-                                                        color: Color.fromARGB(
-                                                            255, 0, 1, 5)),
                                                   ),
-                                                ],
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 20),
+                                                    child: Row(
+                                                      children: [
+                                                        Text(GetTimeAgo.parse(
+                                                            finaldate))
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  const Divider(
+                                                    color: Colors.black,
+                                                  )
+                                                ]),
+                                          );
+                                        }),
+                                  );
+                                }
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              },
+                            ),
+                            StreamBuilder(
+                                stream: FirebaseFirestore.instance
+                                    .collection("users")
+                                    .where("email", isEqualTo: currentuser)
+                                    .snapshots(),
+                                builder: (context,
+                                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                                  if (snapshot.hasData) {
+                                    return ListView.builder(
+                                        itemCount: snapshot.data!.docs.length,
+                                        shrinkWrap: true,
+                                        itemBuilder: (context, i) {
+                                          var data = snapshot.data!.docs[i];
+                                          final _namecontroller =
+                                              data['fullname'];
+                                          final image = data['Imageurl'];
+                                          return Padding(
+                                            padding: EdgeInsets.only(
+                                                bottom: MediaQuery.of(context)
+                                                    .viewInsets
+                                                    .bottom),
+                                            child: Padding(
+                                              padding: EdgeInsets.all(15),
+                                              child: TextFormField(
+                                                cursorColor: Colors.black,
+                                                cursorWidth: 5,
+                                                cursorHeight: 20,
+                                                controller: _commentcontroler,
+                                                textAlignVertical:
+                                                    TextAlignVertical.center,
+                                                keyboardType:
+                                                    TextInputType.multiline,
+                                                maxLines: 3,
+                                                minLines: 2,
+                                                decoration: InputDecoration(
+                                                  filled: true,
+                                                  isDense: true,
+                                                  contentPadding:
+                                                      const EdgeInsets
+                                                              .symmetric(
+                                                          vertical: 10),
+                                                  fillColor: Colors.white70,
+                                                  border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10)),
+                                                  hintText:
+                                                      "Write your comment....",
+                                                  suffixIcon: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: [
+                                                      GestureDetector(
+                                                        onTap: (() {
+                                                          addcommnet(
+                                                              _namecontroller
+                                                                  .toString(),
+                                                              image.toString(),
+                                                              _commentcontroler
+                                                                  .text
+                                                                  .toString());
+                                                        }),
+                                                        child: const Icon(
+                                                            FontAwesomeIcons
+                                                                .solidPaperPlane,
+                                                            size: 20,
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    0,
+                                                                    1,
+                                                                    5)),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        ),
-                                      );
-                                    });
-                              }
-                              return const Center(
-                                  child: CircularProgressIndicator());
-                            }),
-                      ],
-                    );
-                  });
-            },
-            child: Icon(FontAwesomeIcons.commentDots)),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircleAvatar(
-                    radius: 60,
-                    backgroundImage: NetworkImage(widget.post.clubimage),
+                                          );
+                                        });
+                                  }
+                                  return const Center(
+                                      child: CircularProgressIndicator());
+                                }),
+                          ],
+                        );
+                      });
+                },
+                child: const Icon(FontAwesomeIcons.commentDots)),
+            body: SingleChildScrollView(
+              child: Column(children: [
+                Container(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    children: [
+                      CircleAvatar(
+                        radius: 60.0,
+                        backgroundImage: NetworkImage(widget.post.clubimage),
+                      ),
+                      const SizedBox(height: 10.0),
+                      Text(
+                        widget.post.clubname,
+                        style: const TextStyle(
+                          fontSize: 22.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 5.0),
+                      Text(
+                        widget.post.sport,
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                          color: Colors.grey,
+                        ),
+                      ),
+                      Column(
+                        children: [
+                          Container(
+                              width: 200,
+                              height: 26,
+                              child: GetBuilder(
+                                  init: Getclubdata(),
+                                  builder: (controller) {
+                                    return ListView(
+                                      children: controller.clublist
+                                          .where((e) =>
+                                              e.email == widget.post.email)
+                                          .map((element) => Center(
+                                                  child: Text(
+                                                element.rating.toString(),
+                                                style: TextStyle(fontSize: 18),
+                                              )))
+                                          .toList(),
+                                    );
+                                  })),
+                        ],
+                      ),
+                      Container(
+                        child: RatingBar.builder(
+                          minRating: 0,
+                          allowHalfRating: true,
+                          itemBuilder: (context, _) => const Icon(Icons.star),
+                          updateOnDrag: true,
+                          onRatingUpdate: (rating) => setState(() {
+                            this.rating = rating;
+                            addrating();
+                          }),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Container(
-                width: 200,
-                height: 26,
-                child: GetBuilder(
-                    init: Getclubdata(),
-                    builder: (controller) {
-                      return ListView(
-                        children: controller.clublist
-                            .where((e) => e.email == widget.post.email)
-                            .map((element) => Center(
-                                    child: Text(
-                                  element.rating.toString(),
-                                  style: TextStyle(fontSize: 18),
-                                )))
-                            .toList(),
-                      );
-                    }),
-              ),
-              Container(
-                child: RatingBar.builder(
-                  minRating: 0,
-                  itemBuilder: (context, _) => const Icon(Icons.star),
-                  updateOnDrag: true,
-                  onRatingUpdate: (rating) => setState(() {
-                    this.rating = rating;
-                    addrating();
-                  }),
                 ),
-              ),
-              reusableraw(
-                  title: "Club Name",
-                  value: widget.post.clubname,
-                  icondata: FontAwesomeIcons.solidUser),
-              reusableraw(
-                  title: "Location:",
-                  value: widget.post.location,
-                  icondata: FontAwesomeIcons.locationDot),
-              reusableraw(
-                  title: "Email:",
-                  value: widget.post.email,
-                  icondata: FontAwesomeIcons.solidEnvelope),
-              reusableraw(
-                  title: "Contect:",
-                  value: widget.post.phonenumber,
-                  icondata: FontAwesomeIcons.phone),
-              reusableraw(
-                  title: "Sport:",
-                  value: widget.post.sport,
-                  icondata: FontAwesomeIcons.futbol),
-            ],
-          ),
-        ),
-      ),
-    );
+                const SizedBox(height: 10.0),
+                ListTile(
+                  leading: const Icon(Icons.email),
+                  title: Text(widget.post.email),
+                ),
+                Divider(),
+                ListTile(
+                    leading: const Icon(Icons.phone),
+                    title: Text(widget.post.phonenumber)),
+                Divider(),
+                ListTile(
+                  leading: const Icon(Icons.location_on),
+                  title: Text(widget.post.location),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Photos',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0,
+                          ),
+                        ),
+                      ]),
+                )
+              ]),
+            ))
+            );
   }
 }

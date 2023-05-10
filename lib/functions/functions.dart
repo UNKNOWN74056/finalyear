@@ -153,4 +153,4 @@ class functionservices {
  
 }
 
-var functions = new functionservices();
+var functions =  functionservices();
