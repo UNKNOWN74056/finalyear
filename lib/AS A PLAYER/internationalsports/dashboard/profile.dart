@@ -580,7 +580,7 @@ class _profileState extends State<profile> {
 
                                                                                       if (confirmed == true) {
                                                                                         // Delete video document from Firestore
-                                                                                        await FirebaseFirestore.instance.collection('videos').doc(video["id"]).delete();
+                                                                                        await FirebaseFirestore.instance.collection('videos').doc(video).delete();
 
                                                                                         // Remove video controller from list and dispose it
                                                                                         _controllers.remove(_controller);
