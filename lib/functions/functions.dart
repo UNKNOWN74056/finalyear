@@ -47,9 +47,12 @@ class functionservices {
     final downloadURL = await taskSnapshot.ref.getDownloadURL();
 
     //adding download link to firestore database
-    FirebaseFirestore.instance.collection("videos").add({
+    var docRef = FirebaseFirestore.instance.collection("videos").doc();
+    var id = docRef.id;
+    await docRef.set({
       "videourl": downloadURL.toString(),
       "email": currentuser,
+      'id': id,
     });
     Get.snackbar("Message", "Your video has been uploaded");
   }
@@ -149,8 +152,6 @@ class functionservices {
       'Imageurl': newUrl.toString(),
     });
   }
-
- 
 }
 
-var functions =  functionservices();
+var functions = functionservices();

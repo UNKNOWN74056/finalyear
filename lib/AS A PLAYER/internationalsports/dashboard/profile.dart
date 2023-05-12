@@ -557,7 +557,45 @@ class _profileState extends State<profile> {
                                                                               looping: false,
                                                                               additionalOptions: (context) {
                                                                                 return <OptionItem>[
-                                                                                  OptionItem(onTap: () {}, iconData: FontAwesomeIcons.trash, title: "Delete")
+                                                                                  OptionItem(
+                                                                                    onTap: () async {
+                                                                                      // Show confirmation dialog
+                                                                                      final confirmed = await showDialog<bool>(
+                                                                                        context: context,
+                                                                                        builder: (context) => AlertDialog(
+                                                                                          title: const Text('Delete video'),
+                                                                                          content: const Text('Are you sure you want to delete this video?'),
+                                                                                          actions: <Widget>[
+                                                                                            TextButton(
+                                                                                              onPressed: () => Navigator.of(context).pop(false),
+                                                                                              child: const Text('Cancel'),
+                                                                                            ),
+                                                                                            TextButton(
+                                                                                              onPressed: () => Navigator.of(context).pop(true),
+                                                                                              child: const Text('Delete'),
+                                                                                            ),
+                                                                                          ],
+                                                                                        ),
+                                                                                      );
+
+                                                                                      if (confirmed == true) {
+                                                                                        // Delete video document from Firestore
+                                                                                        await FirebaseFirestore.instance.collection('videos').doc(video["id"]).delete();
+
+                                                                                        // Remove video controller from list and dispose it
+                                                                                        _controllers.remove(_controller);
+                                                                                        _controller.dispose();
+
+                                                                                        // Remove video from video list in controller
+                                                                                        vidcontroller.videolist.remove(video);
+
+                                                                                        // Refresh GridView
+                                                                                        setState(() {});
+                                                                                      }
+                                                                                    },
+                                                                                    iconData: FontAwesomeIcons.trash,
+                                                                                    title: 'Delete',
+                                                                                  ),
                                                                                 ];
                                                                               },
                                                                               errorBuilder: (context, errorMessage) {
