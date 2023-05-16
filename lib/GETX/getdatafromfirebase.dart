@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 class FetchDataFirebase extends GetxController {
   RxList mylist = <Users>[].obs;
 
-  get videolist => null;
   @override
   void onInit() {
     super.onInit();
