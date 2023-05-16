@@ -1,33 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-class LoginController extends GetxController {
-  var email = "".obs;
+class changepassword extends GetxController {
   var password = "".obs;
   bool isformValidated = false;
 
   // contorller for the fieled
-  late TextEditingController emailController, passwordController;
+  late TextEditingController passwordController;
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    emailController = TextEditingController();
     passwordController = TextEditingController();
   }
 
 // form key for validaiton
   final keyForm = GlobalKey<FormState>();
 //these are the function for validation
-  String? validEmail(String value) {
-    if (value.isEmpty) {
-      return "Please enter Email";
-    } else if (!value.contains("@gmail.com") && !value.contains("@yahoo.com")) {
-      return "Please enter correct email";
-    }
-  }
-
   String? validPassword(String value) {
     if (value.isEmpty) {
       return "Please enter Password";
@@ -36,7 +26,7 @@ class LoginController extends GetxController {
     }
   }
 
-  checkLogin() {
+  void checkPassword() {
     if (keyForm.currentState!.validate()) {
       final isValid = keyForm.currentState!.validate();
 
@@ -44,10 +34,9 @@ class LoginController extends GetxController {
         return null;
       }
       keyForm.currentState!.save();
-      email.value = emailController.value.text;
       password.value = passwordController.value.text;
       isformValidated = true;
-      // User those values to send our auth request ...
+      // Use the password value for further processing
     }
   }
 }

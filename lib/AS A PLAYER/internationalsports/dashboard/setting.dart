@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:finalyear/GETX/changepassword.dart';
 import 'package:finalyear/functions/functions.dart';
 import 'package:finalyear/pages/loginpage.dart';
+import 'package:finalyear/wedgets/savebutton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -15,8 +17,20 @@ class setting extends StatefulWidget {
 }
 
 class _settingState extends State<setting> {
-  //text controller
-  final TextEditingController changepassword = TextEditingController();
+  final controller = Get.put(changepassword());
+  passwordchange() async {
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser!.email)
+        .update({'password': controller.password.value});
+  }
+
+  @override
+  void dispose() {
+    controller.passwordController.text = "";
+    controller.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -27,7 +41,7 @@ class _settingState extends State<setting> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-             const  SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               const Text(
@@ -121,56 +135,71 @@ class _settingState extends State<setting> {
               const SizedBox(height: 10),
               GestureDetector(
                 onTap: () {
-                  showDialog(
+                  showModalBottomSheet(
+                      isScrollControlled: true,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.vertical(top: Radius.circular(10))),
                       context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: const Text("Change Password"),
-                          content: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                reusebletextfield(
-                                  labelText: "Password",
-                                  icon: const Icon(FontAwesomeIcons.solidUser),
-                                  controller: changepassword,
-                                  validator: (Value) {
-                                    return Value.isEmpty
-                                        ? "Enter your password"
-                                        : null;
-                                  },
-                                  autoValidateMode:
-                                      AutovalidateMode.onUserInteraction,
-                                  keyboard: TextInputType.text,
-                                ),
-                              ],
-                            ),
-                          ),
-                          actions: [
-                            TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: const Text("Cancel")),
-                            TextButton(
-                                onPressed: () {
-                                  FirebaseFirestore.instance
-                                      .collection("users")
-                                      .doc(FirebaseAuth
-                                          .instance.currentUser!.email)
-                                      .update({
-                                    'password': changepassword.text.toString()
-                                  }).then((value) => {
-                                            changepassword.clear(),
-                                            Get.snackbar("Message",
-                                                "Your passwrod has been changed")
-                                          });
+                      builder: (context) => Container(
+                            margin: const EdgeInsets.all(20),
+                            padding: const EdgeInsets.all(8),
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                  bottom:
+                                      MediaQuery.of(context).viewInsets.bottom),
+                              child: Form(
+                                key: controller.keyForm,
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    children: [
+                                      const SizedBox(
+                                        height: 40,
+                                      ),
+                                      const Text(
+                                          "Please enter your new password"),
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
 
-                                  Navigator.pop(context);
-                                },
-                                child: const Text("Ok"))
-                          ],
-                        );
-                      });
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      //textfields with dailog
+                                      reusebletextfield(
+                                          controller:
+                                              controller.passwordController,
+                                          autoValidateMode: AutovalidateMode
+                                              .onUserInteraction,
+                                          keyboard: TextInputType.emailAddress,
+                                          validator: (Value) {
+                                            return controller
+                                                .validPassword(Value!);
+                                          },
+                                          icon:
+                                              const Icon(FontAwesomeIcons.lock),
+                                          labelText: "Enter your password"),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      savebutton(
+                                          onTap: () {
+                                            controller.checkPassword();
+                                            if (controller.isformValidated ==
+                                                true) {
+                                              passwordchange();
+                                              Get.back();
+                                              Get.snackbar("Message",
+                                                  "Your passwrod has been change");
+                                            }
+                                          },
+                                          child: const Text("Save Changes"))
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ));
                 },
                 child: _buildListTile(
                   context,
