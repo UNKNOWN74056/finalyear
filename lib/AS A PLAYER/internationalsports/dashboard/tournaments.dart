@@ -58,7 +58,7 @@ class _tournamentsState extends State<tournaments>
                     isScrollable: true,
                     labelStyle: TextStyle(fontSize: 20),
                     tabs: [
-                      Text("footBall"),
+                      Text("FootBall"),
                       Text("BasketBall"),
                       Text("VulleyBall"),
                       Text("TableTenis"),

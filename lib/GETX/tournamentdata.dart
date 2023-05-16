@@ -25,12 +25,12 @@ class tournamentdata extends GetxController {
         .then((QuerySnapshot snapshot) {
       snapshot.docs.forEach((c) {
         tournamentlist.add(tournament(
-          tournamentimage: c['tournament-image'],
-          tournamentlocation: c['ournament-location'],
-          tournamentsport: c['tournament-sport'],
-          tournamentname: c['tournament-name'],
-          enddate: c['end-date'],
-          startdate: c['start-date'],
+          tournamentimage: c['tournamentimage'],
+          tournamentlocation: c['tournamentlocation'],
+          tournamentsport: c['tournamentsport'],
+          tournamentname: c['tournamentname'],
+          enddate: c['enddate'],
+          startdate: c['startdate'],
         ));
       });
     });
