@@ -6,6 +6,7 @@ import 'package:finalyear/AS%20A%20PLAYER/internationalsports/tournmaents%20tabs
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/tournmaents%20tabs/tabletanistour.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/tournmaents%20tabs/vulleyballtour.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
@@ -16,9 +17,16 @@ class tournaments extends StatefulWidget {
   State<tournaments> createState() => _tournamentsState();
 }
 
-class _tournamentsState extends State<tournaments>
-//with TickerProviderStateMixin
-{
+class _tournamentsState extends State<tournaments>{
+  //images for swiper
+  var images = [
+    'assets/football.jpg',
+    'assets/basketball.jpg',
+    'assets/vullyball.jpg',
+    'assets/tabletanis.jpg',
+    'assets/cricket.jpg',
+    'assets/hockey.jpg',
+  ];
   @override
   Widget build(BuildContext context) =>
       //TabController _TabController = TabController(length: 6, vsync: this);
@@ -46,11 +54,22 @@ class _tournamentsState extends State<tournaments>
                   "Tournaments",
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
-                // flexibleSpace: FlexibleSpaceBar(
-                //     background: Image.asset(
-                //   "assets/mixsport.jpeg",
-                //   fit: BoxFit.cover,
-                // )),
+                flexibleSpace: FlexibleSpaceBar(
+                  background: Swiper(
+                    autoplay: true,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
+                        child: Image(
+                          image: AssetImage(images[index]),
+                          fit: BoxFit.cover,
+                        ),
+                      );
+                    },
+                    itemCount: 6,
+                  ),
+                  centerTitle: true,
+                ),
                 centerTitle: true,
                 bottom: const TabBar(
                     indicatorColor: Colors.orange,
@@ -79,75 +98,3 @@ class _tournamentsState extends State<tournaments>
         ),
       ));
 }
-
-
- // Scaffold(
-    //     appBar: PreferredSize(
-    //         preferredSize: Size.fromHeight(100),
-    //         child: AppBar(
-    //           centerTitle: true,
-    //           title: const Text(
-    //             "Tournaments",
-    //             style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-    //           ),
-    //           actions: [
-    //             Padding(
-    //               padding: const EdgeInsets.only(left: 20),
-    //               child: IconButton(onPressed: () {}, icon: Icon(Icons.search)),
-    //             ),
-    //           ],
-    //           shape: const RoundedRectangleBorder(
-    //               borderRadius: BorderRadius.only(
-    //                   bottomLeft: Radius.circular(25),
-    //                   bottomRight: Radius.circular(25))),
-    //         )),
-    //     body: Column(children: [
-    //       const SizedBox(
-    //         height: 15,
-    //       ),
-    //       Container(
-    //         child: TabBar(
-    //           indicator: BoxDecoration(
-    //               borderRadius: BorderRadius.circular(50), // Creates border
-    //               color: Colors.teal),
-    //           isScrollable: true,
-    //           controller: _TabController,
-    //           labelColor: Colors.black,
-    //           unselectedLabelColor: Colors.teal,
-    //           tabs: const [
-    //             Tab(
-    //               text: "Football",
-    //             ),
-    //             Tab(
-    //               text: "Basketball",
-    //             ),
-    //             Tab(
-    //               text: "vulleyball",
-    //             ),
-    //             Tab(
-    //               text: "tabletenis",
-    //             ),
-    //             Tab(
-    //               text: "Cricket",
-    //             ),
-    //             Tab(
-    //               text: "Hockey",
-    //             ),
-    //           ],
-    //         ),
-    //       ),
-    //       Expanded(
-    //         child: Container(
-    //           width: double.maxFinite,
-    //           child: TabBarView(controller: _TabController, children: const [
-    //             footballtour(),
-    //             basketballtour(),
-    //             vulleyballtour(),
-    //             crickettour(),
-    //             tabletanistour(),
-    //             hockeytour(),
-    //           ]),
-    //         ),
-    //       )
-    //     ])
-    //     );
