@@ -13,10 +13,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../GETX/changepassword.dart';
 import '../GETX/getdatafromfirebase.dart';
 
 class functionservices {
   //controller
+  final chacontroller = Get.put(changepassword());
   final usercontroller = Get.put(FetchDataFirebase());
   final vidcontroller = Get.put(FetchVideoFirebase());
   final updateprofilecontroller = Get.put(updateuserprofile());
@@ -148,6 +150,13 @@ class functionservices {
       'phone': updateprofilecontroller.updatephonecontroller.text.toString(),
       'Imageurl': newUrl.toString(),
     });
+  }
+
+  passwordchange() async {
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser!.email)
+        .update({'password': chacontroller.password.value});
   }
 }
 

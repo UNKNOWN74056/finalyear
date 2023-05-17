@@ -1,6 +1,5 @@
-import 'package:finalyear/AS%20A%20PLAYER/internationalsports/tournamentsregistration/registration.dart';
+import 'package:finalyear/API/footballApi/soccer.dart';
 import 'package:finalyear/GETX/tournamentdata.dart';
-import 'package:finalyear/model/tournamentmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,123 +13,141 @@ class footballtour extends StatefulWidget {
 class _footballtourState extends State<footballtour> {
   //getx controller
   final controller = Get.put(tournamentdata());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: GetBuilder(
-            init: tournamentdata(),
-            builder: (controller) {
-              return ListView(
-                  children: controller.tournamentlist
-                      // .where((e) => e.tournamentsport == "football")
-                      .map(
-                        (element) => Column(
-                          children: [
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 10, right: 10),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.grey.shade300,
-                                    border: Border.all(),
-                                    borderRadius: BorderRadius.circular(15)),
-                                height:
-                                    MediaQuery.of(context).size.height * 0.20,
-                                width: MediaQuery.of(context).size.width,
-                                child: Column(
+        body: GetBuilder<tournamentdata>(
+      init: tournamentdata(), // Create an instance of the controller class
+      builder: (controller) {
+        return ListView(
+          children: controller.tournamentlist
+              //.where((e) => e.tournamentsport == 'football')
+              .map(
+                (element) => Column(
+                  children: [
+                    const SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: GestureDetector(
+                        onTap: () {
+                          Get.to(SoccerApp());
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade300,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          height: 210,
+                          width: MediaQuery.of(context).size.width,
+                          child: Padding(
+                            padding: const EdgeInsets.all(20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
                                   children: [
-                                    const SizedBox(
-                                      height: 20,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 10),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          CircleAvatar(
-                                            radius: 25,
-                                            backgroundImage: NetworkImage(
-                                                element.tournamentimage),
-                                          ),
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 10),
-                                                child: Text(
-                                                  element.tournamentname,
-                                                  style: const TextStyle(
-                                                      fontSize: 20,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 0),
-                                                child: Text(
-                                                    element.tournamentlocation),
-                                              )
-                                            ],
-                                          ),
-                                        ],
+                                    CircleAvatar(
+                                      radius: 25,
+                                      backgroundImage: NetworkImage(
+                                        element.tournamentimage,
                                       ),
                                     ),
+                                    const SizedBox(width: 10),
                                     Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 10, top: 10),
-                                          child: Row(
-                                            children: [
-                                              const Text(
-                                                "Start At:",
-                                                style: TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                              Text(element.startdate),
-                                            ],
+                                        Text(
+                                          element.tournamentname,
+                                          style: const TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 10),
-                                          child: Row(
-                                            children: [
-                                              const Text(
-                                                "End At: ",
-                                                style: TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                              Text(element.enddate)
-                                            ],
+                                        Text(
+                                          element.tournamentlocation,
+                                          style: const TextStyle(
+                                            color: Colors.grey,
                                           ),
-                                        )
+                                        ),
                                       ],
-                                    )
+                                    ),
                                   ],
                                 ),
-                              ),
+                                const SizedBox(height: 20),
+                                Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.schedule,
+                                      color: Colors.blue,
+                                    ),
+                                    const SizedBox(width: 5),
+                                    const Text(
+                                      'Start At:',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 5),
+                                    Text(element.startdate),
+                                  ],
+                                ),
+                                const SizedBox(height: 10),
+                                Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.schedule,
+                                      color: Colors.red,
+                                    ),
+                                    const SizedBox(width: 5),
+                                    const Text(
+                                      'End At:',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 5),
+                                    Text(element.enddate),
+                                  ],
+                                ),
+                                const SizedBox(height: 10),
+                                Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.attach_money,
+                                      color: Colors.green,
+                                    ),
+                                    const SizedBox(width: 5),
+                                    const Text(
+                                      'Price Pool:',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 5),
+                                    Text(
+                                      element.price,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.green,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
-                      )
-                      .toList());
-            }));
+                      ),
+                    ),
+                  ],
+                ),
+              )
+              .toList(),
+        );
+      },
+    ));
   }
 }

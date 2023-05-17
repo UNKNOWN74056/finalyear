@@ -5,6 +5,7 @@ class tournament {
   final dynamic tournamentsport;
   final dynamic startdate;
   final dynamic enddate;
+  final dynamic price;
 
   tournament({
     required this.tournamentimage,
@@ -13,5 +14,6 @@ class tournament {
     required this.tournamentsport,
     required this.startdate,
     required this.enddate,
+    required this.price,
   });
 }

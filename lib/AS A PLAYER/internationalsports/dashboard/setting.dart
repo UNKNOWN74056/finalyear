@@ -1,9 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:finalyear/GETX/changepassword.dart';
+
 import 'package:finalyear/functions/functions.dart';
 import 'package:finalyear/pages/loginpage.dart';
 import 'package:finalyear/wedgets/savebutton.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -17,20 +15,6 @@ class setting extends StatefulWidget {
 }
 
 class _settingState extends State<setting> {
-  final controller = Get.put(changepassword());
-  passwordchange() async {
-    FirebaseFirestore.instance
-        .collection("users")
-        .doc(FirebaseAuth.instance.currentUser!.email)
-        .update({'password': controller.password.value});
-  }
-
-  @override
-  void dispose() {
-    controller.passwordController.text = "";
-    controller.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -149,7 +133,7 @@ class _settingState extends State<setting> {
                                   bottom:
                                       MediaQuery.of(context).viewInsets.bottom),
                               child: Form(
-                                key: controller.keyForm,
+                                key: functions.chacontroller.keyForm,
                                 child: SingleChildScrollView(
                                   child: Column(
                                     children: [
@@ -167,13 +151,13 @@ class _settingState extends State<setting> {
                                       ),
                                       //textfields with dailog
                                       reusebletextfield(
-                                          controller:
-                                              controller.passwordController,
+                                          controller: functions
+                                              .chacontroller.passwordController,
                                           autoValidateMode: AutovalidateMode
                                               .onUserInteraction,
                                           keyboard: TextInputType.emailAddress,
                                           validator: (Value) {
-                                            return controller
+                                            return functions.chacontroller
                                                 .validPassword(Value!);
                                           },
                                           icon:
@@ -184,10 +168,12 @@ class _settingState extends State<setting> {
                                       ),
                                       savebutton(
                                           onTap: () {
-                                            controller.checkPassword();
-                                            if (controller.isformValidated ==
+                                            functions.chacontroller
+                                                .checkPassword();
+                                            if (functions.chacontroller
+                                                    .isformValidated ==
                                                 true) {
-                                              passwordchange();
+                                              functions.passwordchange();
                                               Get.back();
                                               Get.snackbar("Message",
                                                   "Your passwrod has been change");
