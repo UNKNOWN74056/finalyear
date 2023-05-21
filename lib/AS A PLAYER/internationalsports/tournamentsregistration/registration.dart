@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/tournaments.dart';
 import 'package:finalyear/GETX/tournamentRegister.dart';
+import 'package:finalyear/model/tournamentrequestmodel.dart';
 import 'package:finalyear/wedgets/loginbutton.dart';
 import 'package:finalyear/wedgets/reusebletextfield.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +16,61 @@ class registration extends StatefulWidget {
 }
 
 final controller = Get.put(TournamentsRegistration());
+Future<void> sendRequest(BuildContext context) async {
+  final request = TournamentRegistrationRequest(
+    teamName: controller.teamnamecontroller.text,
+    captainName: controller.captainnamecontroller.text,
+    address: controller.addresscontroller.text,
+    city: controller.citycontroller.text,
+    contactEmail: controller.emailcontroller.text,
+  );
+
+  try {
+    final collectionRef =
+        FirebaseFirestore.instance.collection('registrationRequests');
+    final documentRef = await collectionRef.add(request.toJson());
+
+    // Assign the generated document ID to the request
+    final generatedId = documentRef.id;
+    await documentRef.update({'document': generatedId});
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Request Sent'),
+        content: const Text('Your registration request has been sent.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: GestureDetector(
+                onTap: () {
+                  Get.to(const tournaments());
+                },
+                child: const Text('OK')),
+          ),
+        ],
+      ),
+    );
+  } catch (error) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Error'),
+        content: const Text('An error occurred while sending the request.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: GestureDetector(
+                onTap: () {
+                  Get.to(const tournaments());
+                },
+                child: const Text('OK')),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 class _registrationState extends State<registration> {
   @override
@@ -74,7 +132,7 @@ class _registrationState extends State<registration> {
                 height: 10,
               ),
               reusebletextfield(
-                  controller: controller.teamnamecontroller,
+                  controller: controller.captainnamecontroller,
                   autoValidateMode: AutovalidateMode.onUserInteraction,
                   keyboard: TextInputType.name,
                   validator: (Value) {
@@ -112,7 +170,7 @@ class _registrationState extends State<registration> {
                   validator: (Value) {
                     return controller.validcitye(Value!);
                   },
-                  icon: Icon(FontAwesomeIcons.city),
+                  icon: const Icon(FontAwesomeIcons.city),
                   labelText: "Enter your city"),
               const Text("Contact Email",
                   style: TextStyle(
@@ -136,7 +194,9 @@ class _registrationState extends State<registration> {
               loginbutton(
                   onTap: () {
                     controller.checkregisteration();
-                    if (controller.isformValidated == true) {}
+                    if (controller.isformValidated == true) {
+                      sendRequest(context);
+                    }
                   },
                   child: const Text("Submitt"))
             ],

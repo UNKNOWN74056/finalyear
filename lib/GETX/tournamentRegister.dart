@@ -37,30 +37,35 @@ class TournamentsRegistration extends GetxController {
     } else if (!value.contains("@gmail.com") && !value.contains("@yahoo.com")) {
       return "Please enter correct email";
     }
+    return null;
   }
 
   String? validteamname(String value) {
     if (value.isEmpty) {
       return "Please enter your message";
     }
+    return null;
   }
 
   String? validcaptainname(String value) {
     if (value.isEmpty) {
       return "Please enter your message";
     }
+    return null;
   }
 
   String? validaddress(String value) {
     if (value.isEmpty) {
       return "Please enter your message";
     }
+    return null;
   }
 
   String? validcitye(String value) {
     if (value.isEmpty) {
       return "Please enter your message";
     }
+    return null;
   }
 
   checkregisteration() {

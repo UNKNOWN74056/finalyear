@@ -158,6 +158,8 @@ class functionservices {
         .doc(FirebaseAuth.instance.currentUser!.email)
         .update({'password': chacontroller.password.value});
   }
+
+  
 }
 
 var functions = functionservices();

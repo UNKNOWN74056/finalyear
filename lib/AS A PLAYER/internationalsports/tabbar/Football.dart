@@ -1,6 +1,5 @@
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/Details/coachdetail.dart';
 import 'package:finalyear/GETX/getdatafromfirebase.dart';
-import 'package:finalyear/functions/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
