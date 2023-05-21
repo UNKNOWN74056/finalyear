@@ -27,7 +27,7 @@ class functionservices {
   final videocontorller = Get.put(FetchVideoFirebase());
   //refresh function for the users
   void refresh_user_data() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     usercontroller.GetDataFirebase();
   }
 
@@ -46,7 +46,8 @@ class functionservices {
     final downloadURL = await taskSnapshot.ref.getDownloadURL();
 
     //adding download link to firestore database
-    var docRef = FirebaseFirestore.instance.collection("videos").doc();
+    var docRef =
+        FirebaseFirestore.instance.collection("videos").doc(currentuser);
     var id = docRef.id;
     await docRef.set({
       "videourl": downloadURL.toString(),
@@ -60,7 +61,7 @@ class functionservices {
   final clubcontroller = Get.put(Getclubdata());
   //refresh function fir the club data
   void refresh_club_data() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     clubcontroller.Getclubdatafirebase();
   }
 
@@ -131,12 +132,12 @@ class functionservices {
 
   // update profile function
   updateprofile() async {
-    File? _image;
+    File? image;
     final email = FirebaseAuth.instance.currentUser!.email;
     var refer = await FirebaseStorage.instance
         .ref("/MrSport$email")
         .child('images')
-        .putFile(_image!.absolute);
+        .putFile(image!.absolute);
     TaskSnapshot uploadTask = refer;
     await Future.value(uploadTask);
     var newUrl = await refer.ref.getDownloadURL();
@@ -158,8 +159,6 @@ class functionservices {
         .doc(FirebaseAuth.instance.currentUser!.email)
         .update({'password': chacontroller.password.value});
   }
-
-  
 }
 
 var functions = functionservices();

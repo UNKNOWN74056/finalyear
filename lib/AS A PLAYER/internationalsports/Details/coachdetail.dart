@@ -142,7 +142,7 @@ class _coachdetailState extends State<coachdetail> {
                                         var finaldate = DateTime.parse(
                                             date.toDate().toString());
 
-                                        return Container(
+                                        return SizedBox(
                                           height: MediaQuery.of(context)
                                                   .size
                                                   .height *
@@ -190,7 +190,7 @@ class _coachdetailState extends State<coachdetail> {
                                                 const SizedBox(
                                                   height: 10,
                                                 ),
-                                                Container(
+                                                SizedBox(
                                                   width: MediaQuery.of(context)
                                                           .size
                                                           .width *
@@ -209,7 +209,7 @@ class _coachdetailState extends State<coachdetail> {
                                                         padding:
                                                             const EdgeInsets
                                                                 .only(left: 10),
-                                                        child: Container(
+                                                        child: SizedBox(
                                                           width: MediaQuery.of(
                                                                       context)
                                                                   .size
@@ -276,8 +276,7 @@ class _coachdetailState extends State<coachdetail> {
                                       shrinkWrap: true,
                                       itemBuilder: (context, i) {
                                         var data = snapshot.data!.docs[i];
-                                        final _namecontroller =
-                                            data['fullname'];
+                                        final namecontroller = data['fullname'];
                                         final image = data['Imageurl'];
                                         return Padding(
                                           padding: EdgeInsets.only(
@@ -285,7 +284,7 @@ class _coachdetailState extends State<coachdetail> {
                                                   .viewInsets
                                                   .bottom),
                                           child: Padding(
-                                            padding: EdgeInsets.all(15),
+                                            padding: const EdgeInsets.all(15),
                                             child: TextFormField(
                                               cursorColor: Colors.black,
                                               cursorWidth: 5,
@@ -317,7 +316,7 @@ class _coachdetailState extends State<coachdetail> {
                                                     GestureDetector(
                                                       onTap: (() {
                                                         addcommnet(
-                                                            _namecontroller
+                                                            namecontroller
                                                                 .toString(),
                                                             image.toString(),
                                                             _commentcontroler
@@ -381,7 +380,7 @@ class _coachdetailState extends State<coachdetail> {
                       ),
                       Column(
                         children: [
-                          Container(
+                          SizedBox(
                               width: 200,
                               height: 26,
                               child: GetBuilder(
@@ -394,7 +393,8 @@ class _coachdetailState extends State<coachdetail> {
                                           .map((element) => Center(
                                                   child: Text(
                                                 element.rating.toString(),
-                                                style: TextStyle(fontSize: 18),
+                                                style: const TextStyle(
+                                                    fontSize: 18),
                                               )))
                                           .toList(),
                                     );
@@ -421,16 +421,16 @@ class _coachdetailState extends State<coachdetail> {
                   leading: const Icon(Icons.email),
                   title: Text(widget.post.email),
                 ),
-                Divider(),
+                const Divider(),
                 ListTile(
                     leading: const Icon(Icons.phone),
                     title: Text(widget.post.phoneNumber)),
-                Divider(),
+                const Divider(),
                 ListTile(
                   leading: const Icon(Icons.location_on),
                   title: Text(widget.post.city),
                 ),
-                Divider(),
+                const Divider(),
                 ListTile(
                   leading: const Icon(FontAwesomeIcons.venusMars),
                   title: Text(widget.post.gender),
@@ -452,7 +452,7 @@ class _coachdetailState extends State<coachdetail> {
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: vidcontroller.videolist
-                            .where((e) => e.email == currentuser)
+                            .where((e) => e.email == widget.post.email)
                             .length,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
@@ -462,13 +462,11 @@ class _coachdetailState extends State<coachdetail> {
                         ),
                         itemBuilder: (BuildContext context, int index) {
                           final video = vidcontroller.videolist
-                              .where((e) =>
-                                  e.email ==
-                                  FirebaseAuth.instance.currentUser!.email)
+                              .where((e) => e.email == widget.post.email)
                               .toList()[index];
-                          final _controller =
+                          final controller =
                               VideoPlayerController.network(video.videolink);
-                          _controllers.add(_controller);
+                          _controllers.add(controller);
                           return GestureDetector(
                             onTap: () {
                               Navigator.push(
@@ -477,7 +475,7 @@ class _coachdetailState extends State<coachdetail> {
                                   builder: (context) => Scaffold(
                                     body: Chewie(
                                       controller: ChewieController(
-                                        videoPlayerController: _controller,
+                                        videoPlayerController: controller,
                                         autoPlay: true,
                                         looping: false,
                                         additionalOptions: (context) {
@@ -530,17 +528,17 @@ class _coachdetailState extends State<coachdetail> {
                                 ],
                               ),
                               child: FutureBuilder(
-                                future: _controller.initialize(),
+                                future: controller.initialize(),
                                 builder: (BuildContext context,
                                     AsyncSnapshot snapshot) {
                                   if (snapshot.connectionState ==
                                       ConnectionState.done) {
                                     return AspectRatio(
                                       aspectRatio: 16 / 9,
-                                      child: VideoPlayer(_controller),
+                                      child: VideoPlayer(controller),
                                     );
                                   } else if (snapshot.hasError) {
-                                    return Text('Error loading video');
+                                    return const Text('Error loading video');
                                   } else {
                                     return Container(
                                       height: 200.0,
