@@ -23,6 +23,20 @@ Future<void> sendRequest(BuildContext context) async {
     address: controller.addresscontroller.text,
     city: controller.citycontroller.text,
     contactEmail: controller.emailcontroller.text,
+    contact: controller.contactcontroller.text,
+    sportevent: controller.sporteventcontroller.text,
+    player1: controller.player1controller.text,
+    player2: controller.player2controller.text,
+    player3: controller.player3controller.text,
+    player4: controller.player4controller.text,
+    player5: controller.player5controller.text,
+    player6: controller.player6controller.text,
+    player7: controller.player7controller.text,
+    player8: controller.player8controller.text,
+    player9: controller.player9controller.text,
+    player10: controller.player10controller.text,
+    player11: controller.player11controller.text,
+    player12: controller.player12controller.text,
   );
 
   try {
@@ -105,13 +119,6 @@ class _registrationState extends State<registration> {
               const SizedBox(
                 height: 20,
               ),
-              const Text("Team Name:",
-                  style: TextStyle(
-                    fontSize: 15,
-                  )),
-              const SizedBox(
-                height: 10,
-              ),
               reusebletextfield(
                   controller: controller.teamnamecontroller,
                   autoValidateMode: AutovalidateMode.onUserInteraction,
@@ -124,13 +131,6 @@ class _registrationState extends State<registration> {
               const SizedBox(
                 height: 10,
               ),
-              const Text("Captain Name:",
-                  style: TextStyle(
-                    fontSize: 15,
-                  )),
-              const SizedBox(
-                height: 10,
-              ),
               reusebletextfield(
                   controller: controller.captainnamecontroller,
                   autoValidateMode: AutovalidateMode.onUserInteraction,
@@ -140,10 +140,6 @@ class _registrationState extends State<registration> {
                   },
                   icon: const Icon(FontAwesomeIcons.solidUser),
                   labelText: "Enter captain name"),
-              const Text("Address",
-                  style: TextStyle(
-                    fontSize: 15,
-                  )),
               const SizedBox(
                 height: 10,
               ),
@@ -156,10 +152,6 @@ class _registrationState extends State<registration> {
                   },
                   icon: const Icon(FontAwesomeIcons.locationDot),
                   labelText: "Enter your address"),
-              const Text("City",
-                  style: TextStyle(
-                    fontSize: 15,
-                  )),
               const SizedBox(
                 height: 10,
               ),
@@ -172,10 +164,6 @@ class _registrationState extends State<registration> {
                   },
                   icon: const Icon(FontAwesomeIcons.city),
                   labelText: "Enter your city"),
-              const Text("Contact Email",
-                  style: TextStyle(
-                    fontSize: 15,
-                  )),
               const SizedBox(
                 height: 10,
               ),
@@ -188,6 +176,174 @@ class _registrationState extends State<registration> {
                   },
                   icon: const Icon(FontAwesomeIcons.solidEnvelope),
                   labelText: "Enter your email"),
+              const SizedBox(
+                height: 10,
+              ),
+              reusebletextfield(
+                  controller: controller.contactcontroller,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  keyboard: TextInputType.phone,
+                  validator: (Value) {
+                    return controller.validphonenumber(Value!);
+                  },
+                  icon: const Icon(FontAwesomeIcons.phone),
+                  labelText: " + Enter your number"),
+              const SizedBox(
+                height: 10,
+              ),
+              reusebletextfield(
+                  controller: controller.sporteventcontroller,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  keyboard: TextInputType.emailAddress,
+                  validator: (Value) {
+                    return controller.validsportname(Value!);
+                  },
+                  icon: const Icon(FontAwesomeIcons.phone),
+                  labelText: "Enter your sport event corractly"),
+              const SizedBox(
+                height: 10,
+              ),
+              reusebletextfield(
+                  controller: controller.player1controller,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  keyboard: TextInputType.emailAddress,
+                  validator: (Value) {
+                    return controller.validplayername(Value!);
+                  },
+                  icon: const Icon(FontAwesomeIcons.person),
+                  labelText: "Enter your player name"),
+              const SizedBox(
+                height: 10,
+              ),
+              reusebletextfield(
+                  controller: controller.player2controller,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  keyboard: TextInputType.emailAddress,
+                  validator: (Value) {
+                    return controller.validplayername(Value!);
+                  },
+                  icon: const Icon(FontAwesomeIcons.person),
+                  labelText: "Enter your player name"),
+              const SizedBox(
+                height: 10,
+              ),
+              reusebletextfield(
+                  controller: controller.player3controller,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  keyboard: TextInputType.emailAddress,
+                  validator: (Value) {
+                    return controller.validplayername(Value!);
+                  },
+                  icon: const Icon(FontAwesomeIcons.person),
+                  labelText: "Enter your player name"),
+              const SizedBox(
+                height: 10,
+              ),
+              reusebletextfield(
+                  controller: controller.player4controller,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  keyboard: TextInputType.emailAddress,
+                  validator: (Value) {
+                    return controller.validplayername(Value!);
+                  },
+                  icon: const Icon(FontAwesomeIcons.person),
+                  labelText: "Enter your player name"),
+              const SizedBox(
+                height: 10,
+              ),
+              reusebletextfield(
+                  controller: controller.player5controller,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  keyboard: TextInputType.emailAddress,
+                  validator: (Value) {
+                    return controller.validplayername(Value!);
+                  },
+                  icon: const Icon(FontAwesomeIcons.person),
+                  labelText: "Enter your player name"),
+              const SizedBox(
+                height: 10,
+              ),
+              reusebletextfield(
+                  controller: controller.player6controller,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  keyboard: TextInputType.emailAddress,
+                  validator: (Value) {
+                    return controller.validplayername(Value!);
+                  },
+                  icon: const Icon(FontAwesomeIcons.person),
+                  labelText: "Enter your player name"),
+              const SizedBox(
+                height: 10,
+              ),
+              reusebletextfield(
+                  controller: controller.player7controller,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  keyboard: TextInputType.emailAddress,
+                  validator: (Value) {
+                    return controller.validplayername(Value!);
+                  },
+                  icon: const Icon(FontAwesomeIcons.person),
+                  labelText: "Enter your player name"),
+              const SizedBox(
+                height: 10,
+              ),
+              reusebletextfield(
+                  controller: controller.player8controller,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  keyboard: TextInputType.emailAddress,
+                  validator: (Value) {
+                    return controller.validplayername(Value!);
+                  },
+                  icon: const Icon(FontAwesomeIcons.person),
+                  labelText: "Enter your player name"),
+              const SizedBox(
+                height: 10,
+              ),
+              reusebletextfield(
+                  controller: controller.player9controller,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  keyboard: TextInputType.emailAddress,
+                  validator: (Value) {
+                    return controller.validplayername(Value!);
+                  },
+                  icon: const Icon(FontAwesomeIcons.person),
+                  labelText: "Enter your player name"),
+              const SizedBox(
+                height: 10,
+              ),
+              reusebletextfield(
+                  controller: controller.player10controller,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  keyboard: TextInputType.emailAddress,
+                  validator: (Value) {
+                    return controller.validplayername(Value!);
+                  },
+                  icon: const Icon(FontAwesomeIcons.person),
+                  labelText: "Enter your player name"),
+              const SizedBox(
+                height: 10,
+              ),
+              reusebletextfield(
+                  controller: controller.player11controller,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  keyboard: TextInputType.emailAddress,
+                  validator: (Value) {
+                    return controller.validplayername(Value!);
+                  },
+                  icon: const Icon(FontAwesomeIcons.person),
+                  labelText: "Enter your player name"),
+              const SizedBox(
+                height: 10,
+              ),
+              reusebletextfield(
+                  controller: controller.player12controller,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  keyboard: TextInputType.emailAddress,
+                  validator: (Value) {
+                    return controller.validplayername(Value!);
+                  },
+                  icon: const Icon(FontAwesomeIcons.person),
+                  labelText: "Enter your player name"),
               const SizedBox(
                 height: 10,
               ),

@@ -7,6 +7,20 @@ class TournamentsRegistration extends GetxController {
   var address = "".obs;
   var city = "".obs;
   var email = "".obs;
+  var contact = "".obs;
+  var sportevent = "".obs;
+  var player1 = "".obs;
+  var player2 = "".obs;
+  var player3 = "".obs;
+  var player4 = "".obs;
+  var player5 = "".obs;
+  var player6 = "".obs;
+  var player7 = "".obs;
+  var player8 = "".obs;
+  var player9 = "".obs;
+  var player10 = "".obs;
+  var player11 = "".obs;
+  var player12 = "".obs;
   bool isformValidated = false;
 
 //controllers
@@ -14,7 +28,21 @@ class TournamentsRegistration extends GetxController {
       captainnamecontroller,
       addresscontroller,
       citycontroller,
-      emailcontroller;
+      emailcontroller,
+      contactcontroller,
+      sporteventcontroller,
+      player1controller,
+      player2controller,
+      player3controller,
+      player4controller,
+      player5controller,
+      player6controller,
+      player7controller,
+      player8controller,
+      player9controller,
+      player10controller,
+      player11controller,
+      player12controller;
 
   @override
   void onInit() {
@@ -25,6 +53,20 @@ class TournamentsRegistration extends GetxController {
     addresscontroller = TextEditingController();
     citycontroller = TextEditingController();
     emailcontroller = TextEditingController();
+    contactcontroller = TextEditingController();
+    sporteventcontroller = TextEditingController();
+    player1controller = TextEditingController();
+    player2controller = TextEditingController();
+    player3controller = TextEditingController();
+    player4controller = TextEditingController();
+    player5controller = TextEditingController();
+    player6controller = TextEditingController();
+    player7controller = TextEditingController();
+    player8controller = TextEditingController();
+    player9controller = TextEditingController();
+    player10controller = TextEditingController();
+    player11controller = TextEditingController();
+    player12controller = TextEditingController();
   }
 
   // form key for validaiton
@@ -42,28 +84,50 @@ class TournamentsRegistration extends GetxController {
 
   String? validteamname(String value) {
     if (value.isEmpty) {
-      return "Please enter your message";
+      return "Please enter your team name";
     }
     return null;
   }
 
   String? validcaptainname(String value) {
     if (value.isEmpty) {
-      return "Please enter your message";
+      return "Please enter your captain name";
+    }
+    return null;
+  }
+
+  String? validplayername(String value) {
+    if (value.isEmpty) {
+      return "Please enter your player name";
+    }
+    return null;
+  }
+   String? validsportname(String value) {
+    if (value.isEmpty) {
+      return "Please enter your sport event name corractly";
     }
     return null;
   }
 
   String? validaddress(String value) {
     if (value.isEmpty) {
-      return "Please enter your message";
+      return "Please enter your address";
     }
     return null;
   }
 
   String? validcitye(String value) {
     if (value.isEmpty) {
-      return "Please enter your message";
+      return "Please enter your city";
+    }
+    return null;
+  }
+
+  String? validphonenumber(String value) {
+    if (value.isEmpty) {
+      return "Please enter your phone number";
+    } else if (!value.contains("+")) {
+      return "Enter your phone number correctly ";
     }
     return null;
   }
@@ -81,6 +145,20 @@ class TournamentsRegistration extends GetxController {
       captainname.value = captainnamecontroller.value.text;
       address.value = addresscontroller.value.text;
       city.value = citycontroller.value.text;
+      contact.value = contactcontroller.value.text;
+      sportevent.value = sporteventcontroller.value.text;
+      player1.value = player1controller.value.text;
+      player2.value = player2controller.value.text;
+      player3.value = player3controller.value.text;
+      player4.value = player4controller.value.text;
+      player5.value = player5controller.value.text;
+      player6.value = player6controller.value.text;
+      player7.value = player7controller.value.text;
+      player8.value = player8controller.value.text;
+      player9.value = player9controller.value.text;
+      player10.value = player10controller.value.text;
+      player11.value = player11controller.value.text;
+      player12.value = player12controller.value.text;
       isformValidated = true;
       // User those values to send our auth request ...
     }
