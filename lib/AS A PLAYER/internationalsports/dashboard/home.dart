@@ -1,4 +1,3 @@
-import 'package:finalyear/AS%20A%20PLAYER/culturesport/culture_dashboard.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/tabbar/Basketball.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/tabbar/Cricket.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/tabbar/Football.dart';
@@ -47,21 +46,7 @@ class _homeState extends State<home> {
                         icon: const Icon(Icons.search),
                       ),
                     ),
-                    PopupMenuButton(
-                      position: PopupMenuPosition.under,
-                      icon: const Icon(Icons.more_horiz),
-                      itemBuilder: ((context) => [
-                            PopupMenuItem(
-                                child: GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, culturedashboard.routname);
-                              },
-                              child: const Text("Culture sports"),
-                            ))
-                          ]),
-                    )
-                  ],
+                ],
                   automaticallyImplyLeading: false,
                   expandedHeight: 200,
                   pinned: true,

@@ -1,4 +1,3 @@
-import 'package:finalyear/AS%20A%20COACH/culture-sport/cultureplayerdb.dart';
 import 'package:finalyear/wedgets/search_engine_for_user.dart';
 import 'package:get/get.dart';
 import 'package:finalyear/AS%20A%20COACH/international-sports/tabs/player-basketball.dart';
@@ -9,7 +8,6 @@ import 'package:finalyear/AS%20A%20COACH/international-sports/tabs/player-tablet
 import 'package:finalyear/AS%20A%20COACH/international-sports/tabs/player-vulleyball.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import '../../../AS A PLAYER/internationalsports/dashboard/home.dart';
 
 class interhome extends StatefulWidget {
   static const String routname = "interhome";
@@ -48,20 +46,6 @@ class _interhomeState extends State<interhome> {
                           },
                           icon: const Icon(Icons.search)),
                     ),
-                    PopupMenuButton(
-                      position: PopupMenuPosition.under,
-                      icon: const Icon(Icons.more_horiz),
-                      itemBuilder: ((context) => [
-                            PopupMenuItem(
-                                child: GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, cultureplayerdb.routname);
-                              },
-                              child: const Text("Culture sports"),
-                            ))
-                          ]),
-                    )
                   ],
                   automaticallyImplyLeading: false,
                   expandedHeight: 200,
@@ -94,10 +78,10 @@ class _interhomeState extends State<interhome> {
                       isScrollable: true,
                       labelStyle: TextStyle(fontSize: 20),
                       tabs: [
-                        Text("football"),
+                        Text("Football"),
                         Text("Basketball"),
                         Text("vulleyball"),
-                        Text("tabletenis"),
+                        Text("Tabletenis"),
                         Text("Cricket"),
                         Text("Hockey"),
                       ]),

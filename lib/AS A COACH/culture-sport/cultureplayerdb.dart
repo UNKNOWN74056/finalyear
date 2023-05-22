@@ -27,7 +27,7 @@ class _cultureplayerdbState extends State<cultureplayerdb> {
       child: Scaffold(
         body: screens[currentIndex],
         bottomNavigationBar: BottomNavigationBar(
-            selectedItemColor: Colors.blue,
+            selectedItemColor: Colors.teal,
             unselectedItemColor: Colors.black87,
             currentIndex: currentIndex,
             onTap: (value) => setState(() => currentIndex = value),

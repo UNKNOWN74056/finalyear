@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:finalyear/AS%20A%20COACH/international-sports/bottomtabbars/interhome.dart';
-import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/dashboard.dart';
-import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/home.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/profile.dart';
 import 'package:finalyear/GETX/LoginGetX.dart';
 import 'package:finalyear/pages/forgotpassword.dart';
+import 'package:finalyear/pages/homedbforcoache.dart';
+import 'package:finalyear/pages/homedbforplayer.dart';
 import 'package:finalyear/pages/signuppage.dart';
 import 'package:finalyear/service/internet_connection.dart';
 import 'package:finalyear/wedgets/loginbutton.dart';
@@ -25,7 +24,7 @@ class loginpage extends StatefulWidget {
 
 class _loginpageState extends State<loginpage> {
   //bool  for visibility of password
-  bool _obsecure = true;
+  final bool _obsecure = true;
 
   //putting getx controller her
   final controller = Get.put(LoginController());
@@ -49,14 +48,13 @@ class _loginpageState extends State<loginpage> {
           .get()
           .then((value) {
         if (value['profession'] == 'Player') {
-          Get.to(const interhome());
+          Get.to(const homeforplayer());
           print("as a coach dashboard");
         } else {
-          Get.to(const dashboard());
+          Get.to(const homeforcoach());
           print("as a player dashboard");
         }
       });
-      //Get.to(const Homedb());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
