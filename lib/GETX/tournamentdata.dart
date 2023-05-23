@@ -8,7 +8,6 @@ class tournamentdata extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // Call Getallvideos() function when the controller is initialized
     Gettournamentdata();
   }
 

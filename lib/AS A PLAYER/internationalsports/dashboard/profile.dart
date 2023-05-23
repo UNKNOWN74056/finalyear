@@ -116,17 +116,6 @@ class _profileState extends State<profile> {
   }
 
   @override
-  void dispose() {
-    for (var controller in _controllers) {
-      controller.dispose();
-    }
-    updateprofilecontroller.updatefullnamecontroller.dispose();
-    updateprofilecontroller.updatecitycontroller.dispose();
-    updateprofilecontroller.updatephonecontroller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -443,19 +432,9 @@ class _profileState extends State<profile> {
                                                                                     ),
                                                                                   ));
                                                                         },
-                                                                        child:
-                                                                            Row(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.min,
-                                                                          children: [
-                                                                            const Icon(Icons.edit),
-                                                                            const SizedBox(width: 4.0),
-                                                                            const Text('Edit'),
-                                                                          ],
-                                                                        ),
                                                                         style: ElevatedButton
                                                                             .styleFrom(
-                                                                          primary:
+                                                                          backgroundColor:
                                                                               Colors.white, // Button background color
                                                                           onPrimary:
                                                                               Colors.black, // Text color
@@ -469,6 +448,16 @@ class _profileState extends State<profile> {
                                                                               vertical: 8.0),
                                                                           elevation:
                                                                               2.0,
+                                                                        ),
+                                                                        child:
+                                                                            Row(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.min,
+                                                                          children: [
+                                                                            const Icon(Icons.edit),
+                                                                            const SizedBox(width: 4.0),
+                                                                            const Text('Edit'),
+                                                                          ],
                                                                         ),
                                                                       ),
                                                                     )
@@ -533,12 +522,12 @@ class _profileState extends State<profile> {
                                                                             .currentUser!
                                                                             .email)
                                                                     .toList()[index];
-                                                                final _controller =
+                                                                final controller =
                                                                     VideoPlayerController
                                                                         .network(
                                                                             video.videolink);
                                                                 _controllers.add(
-                                                                    _controller);
+                                                                    controller);
                                                                 return GestureDetector(
                                                                   onTap: () {
                                                                     Navigator
@@ -552,7 +541,7 @@ class _profileState extends State<profile> {
                                                                               Chewie(
                                                                             controller:
                                                                                 ChewieController(
-                                                                              videoPlayerController: _controller,
+                                                                              videoPlayerController: controller,
                                                                               autoPlay: true,
                                                                               looping: false,
                                                                               additionalOptions: (context) {
@@ -583,8 +572,8 @@ class _profileState extends State<profile> {
                                                                                         await FirebaseFirestore.instance.collection('videos').doc(video).delete();
 
                                                                                         // Remove video controller from list and dispose it
-                                                                                        _controllers.remove(_controller);
-                                                                                        _controller.dispose();
+                                                                                        _controllers.remove(controller);
+                                                                                        controller.dispose();
 
                                                                                         // Remove video from video list in controller
                                                                                         vidcontroller.videolist.remove(video);
@@ -650,7 +639,7 @@ class _profileState extends State<profile> {
                                                                     ),
                                                                     child:
                                                                         FutureBuilder(
-                                                                      future: _controller
+                                                                      future: controller
                                                                           .initialize(),
                                                                       builder: (BuildContext
                                                                               context,
@@ -662,11 +651,11 @@ class _profileState extends State<profile> {
                                                                             aspectRatio:
                                                                                 16 / 9,
                                                                             child:
-                                                                                VideoPlayer(_controller),
+                                                                                VideoPlayer(controller),
                                                                           );
                                                                         } else if (snapshot
                                                                             .hasError) {
-                                                                          return Text(
+                                                                          return const Text(
                                                                               'Error loading video');
                                                                         } else {
                                                                           return Container(
