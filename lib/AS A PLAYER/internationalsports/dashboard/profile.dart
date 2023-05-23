@@ -4,6 +4,7 @@ import 'package:finalyear/GETX/getdatafromfirebase.dart';
 import 'package:finalyear/GETX/updataprofile.dart';
 import 'package:finalyear/functions/functions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:finalyear/wedgets/adminapprove.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -171,8 +172,7 @@ class _profileState extends State<profile> {
                                                         padding:
                                                             const EdgeInsets
                                                                     .only(
-                                                                right: 10,
-                                                                top: 10),
+                                                                left: 130),
                                                         child: InkWell(
                                                           onTap: () async {
                                                             functions
@@ -182,7 +182,22 @@ class _profileState extends State<profile> {
                                                               FontAwesomeIcons
                                                                   .rightLeft),
                                                         ),
-                                                      )
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                right: 10),
+                                                        child: InkWell(
+                                                          onTap: () {
+                                                            Get.to(
+                                                                AdminApprovalScreen());
+                                                          },
+                                                          child: const Icon(
+                                                              FontAwesomeIcons
+                                                                  .bell),
+                                                        ),
+                                                      ),
                                                     ],
                                                   ),
                                                   Container(
@@ -434,10 +449,10 @@ class _profileState extends State<profile> {
                                                                         },
                                                                         style: ElevatedButton
                                                                             .styleFrom(
+                                                                          foregroundColor:
+                                                                              Colors.black,
                                                                           backgroundColor:
-                                                                              Colors.white, // Button background color
-                                                                          onPrimary:
-                                                                              Colors.black, // Text color
+                                                                              Colors.white, // Text color
                                                                           shape:
                                                                               RoundedRectangleBorder(
                                                                             borderRadius:
@@ -453,10 +468,10 @@ class _profileState extends State<profile> {
                                                                             Row(
                                                                           mainAxisSize:
                                                                               MainAxisSize.min,
-                                                                          children: [
-                                                                            const Icon(Icons.edit),
-                                                                            const SizedBox(width: 4.0),
-                                                                            const Text('Edit'),
+                                                                          children: const [
+                                                                            Icon(Icons.edit),
+                                                                            SizedBox(width: 4.0),
+                                                                            Text('Edit'),
                                                                           ],
                                                                         ),
                                                                       ),
