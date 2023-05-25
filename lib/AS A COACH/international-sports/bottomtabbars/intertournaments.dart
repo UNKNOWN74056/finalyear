@@ -5,6 +5,7 @@ import 'package:finalyear/AS%20A%20COACH/international-sports/intertournaments/p
 import 'package:finalyear/AS%20A%20COACH/international-sports/intertournaments/player-tour-vulleyball.dart';
 import 'package:finalyear/AS%20A%20COACH/international-sports/intertournaments/player-your-tabletenis.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 
 class intertournaments extends StatefulWidget {
   const intertournaments({super.key});
@@ -14,6 +15,15 @@ class intertournaments extends StatefulWidget {
 }
 
 class _intertournamentsState extends State<intertournaments> {
+  //images for swiper
+  var images = [
+    'assets/football.jpg',
+    'assets/basketball.jpg',
+    'assets/vullyball.jpg',
+    'assets/tabletanis.jpg',
+    'assets/cricket.jpg',
+    'assets/hockey.jpg',
+  ];
   @override
   Widget build(BuildContext context) =>
       //TabController _TabController = TabController(length: 6, vsync: this);
@@ -34,10 +44,21 @@ class _intertournamentsState extends State<intertournaments> {
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
                 flexibleSpace: FlexibleSpaceBar(
-                    background: Image.asset(
-                  "assets/mixsport.jpeg",
-                  fit: BoxFit.cover,
-                )),
+                  background: Swiper(
+                    autoplay: true,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
+                        child: Image(
+                          image: AssetImage(images[index]),
+                          fit: BoxFit.cover,
+                        ),
+                      );
+                    },
+                    itemCount: 6,
+                  ),
+                  centerTitle: true,
+                ),
                 centerTitle: true,
                 bottom: const TabBar(
                     indicatorColor: Colors.orange,

@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:finalyear/AS%20A%20COACH/international-sports/playerdashboard.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/profile.dart';
 import 'package:finalyear/GETX/allvideos.dart';
 import 'package:finalyear/GETX/clubdatafirebase.dart';
@@ -123,10 +122,10 @@ class functionservices {
         .get()
         .then((value) {
       if (value['profession'] == 'Player') {
-        Get.to(const homeforplayer());
+        Get.to(const homeforcoach());
         print("as a coach dashboard");
       } else {
-        Get.to(const homeforcoach());
+        Get.to(const homeforplayer());
       }
     });
   }

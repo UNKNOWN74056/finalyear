@@ -305,6 +305,26 @@ class _profileState extends State<profile> {
                                                                         8.0),
                                                                 Row(
                                                                   children: [
+                                                                    const Text(
+                                                                        "Profession: "),
+                                                                    Text(
+                                                                      element
+                                                                          .profession,
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: Colors
+                                                                            .grey[600],
+                                                                        fontSize:
+                                                                            16.0,
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                const SizedBox(
+                                                                    height:
+                                                                        8.0),
+                                                                Row(
+                                                                  children: [
                                                                     const Icon(
                                                                         Icons
                                                                             .star,

@@ -435,6 +435,11 @@ class _coachdetailState extends State<coachdetail> {
                   leading: const Icon(FontAwesomeIcons.venusMars),
                   title: Text(widget.post.gender),
                 ),
+                const Divider(),
+                ListTile(
+                  leading: const Icon(FontAwesomeIcons.userTie),
+                  title: Text(widget.post.profession),
+                ),
                 Container(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
