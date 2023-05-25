@@ -439,6 +439,7 @@ class _clubdetailState extends State<clubdetail> {
               child: StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection("clubphoto")
+                    .where("Email", isEqualTo: widget.post.email)
                     .snapshots(),
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -447,11 +448,16 @@ class _clubdetailState extends State<clubdetail> {
                   }
 
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Text("Loading....");
+                    return const Center(child: Text("Loading...."));
                   }
 
                   final photos = snapshot.data!.docs
-                      .map((doc) => {'id': doc.id, 'photo': doc['clubphoto']})
+                      .where((doc) => doc['Email'] == widget.post.email)
+                      .map((doc) => {
+                            'id': doc.id,
+                            'photo': doc['clubphoto'],
+                            'Email': doc['Email'],
+                          })
                       .toList();
 
                   return GridView.builder(
