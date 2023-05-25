@@ -1,4 +1,3 @@
-
 import 'package:finalyear/functions/functions.dart';
 import 'package:finalyear/pages/loginpage.dart';
 import 'package:finalyear/wedgets/savebutton.dart';
@@ -90,6 +89,7 @@ class _settingState extends State<setting> {
                             TextButton(
                                 onPressed: () {
                                   functions.signout();
+
                                   Navigator.pushNamed(
                                       context, loginpage.routname);
                                 },

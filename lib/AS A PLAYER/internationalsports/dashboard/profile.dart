@@ -335,7 +335,8 @@ class _profileState extends State<profile> {
                                                                             4.0),
                                                                     Text(
                                                                       element
-                                                                          .rating,
+                                                                          .rating
+                                                                          .toString(),
                                                                       style:
                                                                           const TextStyle(
                                                                         fontSize:

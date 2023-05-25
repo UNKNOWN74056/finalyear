@@ -124,7 +124,7 @@ class functionservices {
       if (value['profession'] == 'Player') {
         Get.to(const homeforcoach());
         print("as a coach dashboard");
-      } else {
+      } else if (value['profession'] == 'Coache') {
         Get.to(const homeforplayer());
       }
     });

@@ -48,10 +48,10 @@ class _loginpageState extends State<loginpage> {
           .get()
           .then((value) {
         if (value['profession'] == 'Player') {
-          Get.to(const homeforplayer());
-          print("as a coach dashboard");
-        } else {
           Get.to(const homeforcoach());
+          print("as a coach dashboard");
+        } else if (value['profession'] == 'Coache') {
+          Get.to(const homeforplayer());
           print("as a player dashboard");
         }
       });

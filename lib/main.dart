@@ -28,17 +28,14 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final Future<FirebaseApp> _initailization = Firebase.initializeApp();
-
-  // comment
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
   @override
   Widget build(BuildContext context) {
-    // i add get here GetMaterialApp
     return FutureBuilder(
-      future: _initailization,
+      future: _initialization,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          Get.snackbar("Error", "Somthing went wrong!");
+          Get.snackbar("Error", "Something went wrong!");
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
@@ -50,7 +47,7 @@ class _MyAppState extends State<MyApp> {
             primarySwatch: Colors.blueGrey,
           ),
           debugShowCheckedModeBanner: false,
-          initialRoute: splashscreen.routname,
+          home: const splashscreen(),
           routes: {
             splashscreen.routname: (context) => const splashscreen(),
             loginpage.routname: (context) => const loginpage(),
