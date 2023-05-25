@@ -1,8 +1,8 @@
-import 'package:finalyear/AS%20A%20COACH/culture-sport/cultureplayerdb.dart';
-import 'package:finalyear/AS%20A%20COACH/international-sports/playerdashboard.dart';
+import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import '../AS A PLAYER/culturesport/culture_dashboard.dart';
 
 class homeforplayer extends StatefulWidget {
   const homeforplayer({super.key});
@@ -31,7 +31,7 @@ class _homeforplayerState extends State<homeforplayer> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Get.to(const playerdashboeard());
+                    Get.to(const dashboard());
                   },
                   child: Container(
                     margin: const EdgeInsets.only(bottom: 16.0),
@@ -57,7 +57,7 @@ class _homeforplayerState extends State<homeforplayer> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.to(const cultureplayerdb());
+                    Get.to(const culturedashboard());
                   },
                   child: Container(
                     height: 200,
