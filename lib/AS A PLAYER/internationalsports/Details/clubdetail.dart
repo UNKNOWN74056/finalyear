@@ -1,6 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:finalyear/GETX/clubdatafirebase.dart';
-import 'package:finalyear/wedgets/reusraw.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -46,19 +44,19 @@ class _clubdetailState extends State<clubdetail> {
     double totalrating = 0;
     await FirebaseFirestore.instance
         .collection("clubs")
-        .doc(widget.post['Email'])
+        .doc(widget.post.email)
         .collection("ratings")
         .doc(currentuser)
         .set({
-      'Email': widget.post['Email'],
+      'Email': widget.post.email,
       'rating': rating,
     });
 
     var querySnapshot = await FirebaseFirestore.instance
         .collection('clubs')
-        .doc(widget.post['Email'])
+        .doc(widget.post.email)
         .collection("ratings")
-        .where('Email', isEqualTo: widget.post['Email'])
+        .where('Email', isEqualTo: widget.post.email)
         .get();
 
     int numRatings = querySnapshot.docs.length;
@@ -69,17 +67,17 @@ class _clubdetailState extends State<clubdetail> {
     print('Average rating: $ratingavg');
     await FirebaseFirestore.instance
         .collection("clubs")
-        .doc(widget.post['Email'])
+        .doc(widget.post.email)
         .collection("ratings")
         .doc(currentuser)
         .update({
-      'rating': ratingavg,
+      'rating': ratingavg.toString(),
     });
     await FirebaseFirestore.instance
         .collection("clubs")
-        .doc(widget.post['Email'])
+        .doc(widget.post.email)
         .update({
-      'rating': ratingavg,
+      'rating': ratingavg.toString(),
     });
   }
 
@@ -127,7 +125,7 @@ class _clubdetailState extends State<clubdetail> {
                                         snapshot.data!.docs[i]['time'];
                                     var finaldate = DateTime.parse(
                                         date.toDate().toString());
-                                    return Container(
+                                    return SizedBox(
                                       height:
                                           MediaQuery.of(context).size.height *
                                               0.25,
@@ -171,7 +169,7 @@ class _clubdetailState extends State<clubdetail> {
                                             const SizedBox(
                                               height: 10,
                                             ),
-                                            Container(
+                                            SizedBox(
                                               width: MediaQuery.of(context)
                                                       .size
                                                       .width *
@@ -189,7 +187,7 @@ class _clubdetailState extends State<clubdetail> {
                                                     padding:
                                                         const EdgeInsets.only(
                                                             left: 10),
-                                                    child: Container(
+                                                    child: SizedBox(
                                                       width:
                                                           MediaQuery.of(context)
                                                                   .size
@@ -252,7 +250,7 @@ class _clubdetailState extends State<clubdetail> {
                                   shrinkWrap: true,
                                   itemBuilder: (context, i) {
                                     var data = snapshot.data!.docs[i];
-                                    final _namecontroller = data['fullname'];
+                                    final namecontroller = data['fullname'];
                                     final image = data['Imageurl'];
                                     return Padding(
                                       padding: EdgeInsets.only(
@@ -260,7 +258,7 @@ class _clubdetailState extends State<clubdetail> {
                                               .viewInsets
                                               .bottom),
                                       child: Padding(
-                                        padding: EdgeInsets.all(15),
+                                        padding: const EdgeInsets.all(15),
                                         child: TextFormField(
                                           cursorColor: Colors.black,
                                           cursorWidth: 5,
@@ -288,7 +286,7 @@ class _clubdetailState extends State<clubdetail> {
                                                 GestureDetector(
                                                   onTap: (() {
                                                     addcommnet(
-                                                        _namecontroller
+                                                        namecontroller
                                                             .toString(),
                                                         image.toString(),
                                                         _commentcontroler.text
@@ -445,11 +443,11 @@ class _clubdetailState extends State<clubdetail> {
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.hasError) {
-                    return Text('Something went wrong');
+                    return const Text('Something went wrong');
                   }
 
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Text("Loading....");
+                    return const Text("Loading....");
                   }
 
                   final photos = snapshot.data!.docs

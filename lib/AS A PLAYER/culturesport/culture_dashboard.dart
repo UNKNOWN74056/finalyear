@@ -15,7 +15,7 @@ class culturedashboard extends StatefulWidget {
 class _culturedashboardState extends State<culturedashboard> {
   int currentIndex = 0;
 
-  final screens = [
+  final screens = const [
     culturehome(),
     culturetournaments(),
     setting(),
