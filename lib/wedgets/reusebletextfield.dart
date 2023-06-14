@@ -8,18 +8,23 @@ class reusebletextfield extends StatelessWidget {
   final autoValidateMode;
   final keyboard;
   final icon;
+  final sufixicon;
   final labelText;
+  final obscureText;
 
-  const reusebletextfield(
-      {super.key,
-      required this.controller,
-      required this.autoValidateMode,
-      required this.keyboard,
-      this.maxlength,
-      this.maxline,
-      required this.validator,
-      required this.icon,
-      required this.labelText});
+  const reusebletextfield({
+    super.key,
+    required this.controller,
+    required this.autoValidateMode,
+    required this.keyboard,
+    this.maxlength,
+    this.maxline = 1,
+    required this.validator,
+    required this.icon,
+    this.sufixicon,
+    required this.labelText,
+    this.obscureText = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +38,7 @@ class reusebletextfield extends StatelessWidget {
         color: Colors.black,
       ),
       keyboardType: keyboard,
+      obscureText: obscureText,
       textAlignVertical: TextAlignVertical.center,
       decoration: InputDecoration(
         filled: true,
@@ -40,6 +46,7 @@ class reusebletextfield extends StatelessWidget {
         contentPadding: const EdgeInsets.symmetric(vertical: 22),
         prefixIcon: icon,
         labelText: labelText,
+        suffixIcon: sufixicon,
         hintStyle: const TextStyle(
           color: Colors.grey,
         ),

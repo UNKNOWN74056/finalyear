@@ -1,7 +1,7 @@
 import 'package:chewie/chewie.dart';
 import 'package:finalyear/GETX/getdatafromfirebase.dart';
-
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -29,6 +29,10 @@ class _coachdetailState extends State<coachdetail> {
   final controller = Get.put(FetchDataFirebase());
   //controller
   final TextEditingController _commentcontroler = TextEditingController();
+  //cureent user
+  final currentuser = FirebaseAuth.instance.currentUser!.email;
+  //rating track
+  bool hasRated = false;
   //add comment in firestore
   Future addcommnet(String name, String image, String comment) async {
     await FirebaseFirestore.instance
@@ -59,7 +63,12 @@ class _coachdetailState extends State<coachdetail> {
         .set({
       'email': widget.post.email,
       'rating': rating,
-    });
+      "hasrated": true,
+    }).then((_) => {
+              setState(() {
+                hasRated = true;
+              })
+            });
 
     var querySnapshot = await FirebaseFirestore.instance
         .collection('users')
@@ -90,13 +99,31 @@ class _coachdetailState extends State<coachdetail> {
     });
   }
 
-  final currentuser = FirebaseAuth.instance.currentUser!.email;
+  void checkRatingStatus() {
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentuser)
+        .collection("ratings")
+        .get()
+        .then((QuerySnapshot<Map<String, dynamic>> docSnapshot) {
+      setState(() {
+        hasRated = docSnapshot.size >
+            0; // Check if there are any documents in the snapshot
+      });
+    });
+  }
 
   //dispose
   @override
   void dispose() {
     _commentcontroler.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkRatingStatus();
   }
 
   double rating = 0;
@@ -401,8 +428,13 @@ class _coachdetailState extends State<coachdetail> {
                                   })),
                         ],
                       ),
-                      Container(
-                        child: RatingBar.builder(
+                    ],
+                  ),
+                ),
+                Container(
+                  child: hasRated
+                      ? Container()
+                      : RatingBar.builder(
                           minRating: 0,
                           allowHalfRating: true,
                           itemBuilder: (context, _) => const Icon(Icons.star),
@@ -412,9 +444,6 @@ class _coachdetailState extends State<coachdetail> {
                             addrating();
                           }),
                         ),
-                      ),
-                    ],
-                  ),
                 ),
                 const SizedBox(height: 10.0),
                 ListTile(
