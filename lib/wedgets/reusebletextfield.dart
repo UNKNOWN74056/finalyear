@@ -23,7 +23,7 @@ class reusebletextfield extends StatelessWidget {
     required this.icon,
     this.sufixicon,
     required this.labelText,
-    this.obscureText = true,
+    this.obscureText = false,
   });
 
   @override

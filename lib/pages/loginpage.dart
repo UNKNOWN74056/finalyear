@@ -23,9 +23,6 @@ class loginpage extends StatefulWidget {
 }
 
 class _loginpageState extends State<loginpage> {
-  //bool  for visibility of password
-  //late bool obsecure = true;
-
   //putting getx controller her
   final controller = Get.put(LoginController());
 
@@ -145,12 +142,12 @@ class _loginpageState extends State<loginpage> {
                     ),
                     reusebletextfield(
                       keyboard: TextInputType.emailAddress,
-                      obscureText: true,
                       validator: (value) {
                         return controller.validPassword(value!);
                       },
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                       controller: controller.passwordController,
+                      obscureText: true,
                       labelText: "Enter your passwowrd",
                       icon: const Icon(
                         Icons.lock,
@@ -159,6 +156,7 @@ class _loginpageState extends State<loginpage> {
                       sufixicon: const Icon(
                         Icons.visibility_off,
                         color: Colors.grey,
+                        size: 20,
                       ),
                     ),
                   ],
