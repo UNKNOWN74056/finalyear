@@ -46,8 +46,7 @@ class functionservices {
     final downloadURL = await taskSnapshot.ref.getDownloadURL();
 
     //adding download link to firestore database
-    var docRef =
-        FirebaseFirestore.instance.collection("videos").doc(currentuser);
+    var docRef = FirebaseFirestore.instance.collection("videos").doc();
     var id = docRef.id;
     await docRef.set({
       "videourl": downloadURL.toString(),
