@@ -38,6 +38,7 @@ class functionservices {
     if (result != null) {
       _videoFile = File(result.files.single.path!);
     }
+
     if (_videoFile == null) return;
     String fileName = _videoFile!.path.split('/videos').last;
     Reference reference = FirebaseStorage.instance.ref().child(fileName);
