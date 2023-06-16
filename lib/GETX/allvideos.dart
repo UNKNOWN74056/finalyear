@@ -23,12 +23,13 @@ class FetchVideoFirebase extends GetxController {
         .collection("videos")
         .get()
         .then((QuerySnapshot snapshot) {
-      snapshot.docs.forEach((f) {
+      for (var f in snapshot.docs) {
         videolist.add(video(
+          id: f['id'],
           videolink: f['videourl'],
           email: f['email'],
         ));
-      });
+      }
     });
   }
 }

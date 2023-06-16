@@ -1,11 +1,11 @@
-import 'package:finalyear/AS%20A%20PLAYER/internationalsports/Details/clubdetail.dart';
 import 'package:finalyear/GETX/clubdatafirebase.dart';
-import 'package:finalyear/functions/functions.dart';
-import 'package:finalyear/wedgets/search_engine_for_club.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+
+import '../../../wedgets/search_engine_for_club.dart';
+import '../Details/clubdetail.dart';
 
 class clubs extends StatefulWidget {
   const clubs({super.key});
@@ -76,8 +76,8 @@ class _clubsState extends State<clubs> {
             body: GetBuilder(
                 init: Getclubdata(),
                 builder: (clubcontroller) {
-                  return Obx(()
-                    => Column(
+                  return Obx(
+                    () => Column(
                       children: clubcontroller.clublist
                           .map(
                             (element) => Card(

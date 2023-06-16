@@ -24,7 +24,7 @@ class Getclubdata extends GetxController {
         .collection("clubs")
         .get()
         .then((QuerySnapshot snapshot) {
-      snapshot.docs.forEach((c) {
+      for (var c in snapshot.docs) {
         clublist.add(Clubs(
           clubimage: c['Clubimage'],
           clubname: c['Clubname'],
@@ -34,7 +34,7 @@ class Getclubdata extends GetxController {
           rating: c['rating'],
           sport: c['sport'],
         ));
-      });
+      }
     });
   }
 }

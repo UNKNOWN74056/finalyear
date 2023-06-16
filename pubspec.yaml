@@ -54,7 +54,6 @@ dependencies:
   http: ^0.13.0
   url_launcher: ^6.0.0
   get_time_ago: ^1.1.8
-  shared_preferences: ^2.1.1
 
 dev_dependencies:
   flutter_test:
