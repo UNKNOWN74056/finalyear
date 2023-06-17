@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/model/usersModel.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 class FetchDataFirebase extends GetxController {
@@ -9,12 +8,11 @@ class FetchDataFirebase extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // Call Getallvideos() function when the controller is initialized
     GetDataFirebase();
   }
 
-  // Function to refresh videolist
-  Future<void> refresh_videos() async {
+  // Function to refresh user data
+  Future<void> refresh_userdata() async {
     await GetDataFirebase();
   }
 
@@ -25,7 +23,7 @@ class FetchDataFirebase extends GetxController {
         .collection("users")
         .get()
         .then((QuerySnapshot snapshot) {
-      snapshot.docs.forEach((f) {
+      for (var f in snapshot.docs) {
         mylist.add(Users(
           image_Url: f['Imageurl'],
           city: f['city'],
@@ -38,7 +36,7 @@ class FetchDataFirebase extends GetxController {
           rating: f['rating'],
           sport: f['sport'],
         ));
-      });
+      }
     });
   }
 }

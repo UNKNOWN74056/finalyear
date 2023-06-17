@@ -8,12 +8,11 @@ class Getclubdata extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // Call Getallvideos() function when the controller is initialized
     Getclubdatafirebase();
   }
 
-  // Function to refresh videolist
-  Future<void> refresh_videos() async {
+  // Function to refresh clubdata
+  Future<void> refresh_clubdata() async {
     await Getclubdatafirebase();
   }
 

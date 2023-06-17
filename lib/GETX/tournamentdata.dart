@@ -11,8 +11,8 @@ class tournamentdata extends GetxController {
     Gettournamentdata();
   }
 
-  // Function to refresh videolist
-  Future<void> refresh_videos() async {
+  // Function to refresh tournament
+  Future<void> refresh_tournament() async {
     await Gettournamentdata();
   }
 
@@ -22,15 +22,15 @@ class tournamentdata extends GetxController {
         .collection("tournaments")
         .get()
         .then((QuerySnapshot snapshot) {
-      for (var c in snapshot.docs) {
+      for (var f in snapshot.docs) {
         tournamentlist.add(tournament(
-            tournamentimage: c['tournamentimage'],
-            tournamentlocation: c['tournamentlocation'],
-            tournamentsport: c['tournamentsport'],
-            tournamentname: c['tournamentname'],
-            enddate: c['enddate'],
-            startdate: c['startdate'],
-            price: c['price']));
+            tournamentimage: f['tournamentimage'],
+            tournamentlocation: f['tournamentlocation'],
+            tournamentname: f['tournamentname'],
+            tournamentsport: f['tournamentsport'],
+            startdate: f['startdate'],
+            enddate: f['enddate'],
+            price: f['price']));
       }
     });
   }
