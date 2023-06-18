@@ -89,9 +89,7 @@ class _settingState extends State<setting> {
                             TextButton(
                                 onPressed: () {
                                   functions.signout();
-
-                                  Navigator.pushNamed(
-                                      context, loginpage.routname);
+                                  Get.to(const loginpage());
                                 },
                                 child: const Text("Yes")),
                           ],

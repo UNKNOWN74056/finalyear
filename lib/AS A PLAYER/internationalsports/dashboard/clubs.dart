@@ -30,54 +30,54 @@ class _clubsState extends State<clubs> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: RefreshIndicator(
-          onRefresh: () async {
-            clubcontroller.Getclubdatafirebase();
-          },
-          child: NestedScrollView(
-            headerSliverBuilder: (context, innerBoxIsScrolled) => [
-              SliverAppBar(
-                  actions: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20),
-                      child: IconButton(
-                          onPressed: () {
-                            Get.to(clubsearchengine());
-                          },
-                          icon: const Icon(Icons.search)),
-                    ),
-                  ],
-                  automaticallyImplyLeading: false,
-                  expandedHeight: 200,
-                  pinned: true,
-                  floating: true,
-                  snap: true,
-                  title: const Text(
-                    "CLUBS",
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+        body: NestedScrollView(
+          headerSliverBuilder: (context, innerBoxIsScrolled) => [
+            SliverAppBar(
+                actions: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: IconButton(
+                        onPressed: () {
+                          Get.to(clubsearchengine());
+                        },
+                        icon: const Icon(Icons.search)),
                   ),
-                  flexibleSpace: FlexibleSpaceBar(
-                    background: Swiper(
-                      autoplay: true,
-                      itemBuilder: (BuildContext context, int index) {
-                        return ClipRRect(
-                          borderRadius: BorderRadius.circular(5),
-                          child: Image(
-                            image: AssetImage(images[index]),
-                            fit: BoxFit.cover,
-                          ),
-                        );
-                      },
-                      itemCount: 6,
-                    ),
-                    centerTitle: true,
-                  ))
-            ],
-            body: GetBuilder(
-                init: Getclubdata(),
-                builder: (clubcontroller) {
-                  return Obx(
-                    () => Column(
+                ],
+                automaticallyImplyLeading: false,
+                expandedHeight: 200,
+                pinned: true,
+                floating: true,
+                snap: true,
+                title: const Text(
+                  "CLUBS",
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                ),
+                flexibleSpace: FlexibleSpaceBar(
+                  background: Swiper(
+                    autoplay: true,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
+                        child: Image(
+                          image: AssetImage(images[index]),
+                          fit: BoxFit.cover,
+                        ),
+                      );
+                    },
+                    itemCount: 6,
+                  ),
+                  centerTitle: true,
+                ))
+          ],
+          body: GetBuilder(
+              init: Getclubdata(),
+              builder: (clubcontroller) {
+                return RefreshIndicator(
+                  onRefresh: () async {
+                    await clubcontroller.Getclubdatafirebase();
+                  },
+                  child: Obx(
+                    () => ListView(
                       children: clubcontroller.clublist
                           .map(
                             (element) => Card(
@@ -106,9 +106,9 @@ class _clubsState extends State<clubs> {
                           )
                           .toList(),
                     ),
-                  );
-                }),
-          ),
+                  ),
+                );
+              }),
         ),
       ),
     );

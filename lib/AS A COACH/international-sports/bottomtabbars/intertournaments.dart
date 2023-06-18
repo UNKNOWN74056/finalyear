@@ -25,9 +25,7 @@ class _intertournamentsState extends State<intertournaments> {
     'assets/hockey.jpg',
   ];
   @override
-  Widget build(BuildContext context) =>
-      //TabController _TabController = TabController(length: 6, vsync: this);
-      SafeArea(
+  Widget build(BuildContext context) => SafeArea(
           child: DefaultTabController(
         length: 6,
         child: Scaffold(

@@ -91,33 +91,51 @@ class _profileState extends State<profile> {
                                 ],
                               ),
                               Container(
-                                padding: const EdgeInsets.all(16.0),
+                                padding: const EdgeInsets.all(20),
                                 child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    CircleAvatar(
-                                      radius: 40.0,
-                                      backgroundImage:
-                                          NetworkImage(element.image_Url),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 45.0,
+                                          backgroundImage:
+                                              NetworkImage(element.image_Url),
+                                        ),
+                                      ],
                                     ),
                                     const SizedBox(width: 16.0),
-                                    Expanded(
-                                      // Move the Expanded widget here
-                                      child: Column(
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 20),
+                                      child: Expanded(
+                                        child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Text(
-                                              element.fullname,
-                                              style: const TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 20,
-                                              ),
-                                            ),
-                                            const SizedBox(height: 8.0),
                                             Row(
                                               children: [
-                                                const Text("Gender: "),
+                                                Text(
+                                                  element.fullname,
+                                                  style: const TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 20,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 8.0,
+                                            ),
+                                            Row(
+                                              children: [
+                                                const Text(
+                                                  "Gender: ",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
                                                 Text(
                                                   element.gender,
                                                   style: TextStyle(
@@ -130,7 +148,12 @@ class _profileState extends State<profile> {
                                             const SizedBox(height: 8.0),
                                             Row(
                                               children: [
-                                                const Text("Favorite sport: "),
+                                                const Text(
+                                                  "Favorite sport: ",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
                                                 Text(
                                                   element.sport,
                                                   style: TextStyle(
@@ -143,7 +166,12 @@ class _profileState extends State<profile> {
                                             const SizedBox(height: 8.0),
                                             Row(
                                               children: [
-                                                const Text("Location: "),
+                                                const Text(
+                                                  "Location: ",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
                                                 Text(
                                                   element.city,
                                                   style: TextStyle(
@@ -156,7 +184,12 @@ class _profileState extends State<profile> {
                                             const SizedBox(height: 8.0),
                                             Row(
                                               children: [
-                                                const Text("Profession: "),
+                                                const Text(
+                                                  "Profession: ",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
                                                 Text(
                                                   element.profession,
                                                   style: TextStyle(
@@ -180,25 +213,28 @@ class _profileState extends State<profile> {
                                                 ),
                                                 const SizedBox(width: 4.0),
                                                 Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 40),
-                                                    child:
-                                                        ReusableElevatedButton(
-                                                      onTap: () {
-                                                        Get.to(
-                                                            const CustomBottomSheet());
-                                                      },
-                                                      icon: Icons.edit,
-                                                      child: const Text("Edit"),
-                                                    ))
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 40),
+                                                  child: ReusableElevatedButton(
+                                                    onTap: () {
+                                                      Get.to(
+                                                          const CustomBottomSheet());
+                                                    },
+                                                    icon: Icons.edit,
+                                                    child: const Text("Edit"),
+                                                  ),
+                                                ),
                                               ],
                                             ),
-                                          ]),
-                                    )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
+
                               Padding(
                                 padding: const EdgeInsets.only(left: 15),
                                 child: Column(
