@@ -26,7 +26,7 @@ class _footballtourState extends State<footballtour> {
           },
           child: ListView(
             children: controller.tournamentlist
-                //.where((e) => e.tournamentsport == 'football')
+                .where((e) => e.tournamentsport == 'football')
                 .map(
                   (element) => Column(
                     children: [
