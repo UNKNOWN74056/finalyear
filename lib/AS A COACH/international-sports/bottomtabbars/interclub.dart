@@ -77,34 +77,36 @@ class _interclubState extends State<interclub> {
             body: GetBuilder(
                 init: Getclubdata(),
                 builder: (clubcontroller) {
-                  return Column(
-                    children: clubcontroller.clublist
-                        .map(
-                          (element) => Card(
-                              color: Colors.grey.shade300,
-                              shape: RoundedRectangleBorder(
-                                side: const BorderSide(
-                                    color: Color.fromARGB(255, 25, 9, 117),
-                                    width: 1),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: ListTile(
-                                  title: Text(element.clubname,
-                                      style: const TextStyle(fontSize: 20)),
-                                  leading: CircleAvatar(
-                                      radius: 35,
-                                      backgroundImage:
-                                          NetworkImage(element.clubimage),
-                                      backgroundColor: Colors.white),
-                                  subtitle: Text(element.location,
-                                      style: const TextStyle(fontSize: 15)),
-                                  trailing: const Icon(
-                                    FontAwesomeIcons.arrowRight,
-                                  ),
-                                  onTap: () =>
-                                      Get.to(clubdetail(post: element)))),
-                        )
-                        .toList(),
+                  return Obx(
+                    () => Column(
+                      children: clubcontroller.clublist
+                          .map(
+                            (element) => Card(
+                                color: Colors.grey.shade300,
+                                shape: RoundedRectangleBorder(
+                                  side: const BorderSide(
+                                      color: Color.fromARGB(255, 25, 9, 117),
+                                      width: 1),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: ListTile(
+                                    title: Text(element.clubname,
+                                        style: const TextStyle(fontSize: 20)),
+                                    leading: CircleAvatar(
+                                        radius: 35,
+                                        backgroundImage:
+                                            NetworkImage(element.clubimage),
+                                        backgroundColor: Colors.white),
+                                    subtitle: Text(element.location,
+                                        style: const TextStyle(fontSize: 15)),
+                                    trailing: const Icon(
+                                      FontAwesomeIcons.arrowRight,
+                                    ),
+                                    onTap: () =>
+                                        Get.to(clubdetail(post: element)))),
+                          )
+                          .toList(),
+                    ),
                   );
                 }),
           ),

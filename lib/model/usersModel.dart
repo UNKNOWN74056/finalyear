@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 class Users {
   final dynamic image_Url;
   final dynamic city;
