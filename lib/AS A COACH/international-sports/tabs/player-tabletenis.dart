@@ -1,7 +1,6 @@
-import 'package:finalyear/functions/functions.dart';
+import 'package:finalyear/AS%20A%20COACH/details_page/user_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../AS A PLAYER/internationalsports/Details/coachdetail.dart';
 import '../../../GETX/getdatafromfirebase.dart';
 
 class playertabletenis extends StatefulWidget {
@@ -48,7 +47,8 @@ class _playertabletenisState extends State<playertabletenis> {
                               trailing: const Icon(
                                 Icons.arrow_forward,
                               ),
-                              onTap: () => Get.to(coachdetail(post: element)),
+                              onTap: () =>
+                                  Get.to(user_detail_page(post: element)),
                               subtitle: Text(element.city,
                                   style: const TextStyle(fontSize: 15))),
                         ))

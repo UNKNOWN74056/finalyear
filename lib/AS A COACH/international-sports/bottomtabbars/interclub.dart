@@ -1,9 +1,9 @@
+import 'package:finalyear/AS%20A%20COACH/details_page/club_detail_page.dart';
 import 'package:finalyear/wedgets/search_engine_for_club.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import '../../../AS A PLAYER/internationalsports/Details/clubdetail.dart';
 import '../../../GETX/clubdatafirebase.dart';
 
 class interclub extends StatefulWidget {
@@ -102,8 +102,8 @@ class _interclubState extends State<interclub> {
                                     trailing: const Icon(
                                       FontAwesomeIcons.arrowRight,
                                     ),
-                                    onTap: () =>
-                                        Get.to(clubdetail(post: element)))),
+                                    onTap: () => Get.to(
+                                        club_detail_page(post: element)))),
                           )
                           .toList(),
                     ),
