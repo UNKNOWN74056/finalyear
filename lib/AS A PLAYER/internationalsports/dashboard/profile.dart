@@ -11,6 +11,7 @@ import 'package:video_player/video_player.dart';
 import '../../../GETX/allvideos.dart';
 import '../../../wedgets/editbutton.dart';
 import '../../../wedgets/editprofilewidget.dart';
+import 'package:flutter_badged/flutter_badge.dart';
 
 class profile extends StatefulWidget {
   const profile({super.key});
