@@ -1,6 +1,6 @@
+import 'package:finalyear/API/footballApi/basketballapi/baskitballapi.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../API/footballApi/soccer.dart';
 import '../../../GETX/tournamentdata.dart';
 
 class playertourfootball extends StatefulWidget {
@@ -34,7 +34,7 @@ class _playertourfootballState extends State<playertourfootball> {
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: GestureDetector(
                             onTap: () {
-                              Get.to(SoccerApp());
+                              Get.to(BasketballMatchesPage());
                             },
                             child: Container(
                               decoration: BoxDecoration(

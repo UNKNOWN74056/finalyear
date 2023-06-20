@@ -3,6 +3,7 @@ import 'package:finalyear/AS%20A%20COACH/culture-sport/tournaments/player-tour-g
 import 'package:finalyear/AS%20A%20COACH/culture-sport/tournaments/player-tour-kabaddi.dart';
 import 'package:finalyear/AS%20A%20COACH/culture-sport/tournaments/player-tour-tent-pagging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 
 class playerculturetournaments extends StatefulWidget {
   const playerculturetournaments({super.key});
@@ -11,6 +12,13 @@ class playerculturetournaments extends StatefulWidget {
   State<playerculturetournaments> createState() =>
       _playerculturetournamentsState();
 }
+
+var images = [
+  'assets/culture1.jpg',
+  'assets/culture2.jpg',
+  'assets/culture3.jpg',
+  'assets/culture4.jpg',
+];
 
 class _playerculturetournamentsState extends State<playerculturetournaments> {
   @override
@@ -31,10 +39,21 @@ class _playerculturetournamentsState extends State<playerculturetournaments> {
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
                 flexibleSpace: FlexibleSpaceBar(
-                    background: Image.asset(
-                  "assets/mixsport.jpeg",
-                  fit: BoxFit.cover,
-                )),
+                  background: Swiper(
+                    autoplay: true,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
+                        child: Image(
+                          image: AssetImage(images[index]),
+                          fit: BoxFit.cover,
+                        ),
+                      );
+                    },
+                    itemCount: 6,
+                  ),
+                  centerTitle: true,
+                ),
                 centerTitle: true,
                 bottom: const TabBar(
                     indicatorColor: Colors.orange,
