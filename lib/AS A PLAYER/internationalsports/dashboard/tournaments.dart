@@ -29,7 +29,6 @@ class _tournamentsState extends State<tournaments>{
   ];
   @override
   Widget build(BuildContext context) =>
-      //TabController _TabController = TabController(length: 6, vsync: this);
       SafeArea(
           child: DefaultTabController(
         length: 6,

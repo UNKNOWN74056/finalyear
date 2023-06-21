@@ -4,6 +4,7 @@ import 'package:finalyear/GETX/tournamentRegister.dart';
 import 'package:finalyear/model/tournamentrequestmodel.dart';
 import 'package:finalyear/wedgets/loginbutton.dart';
 import 'package:finalyear/wedgets/reusebletextfield.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -16,28 +17,29 @@ class registration extends StatefulWidget {
 }
 
 final controller = Get.put(TournamentsRegistration());
+final currentuser = FirebaseAuth.instance.currentUser!.email;
 Future<void> sendRequest(BuildContext context) async {
   final request = TournamentRegistrationRequest(
-    teamName: controller.teamnamecontroller.text,
-    captainName: controller.captainnamecontroller.text,
-    address: controller.addresscontroller.text,
-    city: controller.citycontroller.text,
-    contactEmail: controller.emailcontroller.text,
-    contact: controller.contactcontroller.text,
-    sportevent: controller.sporteventcontroller.text,
-    player1: controller.player1controller.text,
-    player2: controller.player2controller.text,
-    player3: controller.player3controller.text,
-    player4: controller.player4controller.text,
-    player5: controller.player5controller.text,
-    player6: controller.player6controller.text,
-    player7: controller.player7controller.text,
-    player8: controller.player8controller.text,
-    player9: controller.player9controller.text,
-    player10: controller.player10controller.text,
-    player11: controller.player11controller.text,
-    player12: controller.player12controller.text,
-  );
+      teamName: controller.teamnamecontroller.text,
+      captainName: controller.captainnamecontroller.text,
+      address: controller.addresscontroller.text,
+      city: controller.citycontroller.text,
+      contactEmail: controller.emailcontroller.text,
+      contact: controller.contactcontroller.text,
+      sportevent: controller.sporteventcontroller.text,
+      player1: controller.player1controller.text,
+      player2: controller.player2controller.text,
+      player3: controller.player3controller.text,
+      player4: controller.player4controller.text,
+      player5: controller.player5controller.text,
+      player6: controller.player6controller.text,
+      player7: controller.player7controller.text,
+      player8: controller.player8controller.text,
+      player9: controller.player9controller.text,
+      player10: controller.player10controller.text,
+      player11: controller.player11controller.text,
+      player12: controller.player12controller.text,
+      sentby: currentuser.toString());
 
   try {
     final collectionRef =

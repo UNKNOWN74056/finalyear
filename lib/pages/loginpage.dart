@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/profile.dart';
 import 'package:finalyear/GETX/LoginGetX.dart';
 import 'package:finalyear/pages/forgotpassword.dart';
 import 'package:finalyear/pages/homedbforcoache.dart';
@@ -21,6 +20,8 @@ class loginpage extends StatefulWidget {
   @override
   State<loginpage> createState() => _loginpageState();
 }
+
+final currentUser = FirebaseAuth.instance;
 
 class _loginpageState extends State<loginpage> {
   //putting getx controller her

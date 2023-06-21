@@ -1,3 +1,4 @@
+import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/profile.dart';
 class TournamentRegistrationRequest {
   String teamName;
   String captainName;
@@ -19,6 +20,7 @@ class TournamentRegistrationRequest {
   String player11;
   String player12;
   bool isApproved;
+  String sentby;
 
   TournamentRegistrationRequest({
     required this.teamName,
@@ -41,6 +43,7 @@ class TournamentRegistrationRequest {
     required this.player11,
     required this.player12,
     this.isApproved = false,
+    required this.sentby,
   });
 
   Map<String, dynamic> toJson() {
@@ -50,7 +53,7 @@ class TournamentRegistrationRequest {
       'address': address,
       'city': city,
       'contactEmail': contactEmail,
-      'sportevent':sportevent,
+      'sportevent': sportevent,
       'contact': contact,
       'player1': player1,
       'player2': player2,
@@ -64,6 +67,7 @@ class TournamentRegistrationRequest {
       'player10': player10,
       'player11': player11,
       'isApproved': isApproved,
+      'email' : sentby,
     };
   }
 
@@ -89,6 +93,7 @@ class TournamentRegistrationRequest {
       player11: json['player11'],
       player12: json['player12'],
       isApproved: json['isApproved'],
+      sentby: json['email']
     );
   }
 }

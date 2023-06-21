@@ -20,7 +20,6 @@ class profile extends StatefulWidget {
   State<profile> createState() => _profileState();
 }
 
-final currentUser = FirebaseAuth.instance;
 
 class _profileState extends State<profile> {
   //getx controller

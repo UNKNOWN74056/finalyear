@@ -6,6 +6,9 @@ import 'package:finalyear/AS%20A%20COACH/international-sports/intertournaments/p
 import 'package:finalyear/AS%20A%20COACH/international-sports/intertournaments/player-your-tabletenis.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import '../../../AS A PLAYER/internationalsports/tournamentsregistration/registration.dart';
 
 class intertournaments extends StatefulWidget {
   const intertournaments({super.key});
@@ -33,6 +36,14 @@ class _intertournamentsState extends State<intertournaments> {
             floatHeaderSlivers: true,
             headerSliverBuilder: (context, innerBoxIsScrolled) => [
               SliverAppBar(
+                actions: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: IconButton(
+                        onPressed: () => Get.to(() => (const registration())),
+                        icon: const FaIcon(FontAwesomeIcons.trophy)),
+                  ),
+                ],
                 expandedHeight: 200,
                 pinned: true,
                 floating: true,
