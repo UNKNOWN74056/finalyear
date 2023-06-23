@@ -1,5 +1,6 @@
 import 'package:chewie/chewie.dart';
 import 'package:finalyear/GETX/getdatafromfirebase.dart';
+import 'package:finalyear/GETX/offerrequest.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'package:get/get.dart';
@@ -11,6 +12,7 @@ import 'package:get_time_ago/get_time_ago.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../GETX/allvideos.dart';
+import '../../functions/functions.dart';
 
 class user_detail_page extends StatefulWidget {
   //object to the wigdet data
@@ -127,6 +129,8 @@ class _coachdetailState extends State<user_detail_page> {
   }
 
   double rating = 0;
+  final offercontroller = Get.put(offerrequestform());
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -383,7 +387,44 @@ class _coachdetailState extends State<user_detail_page> {
                   padding: const EdgeInsets.only(right: 10),
                   child: GestureDetector(
                     onTap: () {
-                      
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Offer Amount'),
+                            content: Form(
+                              key: offercontroller.offerkey,
+                              child: TextFormField(
+                                controller: offercontroller.amountcontroller,
+                                keyboardType: TextInputType.number,
+                                validator: (Value) {
+                                  return offercontroller.validammount(Value!);
+                                },
+                                decoration: const InputDecoration(
+                                    labelText: 'Enter Amount'),
+                              ),
+                            ),
+                            actions: <Widget>[
+                              ElevatedButton(
+                                child: const Text('Cancel'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              ElevatedButton(
+                                child: const Text('Send Offer'),
+                                onPressed: () {
+                                  offercontroller.checkoffer();
+                                  if (offercontroller.isformValidated == true) {
+                                    functions.sendoffer(context);
+                                    Navigator.of(context).pop();
+                                  }
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
                     },
                     child: const Icon(FontAwesomeIcons.fileContract),
                   ),

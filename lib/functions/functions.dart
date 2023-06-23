@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/profile.dart';
 import 'package:finalyear/GETX/allvideos.dart';
 import 'package:finalyear/GETX/clubdatafirebase.dart';
 import 'package:finalyear/GETX/forgotpassword.dart';
@@ -11,25 +10,24 @@ import 'package:finalyear/pages/homedbforplayer.dart';
 import 'package:finalyear/pages/loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../GETX/changepassword.dart';
 import '../GETX/getdatafromfirebase.dart';
+import '../GETX/offerrequest.dart';
+import '../model/offermodel.dart';
 
 class functionservices {
   //controller
   final chacontroller = Get.put(changepassword());
   final usercontroller = Get.put(FetchDataFirebase());
   final vidcontroller = Get.put(FetchVideoFirebase());
+  final offercontroller = Get.put(offerrequestform());
   final updateprofilecontroller = Get.put(updateuserprofile());
   final currentuser = FirebaseAuth.instance.currentUser!.email;
   File? _videoFile;
   final videocontorller = Get.put(FetchVideoFirebase());
-  //refresh function for the users
-  void refresh_user_data() async {
-    await Future.delayed(const Duration(seconds: 2));
-    usercontroller.GetDataFirebase();
-  }
 
 //picked upload function
   Future<void> pickVideo() async {
@@ -153,11 +151,31 @@ class functionservices {
     });
   }
 
+  //user password change function
   passwordchange() async {
     FirebaseFirestore.instance
         .collection("users")
         .doc(FirebaseAuth.instance.currentUser!.email)
         .update({'password': chacontroller.password.value});
+  }
+
+//sending offer to buy the player function
+  Future<void> sendoffer(BuildContext context) async {
+    final request = offerrequest(
+        amount: offercontroller.amountcontroller.text,
+        sentby: currentuser.toString());
+
+    try {
+      final collectionRef = FirebaseFirestore.instance.collection('offers');
+      final documentRef = await collectionRef.add(request.toJson());
+
+      // Assign the generated document ID to the request
+      final generatedId = documentRef.id;
+      await documentRef.update({'document': generatedId});
+      Get.snackbar("Meassage", "Your offer has been sended.");
+    } catch (error) {
+      Get.snackbar("Error", "There was an error while sending offer.");
+    }
   }
 }
 
