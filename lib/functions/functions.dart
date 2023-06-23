@@ -5,17 +5,20 @@ import 'package:finalyear/GETX/allvideos.dart';
 import 'package:finalyear/GETX/clubdatafirebase.dart';
 import 'package:finalyear/GETX/forgotpassword.dart';
 import 'package:finalyear/GETX/updataprofile.dart';
+import 'package:finalyear/model/tournamentrequestmodel.dart';
 import 'package:finalyear/pages/homedbforcoache.dart';
 import 'package:finalyear/pages/homedbforplayer.dart';
 import 'package:finalyear/pages/loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../AS A PLAYER/internationalsports/dashboard/tournaments.dart';
 import '../GETX/changepassword.dart';
 import '../GETX/getdatafromfirebase.dart';
 import '../GETX/offerrequest.dart';
+import '../GETX/tournamentRegister.dart';
 import '../model/offermodel.dart';
 
 class functionservices {
@@ -24,6 +27,7 @@ class functionservices {
   final usercontroller = Get.put(FetchDataFirebase());
   final vidcontroller = Get.put(FetchVideoFirebase());
   final offercontroller = Get.put(offerrequestform());
+  final controller = Get.put(TournamentsRegistration());
   final updateprofilecontroller = Get.put(updateuserprofile());
   final currentuser = FirebaseAuth.instance.currentUser!.email;
   File? _videoFile;
@@ -95,12 +99,12 @@ class functionservices {
   }
 
   //getx controller
-  final controller = Get.put(ForgotPassword());
+  final emailcontroller = Get.put(ForgotPassword());
   //function for the email verfication
   emailverify() async {
     try {
       await FirebaseAuth.instance
-          .sendPasswordResetEmail(email: controller.email.value)
+          .sendPasswordResetEmail(email: emailcontroller.email.value)
           .then((value) => Get.to(const loginpage()));
       Get.snackbar("Reset email",
           "Passward reset email has been sent to your email please check.");
@@ -166,7 +170,8 @@ class functionservices {
         sentby: currentuser.toString());
 
     try {
-      final collectionRef = FirebaseFirestore.instance.collection('offers');
+      final collectionRef =
+          FirebaseFirestore.instance.collection("registrationRequests");
       final documentRef = await collectionRef.add(request.toJson());
 
       // Assign the generated document ID to the request
@@ -175,6 +180,76 @@ class functionservices {
       Get.snackbar("Meassage", "Your offer has been sended.");
     } catch (error) {
       Get.snackbar("Error", "There was an error while sending offer.");
+    }
+  }
+
+  Future<void> sendRequest(BuildContext context) async {
+    final request = TournamentRegistrationRequest(
+        teamName: controller.teamnamecontroller.text,
+        captainName: controller.captainnamecontroller.text,
+        address: controller.addresscontroller.text,
+        city: controller.citycontroller.text,
+        contactEmail: controller.emailcontroller.text,
+        contact: controller.contactcontroller.text,
+        sportevent: controller.sporteventcontroller.text,
+        player1: controller.player1controller.text,
+        player2: controller.player2controller.text,
+        player3: controller.player3controller.text,
+        player4: controller.player4controller.text,
+        player5: controller.player5controller.text,
+        player6: controller.player6controller.text,
+        player7: controller.player7controller.text,
+        player8: controller.player8controller.text,
+        player9: controller.player9controller.text,
+        player10: controller.player10controller.text,
+        player11: controller.player11controller.text,
+        player12: controller.player12controller.text,
+        sentby: currentuser.toString());
+
+    try {
+      final collectionRef =
+          FirebaseFirestore.instance.collection('registrationRequests');
+      final documentRef = await collectionRef.add(request.toJson());
+
+      // Assign the generated document ID to the request
+      final generatedId = documentRef.id;
+      await documentRef.update({'document': generatedId});
+
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Request Sent'),
+          content: const Text('Your registration request has been sent.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: GestureDetector(
+                  onTap: () {
+                    Get.to(const tournaments());
+                  },
+                  child: const Text('OK')),
+            ),
+          ],
+        ),
+      );
+    } catch (error) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Error'),
+          content: const Text('An error occurred while sending the request.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: GestureDetector(
+                  onTap: () {
+                    Get.to(const tournaments());
+                  },
+                  child: const Text('OK')),
+            ),
+          ],
+        ),
+      );
     }
   }
 }
