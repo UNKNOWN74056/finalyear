@@ -2,7 +2,7 @@ import 'package:chewie/chewie.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/GETX/getdatafromfirebase.dart';
 import 'package:finalyear/functions/functions.dart';
-import 'package:finalyear/wedgets/nutification/playernutification/playeradminapprove.dart';
+import 'package:finalyear/wedgets/nutification/coachnitification/adminapprove.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -12,14 +12,14 @@ import '../../../GETX/allvideos.dart';
 import '../../../wedgets/editbutton.dart';
 import '../../../wedgets/editprofilewidget.dart';
 
-class profile extends StatefulWidget {
-  const profile({super.key});
+class playerprofile extends StatefulWidget {
+  const playerprofile({super.key});
 
   @override
-  State<profile> createState() => _profileState();
+  State<playerprofile> createState() => _profileState();
 }
 
-class _profileState extends State<profile> {
+class _profileState extends State<playerprofile> {
   //getx controller
   final vidcontroller = Get.put(FetchVideoFirebase());
   final List<VideoPlayerController> _controllers = [];
@@ -63,7 +63,7 @@ class _profileState extends State<profile> {
                                   const Padding(
                                     padding: EdgeInsets.only(top: 20, left: 10),
                                     child: Text(
-                                      "Profile",
+                                      "profile",
                                       style: TextStyle(fontSize: 40),
                                     ),
                                   ),
@@ -81,7 +81,7 @@ class _profileState extends State<profile> {
                                     padding: const EdgeInsets.only(right: 10),
                                     child: InkWell(
                                       onTap: () {
-                                        Get.to(const playeradminapprove());
+                                        Get.to(const adminapprove());
                                       },
                                       child: const Icon(FontAwesomeIcons.bell),
                                     ),

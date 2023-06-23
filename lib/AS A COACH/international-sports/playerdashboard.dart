@@ -1,7 +1,7 @@
 import 'package:finalyear/AS%20A%20COACH/international-sports/bottomtabbars/interclub.dart';
 import 'package:finalyear/AS%20A%20COACH/international-sports/bottomtabbars/interhome.dart';
 import 'package:finalyear/AS%20A%20COACH/international-sports/bottomtabbars/intertournaments.dart';
-import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/profile.dart';
+import 'package:finalyear/AS%20A%20COACH/profile.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/setting.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +21,7 @@ class _playerdashboeardState extends State<playerdashboeard> {
     interclub(),
     intertournaments(),
     setting(),
-    profile(),
+    playerprofile()
   ];
   @override
   Widget build(BuildContext context) {

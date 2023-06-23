@@ -1,16 +1,21 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import '../model/tournamentregistrationrequest.dart';
 
-class AdminApprovalScreen extends StatelessWidget {
+import '../../../model/tournamentregistrationrequest.dart';
+
+class playerregidtration extends StatefulWidget {
+  const playerregidtration({super.key});
+
+  @override
+  State<playerregidtration> createState() => _registrationState();
+}
+
+class _registrationState extends State<playerregidtration> {
   final currentuser = FirebaseAuth.instance.currentUser!.email;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Admin Approval'),
-      ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
             .collection('registrationRequests')

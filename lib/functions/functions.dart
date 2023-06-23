@@ -19,7 +19,6 @@ import '../GETX/changepassword.dart';
 import '../GETX/getdatafromfirebase.dart';
 import '../GETX/offerrequest.dart';
 import '../GETX/tournamentRegister.dart';
-import '../model/offermodel.dart';
 
 class functionservices {
   //controller
@@ -27,7 +26,7 @@ class functionservices {
   final usercontroller = Get.put(FetchDataFirebase());
   final vidcontroller = Get.put(FetchVideoFirebase());
   final offercontroller = Get.put(offerrequestform());
-  final controller = Get.put(TournamentsRegistration());
+  final regicontroller = Get.put(TournamentsRegistration());
   final updateprofilecontroller = Get.put(updateuserprofile());
   final currentuser = FirebaseAuth.instance.currentUser!.email;
   File? _videoFile;
@@ -163,47 +162,27 @@ class functionservices {
         .update({'password': chacontroller.password.value});
   }
 
-//sending offer to buy the player function
-  Future<void> sendoffer(BuildContext context) async {
-    final request = offerrequest(
-        amount: offercontroller.amountcontroller.text,
-        sentby: currentuser.toString());
-
-    try {
-      final collectionRef =
-          FirebaseFirestore.instance.collection("registrationRequests");
-      final documentRef = await collectionRef.add(request.toJson());
-
-      // Assign the generated document ID to the request
-      final generatedId = documentRef.id;
-      await documentRef.update({'document': generatedId});
-      Get.snackbar("Meassage", "Your offer has been sended.");
-    } catch (error) {
-      Get.snackbar("Error", "There was an error while sending offer.");
-    }
-  }
-
   Future<void> sendRequest(BuildContext context) async {
     final request = TournamentRegistrationRequest(
-        teamName: controller.teamnamecontroller.text,
-        captainName: controller.captainnamecontroller.text,
-        address: controller.addresscontroller.text,
-        city: controller.citycontroller.text,
-        contactEmail: controller.emailcontroller.text,
-        contact: controller.contactcontroller.text,
-        sportevent: controller.sporteventcontroller.text,
-        player1: controller.player1controller.text,
-        player2: controller.player2controller.text,
-        player3: controller.player3controller.text,
-        player4: controller.player4controller.text,
-        player5: controller.player5controller.text,
-        player6: controller.player6controller.text,
-        player7: controller.player7controller.text,
-        player8: controller.player8controller.text,
-        player9: controller.player9controller.text,
-        player10: controller.player10controller.text,
-        player11: controller.player11controller.text,
-        player12: controller.player12controller.text,
+        teamName: regicontroller.teamnamecontroller.text,
+        captainName: regicontroller.captainnamecontroller.text,
+        address: regicontroller.addresscontroller.text,
+        city: regicontroller.citycontroller.text,
+        contactEmail: regicontroller.emailcontroller.text,
+        contact: regicontroller.contactcontroller.text,
+        sportevent: regicontroller.sporteventcontroller.text,
+        player1: regicontroller.player1controller.text,
+        player2: regicontroller.player2controller.text,
+        player3: regicontroller.player3controller.text,
+        player4: regicontroller.player4controller.text,
+        player5: regicontroller.player5controller.text,
+        player6: regicontroller.player6controller.text,
+        player7: regicontroller.player7controller.text,
+        player8: regicontroller.player8controller.text,
+        player9: regicontroller.player9controller.text,
+        player10: regicontroller.player10controller.text,
+        player11: regicontroller.player11controller.text,
+        player12: regicontroller.player12controller.text,
         sentby: currentuser.toString());
 
     try {

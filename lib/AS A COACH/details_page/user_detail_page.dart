@@ -1,6 +1,7 @@
 import 'package:chewie/chewie.dart';
 import 'package:finalyear/GETX/getdatafromfirebase.dart';
 import 'package:finalyear/GETX/offerrequest.dart';
+import 'package:finalyear/model/offermodel.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'package:get/get.dart';
@@ -12,7 +13,6 @@ import 'package:get_time_ago/get_time_ago.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../GETX/allvideos.dart';
-import '../../functions/functions.dart';
 
 class user_detail_page extends StatefulWidget {
   //object to the wigdet data
@@ -130,6 +130,26 @@ class _coachdetailState extends State<user_detail_page> {
 
   double rating = 0;
   final offercontroller = Get.put(offerrequestform());
+//sending offer to buy the player function
+  Future<void> sendoffer(BuildContext context) async {
+    final request = offerrequest(
+      amount: offercontroller.amountcontroller.text,
+      sentby: currentuser.toString(),
+      email: widget.post.email,
+    );
+
+    try {
+      final collectionRef = FirebaseFirestore.instance.collection("offers");
+      final documentRef = await collectionRef.add(request.toJson());
+
+      // Assign the generated document ID to the request
+      final generatedId = documentRef.id;
+      await documentRef.update({'document': generatedId});
+      Get.snackbar("Meassage", "Your offer has been sended.");
+    } catch (error) {
+      Get.snackbar("Error", "There was an error while sending offer.");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -416,7 +436,7 @@ class _coachdetailState extends State<user_detail_page> {
                                 onPressed: () {
                                   offercontroller.checkoffer();
                                   if (offercontroller.isformValidated == true) {
-                                    functions.sendoffer(context);
+                                    sendoffer(context);
                                     Navigator.of(context).pop();
                                   }
                                 },
