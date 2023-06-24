@@ -132,11 +132,23 @@ class _coachdetailState extends State<user_detail_page> {
   final offercontroller = Get.put(offerrequestform());
 //sending offer to buy the player function
   Future<void> sendoffer(BuildContext context) async {
+    // Get the user document of the current user
+    final userDoc = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentuser.toString())
+        .get();
+
+    final name = userDoc.data()?['fullname'] as String?;
+    final profession = userDoc.data()?['profession'] as String?;
+    final sport = userDoc.data()?['sport'] as String?;
+
     final request = offerrequest(
-      amount: offercontroller.amountcontroller.text,
-      sentby: currentuser.toString(),
-      email: widget.post.email,
-    );
+        amount: offercontroller.amountcontroller.text,
+        sentby: currentuser.toString(),
+        email: widget.post.email,
+        name: name.toString(),
+        profession: profession.toString(),
+        sport: sport.toString());
 
     try {
       final collectionRef = FirebaseFirestore.instance.collection("offers");
@@ -145,9 +157,9 @@ class _coachdetailState extends State<user_detail_page> {
       // Assign the generated document ID to the request
       final generatedId = documentRef.id;
       await documentRef.update({'document': generatedId});
-      Get.snackbar("Meassage", "Your offer has been sended.");
+      Get.snackbar("Message", "Your offer has been sent.");
     } catch (error) {
-      Get.snackbar("Error", "There was an error while sending offer.");
+      Get.snackbar("Error", "There was an error while sending the offer.");
     }
   }
 

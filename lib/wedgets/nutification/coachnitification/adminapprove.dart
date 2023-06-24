@@ -17,7 +17,7 @@ class _adminapproveState extends State<adminapprove> {
         child: Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            title: const Text("Admin panel"),
+            title: const Text("Admin Approve"),
             bottom: const TabBar(
               indicatorColor: Colors.black,
               indicatorWeight: 3,
