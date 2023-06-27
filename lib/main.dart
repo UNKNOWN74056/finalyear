@@ -21,7 +21,7 @@ Future main() async {
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({key});
+  const MyApp({key}); 
 
   @override
   State<MyApp> createState() => _MyAppState();
