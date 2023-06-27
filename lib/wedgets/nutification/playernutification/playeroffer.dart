@@ -43,10 +43,10 @@ class _offersState extends State<playeroffer> {
                           .delete()
                           .then((_) {
                         Get.snackbar("Message",
-                            "Your registration has been canceled succefully.");
+                            "Your offer has been canceled succefully.");
                       }).catchError((error) {
-                        Get.snackbar(" Error",
-                            "Error accure while canceling rigistration.");
+                        Get.snackbar(
+                            " Error", "Error accure while canceling offer.");
                       });
                     },
                     backgroundColor: const Color.fromARGB(255, 236, 75, 26),
