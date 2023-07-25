@@ -284,9 +284,12 @@ class _registrationState extends State<registration> {
                     controller.checkregisteration();
                     if (controller.isformValidated == true) {
                       functions.sendRequest(context);
+                      Get.back();
+                      Get.snackbar(
+                          "Message", "Your registration request hasbeen send.");
                     }
                   },
-                  child: const Text("Submitt"))
+                  child: const Text("Submit"))
             ],
           ),
         ),

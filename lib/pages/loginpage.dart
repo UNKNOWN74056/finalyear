@@ -149,7 +149,7 @@ class _loginpageState extends State<loginpage> {
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                       controller: controller.passwordController,
                       obscureText: true,
-                      labelText: "Enter your passwowrd",
+                      labelText: "Enter your password",
                       icon: const Icon(
                         Icons.lock,
                         color: Color.fromARGB(255, 4, 45, 119),
