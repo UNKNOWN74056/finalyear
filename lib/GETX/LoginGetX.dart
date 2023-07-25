@@ -26,6 +26,7 @@ class LoginController extends GetxController {
     } else if (!value.contains("@gmail.com") && !value.contains("@yahoo.com")) {
       return "Please enter correct email";
     }
+    return null;
   }
 
   String? validPassword(String value) {
@@ -34,6 +35,7 @@ class LoginController extends GetxController {
     } else if (value.length < 6) {
       return "Password length should be 6";
     }
+    return null;
   }
 
   checkLogin() {
@@ -49,5 +51,12 @@ class LoginController extends GetxController {
       isformValidated = true;
       // User those values to send our auth request ...
     }
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 }

@@ -97,7 +97,8 @@ class _signuppageState extends State<signuppage> {
   }
 
   @override
-  void dispose() {
+  void initState() {
+    super.initState();
     controller.citycontroller.text = "";
     controller.confirmpasswordcontroller.text = "";
     controller.emailController.text = "";
@@ -107,8 +108,6 @@ class _signuppageState extends State<signuppage> {
     dropcontroller.Frofession.value = " ";
     dropcontroller.Gender.value = "";
     dropcontroller.Sport.value = "";
-    controller.dispose();
-    super.dispose();
   }
 
   //options for profession
@@ -226,7 +225,7 @@ class _signuppageState extends State<signuppage> {
   void passwrodconfirm() {
     if (controller.passwordcontroller.text.trim() ==
         controller.confirmpasswordcontroller.text.trim()) {
-      return null;
+      return;
     } else {
       Get.snackbar(
           "Passwrod", "The password and confirm password are not equal");
@@ -319,8 +318,8 @@ class _signuppageState extends State<signuppage> {
                   items: profession
                       .map(
                         (e) => DropdownMenuItem(
-                          child: Text(e),
                           value: e,
+                          child: Text(e),
                         ),
                       )
                       .toList(),
@@ -364,8 +363,8 @@ class _signuppageState extends State<signuppage> {
                     items: gender
                         .map(
                           (e) => DropdownMenuItem(
-                            child: Text(e),
                             value: e,
+                            child: Text(e),
                           ),
                         )
                         .toList(),
@@ -412,8 +411,8 @@ class _signuppageState extends State<signuppage> {
                     items: sports
                         .map(
                           (e) => DropdownMenuItem(
-                            child: Text(e),
                             value: e,
+                            child: Text(e),
                           ),
                         )
                         .toList(),

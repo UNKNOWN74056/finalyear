@@ -71,19 +71,12 @@ class _loginpageState extends State<loginpage> {
     }
   }
 
-  // dispose function for the field
-  @override
-  void dispose() {
-    controller.emailController.text = "";
-    controller.passwordController.text = "";
-    controller.dispose();
-    super.dispose();
-  }
-
   //overide function for connectivity
   @override
   void initState() {
     super.initState();
+    controller.emailController.text = ""; // Clear email text
+    controller.passwordController.text = ""; // Clear password text
     checkconnectivity();
   }
 
@@ -189,7 +182,13 @@ class _loginpageState extends State<loginpage> {
                       loginuser();
                     }
                   },
-                  child: const Text("Login")),
+                  child: const Text(
+                    "Login",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16),
+                  )),
 
               const SizedBox(
                 height: 20,
@@ -211,7 +210,7 @@ class _loginpageState extends State<loginpage> {
                         style: TextStyle(color: Colors.blue),
                       )),
                   const SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                 ],
               ),

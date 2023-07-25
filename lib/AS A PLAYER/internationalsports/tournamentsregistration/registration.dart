@@ -20,6 +20,30 @@ final currentuser = FirebaseAuth.instance.currentUser!.email;
 
 class _registrationState extends State<registration> {
   @override
+  void initState() {
+    super.initState();
+    controller.teamnamecontroller.text = "";
+    controller.captainnamecontroller.text = "";
+    controller.addresscontroller.text = " ";
+    controller.citycontroller.text = "";
+    controller.emailcontroller.text = "";
+    controller.contactcontroller.text = "";
+    controller.sporteventcontroller.text = "";
+    controller.player1controller.text = "";
+    controller.player2controller.text = "";
+    controller.player3controller.text = "";
+    controller.player4controller.text = "";
+    controller.player5controller.text = "";
+    controller.player6controller.text = "";
+    controller.player7controller.text = "";
+    controller.player8controller.text = "";
+    controller.player9controller.text = "";
+    controller.player10controller.text = "";
+    controller.player11controller.text = "";
+    controller.player12controller.text = "";
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
