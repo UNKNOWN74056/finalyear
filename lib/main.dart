@@ -13,15 +13,17 @@ import 'package:finalyear/splashscreen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  Stripe.publishableKey = "pk_test_51NY1EmL4v0vSdiaO9Bfhg7tWPfSMo4fF3SzSS7OWZ7p06Bbyb41oxQYEOWHGutvwezpqCP3wa5iiLdkWoyRLst7G00n0q1DeAr";
   runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({key}); 
+  const MyApp({key});
 
   @override
   State<MyApp> createState() => _MyAppState();

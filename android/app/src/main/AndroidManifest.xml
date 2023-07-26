@@ -21,6 +21,10 @@
               android:name="io.flutter.embedding.android.NormalTheme"
               android:resource="@style/NormalTheme"
               />
+              <meta-data
+                   android:name="com.stripe.publishable_key"
+                   android:value="pk_test_51NY1EmL4v0vSdiaO9Bfhg7tWPfSMo4fF3SzSS7OWZ7p06Bbyb41oxQYEOWHGutvwezpqCP3wa5iiLdkWoyRLst7G00n0q1DeAr" 
+                />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

@@ -55,6 +55,8 @@ dependencies:
   url_launcher: ^6.0.0
   get_time_ago: ^1.1.8
   flutter_slidable: ^2.0.0
+  flutter_stripe: ^9.3.0
+  
 
 dev_dependencies:
   flutter_test:
