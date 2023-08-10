@@ -77,33 +77,18 @@ class _registrationState extends State<registration> {
 
   displayPaymentSheet() async {
     try {
-      await Stripe.instance
-          .presentPaymentSheet(
-              // parameters: PresentPaymentSheetParameters(
-              // clientSecret: paymentIntentData!['client_secret'],
-              // confirmPayment: true,
-              // )
-              )
-          .then((newValue) {
-        print('payment intent${paymentIntentData!['id']}');
-        print('payment intent${paymentIntentData!['client_secret']}');
-        print('payment intent${paymentIntentData!['amount']}');
-        print('payment intent$paymentIntentData');
-        //orderPlaceApi(paymentIntentData!['id'].toString());
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text("paid successfully")));
+      await Stripe.instance.presentPaymentSheet();
 
+      setState(() {
         paymentIntentData = null;
-      }).onError((error, stackTrace) {
-        print('Exception/DISPLAYPAYMENTSHEET==> $error $stackTrace');
       });
-    } on StripeException catch (e) {
-      print('Exception/DISPLAYPAYMENTSHEET==> $e');
-      showDialog(
-          context: context,
-          builder: (_) => const AlertDialog(
-                content: Text("Cancelled "),
-              ));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Payment Successful!'),
+      ));
+    } on StripeException {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('payment cancelled'),
+      ));
     } catch (e) {
       print('$e');
     }
