@@ -102,7 +102,8 @@ class TournamentsRegistration extends GetxController {
     }
     return null;
   }
-   String? validsportname(String value) {
+
+  String? validsportname(String value) {
     if (value.isEmpty) {
       return "Please enter your sport event name corractly";
     }
@@ -124,10 +125,14 @@ class TournamentsRegistration extends GetxController {
   }
 
   String? validphonenumber(String value) {
+    String regexPattern = r'(^(?:[+0][1-9])?[0-9]{10,12}$)';
+    var regExp = RegExp(regexPattern);
     if (value.isEmpty) {
-      return "Please enter your phone number";
+      return "Please enter phone";
     } else if (!value.contains("+")) {
-      return "Enter your phone number correctly ";
+      return "Please enter correct phone nmuber";
+    } else if (!regExp.hasMatch(value)) {
+      return "Please enter valid mobile number";
     }
     return null;
   }

@@ -1,3 +1,4 @@
+import 'package:finalyear/API/footballApi/soccer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../GETX/tournamentdata.dart';
@@ -33,7 +34,7 @@ class _playertourfootballState extends State<playertourfootball> {
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: GestureDetector(
                             onTap: () {
-                             // Get.to(BasketballMatchesPage());
+                              Get.to(SoccerApp());
                             },
                             child: Container(
                               decoration: BoxDecoration(

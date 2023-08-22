@@ -75,9 +75,13 @@ class _loginpageState extends State<loginpage> {
   @override
   void initState() {
     super.initState();
-    controller.emailController.text = ""; // Clear email text
-    controller.passwordController.text = ""; // Clear password text
+    // controller.emailController.text = ""; // Clear email text
+    // controller.passwordController.text = ""; // Clear password text
     checkconnectivity();
+    Future.delayed(Duration.zero, () {
+      controller.emailController.text = ""; // Clear email text
+      controller.passwordController.text = ""; // Clear password text
+    });
   }
 
   @override

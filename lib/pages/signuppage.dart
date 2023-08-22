@@ -99,15 +99,17 @@ class _signuppageState extends State<signuppage> {
   @override
   void initState() {
     super.initState();
-    controller.citycontroller.text = "";
-    controller.confirmpasswordcontroller.text = "";
-    controller.emailController.text = "";
-    controller.fullnamecontroller.text = "";
-    controller.passwordcontroller.text = "";
-    controller.phonenumbercontroller.text = "";
-    dropcontroller.Frofession.value = " ";
-    dropcontroller.Gender.value = "";
-    dropcontroller.Sport.value = "";
+    Future.delayed(Duration.zero, () {
+      controller.citycontroller.text = "";
+      controller.confirmpasswordcontroller.text = "";
+      controller.emailController.text = "";
+      controller.fullnamecontroller.text = "";
+      controller.passwordcontroller.text = "";
+      controller.phonenumbercontroller.text = "";
+      dropcontroller.Frofession.value = " ";
+      dropcontroller.Gender.value = "";
+      dropcontroller.Sport.value = "";
+    });
   }
 
   //options for profession
@@ -521,7 +523,14 @@ class _signuppageState extends State<signuppage> {
                 loginbutton(
                   onTap: () async {
                     controller.checksignup();
-                    if (controller.isformValidated == true) {
+                    if (_image == null) {
+                      // Show an error message that the user needs to select an image first.
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("Please select an image first."),
+                        ),
+                      );
+                    } else if (controller.isformValidated) {
                       signup();
                     }
                   },

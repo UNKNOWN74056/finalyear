@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -32,20 +31,20 @@ class sighnupcontroller extends GetxController {
   }
 
   // form key for validation
- GlobalKey<FormState> signupkeyForm = GlobalKey<FormState>();
+  GlobalKey<FormState> signupkeyForm = GlobalKey<FormState>();
 //these are the function for validation
   String? validfullname(String value) {
     if (value.isEmpty) {
       return "Please enter fulll name";
     }
+    return null;
   }
-
-  
 
   String? validcity(String value) {
     if (value.isEmpty) {
       return "Please enter city";
     }
+    return null;
   }
 
   String? validEmail(String value) {
@@ -54,6 +53,7 @@ class sighnupcontroller extends GetxController {
     } else if (!value.contains("@gmail.com") && !value.contains("@yahoo.com")) {
       return "Please enter correct email";
     }
+    return null;
   }
 
   String? validPassword(String value) {
@@ -62,20 +62,27 @@ class sighnupcontroller extends GetxController {
     } else if (value.length < 6) {
       return "Password length should be 6";
     }
+    return null;
   }
 
   String? validconfirmPassword(String value) {
     if (value.isEmpty) {
       return "Please enter Password correctly";
     }
+    return null;
   }
 
   String? validphonenumber(String value) {
+    String regexPattern = r'(^(?:[+0][1-9])?[0-9]{10,12}$)';
+    var regExp = RegExp(regexPattern);
     if (value.isEmpty) {
-      return "Please enter your phone number";
+      return "Please enter phone";
     } else if (!value.contains("+")) {
-      return "Enter your phone number correctly ";
+      return "Please enter correct phone nmuber";
+    } else if (!regExp.hasMatch(value)) {
+      return "Please enter valid mobile number";
     }
+    return null;
   }
 
   checksignup() {
@@ -85,7 +92,7 @@ class sighnupcontroller extends GetxController {
       if (!isValid) {
         return null;
       }
-     signupkeyForm.currentState!.save();
+      signupkeyForm.currentState!.save();
       fullname.value = fullnamecontroller.value.text;
       city.value = citycontroller.value.text;
       email.value = emailController.value.text;

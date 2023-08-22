@@ -105,9 +105,10 @@ class _profileState extends State<profile> {
                                       ],
                                     ),
                                     const SizedBox(width: 16.0),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 20),
-                                      child: Expanded(
+                                    Expanded(
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 20),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
