@@ -33,7 +33,7 @@ class functionservices {
   final videocontorller = Get.put(FetchVideoFirebase());
 
 //picked upload function
-  Future<void> pickVideo() async {
+  Future<void> pickVideo(BuildContext context) async {
     FilePickerResult? result =
         await FilePicker.platform.pickFiles(type: FileType.video);
     if (result != null) {
@@ -44,6 +44,20 @@ class functionservices {
     String fileName = _videoFile!.path.split('/videos').last;
     Reference reference = FirebaseStorage.instance.ref().child(fileName);
     UploadTask uploadTask = reference.putFile(_videoFile!);
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Row(
+            children: const [
+              CircularProgressIndicator(),
+              SizedBox(width: 16),
+              Text("Uploading..."),
+            ],
+          ),
+        );
+      },
+    );
     TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() => null);
     final downloadURL = await taskSnapshot.ref.getDownloadURL();
 

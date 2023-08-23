@@ -32,7 +32,7 @@ class _profileState extends State<profile> {
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
-            functions.pickVideo();
+            functions.pickVideo(context);
           },
           icon: const Icon(
             FontAwesomeIcons.video,
