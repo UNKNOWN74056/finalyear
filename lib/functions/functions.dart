@@ -69,6 +69,7 @@ class functionservices {
       "email": currentuser,
       'id': id,
     });
+    Navigator.pop(context);
     Get.snackbar("Message", "Your video has been uploaded");
   }
 
@@ -144,8 +145,6 @@ class functionservices {
       }
     });
   }
-
- 
 
   //user password change function
   passwordchange() async {
