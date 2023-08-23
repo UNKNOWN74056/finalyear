@@ -28,17 +28,19 @@ class updateuserprofile extends GetxController {
     if (value.isEmpty) {
       return "Please enter club name";
     }
+    return null;
   }
 
   String? validlocation(String value) {
     if (value.isEmpty) {
       return "Please enter location";
     }
+    return null;
   }
 
   String? validphone(String value) {
     String regexPattern = r'(^(?:[+0][1-9])?[0-9]{10,12}$)';
-    var regExp = new RegExp(regexPattern);
+    var regExp = RegExp(regexPattern);
     if (value.isEmpty) {
       return "Please enter phone";
     } else if (!value.contains("+")) {

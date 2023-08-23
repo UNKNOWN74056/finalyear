@@ -11,6 +11,7 @@ import 'package:video_player/video_player.dart';
 import '../../../GETX/allvideos.dart';
 import '../../../wedgets/editbutton.dart';
 import '../../../wedgets/editprofilewidget.dart';
+import '../wedgets/userdataprofileedit.dart';
 
 class playerprofile extends StatefulWidget {
   const playerprofile({super.key});
@@ -200,6 +201,24 @@ class _profileState extends State<playerprofile> {
                                             const SizedBox(height: 8.0),
                                             Row(
                                               children: [
+                                                const Text(
+                                                  "Phone: ",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                Text(
+                                                  element.phoneNumber,
+                                                  style: TextStyle(
+                                                    color: Colors.grey[600],
+                                                    fontSize: 16.0,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(height: 8.0),
+                                            Row(
+                                              children: [
                                                 const Icon(Icons.star,
                                                     color: Colors.yellow),
                                                 const SizedBox(width: 4.0),
@@ -216,8 +235,16 @@ class _profileState extends State<playerprofile> {
                                                           left: 40),
                                                   child: ReusableElevatedButton(
                                                     onTap: () {
-                                                      Get.to(
-                                                          const CustomBottomSheet());
+                                                      Get.to(CustomBottomSheet(
+                                                          data: editprofiledata(
+                                                              fullname: element
+                                                                  .fullname,
+                                                              city:
+                                                                  element.city,
+                                                              image_Url: element
+                                                                  .image_Url,
+                                                              phoneNumber: element
+                                                                  .phoneNumber)));
                                                     },
                                                     icon: Icons.edit,
                                                     child: const Text("Edit"),

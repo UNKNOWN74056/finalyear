@@ -145,28 +145,7 @@ class functionservices {
     });
   }
 
-  // update profile function
-  updateprofile() async {
-    File? image;
-    final email = FirebaseAuth.instance.currentUser!.email;
-    var refer = await FirebaseStorage.instance
-        .ref("/MrSport$email")
-        .child('images')
-        .putFile(image!.absolute);
-    TaskSnapshot uploadTask = refer;
-    await Future.value(uploadTask);
-    var newUrl = await refer.ref.getDownloadURL();
-    FirebaseFirestore.instance
-        .collection("users")
-        .doc(FirebaseAuth.instance.currentUser!.email)
-        .update({
-      'fullname':
-          updateprofilecontroller.updatefullnamecontroller.text.toString(),
-      'city': updateprofilecontroller.updatecitycontroller.text.toString(),
-      'phone': updateprofilecontroller.updatephonecontroller.text.toString(),
-      'Imageurl': newUrl.toString(),
-    });
-  }
+ 
 
   //user password change function
   passwordchange() async {

@@ -11,10 +11,11 @@ class reusebletextfield extends StatelessWidget {
   final sufixicon;
   final labelText;
   final obscureText;
+  final initialValue;
 
   const reusebletextfield({
     super.key,
-    required this.controller,
+    this.controller,
     required this.autoValidateMode,
     required this.keyboard,
     this.maxlength,
@@ -22,6 +23,7 @@ class reusebletextfield extends StatelessWidget {
     required this.validator,
     required this.icon,
     this.sufixicon,
+    this.initialValue,
     required this.labelText,
     this.obscureText = false,
   });
@@ -31,6 +33,7 @@ class reusebletextfield extends StatelessWidget {
     return TextFormField(
       controller: controller,
       validator: validator,
+      initialValue: controller != null ? null : initialValue,
       maxLines: maxline,
       maxLength: maxlength,
       autovalidateMode: autoValidateMode,
