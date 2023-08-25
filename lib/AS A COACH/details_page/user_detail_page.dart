@@ -525,10 +525,12 @@ class _coachdetailState extends State<user_detail_page> {
                           allowHalfRating: true,
                           itemBuilder: (context, _) => const Icon(Icons.star),
                           updateOnDrag: true,
-                          onRatingUpdate: (rating) => setState(() {
-                            this.rating = rating;
-                            addrating();
-                          }),
+                          onRatingUpdate: (rating) {
+                            setState(() {
+                              this.rating = rating;
+                              addrating();
+                            });
+                          },
                         ),
                 ),
                 const SizedBox(height: 10.0),

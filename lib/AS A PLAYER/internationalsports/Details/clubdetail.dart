@@ -412,7 +412,6 @@ class _clubdetailState extends State<clubdetail> {
                         allowHalfRating: true,
                         itemBuilder: (context, _) => const Icon(
                           Icons.star,
-                          color: Colors.amber,
                         ),
                         updateOnDrag: true,
                         onRatingUpdate: (rating) => setState(() {

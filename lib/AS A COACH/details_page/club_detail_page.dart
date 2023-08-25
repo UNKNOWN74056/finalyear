@@ -20,6 +20,7 @@ class club_detail_page extends StatefulWidget {
 class _clubdetailState extends State<club_detail_page> {
   //controller
   final TextEditingController _commentcontroler = TextEditingController();
+
   //add comment to firestore
   Future addcommnet(String name, String image, String comment) async {
     await FirebaseFirestore.instance
@@ -411,8 +412,7 @@ class _clubdetailState extends State<club_detail_page> {
                         minRating: 0,
                         allowHalfRating: true,
                         itemBuilder: (context, _) => const Icon(
-                          Icons.star,
-                          color: Colors.amber,
+                          Icons.star
                         ),
                         updateOnDrag: true,
                         onRatingUpdate: (rating) => setState(() {
