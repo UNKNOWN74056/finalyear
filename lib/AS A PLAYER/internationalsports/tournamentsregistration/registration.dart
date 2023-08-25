@@ -234,7 +234,7 @@ class _registrationState extends State<registration> {
                   validator: (Value) {
                     return controller.validsportname(Value!);
                   },
-                  icon: const Icon(FontAwesomeIcons.phone),
+                  icon: const Icon(FontAwesomeIcons.futbol),
                   labelText: "Enter your sport event corractly"),
               const SizedBox(
                 height: 10,

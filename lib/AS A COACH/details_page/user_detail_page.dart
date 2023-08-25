@@ -41,16 +41,18 @@ class _coachdetailState extends State<user_detail_page> {
         .collection('users')
         .doc(widget.post.email)
         .collection("comments")
-        .doc(comment)
-        .set({
+        .add({
       'image': image,
       'commented_on': widget.post.email,
       'name': name,
       'time': DateTime.now(),
       'commenter': currentuser.toString(),
-      'comment': _commentcontroler.text.toString(),
-    }).whenComplete(() {
+      'comment': comment, // Use the passed comment argument directly
+    }).then((newCommentDoc) {
+      print("Comment added with ID: ${newCommentDoc.id}");
       _commentcontroler.clear();
+    }).catchError((error) {
+      print("Error adding comment: $error");
     });
   }
 
