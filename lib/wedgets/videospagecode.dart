@@ -29,7 +29,7 @@ class videopagegridview extends StatelessWidget {
         final video = vidcontroller.videolist
             .where((e) => e.email == FirebaseAuth.instance.currentUser!.email)
             .toList()[index];
-        final controller = VideoPlayerController.networkUrl(video.videolink);
+        final controller = VideoPlayerController.network(video.videolink);
         _controllers.add(controller);
 
         return GestureDetector(
@@ -80,17 +80,22 @@ class videopagegridview extends StatelessWidget {
                     child: const Text('Cancel'),
                   ),
                   TextButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      // Get the video by its ID
                       final videoToDelete = vidcontroller.videolist.firstWhere(
-                          (e) =>
-                              e.email ==
-                              FirebaseAuth.instance.currentUser!.email,
-                          orElse: () => null);
+                        (e) => e.id == video.id, // Compare the document ID
+                        orElse: () => null,
+                      );
                       if (videoToDelete != null) {
-                        FirebaseFirestore.instance
+                        // Delete the video using the document ID
+                        await FirebaseFirestore.instance
                             .collection("videos")
                             .doc(videoToDelete.id)
                             .delete();
+                        // Also stop and dispose of the video player
+                        controller.pause();
+                        controller.dispose();
+                        _controllers.remove(controller);
                       }
                       Navigator.pop(context);
                     },
