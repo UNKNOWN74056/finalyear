@@ -63,7 +63,7 @@ class _profileState extends State<playerprofile> {
                                   const Padding(
                                     padding: EdgeInsets.only(top: 20, left: 10),
                                     child: Text(
-                                      "profile",
+                                      "Profile",
                                       style: TextStyle(fontSize: 40),
                                     ),
                                   ),
@@ -105,9 +105,10 @@ class _profileState extends State<playerprofile> {
                                       ],
                                     ),
                                     const SizedBox(width: 16.0),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 20),
-                                      child: Expanded(
+                                    Expanded(
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 20),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -236,14 +237,14 @@ class _profileState extends State<playerprofile> {
                                                     onTap: () {
                                                       Get.to(CustomBottomSheet(
                                                           data: editprofiledata(
-                                                              fullname: element
-                                                                  .fullname,
-                                                              city:
-                                                                  element.city,
-                                                              image_Url: element
-                                                                  .image_Url,
-                                                              phoneNumber: element
-                                                                  .phoneNumber)));
+                                                        fullname:
+                                                            element.fullname,
+                                                        city: element.city,
+                                                        image_Url:
+                                                            element.image_Url,
+                                                        phoneNumber:
+                                                            element.phoneNumber,
+                                                      )));
                                                     },
                                                     icon: Icons.edit,
                                                     child: const Text("Edit"),
