@@ -68,8 +68,8 @@ class _settingState extends State<setting> {
                           );
                         });
                   },
-                  child: _buildListTile(
-                      context, "Delete", FontAwesomeIcons.trashCan)),
+                  child: _buildListTile(context, "Delete",
+                      FontAwesomeIcons.trashCan, Colors.red)),
               const SizedBox(height: 10),
               GestureDetector(
                 onTap: () {
@@ -96,8 +96,8 @@ class _settingState extends State<setting> {
                         );
                       });
                 },
-                child: _buildListTile(
-                    context, "Logout", FontAwesomeIcons.rightFromBracket),
+                child: _buildListTile(context, "Logout",
+                    FontAwesomeIcons.rightFromBracket, Colors.green),
               ),
               const SizedBox(height: 10),
               _buildSwitchListTile(
@@ -185,11 +185,8 @@ class _settingState extends State<setting> {
                             ),
                           ));
                 },
-                child: _buildListTile(
-                  context,
-                  'Change password',
-                  Icons.lock_outline,
-                ),
+                child: _buildListTile(context, 'Change password',
+                    Icons.lock_outline, Colors.green),
               ),
               const SizedBox(height: 20),
               const Text(
@@ -200,16 +197,10 @@ class _settingState extends State<setting> {
                 ),
               ),
               const SizedBox(height: 10),
-              _buildListTile(
-                context,
-                'Privacy policy',
-                Icons.privacy_tip_outlined,
-              ),
-              _buildListTile(
-                context,
-                'Terms of service',
-                Icons.description_outlined,
-              ),
+              _buildListTile(context, 'Privacy policy',
+                  Icons.privacy_tip_outlined, Colors.red),
+              _buildListTile(context, 'Terms of service',
+                  Icons.description_outlined, Colors.green),
             ],
           ),
         ),
@@ -218,9 +209,13 @@ class _settingState extends State<setting> {
   }
 
   // these are widgets
-  Widget _buildListTile(BuildContext context, String title, IconData icon) {
+  Widget _buildListTile(
+      BuildContext context, String title, IconData icon, Color IconColor) {
     return ListTile(
-      leading: Icon(icon),
+      leading: Icon(
+        icon,
+        color: IconColor,
+      ),
       title: Text(title),
     );
   }
