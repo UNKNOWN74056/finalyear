@@ -75,65 +75,95 @@ class TournamentsRegistration extends GetxController {
   //these are the function for validation
   String? validEmail(String value) {
     if (value.isEmpty) {
-      return "Please enter Email";
-    } else if (!value.contains("@gmail.com") && !value.contains("@yahoo.com")) {
-      return "Please enter correct email";
+      return "Please enter an email";
+    } else if (!value.contains("@gmail.com") &&
+        !value.contains("@yahoo.com") &&
+        !value.contains("@cusite.com") &&
+        !value.contains("@hotmail.com")) {
+      return "Please enter a valid email";
+    } else if (value.endsWith("@gmail.com") ||
+        value.endsWith("@yahoo.com") ||
+        value.endsWith("@cusite.com") ||
+        value.endsWith("@hotmail.com")) {
+      if (value.startsWith("@")) {
+        return "Please enter a valid email with a username";
+      }
     }
     return null;
   }
 
   String? validteamname(String value) {
     if (value.isEmpty) {
-      return "Please enter your team name";
+      return "Please enter a full name";
+    } else if (!_isTextOnly(value)) {
+      return "Please enter a valid name with only letters";
     }
     return null;
   }
 
+  bool _isTextOnly(String value) {
+    // Use a regular expression to match only letters (uppercase and lowercase) and spaces
+    RegExp regex = RegExp(r'^[a-zA-Z\s]+$');
+    return regex.hasMatch(value);
+  }
+
   String? validcaptainname(String value) {
     if (value.isEmpty) {
-      return "Please enter your captain name";
+      return "Please enter a full name";
+    } else if (!_isTextOnly(value)) {
+      return "Please enter a valid name with only letters";
     }
     return null;
   }
 
   String? validplayername(String value) {
     if (value.isEmpty) {
-      return "Please enter your player name";
+      return "Please enter a full name";
+    } else if (!_isTextOnly(value)) {
+      return "Please enter a valid name with only letters";
     }
     return null;
   }
 
   String? validsportname(String value) {
     if (value.isEmpty) {
-      return "Please enter your sport event name corractly";
+      return "Please enter a full name";
+    } else if (!_isTextOnly(value)) {
+      return "Please enter a valid name with only letters";
     }
     return null;
   }
 
   String? validaddress(String value) {
     if (value.isEmpty) {
-      return "Please enter your address";
+      return "Please enter a full name";
+    } else if (!_isTextOnly(value)) {
+      return "Please enter a valid name with only letters";
     }
     return null;
   }
 
   String? validcitye(String value) {
     if (value.isEmpty) {
-      return "Please enter your city";
+      return "Please enter a full name";
+    } else if (!_isTextOnly(value)) {
+      return "Please enter a valid name with only letters";
     }
     return null;
   }
 
   String? validphonenumber(String value) {
-    String regexPattern = r'(^(?:[+0][1-9])?[0-9]{10,12}$)';
+    String regexPattern = r'^(?:\+92)?[0-9]{9}$';
     var regExp = RegExp(regexPattern);
+
     if (value.isEmpty) {
-      return "Please enter phone";
-    } else if (!value.contains("+")) {
-      return "Please enter correct phone nmuber";
+      return "Please enter a phone number";
+    } else if (!value.startsWith("+92")) {
+      return "Please enter the country code +92";
     } else if (!regExp.hasMatch(value)) {
-      return "Please enter valid mobile number";
+      return "Please enter a valid mobile number";
     }
+
     return null;
   }
 

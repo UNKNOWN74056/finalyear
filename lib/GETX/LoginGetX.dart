@@ -22,9 +22,19 @@ class LoginController extends GetxController {
 //these are the function for validation
   String? validEmail(String value) {
     if (value.isEmpty) {
-      return "Please enter Email";
-    } else if (!value.contains("@gmail.com") && !value.contains("@yahoo.com")) {
-      return "Please enter correct email";
+      return "Please enter an email";
+    } else if (!value.contains("@gmail.com") &&
+        !value.contains("@yahoo.com") &&
+        !value.contains("@cusite.com") &&
+        !value.contains("@hotmail.com")) {
+      return "Please enter a valid email";
+    } else if (value.endsWith("@gmail.com") ||
+        value.endsWith("@yahoo.com") ||
+        value.endsWith("@cusite.com") ||
+        value.endsWith("@hotmail.com")) {
+      if (value.startsWith("@")) {
+        return "Please enter a valid email with a username";
+      }
     }
     return null;
   }
