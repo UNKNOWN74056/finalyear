@@ -94,7 +94,7 @@ class TournamentsRegistration extends GetxController {
 
   String? validteamname(String value) {
     if (value.isEmpty) {
-      return "Please enter a full name";
+      return "Please enter a full team name";
     } else if (!_isTextOnly(value)) {
       return "Please enter a valid name with only letters";
     }
@@ -109,7 +109,7 @@ class TournamentsRegistration extends GetxController {
 
   String? validcaptainname(String value) {
     if (value.isEmpty) {
-      return "Please enter a full name";
+      return "Please enter a full captain name";
     } else if (!_isTextOnly(value)) {
       return "Please enter a valid name with only letters";
     }
@@ -118,7 +118,7 @@ class TournamentsRegistration extends GetxController {
 
   String? validplayername(String value) {
     if (value.isEmpty) {
-      return "Please enter a full name";
+      return "Please enter a full player name";
     } else if (!_isTextOnly(value)) {
       return "Please enter a valid name with only letters";
     }
@@ -127,7 +127,7 @@ class TournamentsRegistration extends GetxController {
 
   String? validsportname(String value) {
     if (value.isEmpty) {
-      return "Please enter a full name";
+      return "Please enter a sport event name";
     } else if (!_isTextOnly(value)) {
       return "Please enter a valid name with only letters";
     }
@@ -136,7 +136,7 @@ class TournamentsRegistration extends GetxController {
 
   String? validaddress(String value) {
     if (value.isEmpty) {
-      return "Please enter a full name";
+      return "Please enter full address";
     } else if (!_isTextOnly(value)) {
       return "Please enter a valid name with only letters";
     }
@@ -145,7 +145,7 @@ class TournamentsRegistration extends GetxController {
 
   String? validcitye(String value) {
     if (value.isEmpty) {
-      return "Please enter a full name";
+      return "Please enter city name";
     } else if (!_isTextOnly(value)) {
       return "Please enter a valid name with only letters";
     }
