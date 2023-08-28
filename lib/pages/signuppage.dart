@@ -485,6 +485,7 @@ class _signuppageState extends State<signuppage> {
                     validator: (Value) {
                       return controller.validPassword(Value!);
                     },
+                    obscureText: true,
                     controller: controller.passwordcontroller,
                     labelText: "PASSWORD",
                     icon: const Icon(Icons.lock,
@@ -496,8 +497,12 @@ class _signuppageState extends State<signuppage> {
                     keyboard: TextInputType.emailAddress,
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (Value) {
-                      return controller.validconfirmPassword(Value!);
+                      return controller.validconfirmPassword(
+                        Value!,
+                        controller.passwordcontroller.text,
+                      );
                     },
+                    obscureText: true,
                     controller: controller.confirmpasswordcontroller,
                     labelText: "confirm password",
                     icon: const Icon(Icons.lock,

@@ -41,11 +41,19 @@ class LoginController extends GetxController {
 
   String? validPassword(String value) {
     if (value.isEmpty) {
-      return "Please enter Password";
+      return "Please enter a password";
     } else if (value.length < 6) {
-      return "Password length should be 6";
+      return "Password length should be at least 6";
+    } else if (!_containsCapitalLetter(value)) {
+      return "Password must contain at least one capital letter";
     }
     return null;
+  }
+
+  bool _containsCapitalLetter(String value) {
+    // Use a regular expression to check for at least one capital letter
+    RegExp regex = RegExp(r'[A-Z]');
+    return regex.hasMatch(value);
   }
 
   checkLogin() {

@@ -87,13 +87,15 @@ class sighnupcontroller extends GetxController {
     return null;
   }
 
-  String? validconfirmPassword(String value) {
-    if (value.isEmpty) {
-      return "Please enter a password";
-    } else if (value.length < 6) {
-      return "Password length should be at least 6";
-    } else if (!_containsCapitalLetter(value)) {
-      return "Password must contain at least one capital letter";
+  String? validconfirmPassword(String confirmPassword, String password) {
+    if (confirmPassword.isEmpty) {
+      return "Please enter the confirm password";
+    } else if (confirmPassword != password) {
+      return "Confirm password does not match the password";
+    } else if (confirmPassword.length < 6) {
+      return "Confirm password length should be at least 6";
+    } else if (!_containsCapitalLetter(confirmPassword)) {
+      return "Confirm password must contain at least one capital letter";
     }
     return null;
   }

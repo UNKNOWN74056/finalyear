@@ -55,13 +55,11 @@ class _loginpageState extends State<loginpage> {
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
         Get.snackbar("No User", "No user is found for this Email",
             duration: const Duration(seconds: 2),
             snackPosition: SnackPosition.BOTTOM);
         Navigator.of(context).pop();
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
         Get.snackbar("Your password",
             "Your password is wrong please correct your password",
             duration: const Duration(seconds: 2),
