@@ -1,6 +1,5 @@
 import 'package:finalyear/GETX/getdatafromfirebase.dart';
 import 'package:finalyear/functions/functions.dart';
-import 'package:finalyear/wedgets/nutification/playernutification/playeradminapprove.dart';
 import 'package:finalyear/wedgets/videospagecode.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +9,7 @@ import 'package:video_player/video_player.dart';
 import '../../../GETX/allvideos.dart';
 import '../../../wedgets/editbutton.dart';
 import '../../../wedgets/editprofilewidget.dart';
+import '../../../wedgets/nutification/playernutification/playeradminapprove.dart';
 import '../../../wedgets/userdataprofileedit.dart';
 
 class profile extends StatefulWidget {
@@ -40,6 +40,45 @@ class _profileState extends State<profile> {
           ),
           label: const Text("Add videos"),
         ),
+        appBar: PreferredSize(
+          preferredSize:
+              const Size.fromHeight(65), // Adjust this value as needed
+          child: AppBar(
+            elevation: 0,
+            backgroundColor: Colors.white,
+            titleSpacing: 0,
+            title: const Text(
+              "Profile",
+              style: TextStyle(color: Colors.black, fontSize: 30),
+            ),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 25),
+                child: InkWell(
+                  onTap: () async {
+                    functions.transfer_request_email();
+                  },
+                  child: const Icon(
+                    FontAwesomeIcons.rightLeft,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 20),
+                child: InkWell(
+                  onTap: () {
+                    Get.to(const playeradminapprove());
+                  },
+                  child: const Icon(
+                    FontAwesomeIcons.bell,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
         body: GetBuilder(
           init: FetchDataFirebase(),
           builder: (controller) {
@@ -56,38 +95,6 @@ class _profileState extends State<profile> {
                           (element) => Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Padding(
-                                    padding: EdgeInsets.only(top: 20, left: 10),
-                                    child: Text(
-                                      "Profile",
-                                      style: TextStyle(fontSize: 40),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 130),
-                                    child: InkWell(
-                                      onTap: () async {
-                                        functions.transfer_request_email();
-                                      },
-                                      child: const Icon(
-                                          FontAwesomeIcons.rightLeft),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 10),
-                                    child: InkWell(
-                                      onTap: () {
-                                        Get.to(const playeradminapprove());
-                                      },
-                                      child: const Icon(FontAwesomeIcons.bell),
-                                    ),
-                                  ),
-                                ],
-                              ),
                               Container(
                                 padding: const EdgeInsets.all(20),
                                 child: Row(
