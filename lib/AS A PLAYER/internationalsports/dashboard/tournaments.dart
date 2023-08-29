@@ -17,7 +17,7 @@ class tournaments extends StatefulWidget {
   State<tournaments> createState() => _tournamentsState();
 }
 
-class _tournamentsState extends State<tournaments>{
+class _tournamentsState extends State<tournaments> {
   //images for swiper
   var images = [
     'assets/football.jpg',
@@ -28,8 +28,7 @@ class _tournamentsState extends State<tournaments>{
     'assets/hockey.jpg',
   ];
   @override
-  Widget build(BuildContext context) =>
-      SafeArea(
+  Widget build(BuildContext context) => SafeArea(
           child: DefaultTabController(
         length: 6,
         child: Scaffold(
@@ -78,8 +77,8 @@ class _tournamentsState extends State<tournaments>{
                     tabs: [
                       Text("FootBall"),
                       Text("BasketBall"),
-                      Text("VulleyBall"),
-                      Text("TableTenis"),
+                      Text("VolleyBall"),
+                      Text("TableTennis"),
                       Text("Cricket"),
                       Text("Hockey"),
                     ]),

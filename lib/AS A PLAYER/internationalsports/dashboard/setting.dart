@@ -60,6 +60,12 @@ class _settingState extends State<setting> {
                               TextButton(
                                   onPressed: () {
                                     functions.delete();
+                                    Get.snackbar(
+                                      "Message",
+                                      "Your account has been successfully deleted.",
+                                      backgroundColor: Colors.green,
+                                      colorText: Colors.white,
+                                    );
                                     Navigator.pushNamed(
                                         context, loginpage.routname);
                                   },
@@ -89,6 +95,12 @@ class _settingState extends State<setting> {
                             TextButton(
                                 onPressed: () {
                                   functions.signout();
+                                  Get.snackbar(
+                                    "Message",
+                                    "You have successfully logout.",
+                                    backgroundColor: Colors.green,
+                                    colorText: Colors.white,
+                                  );
                                   Get.offAllNamed(loginpage.routname);
                                 },
                                 child: const Text("Yes")),
@@ -173,8 +185,12 @@ class _settingState extends State<setting> {
                                                 true) {
                                               functions.passwordchange();
                                               Get.back();
-                                              Get.snackbar("Message",
-                                                  "Your passwrod has been change");
+                                              Get.snackbar(
+                                                "Message",
+                                                "Your password has been change",
+                                                backgroundColor: Colors.green,
+                                                colorText: Colors.white,
+                                              );
                                             }
                                           },
                                           child: const Text("Save Changes"))

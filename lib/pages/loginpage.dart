@@ -32,12 +32,13 @@ class _loginpageState extends State<loginpage> {
     try {
       checkconnectivity();
       showDialog(
-          context: context,
-          builder: (context) {
-            return const Center(
-              child: CircularProgressIndicator(color: Colors.red),
-            );
-          });
+        context: context,
+        builder: (context) {
+          return const Center(
+            child: CircularProgressIndicator(color: Colors.red),
+          );
+        },
+      );
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: controller.email.value, password: controller.password.value);
       FirebaseFirestore.instance
@@ -47,21 +48,29 @@ class _loginpageState extends State<loginpage> {
           .then((value) {
         if (value['profession'] == 'Player') {
           Get.to(const homeforcoach());
-          print("as a coach dashboard");
         } else if (value['profession'] == 'Coache') {
           Get.to(const homeforplayer());
-          print("as a player dashboard");
         }
+        Get.snackbar(
+          "Message",
+          "You have login successfully.",
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+        );
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         Get.snackbar("No User", "No user is found for this Email",
+            backgroundColor: Colors.red,
+            colorText: Colors.white,
             duration: const Duration(seconds: 2),
             snackPosition: SnackPosition.BOTTOM);
         Navigator.of(context).pop();
       } else if (e.code == 'wrong-password') {
         Get.snackbar("Your password",
             "Your password is wrong please correct your password",
+            backgroundColor: Colors.red,
+            colorText: Colors.white,
             duration: const Duration(seconds: 2),
             snackPosition: SnackPosition.BOTTOM);
         Navigator.of(context).pop();

@@ -70,7 +70,12 @@ class functionservices {
       'id': id,
     });
     Navigator.pop(context);
-    Get.snackbar("Message", "Your video has been uploaded");
+    Get.snackbar(
+      "Message",
+      "Your video has been uploaded",
+      backgroundColor: Colors.green,
+      colorText: Colors.white,
+    );
   }
 
   // controller

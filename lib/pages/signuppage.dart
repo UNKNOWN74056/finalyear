@@ -175,19 +175,32 @@ class _signuppageState extends State<signuppage> {
         newUrl.toString(),
         rating.toString(),
       );
-      Get.snackbar("Registration",
-          "Your account has been register succefully please login again.");
+      Get.snackbar(
+        "Registration",
+        "Your account has been register succefully please login again.",
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+      );
       Navigator.of(context).pop();
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => const loginpage()),
           (Route<dynamic> route) => false);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        Get.snackbar("Password weak", "Password is too weak!");
+        Get.snackbar(
+          "Password weak",
+          "Password is too weak!",
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+        );
         Navigator.of(context).pop();
       } else if (e.code == 'email-already-in-use') {
         Get.snackbar(
-            "Email", "This email is already in use please try a valid email!");
+          "Email",
+          "This email is already in use please try a valid email!",
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+        );
         Navigator.of(context).pop();
       }
     }

@@ -274,10 +274,20 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
                         try {
                           await updateprofile();
                           Get.back();
-                          Get.snackbar("Message", "Profile has been updated.");
+                          Get.snackbar(
+                            "Message",
+                            "Profile has been updated.",
+                            backgroundColor: Colors.green,
+                            colorText: Colors.white,
+                          );
                         } catch (error) {
                           print("Error updating profile: $error");
-                          Get.snackbar("Error", "Failed to update profile.");
+                          Get.snackbar(
+                            "Error",
+                            "Failed to update profile.",
+                            backgroundColor: Colors.red,
+                            colorText: Colors.white,
+                          );
                         }
                       }
                     },

@@ -406,11 +406,24 @@ class _registrationState extends State<registration> {
               loginbutton(
                   onTap: () {
                     controller.checkregisteration();
-                    if (controller.isformValidated == true) {
-                      functions.sendRequest(context);
-                      Get.back();
-                      Get.snackbar("Message",
-                          "Your registration request has been send.");
+                    try {
+                      if (controller.isformValidated == true) {
+                        functions.sendRequest(context);
+                        Get.back();
+                        Get.snackbar(
+                          "Message",
+                          "Your registration request has been send.",
+                          backgroundColor: Colors.green,
+                          colorText: Colors.white,
+                        );
+                      }
+                    } catch (e) {
+                      Get.snackbar(
+                        "Error",
+                        "Error while sending request.",
+                        backgroundColor: Colors.red,
+                        colorText: Colors.white,
+                      );
                     }
                   },
                   child: const Text("Submit"))

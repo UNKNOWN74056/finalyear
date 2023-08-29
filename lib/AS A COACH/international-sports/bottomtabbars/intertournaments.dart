@@ -77,8 +77,8 @@ class _intertournamentsState extends State<intertournaments> {
                     tabs: [
                       Text("football"),
                       Text("Basketball"),
-                      Text("vulleyball"),
-                      Text("tabletenis"),
+                      Text("volleyball"),
+                      Text("tabletennis"),
                       Text("Cricket"),
                       Text("Hockey"),
                     ]),

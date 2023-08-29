@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class loginbutton extends StatelessWidget {
   final Function()? onTap;
-  final child;
+  final Widget child;
 
   const loginbutton({super.key, required this.onTap, required this.child});
 
@@ -16,7 +16,13 @@ class loginbutton extends StatelessWidget {
         decoration: BoxDecoration(
             color: Colors.blueGrey, borderRadius: BorderRadius.circular(8)),
         child: Center(
-          child: child,
+          child: Center(
+            child: DefaultTextStyle.merge(
+              style: const TextStyle(
+                  color: Colors.white), // Set the text color to white
+              child: child,
+            ),
+          ),
         ),
       ),
     );
