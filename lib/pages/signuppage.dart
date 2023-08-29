@@ -127,8 +127,8 @@ class _signuppageState extends State<signuppage> {
   List sports = [
     'FootBall',
     'BasketBall',
-    'VulleyBall',
-    'TableTenis',
+    'VolleyBall',
+    'TableTennis',
     'Cricket',
     'Hockey',
     'Archery',

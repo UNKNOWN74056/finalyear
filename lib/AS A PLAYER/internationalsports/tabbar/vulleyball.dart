@@ -1,5 +1,4 @@
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/Details/coachdetail.dart';
-import 'package:finalyear/functions/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../GETX/getdatafromfirebase.dart';
@@ -28,7 +27,7 @@ class _vulleyballState extends State<vulleyball> {
             () => ListView(
                 children: controller.mylist
                     .where((e) =>
-                        e.sport == "VulleyBall" && e.profession == "Coache")
+                        e.sport == "VolleyBall" && e.profession == "Coache")
                     .map((element) => Card(
                           color: Colors.grey.shade300,
                           shape: RoundedRectangleBorder(

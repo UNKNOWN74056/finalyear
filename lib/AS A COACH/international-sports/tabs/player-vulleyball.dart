@@ -28,7 +28,7 @@ class _playervulleyballState extends State<playervulleyball> {
             () => ListView(
                 children: controller.mylist
                     .where((e) =>
-                        e.sport == "VulleyBall" && e.profession == "Player")
+                        e.sport == "VolleyBall" && e.profession == "Player")
                     .map((element) => Card(
                           color: Colors.grey.shade300,
                           shape: RoundedRectangleBorder(

@@ -80,8 +80,8 @@ class _interhomeState extends State<interhome> {
                       tabs: [
                         Text("Football"),
                         Text("Basketball"),
-                        Text("vulleyball"),
-                        Text("Tabletenis"),
+                        Text("volleyball"),
+                        Text("Tabletennis"),
                         Text("Cricket"),
                         Text("Hockey"),
                       ]),

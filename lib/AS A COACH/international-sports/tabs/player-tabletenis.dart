@@ -27,7 +27,7 @@ class _playertabletenisState extends State<playertabletenis> {
             () => ListView(
                 children: controller.mylist
                     .where((e) =>
-                        e.sport == "TableTenis" && e.profession == "Player")
+                        e.sport == "TableTennis" && e.profession == "Player")
                     .map((element) => Card(
                           color: Colors.grey.shade300,
                           shape: RoundedRectangleBorder(
