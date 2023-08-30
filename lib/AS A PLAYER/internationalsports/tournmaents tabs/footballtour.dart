@@ -1,7 +1,8 @@
-import 'package:finalyear/API/footballApi/soccer.dart';
 import 'package:finalyear/GETX/tournamentdata.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../API/footballApi/soccer.dart';
 
 class footballtour extends StatefulWidget {
   const footballtour({super.key});
@@ -96,7 +97,9 @@ class _footballtourState extends State<footballtour> {
                                           ),
                                         ),
                                         const SizedBox(width: 5),
-                                        Text(element.startdate),
+                                        Text(
+                                          element.startdate,
+                                        ),
                                       ],
                                     ),
                                     const SizedBox(height: 10),
