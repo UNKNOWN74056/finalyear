@@ -37,17 +37,6 @@ class tournamentdata extends GetxController {
                 : null,
             price: f['price'],
             email: f['email']));
-        // Print the tournament data for debugging
-        print('Tournament Image: ${f['tournamentimage']}');
-        print('Tournament Location: ${f['tournamentlocation']}');
-        print('Tournament Name: ${f['tournamentname']}');
-        print('Tournament Sport: ${f['tournamentsport']}');
-        print(
-            'Start Date: ${f['startdate'] != null ? DateFormat('MMMM d, y, hh:mm a').format(f['startdate'].toDate()) : 'N/A'}');
-        print(
-            'End Date: ${f['enddate'] != null ? DateFormat('MMMM d, y, hh:mm a').format(f['enddate'].toDate()) : 'N/A'}');
-        print('Price: ${f['price']}');
-        print('Email: ${f['email']}');
       }
     });
   }
