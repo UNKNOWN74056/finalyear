@@ -131,7 +131,7 @@ class _clubdetailState extends State<club_detail_page> {
                                     return SizedBox(
                                       height:
                                           MediaQuery.of(context).size.height *
-                                              0.25,
+                                              0.30,
                                       width: MediaQuery.of(context).size.width,
                                       child: Column(
                                           mainAxisAlignment:
@@ -411,9 +411,7 @@ class _clubdetailState extends State<club_detail_page> {
                       child: RatingBar.builder(
                         minRating: 0,
                         allowHalfRating: true,
-                        itemBuilder: (context, _) => const Icon(
-                          Icons.star
-                        ),
+                        itemBuilder: (context, _) => const Icon(Icons.star),
                         updateOnDrag: true,
                         onRatingUpdate: (rating) => setState(() {
                           this.rating = rating;

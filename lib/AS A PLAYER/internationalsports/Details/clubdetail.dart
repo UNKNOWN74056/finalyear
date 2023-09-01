@@ -130,7 +130,7 @@ class _clubdetailState extends State<clubdetail> {
                                     return SizedBox(
                                       height:
                                           MediaQuery.of(context).size.height *
-                                              0.25,
+                                              0.30,
                                       width: MediaQuery.of(context).size.width,
                                       child: Column(
                                           mainAxisAlignment:

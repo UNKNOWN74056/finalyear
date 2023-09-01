@@ -211,7 +211,7 @@ class _coachdetailState extends State<user_detail_page> {
                                           height: MediaQuery.of(context)
                                                   .size
                                                   .height *
-                                              0.25,
+                                              0.30,
                                           width:
                                               MediaQuery.of(context).size.width,
                                           child: Column(
