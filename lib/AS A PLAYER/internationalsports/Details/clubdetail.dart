@@ -7,8 +7,8 @@ import 'package:get/get.dart';
 import 'package:get_time_ago/get_time_ago.dart';
 
 import '../../../GETX/fullscreenphoto.dart';
-import '../../../wedgets/comenttextfield.dart';
-import '../../../wedgets/customesendbutton.dart';
+import '../../../wedgets/comment-widgets/comenttextfield.dart';
+import '../../../wedgets/comment-widgets/customesendbutton.dart';
 
 class clubdetail extends StatefulWidget {
   final post;

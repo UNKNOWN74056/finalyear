@@ -13,8 +13,8 @@ import 'package:get_time_ago/get_time_ago.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../GETX/allvideos.dart';
-import '../../wedgets/comenttextfield.dart';
-import '../../wedgets/customesendbutton.dart';
+import '../../wedgets/comment-widgets/comenttextfield.dart';
+import '../../wedgets/comment-widgets/customesendbutton.dart';
 
 class user_detail_page extends StatefulWidget {
   //object to the wigdet data

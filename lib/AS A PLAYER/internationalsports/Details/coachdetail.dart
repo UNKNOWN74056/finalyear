@@ -1,8 +1,9 @@
 import 'package:chewie/chewie.dart';
 import 'package:finalyear/GETX/getdatafromfirebase.dart';
-import 'package:finalyear/wedgets/comenttextfield.dart';
-import 'package:finalyear/wedgets/customesendbutton.dart';
+import 'package:finalyear/wedgets/comment-widgets/comenttextfield.dart';
+import 'package:finalyear/wedgets/comment-widgets/customesendbutton.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -175,84 +176,17 @@ class _coachdetailState extends State<coachdetail> {
                                             date.toDate().toString());
 
                                         return SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.30,
                                           width:
                                               MediaQuery.of(context).size.width,
                                           child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 10),
-                                                  child: Row(
+                                            children: [
+                                              Slidable(
+                                                endActionPane: ActionPane(
+                                                    motion:
+                                                        const ScrollMotion(),
                                                     children: [
-                                                      CircleAvatar(
-                                                        backgroundImage:
-                                                            NetworkImage(
-                                                                data['image']),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                left: 8.0),
-                                                        child: Container(
-                                                          child: Row(children: [
-                                                            Text(
-                                                              data['name'],
-                                                              style: const TextStyle(
-                                                                  fontSize: 15,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ]),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                const SizedBox(
-                                                  height: 10,
-                                                ),
-                                                SizedBox(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      1,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 15),
-                                                    child: Row(children: [
-                                                      const Icon(
-                                                        Icons
-                                                            .arrow_forward_ios_outlined,
-                                                        size: 15,
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(left: 10),
-                                                        child: SizedBox(
-                                                          width: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width *
-                                                              0.75,
-                                                          child: Text(
-                                                              data['comment']),
-                                                        ),
-                                                      ),
-                                                      GestureDetector(
-                                                        onTap: () {
+                                                      SlidableAction(
+                                                        onPressed: (context) {
                                                           if (data[
                                                                   'commenter'] ==
                                                               currentuser) {
@@ -262,30 +196,60 @@ class _coachdetailState extends State<coachdetail> {
                                                             null;
                                                           }
                                                         },
-                                                        child: const Icon(
-                                                          FontAwesomeIcons
-                                                              .trash,
-                                                          color: Colors.red,
+                                                        backgroundColor:
+                                                            const Color
+                                                                    .fromARGB(
+                                                                255, 252, 6, 6),
+                                                        foregroundColor:
+                                                            Colors.white,
+                                                        icon: FontAwesomeIcons
+                                                            .trash,
+                                                        label: 'Delete',
+                                                      )
+                                                    ]),
+                                                child: ListTile(
+                                                  leading: CircleAvatar(
+                                                    backgroundImage:
+                                                        NetworkImage(
+                                                            data['image']),
+                                                    radius: 20,
+                                                  ),
+                                                  title: Row(
+                                                    children: [
+                                                      Text(
+                                                        data['name'],
+                                                        style: const TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                         ),
                                                       ),
-                                                    ]),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 20),
-                                                  child: Row(
-                                                    children: [
-                                                      Text(GetTimeAgo.parse(
-                                                          finaldate))
+                                                      const SizedBox(
+                                                          width:
+                                                              10), // Add some space between name and timestamp
+                                                      Text(
+                                                        GetTimeAgo.parse(
+                                                            finaldate),
+                                                        style: const TextStyle(
+                                                          color: Colors.grey,
+                                                          fontSize:
+                                                              12, // Adjust the font size as needed
+                                                        ),
+                                                      ),
                                                     ],
                                                   ),
+                                                  subtitle: Text(
+                                                    data['comment'],
+                                                    style: const TextStyle(),
+                                                  ),
                                                 ),
-                                                const Divider(
-                                                  color: Colors.black,
-                                                )
-                                              ]),
+                                              ),
+                                              Divider(
+                                                color: Colors.grey.shade300,
+                                                thickness: 0.8,
+                                                height: 0,
+                                              ),
+                                            ],
+                                          ),
                                         );
                                       }),
                                 );
@@ -336,8 +300,7 @@ class _coachdetailState extends State<coachdetail> {
                                                   })
                                                 ],
                                               ),
-                                            )
-                                            );
+                                            ));
                                       });
                                 }
                                 return const Center(child: Text("Loading..."));
