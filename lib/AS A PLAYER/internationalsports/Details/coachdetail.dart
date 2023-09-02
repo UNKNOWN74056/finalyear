@@ -1,5 +1,7 @@
 import 'package:chewie/chewie.dart';
 import 'package:finalyear/GETX/getdatafromfirebase.dart';
+import 'package:finalyear/wedgets/comenttextfield.dart';
+import 'package:finalyear/wedgets/customesendbutton.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'package:get/get.dart';
@@ -34,7 +36,7 @@ class _coachdetailState extends State<coachdetail> {
   //rating track
   bool hasRated = false;
   //add comment in firestore
-  Future addcommnet(String name, String image, String comment) async {
+  Future addcomment(String name, String image, String comment) async {
     await FirebaseFirestore.instance
         .collection('users')
         .doc(widget.post.email)
@@ -152,6 +154,7 @@ class _coachdetailState extends State<coachdetail> {
                               style: TextStyle(fontSize: 20),
                             ),
                           ),
+                          //comeent to show stream builder
                           StreamBuilder(
                             stream: FirebaseFirestore.instance
                                 .collection("users")
@@ -292,6 +295,7 @@ class _coachdetailState extends State<coachdetail> {
                               );
                             },
                           ),
+                          //comment textfield
                           StreamBuilder(
                               stream: FirebaseFirestore.instance
                                   .collection("users")
@@ -308,63 +312,32 @@ class _coachdetailState extends State<coachdetail> {
                                         final namecontroller = data['fullname'];
                                         final image = data['Imageurl'];
                                         return Padding(
-                                          padding: EdgeInsets.only(
-                                              bottom: MediaQuery.of(context)
-                                                  .viewInsets
-                                                  .bottom),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(15),
-                                            child: TextFormField(
-                                              cursorColor: Colors.black,
-                                              cursorWidth: 5,
-                                              cursorHeight: 20,
-                                              controller: _commentcontroler,
-                                              textAlignVertical:
-                                                  TextAlignVertical.center,
-                                              keyboardType:
-                                                  TextInputType.multiline,
-                                              maxLines: 3,
-                                              minLines: 2,
-                                              decoration: InputDecoration(
-                                                filled: true,
-                                                isDense: true,
-                                                contentPadding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 10),
-                                                fillColor: Colors.white70,
-                                                border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10)),
-                                                hintText:
-                                                    "Write your comment....",
-                                                suffixIcon: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    GestureDetector(
-                                                      onTap: (() {
-                                                        addcommnet(
-                                                            namecontroller
-                                                                .toString(),
-                                                            image.toString(),
-                                                            _commentcontroler
-                                                                .text
-                                                                .toString());
-                                                      }),
-                                                      child: const Icon(
-                                                          FontAwesomeIcons
-                                                              .solidPaperPlane,
-                                                          size: 20,
-                                                          color: Color.fromARGB(
-                                                              255, 0, 1, 5)),
-                                                    ),
-                                                  ],
-                                                ),
+                                            padding: EdgeInsets.only(
+                                                bottom: MediaQuery.of(context)
+                                                    .viewInsets
+                                                    .bottom),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(15),
+                                              child: Row(
+                                                children: [
+                                                  Expanded(
+                                                      child: commenttextfield(
+                                                          controller:
+                                                              _commentcontroler)),
+                                                  const SizedBox(width: 8),
+                                                  CustomSendButton(
+                                                      onPressed: () {
+                                                    addcomment(
+                                                      namecontroller.toString(),
+                                                      image.toString(),
+                                                      _commentcontroler.text
+                                                          .toString(),
+                                                    );
+                                                  })
+                                                ],
                                               ),
-                                            ),
-                                          ),
-                                        );
+                                            )
+                                            );
                                       });
                                 }
                                 return const Center(child: Text("Loading..."));

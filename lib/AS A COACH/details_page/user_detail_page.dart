@@ -13,6 +13,8 @@ import 'package:get_time_ago/get_time_ago.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../GETX/allvideos.dart';
+import '../../wedgets/comenttextfield.dart';
+import '../../wedgets/customesendbutton.dart';
 
 class user_detail_page extends StatefulWidget {
   //object to the wigdet data
@@ -36,7 +38,7 @@ class _coachdetailState extends State<user_detail_page> {
   //rating track
   bool hasRated = false;
   //add comment in firestore
-  Future addcommnet(String name, String image, String comment) async {
+  Future addcomment(String name, String image, String comment) async {
     await FirebaseFirestore.instance
         .collection('users')
         .doc(widget.post.email)
@@ -344,63 +346,39 @@ class _coachdetailState extends State<user_detail_page> {
                                         final namecontroller = data['fullname'];
                                         final image = data['Imageurl'];
                                         return Padding(
-                                          padding: EdgeInsets.only(
-                                              bottom: MediaQuery.of(context)
-                                                  .viewInsets
-                                                  .bottom),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(15),
-                                            child: TextFormField(
-                                              cursorColor: Colors.black,
-                                              cursorWidth: 5,
-                                              cursorHeight: 20,
-                                              controller: _commentcontroler,
-                                              textAlignVertical:
-                                                  TextAlignVertical.center,
-                                              keyboardType:
-                                                  TextInputType.multiline,
-                                              maxLines: 3,
-                                              minLines: 2,
-                                              decoration: InputDecoration(
-                                                filled: true,
-                                                isDense: true,
-                                                contentPadding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 10),
-                                                fillColor: Colors.white70,
-                                                border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10)),
-                                                hintText:
-                                                    "Write your comment....",
-                                                suffixIcon: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    GestureDetector(
-                                                      onTap: (() {
-                                                        addcommnet(
-                                                            namecontroller
-                                                                .toString(),
-                                                            image.toString(),
-                                                            _commentcontroler
-                                                                .text
-                                                                .toString());
-                                                      }),
-                                                      child: const Icon(
-                                                          FontAwesomeIcons
-                                                              .solidPaperPlane,
-                                                          size: 20,
-                                                          color: Color.fromARGB(
-                                                              255, 0, 1, 5)),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        );
+                                            padding: EdgeInsets.only(
+                                                bottom: MediaQuery.of(context)
+                                                    .viewInsets
+                                                    .bottom),
+                                            child: Padding(
+                                                padding: EdgeInsets.only(
+                                                    bottom:
+                                                        MediaQuery.of(context)
+                                                            .viewInsets
+                                                            .bottom),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(15),
+                                                  child: Row(
+                                                    children: [
+                                                      Expanded(
+                                                          child: commenttextfield(
+                                                              controller:
+                                                                  _commentcontroler)),
+                                                      const SizedBox(width: 8),
+                                                      CustomSendButton(
+                                                          onPressed: () {
+                                                        addcomment(
+                                                          namecontroller
+                                                              .toString(),
+                                                          image.toString(),
+                                                          _commentcontroler.text
+                                                              .toString(),
+                                                        );
+                                                      })
+                                                    ],
+                                                  ),
+                                                )));
                                       });
                                 }
                                 return const Center(child: Text("Loading..."));
