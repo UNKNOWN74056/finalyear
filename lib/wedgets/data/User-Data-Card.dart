@@ -36,41 +36,46 @@ class _CustomCardState extends State<CustomCard> {
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
-      return Shimmer.fromColors(
-        baseColor: Colors.grey[300]!,
-        highlightColor: Colors.grey[100]!,
-        child: Card(
-          color: Colors.grey.shade300,
-          shape: RoundedRectangleBorder(
-            side: const BorderSide(
-              color: Color.fromARGB(255, 25, 9, 117),
-              width: 1,
-            ),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: ListTile(
-            title: Container(
-              width: double.infinity,
-              height: 20.0,
-              color: Colors.grey[300],
-            ),
-            leading: const CircleAvatar(
-              radius: 35,
-              backgroundColor: Colors.white,
-            ),
-            trailing: Icon(
-              Icons.arrow_forward,
-              color: Colors.grey[300],
-            ),
-            onTap: () {},
-            subtitle: Container(
-              width: double.infinity,
-              height: 16.0,
-              color: Colors.grey[300],
-            ),
-          ),
-        ),
-      );
+      return ListView.builder(
+          itemCount: 5, // Number of shimmer items
+          shrinkWrap: true,
+          itemBuilder: (context, i) {
+            return Shimmer.fromColors(
+              baseColor: Colors.grey[300]!,
+              highlightColor: Colors.grey[100]!,
+              child: Card(
+                color: Colors.grey.shade300,
+                shape: RoundedRectangleBorder(
+                  side: const BorderSide(
+                    color: Color.fromARGB(255, 25, 9, 117),
+                    width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: ListTile(
+                  title: Container(
+                    width: double.infinity,
+                    height: 20.0,
+                    color: Colors.grey[300],
+                  ),
+                  leading: const CircleAvatar(
+                    radius: 35,
+                    backgroundColor: Colors.white,
+                  ),
+                  trailing: Icon(
+                    Icons.arrow_forward,
+                    color: Colors.grey[300],
+                  ),
+                  onTap: () {},
+                  subtitle: Container(
+                    width: double.infinity,
+                    height: 16.0,
+                    color: Colors.grey[300],
+                  ),
+                ),
+              ),
+            );
+          });
     } else {
       return Card(
         color: Colors.grey.shade300,

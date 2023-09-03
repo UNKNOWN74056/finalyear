@@ -9,6 +9,7 @@ class ClubCard extends StatefulWidget {
   final Function() onTap;
 
   const ClubCard({
+    super.key,
     required this.clubname,
     required this.clubimage,
     required this.location,
@@ -37,42 +38,47 @@ class _ClubCardState extends State<ClubCard> {
   Widget build(BuildContext context) {
     if (isLoading) {
       // Show shimmer loading when isLoading is true
-      return Shimmer.fromColors(
-        baseColor: Colors.grey[300]!,
-        highlightColor: Colors.grey[100]!,
-        child: Card(
-          // Shimmer loading card content
-          color: Colors.grey.shade300,
-          shape: RoundedRectangleBorder(
-            side: const BorderSide(
-              color: Color.fromARGB(255, 25, 9, 117),
-              width: 1,
-            ),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: ListTile(
-            title: Container(
-              width: double.infinity,
-              height: 20.0,
-              color: Colors.grey[300],
-            ),
-            leading: const CircleAvatar(
-              radius: 35,
-              backgroundColor: Colors.white,
-            ),
-            subtitle: Container(
-              width: double.infinity,
-              height: 16.0,
-              color: Colors.grey[300],
-            ),
-            trailing: const Icon(
-              FontAwesomeIcons.arrowRight,
-              color: Color.fromARGB(201, 224, 224, 224),
-            ),
-            onTap: () {},
-          ),
-        ),
-      );
+      return ListView.builder(
+          itemCount: 5, // Number of shimmer items
+          shrinkWrap: true,
+          itemBuilder: (context, i) {
+            return Shimmer.fromColors(
+              baseColor: Colors.grey[300]!,
+              highlightColor: Colors.grey[100]!,
+              child: Card(
+                // Shimmer loading card content
+                color: Colors.grey.shade300,
+                shape: RoundedRectangleBorder(
+                  side: const BorderSide(
+                    color: Color.fromARGB(255, 25, 9, 117),
+                    width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: ListTile(
+                  title: Container(
+                    width: double.infinity,
+                    height: 20.0,
+                    color: Colors.grey[300],
+                  ),
+                  leading: const CircleAvatar(
+                    radius: 35,
+                    backgroundColor: Colors.white,
+                  ),
+                  subtitle: Container(
+                    width: double.infinity,
+                    height: 16.0,
+                    color: Colors.grey[300],
+                  ),
+                  trailing: const Icon(
+                    FontAwesomeIcons.arrowRight,
+                    color: Color.fromARGB(201, 224, 224, 224),
+                  ),
+                  onTap: () {},
+                ),
+              ),
+            );
+          });
     } else {
       // Show the actual card content
       return Card(
