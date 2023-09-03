@@ -2,9 +2,9 @@ import 'package:finalyear/AS%20A%20COACH/details_page/club_detail_page.dart';
 import 'package:finalyear/wedgets/search_engine_for_club.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import '../../../GETX/clubdatafirebase.dart';
+import '../../../wedgets/data/Club-Data-Card.dart';
 
 class interclub extends StatefulWidget {
   const interclub({super.key});
@@ -80,31 +80,13 @@ class _interclubState extends State<interclub> {
                   return Obx(
                     () => Column(
                       children: clubcontroller.clublist
-                          .map(
-                            (element) => Card(
-                                color: Colors.grey.shade300,
-                                shape: RoundedRectangleBorder(
-                                  side: const BorderSide(
-                                      color: Color.fromARGB(255, 25, 9, 117),
-                                      width: 1),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: ListTile(
-                                    title: Text(element.clubname,
-                                        style: const TextStyle(fontSize: 20)),
-                                    leading: CircleAvatar(
-                                        radius: 35,
-                                        backgroundImage:
-                                            NetworkImage(element.clubimage),
-                                        backgroundColor: Colors.white),
-                                    subtitle: Text(element.location,
-                                        style: const TextStyle(fontSize: 15)),
-                                    trailing: const Icon(
-                                      FontAwesomeIcons.arrowRight,
-                                    ),
-                                    onTap: () => Get.to(
-                                        club_detail_page(post: element)))),
-                          )
+                          .map((element) => ClubCard(
+                                clubname: element.clubname,
+                                clubimage: element.clubimage,
+                                location: element.location,
+                                onTap: () =>
+                                    Get.to(club_detail_page(post: element)),
+                              ))
                           .toList(),
                     ),
                   );
