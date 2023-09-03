@@ -13,7 +13,7 @@ class CustomSendButton extends StatelessWidget {
       onTap: onPressed,
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(25),
           shape: BoxShape.rectangle,
           color: Colors.green,
         ),
