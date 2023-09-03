@@ -13,7 +13,7 @@ class CommentListWidget extends StatelessWidget {
   final _commentcontroller = TextEditingController();
   final String postEmail; // Add this variable
 
-  CommentListWidget({required this.postEmail});
+  CommentListWidget({super.key, required this.postEmail});
 
   //add comment in firestore
   Future addcomment(String name, String image, String comment) async {
