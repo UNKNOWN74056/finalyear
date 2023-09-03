@@ -5,8 +5,8 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_time_ago/get_time_ago.dart';
-import 'package:shimmer/shimmer.dart';
 import 'comenttextfield.dart';
+import 'commentshimmer.dart';
 import 'customesendbutton.dart';
 
 class CommentListWidget extends StatelessWidget {
@@ -149,30 +149,7 @@ class CommentListWidget extends StatelessWidget {
                 );
               } else if (snapshot.connectionState == ConnectionState.waiting) {
                 // Show shimmer effect while loading
-                return Expanded(
-                  child: ListView.builder(
-                    itemCount: 5, // Number of shimmer items
-                    shrinkWrap: true,
-                    itemBuilder: (context, i) {
-                      return Shimmer.fromColors(
-                        baseColor: Colors.grey[300]!,
-                        highlightColor: Colors.grey[100]!,
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          child: Column(
-                            children: [
-                              Divider(
-                                color: Colors.grey.shade300,
-                                thickness: 0.8,
-                                height: 0,
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                );
+                return ShimmerLoadingWidget();
               } else {
                 return const Center(
                   child:
