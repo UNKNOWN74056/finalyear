@@ -21,7 +21,7 @@ class clubdetail extends StatefulWidget {
 
 class _clubdetailState extends State<clubdetail> {
   //controller
-  final TextEditingController _commentcontroler = TextEditingController();
+  final TextEditingController _commentcontroller = TextEditingController();
   //add comment to firestore
   Future addcomment(String name, String image, String comment) async {
     await FirebaseFirestore.instance
@@ -37,7 +37,7 @@ class _clubdetailState extends State<clubdetail> {
       'comment': comment, // Use the passed comment argument directly
     }).then((newCommentDoc) {
       print("Comment added with ID: ${newCommentDoc.id}");
-      _commentcontroler.clear();
+      _commentcontroller.clear();
     }).catchError((error) {
       print("Error adding comment: $error");
     });
@@ -83,6 +83,13 @@ class _clubdetailState extends State<clubdetail> {
         .update({
       'rating': ratingavg.toString(),
     });
+  }
+
+  //dispose
+  @override
+  void dispose() {
+    _commentcontroller.dispose();
+    super.dispose();
   }
 
   final currentuser = FirebaseAuth.instance.currentUser!.email;
@@ -271,19 +278,53 @@ class _clubdetailState extends State<clubdetail> {
                                               child: Row(
                                                 children: [
                                                   Expanded(
-                                                      child: commenttextfield(
-                                                          controller:
-                                                              _commentcontroler)),
-                                                  const SizedBox(width: 8),
-                                                  CustomSendButton(
-                                                      onPressed: () {
-                                                    addcomment(
-                                                      namecontroller.toString(),
-                                                      image.toString(),
-                                                      _commentcontroler.text
-                                                          .toString(),
-                                                    );
-                                                  })
+                                                      child: Stack(
+                                                    children: [
+                                                      // Text field
+                                                      commenttextfield(
+                                                        controller:
+                                                            _commentcontroller,
+                                                      ),
+
+                                                      // Positioned "Send" button
+                                                      Positioned(
+                                                        right:
+                                                            8, // Adjust the position as needed
+                                                        bottom:
+                                                            3, // Adjust the position as needed
+                                                        child: CustomSendButton(
+                                                          onPressed: () {
+                                                            final commenttext =
+                                                                _commentcontroller
+                                                                    .text;
+                                                            if (commenttext
+                                                                .isNotEmpty) {
+                                                              addcomment(
+                                                                namecontroller
+                                                                    .toString(),
+                                                                image
+                                                                    .toString(),
+                                                                _commentcontroller
+                                                                    .text
+                                                                    .toString(),
+                                                              );
+                                                            } else {
+                                                              // Show a message to the user that they need to enter a comment
+                                                              Get.snackbar(
+                                                                  "Message",
+                                                                  "please enter your comment first.",
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .red,
+                                                                  colorText:
+                                                                      Colors
+                                                                          .white);
+                                                            }
+                                                          },
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ))
                                                 ],
                                               ),
                                             )));

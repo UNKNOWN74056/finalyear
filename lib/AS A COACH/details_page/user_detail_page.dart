@@ -32,7 +32,7 @@ class _coachdetailState extends State<user_detail_page> {
   final List<VideoPlayerController> _controllers = [];
   final controller = Get.put(FetchDataFirebase());
   //controller
-  final TextEditingController _commentcontroler = TextEditingController();
+  final TextEditingController _commentcontroller = TextEditingController();
   //cureent user
   final currentuser = FirebaseAuth.instance.currentUser!.email;
   //rating track
@@ -52,7 +52,7 @@ class _coachdetailState extends State<user_detail_page> {
       'comment': comment, // Use the passed comment argument directly
     }).then((newCommentDoc) {
       print("Comment added with ID: ${newCommentDoc.id}");
-      _commentcontroler.clear();
+      _commentcontroller.clear();
     }).catchError((error) {
       print("Error adding comment: $error");
     });
@@ -122,7 +122,7 @@ class _coachdetailState extends State<user_detail_page> {
   //dispose
   @override
   void dispose() {
-    _commentcontroler.dispose();
+    _commentcontroller.dispose();
     super.dispose();
   }
 
@@ -362,20 +362,54 @@ class _coachdetailState extends State<user_detail_page> {
                                                   child: Row(
                                                     children: [
                                                       Expanded(
-                                                          child: commenttextfield(
-                                                              controller:
-                                                                  _commentcontroler)),
-                                                      const SizedBox(width: 8),
-                                                      CustomSendButton(
-                                                          onPressed: () {
-                                                        addcomment(
-                                                          namecontroller
-                                                              .toString(),
-                                                          image.toString(),
-                                                          _commentcontroler.text
-                                                              .toString(),
-                                                        );
-                                                      })
+                                                          child: Stack(
+                                                        children: [
+                                                          // Text field
+                                                          commenttextfield(
+                                                            controller:
+                                                                _commentcontroller,
+                                                          ),
+
+                                                          // Positioned "Send" button
+                                                          Positioned(
+                                                            right:
+                                                                8, // Adjust the position as needed
+                                                            bottom:
+                                                                3, // Adjust the position as needed
+                                                            child:
+                                                                CustomSendButton(
+                                                              onPressed: () {
+                                                                final commenttext =
+                                                                    _commentcontroller
+                                                                        .text;
+                                                                if (commenttext
+                                                                    .isNotEmpty) {
+                                                                  addcomment(
+                                                                    namecontroller
+                                                                        .toString(),
+                                                                    image
+                                                                        .toString(),
+                                                                    _commentcontroller
+                                                                        .text
+                                                                        .toString(),
+                                                                  );
+                                                                } else {
+                                                                  // Show a message to the user that they need to enter a comment
+                                                                  Get.snackbar(
+                                                                      "Message",
+                                                                      "please enter your comment first.",
+                                                                      backgroundColor:
+                                                                          Colors
+                                                                              .red,
+                                                                      colorText:
+                                                                          Colors
+                                                                              .white);
+                                                                }
+                                                              },
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ))
                                                     ],
                                                   ),
                                                 )));
