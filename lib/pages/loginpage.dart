@@ -26,6 +26,8 @@ final currentUser = FirebaseAuth.instance;
 class _loginpageState extends State<loginpage> {
   //putting getx controller her
   final controller = Get.put(LoginController());
+  // State variable for password visibility toggle
+  bool _isObscured = true;
 
   //login function for the user
   loginuser() async {
@@ -150,16 +152,25 @@ class _loginpageState extends State<loginpage> {
                       },
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                       controller: controller.passwordController,
-                      obscureText: true,
+                      obscureText: _isObscured,
                       labelText: "Enter your password",
                       icon: const Icon(
                         Icons.lock,
                         color: Color.fromARGB(255, 4, 45, 119),
                       ),
-                      sufixicon: const Icon(
-                        Icons.visibility_off,
-                        color: Colors.grey,
-                        size: 20,
+                      sufixicon: GestureDetector(
+                        onTap: (() {
+                          setState(() {
+                            _isObscured = !_isObscured;
+                          });
+                        }),
+                        child: Icon(
+                          _isObscured
+                              ? FontAwesomeIcons.eyeSlash
+                              : FontAwesomeIcons.eye,
+                          color: Colors.black,
+                          size: 21,
+                        ),
                       ),
                     ),
                   ],

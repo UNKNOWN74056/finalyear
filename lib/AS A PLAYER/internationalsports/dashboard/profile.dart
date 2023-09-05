@@ -1,5 +1,6 @@
 import 'package:finalyear/GETX/getdatafromfirebase.dart';
 import 'package:finalyear/functions/functions.dart';
+import 'package:finalyear/wedgets/data/Profile-Shimmer-Ui.dart';
 import 'package:finalyear/wedgets/videospagecode.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,18 @@ class _profileState extends State<profile> {
   final vidcontroller = Get.put(FetchVideoFirebase());
   final List<VideoPlayerController> _controllers = [];
   final currentuser = FirebaseAuth.instance.currentUser!.email;
+  bool isLoading = true; // Initially set to true for shimmer loading
+
+  @override
+  void initState() {
+    super.initState();
+    // Simulate data loading delay
+    Future.delayed(const Duration(seconds: 2), () {
+      setState(() {
+        isLoading = false; // Set to false when data is loaded
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,219 +93,231 @@ class _profileState extends State<profile> {
           ),
         ),
         body: GetBuilder(
-          init: FetchDataFirebase(),
-          builder: (controller) {
-            return RefreshIndicator(
-              onRefresh: () async {
-                vidcontroller.Getallvideos();
-                controller.GetDataFirebase();
-              },
-              child: Obx(() => ListView(
-                    children: controller.mylist
-                        .where((e) =>
-                            e.email == FirebaseAuth.instance.currentUser!.email)
-                        .map(
-                          (element) => Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(20),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Column(
+            init: FetchDataFirebase(),
+            builder: (controller) {
+              if (isLoading) {
+                return ShimmerProfileWidget();
+              }
+              //original ui
+              else {
+                return RefreshIndicator(
+                  onRefresh: () async {
+                    vidcontroller.Getallvideos();
+                    controller.GetDataFirebase();
+                  },
+                  child: Obx(() => ListView(
+                        children: controller.mylist
+                            .where((e) =>
+                                e.email ==
+                                FirebaseAuth.instance.currentUser!.email)
+                            .map(
+                              (element) => Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.all(20),
+                                    child: Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        CircleAvatar(
-                                          radius: 45.0,
-                                          backgroundImage:
-                                              NetworkImage(element.image_Url),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(width: 16.0),
-                                    Expanded(
-                                      child: Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 20),
-                                        child: Column(
+                                        Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  element.fullname,
-                                                  style: const TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            const SizedBox(
-                                              height: 8.0,
-                                            ),
-                                            Row(
-                                              children: [
-                                                const Text(
-                                                  "Gender: ",
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                Text(
-                                                  element.gender,
-                                                  style: TextStyle(
-                                                    color: Colors.grey[600],
-                                                    fontSize: 16.0,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            const SizedBox(height: 8.0),
-                                            Row(
-                                              children: [
-                                                const Text(
-                                                  "Favorite sport: ",
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                Text(
-                                                  element.sport,
-                                                  style: TextStyle(
-                                                    color: Colors.grey[600],
-                                                    fontSize: 16.0,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            const SizedBox(height: 8.0),
-                                            Row(
-                                              children: [
-                                                const Text(
-                                                  "Location: ",
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                Text(
-                                                  element.city,
-                                                  style: TextStyle(
-                                                    color: Colors.grey[600],
-                                                    fontSize: 16.0,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            const SizedBox(height: 8.0),
-                                            Row(
-                                              children: [
-                                                const Text(
-                                                  "Profession: ",
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                Text(
-                                                  element.profession,
-                                                  style: TextStyle(
-                                                    color: Colors.grey[600],
-                                                    fontSize: 16.0,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            const SizedBox(height: 8.0),
-                                            Row(
-                                              children: [
-                                                const Text(
-                                                  "Phone: ",
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                Text(
-                                                  element.phoneNumber,
-                                                  style: TextStyle(
-                                                    color: Colors.grey[600],
-                                                    fontSize: 16.0,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            const SizedBox(height: 8.0),
-                                            Row(
-                                              children: [
-                                                const Icon(Icons.star,
-                                                    color: Colors.yellow),
-                                                const SizedBox(width: 4.0),
-                                                Text(
-                                                  element.rating.toString(),
-                                                  style: const TextStyle(
-                                                    fontSize: 16.0,
-                                                  ),
-                                                ),
-                                                const SizedBox(width: 4.0),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 40),
-                                                  child: ReusableElevatedButton(
-                                                    onTap: () {
-                                                      Get.to(CustomBottomSheet(
-                                                          data: editprofiledata(
-                                                        fullname:
-                                                            element.fullname,
-                                                        city: element.city,
-                                                        image_Url:
-                                                            element.image_Url,
-                                                        phoneNumber:
-                                                            element.phoneNumber,
-                                                      )));
-                                                    },
-                                                    icon: Icons.edit,
-                                                    child: const Text("Edit"),
-                                                  ),
-                                                ),
-                                              ],
+                                            CircleAvatar(
+                                              radius: 45.0,
+                                              backgroundImage: NetworkImage(
+                                                  element.image_Url),
                                             ),
                                           ],
                                         ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-
-                              Padding(
-                                padding: const EdgeInsets.only(left: 15),
-                                child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: const [
-                                      Text(
-                                        'Videos',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20.0,
+                                        const SizedBox(width: 16.0),
+                                        Expanded(
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 20),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      element.fullname,
+                                                      style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 20,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(
+                                                  height: 8.0,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    const Text(
+                                                      "Gender: ",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                    Text(
+                                                      element.gender,
+                                                      style: TextStyle(
+                                                        color: Colors.grey[600],
+                                                        fontSize: 16.0,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(height: 8.0),
+                                                Row(
+                                                  children: [
+                                                    const Text(
+                                                      "Favorite sport: ",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                    Text(
+                                                      element.sport,
+                                                      style: TextStyle(
+                                                        color: Colors.grey[600],
+                                                        fontSize: 16.0,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(height: 8.0),
+                                                Row(
+                                                  children: [
+                                                    const Text(
+                                                      "Location: ",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                    Text(
+                                                      element.city,
+                                                      style: TextStyle(
+                                                        color: Colors.grey[600],
+                                                        fontSize: 16.0,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(height: 8.0),
+                                                Row(
+                                                  children: [
+                                                    const Text(
+                                                      "Profession: ",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                    Text(
+                                                      element.profession,
+                                                      style: TextStyle(
+                                                        color: Colors.grey[600],
+                                                        fontSize: 16.0,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(height: 8.0),
+                                                Row(
+                                                  children: [
+                                                    const Text(
+                                                      "Phone: ",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                    Text(
+                                                      element.phoneNumber,
+                                                      style: TextStyle(
+                                                        color: Colors.grey[600],
+                                                        fontSize: 16.0,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(height: 8.0),
+                                                Row(
+                                                  children: [
+                                                    const Icon(Icons.star,
+                                                        color: Colors.yellow),
+                                                    const SizedBox(width: 4.0),
+                                                    Text(
+                                                      element.rating.toString(),
+                                                      style: const TextStyle(
+                                                        fontSize: 16.0,
+                                                      ),
+                                                    ),
+                                                    const SizedBox(width: 4.0),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 40),
+                                                      child:
+                                                          ReusableElevatedButton(
+                                                        onTap: () {
+                                                          Get.to(
+                                                              CustomBottomSheet(
+                                                                  data:
+                                                                      editprofiledata(
+                                                            fullname: element
+                                                                .fullname,
+                                                            city: element.city,
+                                                            image_Url: element
+                                                                .image_Url,
+                                                            phoneNumber: element
+                                                                .phoneNumber,
+                                                          )));
+                                                        },
+                                                        icon: Icons.edit,
+                                                        child:
+                                                            const Text("Edit"),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                         ),
-                                      ),
-                                      SizedBox(height: 8.0),
-                                    ]),
+                                      ],
+                                    ),
+                                  ),
+
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 15),
+                                    child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: const [
+                                          Text(
+                                            'Videos',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20.0,
+                                            ),
+                                          ),
+                                          SizedBox(height: 8.0),
+                                        ]),
+                                  ),
+                                  //video section
+                                  videopagegridview()
+                                ],
                               ),
-                              //video section
-                              videopagegridview()
-                            ],
-                          ),
-                        )
-                        .toList(),
-                  )),
-            );
-          },
-        ),
+                            )
+                            .toList(),
+                      )),
+                );
+              }
+            }),
       ),
     );
   }
