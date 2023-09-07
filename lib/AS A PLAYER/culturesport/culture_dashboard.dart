@@ -3,6 +3,7 @@ import 'package:finalyear/AS%20A%20PLAYER/culturesport/culturetournametns.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/profile.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/setting.dart';
 import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
 
 class culturedashboard extends StatefulWidget {
   static const String routname = "culturedashboard";
@@ -28,25 +29,27 @@ class _culturedashboardState extends State<culturedashboard> {
       child: Scaffold(
         body: screens[currentIndex],
         bottomNavigationBar: BottomNavigationBar(
-            selectedItemColor: Colors.teal,
-            unselectedItemColor: Colors.black87,
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: Colors.white70,
+            selectedItemColor: const Color.fromARGB(255, 17, 0, 0),
+            unselectedItemColor: Colors.grey[600],
             currentIndex: currentIndex,
             onTap: (value) => setState(() => currentIndex = value),
             items: const [
               BottomNavigationBarItem(
-                icon: Icon(Icons.home),
+                icon: Icon(Ionicons.home),
                 label: "Home",
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.emoji_events),
-                label: "Tournaments",
+                icon: Icon(Ionicons.trophy),
+                label: "Events",
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
+                icon: Icon(Ionicons.settings),
                 label: "Setting",
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.person),
+                icon: Icon(Ionicons.person),
                 label: "Profile",
               ),
             ]),

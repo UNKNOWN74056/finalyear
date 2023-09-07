@@ -57,6 +57,7 @@ dependencies:
   flutter_slidable: ^2.0.0
   flutter_stripe: ^9.3.0
   shimmer: ^3.0.0
+  ionicons: ^0.2.2
 
 dev_dependencies:
   flutter_test:
