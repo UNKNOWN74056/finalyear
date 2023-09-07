@@ -64,9 +64,7 @@ class _MyAppState extends State<MyApp> {
             culturedashboard.routname: (context) => const culturedashboard(),
           },
         );
-        
       },
     );
-    
   }
 }

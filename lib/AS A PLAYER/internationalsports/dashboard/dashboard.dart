@@ -31,6 +31,7 @@ class _dashboardState extends State<dashboard> {
       child: Scaffold(
         body: screens[currentIndex],
         bottomNavigationBar: BottomNavigationBar(
+            backgroundColor: Colors.grey,
             selectedItemColor: Colors.teal,
             unselectedItemColor: Colors.black87,
             currentIndex: currentIndex,
@@ -46,7 +47,7 @@ class _dashboardState extends State<dashboard> {
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.emoji_events),
-                label: "Tournaments",
+                label: "Events",
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.settings),
