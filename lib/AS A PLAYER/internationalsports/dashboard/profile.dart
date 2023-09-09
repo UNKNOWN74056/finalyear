@@ -264,18 +264,19 @@ class _profileState extends State<profile> {
                                                       child:
                                                           ReusableElevatedButton(
                                                         onTap: () {
-                                                          Get.to(
+                                                          Get.to(() =>
                                                               CustomBottomSheet(
                                                                   data:
                                                                       editprofiledata(
-                                                            fullname: element
-                                                                .fullname,
-                                                            city: element.city,
-                                                            image_Url: element
-                                                                .image_Url,
-                                                            phoneNumber: element
-                                                                .phoneNumber,
-                                                          )));
+                                                                fullname: element
+                                                                    .fullname,
+                                                                city: element
+                                                                    .city,
+                                                                image_Url: element
+                                                                    .image_Url,
+                                                                phoneNumber: element
+                                                                    .phoneNumber,
+                                                              )));
                                                         },
                                                         icon: Icons.edit,
                                                         child:

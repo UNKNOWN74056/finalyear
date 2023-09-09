@@ -31,7 +31,7 @@ class _homeforcoachState extends State<homeforcoach> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Get.to(const dashboard());
+                    Get.to(() => const dashboard());
                   },
                   child: Container(
                     margin: const EdgeInsets.only(bottom: 16.0),
@@ -57,7 +57,7 @@ class _homeforcoachState extends State<homeforcoach> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.to(const culturedashboard());
+                    Get.to(() => const culturedashboard());
                   },
                   child: Container(
                     height: 200,

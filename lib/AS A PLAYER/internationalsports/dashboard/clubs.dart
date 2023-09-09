@@ -83,7 +83,8 @@ class _clubsState extends State<clubs> {
                                 clubname: element.clubname,
                                 clubimage: element.clubimage,
                                 location: element.location,
-                                onTap: () => Get.to(clubdetail(post: element)),
+                                onTap: () =>
+                                    Get.to(() => clubdetail(post: element)),
                               ))
                           .toList(),
                     ),

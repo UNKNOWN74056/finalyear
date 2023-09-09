@@ -31,7 +31,7 @@ class _homeforplayerState extends State<homeforplayer> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Get.to(const playerdashboeard());
+                    Get.to(() => const playerdashboeard());
                   },
                   child: Container(
                     margin: const EdgeInsets.only(bottom: 16.0),
@@ -57,7 +57,7 @@ class _homeforplayerState extends State<homeforplayer> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.to(const cultureplayerdb());
+                    Get.to(() => const cultureplayerdb());
                   },
                   child: Container(
                     height: 200,
