@@ -32,6 +32,12 @@ class _settingState extends State<setting> {
                 style: TextStyle(fontSize: 40),
               ),
               const SizedBox(
+                height: 20,
+              ),
+              const Divider(
+                color: Colors.black,
+              ),
+              const SizedBox(
                 height: 15,
               ),
               const Text(
@@ -111,13 +117,13 @@ class _settingState extends State<setting> {
                 child: _buildListTile(context, "Logout",
                     FontAwesomeIcons.rightFromBracket, Colors.green),
               ),
-              const SizedBox(height: 10),
-              _buildSwitchListTile(
-                context,
-                'Dark mode',
-                false,
-                (bool value) {},
-              ),
+              // const SizedBox(height: 10),
+              // _buildSwitchListTile(
+              //   context,
+              //   'Dark mode',
+              //   false,
+              //   (bool value) {},
+              // ),
               const SizedBox(height: 20),
               const Text(
                 'Account',

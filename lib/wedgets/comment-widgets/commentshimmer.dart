@@ -5,7 +5,7 @@ class ShimmerLoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 5, // Number of shimmer items
+      itemCount: 6, // Number of shimmer items
       shrinkWrap: true,
       itemBuilder: (context, i) {
         return Shimmer.fromColors(
