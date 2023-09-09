@@ -33,7 +33,7 @@ class _CricketState extends State<Cricket> {
                           fullName: element.fullname,
                           imageUrl: element.image_Url,
                           city: element.city,
-                          onTap: () => Get.to(coachdetail(post: element)),
+                          onTap: () => Get.to(() => coachdetail(post: element)),
                         ))
                     .toList()),
           );

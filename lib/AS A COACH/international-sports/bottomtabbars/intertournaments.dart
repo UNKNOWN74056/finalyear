@@ -36,6 +36,7 @@ class _intertournamentsState extends State<intertournaments> {
             floatHeaderSlivers: true,
             headerSliverBuilder: (context, innerBoxIsScrolled) => [
               SliverAppBar(
+                automaticallyImplyLeading: false,
                 actions: [
                   Padding(
                     padding: const EdgeInsets.only(left: 20),

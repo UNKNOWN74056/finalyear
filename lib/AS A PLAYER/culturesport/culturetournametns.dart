@@ -29,6 +29,7 @@ class _culturetournamentsState extends State<culturetournaments> {
             floatHeaderSlivers: true,
             headerSliverBuilder: (context, innerBoxIsScrolled) => [
               SliverAppBar(
+                automaticallyImplyLeading: false,
                 expandedHeight: 200,
                 pinned: true,
                 floating: true,

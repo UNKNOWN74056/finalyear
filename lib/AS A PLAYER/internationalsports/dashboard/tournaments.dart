@@ -36,6 +36,7 @@ class _tournamentsState extends State<tournaments> {
             floatHeaderSlivers: true,
             headerSliverBuilder: (context, innerBoxIsScrolled) => [
               SliverAppBar(
+                automaticallyImplyLeading: false,
                 actions: [
                   Padding(
                     padding: const EdgeInsets.only(left: 20),
