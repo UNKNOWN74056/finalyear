@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/Details/coachdetail.dart';
-import 'package:finalyear/AS%20A%20PLAYER/internationalsports/tabbar/Football.dart';
-import 'package:finalyear/functions/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

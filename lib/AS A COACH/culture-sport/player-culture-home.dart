@@ -5,7 +5,7 @@ import 'package:finalyear/AS%20A%20COACH/culture-sport/tabs/player-culture-tent-
 import 'package:finalyear/wedgets/search_engine_for_user.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:card_swiper/card_swiper.dart';
 
 class playerculturehome extends StatefulWidget {
   static const String routname = "playerculturehome";

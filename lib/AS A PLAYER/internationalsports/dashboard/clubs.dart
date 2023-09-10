@@ -1,8 +1,7 @@
 import 'package:finalyear/GETX/clubdatafirebase.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:card_swiper/card_swiper.dart';
 import 'package:get/get.dart';
-
 import '../../../wedgets/data/Club-Data-Card.dart';
 import '../../../wedgets/search_engine_for_club.dart';
 import '../Details/clubdetail.dart';

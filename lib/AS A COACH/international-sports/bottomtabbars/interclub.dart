@@ -1,7 +1,7 @@
 import 'package:finalyear/AS%20A%20COACH/details_page/club_detail_page.dart';
 import 'package:finalyear/wedgets/search_engine_for_club.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:card_swiper/card_swiper.dart';
 import 'package:get/get.dart';
 import '../../../GETX/clubdatafirebase.dart';
 import '../../../wedgets/data/Club-Data-Card.dart';

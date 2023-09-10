@@ -3,7 +3,7 @@ import 'package:finalyear/AS%20A%20COACH/culture-sport/tournaments/player-tour-g
 import 'package:finalyear/AS%20A%20COACH/culture-sport/tournaments/player-tour-kabaddi.dart';
 import 'package:finalyear/AS%20A%20COACH/culture-sport/tournaments/player-tour-tent-pagging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:card_swiper/card_swiper.dart';
 
 class playerculturetournaments extends StatefulWidget {
   const playerculturetournaments({super.key});

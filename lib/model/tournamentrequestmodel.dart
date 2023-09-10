@@ -1,4 +1,3 @@
-import 'package:finalyear/AS%20A%20PLAYER/internationalsports/dashboard/profile.dart';
 class TournamentRegistrationRequest {
   String teamName;
   String captainName;

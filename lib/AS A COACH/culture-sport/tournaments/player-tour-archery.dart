@@ -1,4 +1,3 @@
-import 'package:finalyear/model/tournamentmodel.dart';
 import 'package:flutter/material.dart';
 
 class playertourarchery extends StatefulWidget {

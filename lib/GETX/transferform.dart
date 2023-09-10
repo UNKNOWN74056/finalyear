@@ -30,12 +30,14 @@ class TransFerForm extends GetxController {
     } else if (!value.contains("@gmail.com") && !value.contains("@yahoo.com")) {
       return "Please enter correct email";
     }
+    return null;
   }
 
   String? validmessage(String value) {
     if (value.isEmpty) {
       return "Please enter your message";
     }
+    return null;
   }
 
   checktransfer() {

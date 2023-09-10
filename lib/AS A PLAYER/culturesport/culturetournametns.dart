@@ -3,7 +3,7 @@ import 'package:finalyear/AS%20A%20PLAYER/culturesport/tournaments%20tabs/tourar
 import 'package:finalyear/AS%20A%20PLAYER/culturesport/tournaments%20tabs/tourgynamstic.dart';
 import 'package:finalyear/AS%20A%20PLAYER/culturesport/tournaments%20tabs/tourkabadii.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:card_swiper/card_swiper.dart';
 
 class culturetournaments extends StatefulWidget {
   const culturetournaments({super.key});

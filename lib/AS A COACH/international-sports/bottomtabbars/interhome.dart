@@ -7,7 +7,7 @@ import 'package:finalyear/AS%20A%20COACH/international-sports/tabs/player-hockey
 import 'package:finalyear/AS%20A%20COACH/international-sports/tabs/player-tabletenis.dart';
 import 'package:finalyear/AS%20A%20COACH/international-sports/tabs/player-vulleyball.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:card_swiper/card_swiper.dart';
 
 class interhome extends StatefulWidget {
   static const String routname = "interhome";

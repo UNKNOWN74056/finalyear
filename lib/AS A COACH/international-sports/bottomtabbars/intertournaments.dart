@@ -5,7 +5,7 @@ import 'package:finalyear/AS%20A%20COACH/international-sports/intertournaments/p
 import 'package:finalyear/AS%20A%20COACH/international-sports/intertournaments/player-tour-vulleyball.dart';
 import 'package:finalyear/AS%20A%20COACH/international-sports/intertournaments/player-your-tabletenis.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:card_swiper/card_swiper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import '../../../AS A PLAYER/internationalsports/tournamentsregistration/registration.dart';

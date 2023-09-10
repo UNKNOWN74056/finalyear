@@ -7,7 +7,7 @@ import 'package:finalyear/AS%20A%20PLAYER/internationalsports/tabbar/vulleyball.
 import 'package:finalyear/wedgets/search_engine_for_user.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:card_swiper/card_swiper.dart';
 
 class home extends StatefulWidget {
   const home({super.key});
