@@ -14,17 +14,19 @@ class _adminapproveState extends State<adminapprove> {
   Widget build(BuildContext context) {
     return DefaultTabController(
         length: 2,
-        child: Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: const Text("Admin Approve"),
-            bottom: const TabBar(
-              indicatorColor: Colors.black,
-              indicatorWeight: 3,
-              tabs: [Text("Registration"), Text("Offers")],
+        child: SafeArea(
+          child: Scaffold(
+            appBar: AppBar(
+              centerTitle: true,
+              title: const Text("Admin Approve"),
+              bottom: const TabBar(
+                indicatorColor: Colors.black,
+                indicatorWeight: 3,
+                tabs: [Text("Registration"), Text("Offers")],
+              ),
             ),
+            body: const TabBarView(children: [registration(), offers()]),
           ),
-          body: const TabBarView(children: [registration(), offers()]),
         ));
   }
 }
