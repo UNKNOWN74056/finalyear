@@ -81,22 +81,23 @@ class videopagegridview extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () async {
-                      // Get the video by its ID
-                      final videoToDelete = vidcontroller.videolist.firstWhere(
-                        (e) => e.id == video.id, // Compare the document ID
-                        orElse: () => null,
-                      );
-                      if (videoToDelete != null) {
+                      // Get the document ID from the selected video
+                      final videoToDelete = vidcontroller.videolist[index];
+                      final documentID = videoToDelete.id;
+
+                      if (documentID != null) {
                         // Delete the video using the document ID
                         await FirebaseFirestore.instance
                             .collection("videos")
-                            .doc(videoToDelete.id)
+                            .doc(documentID)
                             .delete();
+
                         // Also stop and dispose of the video player
                         controller.pause();
                         controller.dispose();
                         _controllers.remove(controller);
                       }
+
                       Navigator.pop(context);
                     },
                     child: const Text('Delete'),
