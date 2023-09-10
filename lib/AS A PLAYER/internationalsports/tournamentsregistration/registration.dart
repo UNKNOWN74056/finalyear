@@ -180,14 +180,13 @@ class _registrationState extends State<registration> {
                 height: 10,
               ),
               reusebletextfield(
-                  controller: controller.addresscontroller,
                   autoValidateMode: AutovalidateMode.onUserInteraction,
-                  keyboard: TextInputType.name,
+                  keyboard: TextInputType.emailAddress,
                   validator: (Value) {
                     return controller.validaddress(Value!);
                   },
                   icon: const Icon(FontAwesomeIcons.locationDot),
-                  labelText: "Enter your address"),
+                  labelText: 'Enter your address.'),
               const SizedBox(
                 height: 10,
               ),
