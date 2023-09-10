@@ -45,7 +45,10 @@ class _interclubState extends State<interclub> {
                         onPressed: () {
                           Get.to(clubsearchengine());
                         },
-                        icon: const Icon(Icons.search)),
+                        icon: const Icon(
+                          Icons.search,
+                          color: Colors.white,
+                        )),
                   ),
                 ],
                 automaticallyImplyLeading: false,
@@ -55,7 +58,10 @@ class _interclubState extends State<interclub> {
                 snap: true,
                 title: const Text(
                   "CLUBS",
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 ),
                 flexibleSpace: FlexibleSpaceBar(
                   background: Swiper(
@@ -78,16 +84,18 @@ class _interclubState extends State<interclub> {
                 init: Getclubdata(),
                 builder: (clubcontroller) {
                   return Obx(
-                    () => Column(
-                      children: clubcontroller.clublist
-                          .map((element) => ClubCard(
-                                clubname: element.clubname,
-                                clubimage: element.clubimage,
-                                location: element.location,
-                                onTap: () =>
-                                    Get.to(club_detail_page(post: element)),
-                              ))
-                          .toList(),
+                    () => SingleChildScrollView(
+                      child: Column(
+                        children: clubcontroller.clublist
+                            .map((element) => ClubCard(
+                                  clubname: element.clubname,
+                                  clubimage: element.clubimage,
+                                  location: element.location,
+                                  onTap: () =>
+                                      Get.to(club_detail_page(post: element)),
+                                ))
+                            .toList(),
+                      ),
                     ),
                   );
                 }),

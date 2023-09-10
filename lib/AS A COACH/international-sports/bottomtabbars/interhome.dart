@@ -44,7 +44,10 @@ class _interhomeState extends State<interhome> {
                           onPressed: () {
                             Get.to(usersearchengine());
                           },
-                          icon: const Icon(Icons.search)),
+                          icon: const Icon(
+                            Icons.search,
+                            color: Colors.white,
+                          )),
                     ),
                   ],
                   automaticallyImplyLeading: false,
@@ -54,7 +57,8 @@ class _interhomeState extends State<interhome> {
                   snap: true,
                   title: const Text(
                     "INTERNATIONAL",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white),
                   ),
                   flexibleSpace: FlexibleSpaceBar(
                     background: Swiper(
@@ -75,6 +79,8 @@ class _interhomeState extends State<interhome> {
                   bottom: const TabBar(
                       indicatorColor: Colors.orange,
                       indicatorWeight: 5,
+                      unselectedLabelColor: Color.fromARGB(255, 194, 203, 208),
+                      labelColor: Colors.white,
                       isScrollable: true,
                       labelStyle: TextStyle(fontSize: 20),
                       tabs: [

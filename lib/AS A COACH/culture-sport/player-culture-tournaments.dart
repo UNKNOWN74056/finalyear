@@ -30,13 +30,17 @@ class _playerculturetournamentsState extends State<playerculturetournaments> {
             floatHeaderSlivers: true,
             headerSliverBuilder: (context, innerBoxIsScrolled) => [
               SliverAppBar(
+                automaticallyImplyLeading: false,
                 expandedHeight: 200,
                 pinned: true,
                 floating: true,
                 snap: true,
                 title: const Text(
                   "Tournaments",
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 ),
                 flexibleSpace: FlexibleSpaceBar(
                   background: Swiper(
@@ -50,7 +54,7 @@ class _playerculturetournamentsState extends State<playerculturetournaments> {
                         ),
                       );
                     },
-                    itemCount: 6,
+                    itemCount: 4,
                   ),
                   centerTitle: true,
                 ),
@@ -58,6 +62,8 @@ class _playerculturetournamentsState extends State<playerculturetournaments> {
                 bottom: const TabBar(
                     indicatorColor: Colors.orange,
                     indicatorWeight: 5,
+                    unselectedLabelColor: Color.fromARGB(255, 194, 203, 208),
+                    labelColor: Colors.white,
                     isScrollable: true,
                     labelStyle: TextStyle(fontSize: 20),
                     tabs: [

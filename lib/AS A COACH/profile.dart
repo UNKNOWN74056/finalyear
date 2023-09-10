@@ -1,6 +1,6 @@
 import 'package:finalyear/GETX/getdatafromfirebase.dart';
 import 'package:finalyear/functions/functions.dart';
-import 'package:finalyear/wedgets/comment-widgets/commentshimmer.dart';
+import 'package:finalyear/wedgets/data/Profile-Shimmer-Ui.dart';
 import 'package:finalyear/wedgets/nutification/coachnitification/adminapprove.dart';
 import 'package:finalyear/wedgets/videospagecode.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -55,7 +55,7 @@ class _profileState extends State<playerprofile> {
           init: FetchDataFirebase(),
           builder: (controller) {
             if (isLoading) {
-              return const ShimmerLoadingWidget();
+              return ShimmerProfileWidget();
             } else {
               return RefreshIndicator(
                 onRefresh: () async {

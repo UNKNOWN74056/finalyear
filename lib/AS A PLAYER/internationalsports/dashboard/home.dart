@@ -43,7 +43,10 @@ class _homeState extends State<home> {
                         onPressed: () {
                           Get.to(usersearchengine());
                         },
-                        icon: const Icon(Icons.search),
+                        icon: const Icon(
+                          Icons.search,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ],
@@ -54,7 +57,8 @@ class _homeState extends State<home> {
                   snap: true,
                   title: const Text(
                     "INTERNATIONAL",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white),
                   ),
                   flexibleSpace: FlexibleSpaceBar(
                     background: Swiper(
@@ -75,6 +79,8 @@ class _homeState extends State<home> {
                   bottom: const TabBar(
                       indicatorColor: Colors.orange,
                       indicatorWeight: 5,
+                      unselectedLabelColor: Color.fromARGB(255, 194, 203, 208),
+                      labelColor: Colors.white,
                       isScrollable: true,
                       labelStyle: TextStyle(fontSize: 20),
                       tabs: [

@@ -17,7 +17,7 @@ class _adminapproveState extends State<playeradminapprove> {
         child: Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            title: const Text("Admin panel"),
+            title: const Text("Notification"),
             bottom: const TabBar(
               indicatorColor: Colors.black,
               indicatorWeight: 3,

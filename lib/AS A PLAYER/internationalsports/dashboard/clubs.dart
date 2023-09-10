@@ -39,7 +39,10 @@ class _clubsState extends State<clubs> {
                         onPressed: () {
                           Get.to(clubsearchengine());
                         },
-                        icon: const Icon(Icons.search)),
+                        icon: const Icon(
+                          Icons.search,
+                          color: Colors.white,
+                        )),
                   ),
                 ],
                 automaticallyImplyLeading: false,
@@ -49,7 +52,10 @@ class _clubsState extends State<clubs> {
                 snap: true,
                 title: const Text(
                   "CLUBS",
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 ),
                 flexibleSpace: FlexibleSpaceBar(
                   background: Swiper(

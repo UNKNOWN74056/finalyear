@@ -42,6 +42,7 @@ class _profileState extends State<profile> {
       child: Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         floatingActionButton: FloatingActionButton.extended(
+          backgroundColor: Colors.blueGrey,
           onPressed: () {
             functions.pickVideo(context);
           },
@@ -291,12 +292,12 @@ class _profileState extends State<profile> {
                                     ),
                                   ),
 
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 15),
+                                  const Padding(
+                                    padding: EdgeInsets.only(left: 15),
                                     child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
-                                        children: const [
+                                        children: [
                                           Text(
                                             'Videos',
                                             style: TextStyle(

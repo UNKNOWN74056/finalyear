@@ -45,9 +45,7 @@ class _MyAppState extends State<MyApp> {
 
         return GetMaterialApp(
           title: 'Mr Sports',
-          theme: ThemeData(
-            primarySwatch: Colors.blueGrey,
-          ),
+          theme: ThemeData.light().copyWith(useMaterial3: true),
           debugShowCheckedModeBanner: false,
           home: const splashscreen(),
           routes: {

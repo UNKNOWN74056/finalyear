@@ -42,7 +42,10 @@ class _intertournamentsState extends State<intertournaments> {
                     padding: const EdgeInsets.only(left: 20),
                     child: IconButton(
                         onPressed: () => Get.to(() => (const registration())),
-                        icon: const FaIcon(FontAwesomeIcons.trophy)),
+                        icon: const FaIcon(
+                          FontAwesomeIcons.trophy,
+                          color: Colors.white,
+                        )),
                   ),
                 ],
                 expandedHeight: 200,
@@ -51,7 +54,10 @@ class _intertournamentsState extends State<intertournaments> {
                 snap: true,
                 title: const Text(
                   "Tournaments",
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 ),
                 flexibleSpace: FlexibleSpaceBar(
                   background: Swiper(
@@ -73,6 +79,8 @@ class _intertournamentsState extends State<intertournaments> {
                 bottom: const TabBar(
                     indicatorColor: Colors.orange,
                     indicatorWeight: 5,
+                    unselectedLabelColor: Color.fromARGB(255, 194, 203, 208),
+                    labelColor: Colors.white,
                     isScrollable: true,
                     labelStyle: TextStyle(fontSize: 20),
                     tabs: [

@@ -24,63 +24,65 @@ class _homeforplayerState extends State<homeforplayer> {
           appBar: AppBar(
             title: const Text('Sports'),
           ),
-          body: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Get.to(() => const playerdashboeard());
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.only(bottom: 16.0),
-                    height: 200,
-                    decoration: BoxDecoration(
-                      image: const DecorationImage(
-                        image: AssetImage('assets/interna.jpeg'),
-                        fit: BoxFit.cover,
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(() => const playerdashboeard());
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 16.0),
+                      height: 200,
+                      decoration: BoxDecoration(
+                        image: const DecorationImage(
+                          image: AssetImage('assets/interna.jpeg'),
+                          fit: BoxFit.cover,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        'International Sports',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                      child: const Center(
+                        child: Text(
+                          'International Sports',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Get.to(() => const cultureplayerdb());
-                  },
-                  child: Container(
-                    height: 200,
-                    decoration: BoxDecoration(
-                      image: const DecorationImage(
-                        image: AssetImage('assets/culture.jpeg'),
-                        fit: BoxFit.cover,
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(() => const cultureplayerdb());
+                    },
+                    child: Container(
+                      height: 200,
+                      decoration: BoxDecoration(
+                        image: const DecorationImage(
+                          image: AssetImage('assets/culture.jpeg'),
+                          fit: BoxFit.cover,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        'Culture Sports',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                      child: const Center(
+                        child: Text(
+                          'Culture Sports',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
