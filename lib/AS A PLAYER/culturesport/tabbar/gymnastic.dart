@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/AS%20A%20PLAYER/internationalsports/Details/coachdetail.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,7 +30,7 @@ class _gymnasticState extends State<gymnastic> {
                 children: controller.mylist
                     .where((e) =>
                         e.sport == "Gymnastic" && e.profession == "Coache")
-                    .map((element) =>  CustomCard(
+                    .map((element) => CustomCard(
                           fullName: element.fullname,
                           imageUrl: element.image_Url,
                           city: element.city,

@@ -41,8 +41,7 @@ class _tournamentsState extends State<tournaments> {
                   Padding(
                     padding: const EdgeInsets.only(left: 20),
                     child: IconButton(
-                        onPressed: () =>
-                            Get.to(() => (() => const registration())),
+                        onPressed: () => Get.to(() => const registration()),
                         icon: const FaIcon(FontAwesomeIcons.trophy)),
                   ),
                 ],
