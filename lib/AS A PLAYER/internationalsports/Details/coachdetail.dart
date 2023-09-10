@@ -105,14 +105,10 @@ class _coachdetailState extends State<coachdetail> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-            floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
             floatingActionButton: FloatingActionButton(
               onPressed: () {
                 showModalBottomSheet(
                     isScrollControlled: true,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.vertical(top: Radius.circular(10))),
                     context: context,
                     builder: (context) {
                       return CommentListWidget(postEmail: widget.post.email);

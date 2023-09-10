@@ -7,7 +7,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:video_player/video_player.dart';
 import '../../../GETX/allvideos.dart';
 import '../../../wedgets/editbutton.dart';
 import '../../../wedgets/editprofilewidget.dart';
@@ -23,7 +22,6 @@ class playerprofile extends StatefulWidget {
 class _profileState extends State<playerprofile> {
   //getx controller
   final vidcontroller = Get.put(FetchVideoFirebase());
-  final List<VideoPlayerController> _controllers = [];
   final currentuser = FirebaseAuth.instance.currentUser!.email;
   bool isLoading = true; // Initially set to true for shimmer loading
 
@@ -57,7 +55,7 @@ class _profileState extends State<playerprofile> {
           init: FetchDataFirebase(),
           builder: (controller) {
             if (isLoading) {
-              return ShimmerLoadingWidget();
+              return const ShimmerLoadingWidget();
             } else {
               return RefreshIndicator(
                 onRefresh: () async {
@@ -282,12 +280,12 @@ class _profileState extends State<playerprofile> {
                                   ),
                                 ),
 
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 15),
+                                const Padding(
+                                  padding: EdgeInsets.only(left: 15),
                                   child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
-                                      children: const [
+                                      children: [
                                         Text(
                                           'Videos',
                                           style: TextStyle(
