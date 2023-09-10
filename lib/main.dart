@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'dart:async';
 import 'package:finalyear/AS%20A%20COACH/culture-sport/cultureplayerdb.dart';
 import 'package:finalyear/AS%20A%20COACH/culture-sport/player-culture-home.dart';
