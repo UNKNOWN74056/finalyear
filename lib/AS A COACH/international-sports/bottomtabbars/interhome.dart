@@ -32,75 +32,78 @@ class _interhomeState extends State<interhome> {
   Widget build(BuildContext context) => SafeArea(
         child: DefaultTabController(
           length: 6,
-          child: Scaffold(
-            body: NestedScrollView(
-              floatHeaderSlivers: true,
-              headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                SliverAppBar(
-                  actions: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 70),
-                      child: IconButton(
-                          onPressed: () {
-                            Get.to(usersearchengine());
-                          },
-                          icon: const Icon(
-                            Icons.search,
-                            color: Colors.white,
-                          )),
+          child: SafeArea(
+            child: Scaffold(
+              body: NestedScrollView(
+                floatHeaderSlivers: true,
+                headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                  SliverAppBar(
+                    actions: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 70),
+                        child: IconButton(
+                            onPressed: () {
+                              Get.to(usersearchengine());
+                            },
+                            icon: const Icon(
+                              Icons.search,
+                              color: Colors.white,
+                            )),
+                      ),
+                    ],
+                    automaticallyImplyLeading: false,
+                    expandedHeight: 200,
+                    pinned: true,
+                    floating: true,
+                    snap: true,
+                    title: const Text(
+                      "INTERNATIONAL",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.white),
                     ),
-                  ],
-                  automaticallyImplyLeading: false,
-                  expandedHeight: 200,
-                  pinned: true,
-                  floating: true,
-                  snap: true,
-                  title: const Text(
-                    "INTERNATIONAL",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.white),
-                  ),
-                  flexibleSpace: FlexibleSpaceBar(
-                    background: Swiper(
-                      autoplay: true,
-                      itemBuilder: (BuildContext context, int index) {
-                        return ClipRRect(
-                          borderRadius: BorderRadius.circular(5),
-                          child: Image(
-                            image: AssetImage(images[index]),
-                            fit: BoxFit.cover,
-                          ),
-                        );
-                      },
-                      itemCount: 6,
+                    flexibleSpace: FlexibleSpaceBar(
+                      background: Swiper(
+                        autoplay: true,
+                        itemBuilder: (BuildContext context, int index) {
+                          return ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: Image(
+                              image: AssetImage(images[index]),
+                              fit: BoxFit.cover,
+                            ),
+                          );
+                        },
+                        itemCount: 6,
+                      ),
                     ),
-                  ),
-                  centerTitle: true,
-                  bottom: const TabBar(
-                      indicatorColor: Colors.orange,
-                      indicatorWeight: 5,
-                      unselectedLabelColor: Color.fromARGB(255, 194, 203, 208),
-                      labelColor: Colors.white,
-                      isScrollable: true,
-                      labelStyle: TextStyle(fontSize: 20),
-                      tabs: [
-                        Text("Football"),
-                        Text("Basketball"),
-                        Text("volleyball"),
-                        Text("Tabletennis"),
-                        Text("Cricket"),
-                        Text("Hockey"),
-                      ]),
-                )
-              ],
-              body: const TabBarView(children: [
-                playerfootball(),
-                playerbasketball(),
-                playervulleyball(),
-                playercricket(),
-                playertabletenis(),
-                palyerhockey()
-              ]),
+                    centerTitle: true,
+                    bottom: const TabBar(
+                        indicatorColor: Colors.orange,
+                        indicatorWeight: 5,
+                        unselectedLabelColor:
+                            Color.fromARGB(255, 194, 203, 208),
+                        labelColor: Colors.white,
+                        isScrollable: true,
+                        labelStyle: TextStyle(fontSize: 20),
+                        tabs: [
+                          Text("Football"),
+                          Text("Basketball"),
+                          Text("volleyball"),
+                          Text("Tabletennis"),
+                          Text("Cricket"),
+                          Text("Hockey"),
+                        ]),
+                  )
+                ],
+                body: const TabBarView(children: [
+                  playerfootball(),
+                  playerbasketball(),
+                  playervulleyball(),
+                  playercricket(),
+                  playertabletenis(),
+                  palyerhockey()
+                ]),
+              ),
             ),
           ),
         ),

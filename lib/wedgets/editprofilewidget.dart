@@ -149,151 +149,154 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Edit profile'),
-      ),
-      body: Container(
-        margin: const EdgeInsets.all(20),
-        padding: const EdgeInsets.all(8),
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom),
-            child: Form(
-              key: updateprofilecontroller.keyForm,
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(right: 150),
-                    child: Text(
-                      "Fill Your Details",
-                      style: TextStyle(fontSize: 20),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Edit profile'),
+        ),
+        body: Container(
+          margin: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(8),
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: Form(
+                key: updateprofilecontroller.keyForm,
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 10,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  GestureDetector(
-                    onTap: () async {
-                      dialogAlert(context);
-                      setState(
-                          () {}); // Trigger a rebuild when the image is changed
-                    },
-                    child: Container(
-                      child: _image == null // Check if a new image is selected
-                          ? (widget.data.image_Url.isEmpty
-                              ? CircleAvatar(
-                                  radius: 60,
-                                  child: Image.asset(
-                                    "assets/logo.png",
-                                    height: 90,
+                    const Padding(
+                      padding: EdgeInsets.only(right: 150),
+                      child: Text(
+                        "Fill Your Details",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    GestureDetector(
+                      onTap: () async {
+                        dialogAlert(context);
+                        setState(
+                            () {}); // Trigger a rebuild when the image is changed
+                      },
+                      child: Container(
+                        child:
+                            _image == null // Check if a new image is selected
+                                ? (widget.data.image_Url.isEmpty
+                                    ? CircleAvatar(
+                                        radius: 60,
+                                        child: Image.asset(
+                                          "assets/logo.png",
+                                          height: 90,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      )
+                                    : Image.network(
+                                        widget.data.image_Url,
+                                        height: 100,
+                                        width: 100,
+                                        fit: BoxFit.cover,
+                                      ))
+                                : Image.file(
+                                    // Display the new selected image
+                                    _image!,
+                                    height: 100,
+                                    width: 100,
                                     fit: BoxFit.cover,
                                   ),
-                                )
-                              : Image.network(
-                                  widget.data.image_Url,
-                                  height: 100,
-                                  width: 100,
-                                  fit: BoxFit.cover,
-                                ))
-                          : Image.file(
-                              // Display the new selected image
-                              _image!,
-                              height: 100,
-                              width: 100,
-                              fit: BoxFit.cover,
-                            ),
+                      ),
                     ),
-                  ),
 
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  // Textfields with dialog
-                  reusebletextfield(
-                    controller: fullnameupdate,
-                    initialValue: widget.data.fullname,
-                    autoValidateMode: AutovalidateMode.onUserInteraction,
-                    keyboard: TextInputType.name,
-                    validator: (Value) {
-                      return updateprofilecontroller.validfullname(Value!);
-                    },
-                    icon: const Icon(FontAwesomeIcons.clipboardUser),
-                    labelText: "Enter full name",
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  reusebletextfield(
-                    controller: citynameupdate,
-                    initialValue: widget.data.city,
-                    autoValidateMode: AutovalidateMode.onUserInteraction,
-                    keyboard: TextInputType.text,
-                    validator: (Value) {
-                      return updateprofilecontroller.validlocation(Value!);
-                    },
-                    icon: const Icon(FontAwesomeIcons.locationDot),
-                    labelText: "Enter location",
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  reusebletextfield(
-                    controller: phoneupdate,
-                    initialValue: widget.data.phoneNumber,
-                    autoValidateMode: AutovalidateMode.onUserInteraction,
-                    keyboard: TextInputType.phone,
-                    validator: (Value) {
-                      return updateprofilecontroller.validphone(Value!);
-                    },
-                    icon: const Icon(FontAwesomeIcons.phone),
-                    labelText: "+ code phone number",
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  // Button to add the clubs and save in database
-                  // Button to add the clubs and save in database
-                  savebutton(
-                    onTap: () async {
-                      updateprofilecontroller.checkbottomsheet();
-                      if (updateprofilecontroller.isformValidated == true) {
-                        try {
-                          await updateprofile();
-                          Get.back();
-                          Get.snackbar(
-                            "Message",
-                            "Profile has been updated.",
-                            backgroundColor: Colors.green,
-                            colorText: Colors.white,
-                          );
-                        } catch (error) {
-                          print("Error updating profile: $error");
-                          Get.snackbar(
-                            "Error",
-                            "Failed to update profile.",
-                            backgroundColor: Colors.red,
-                            colorText: Colors.white,
-                          );
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    // Textfields with dialog
+                    reusebletextfield(
+                      controller: fullnameupdate,
+                      initialValue: widget.data.fullname,
+                      autoValidateMode: AutovalidateMode.onUserInteraction,
+                      keyboard: TextInputType.name,
+                      validator: (Value) {
+                        return updateprofilecontroller.validfullname(Value!);
+                      },
+                      icon: const Icon(FontAwesomeIcons.clipboardUser),
+                      labelText: "Enter full name",
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    reusebletextfield(
+                      controller: citynameupdate,
+                      initialValue: widget.data.city,
+                      autoValidateMode: AutovalidateMode.onUserInteraction,
+                      keyboard: TextInputType.text,
+                      validator: (Value) {
+                        return updateprofilecontroller.validlocation(Value!);
+                      },
+                      icon: const Icon(FontAwesomeIcons.locationDot),
+                      labelText: "Enter location",
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    reusebletextfield(
+                      controller: phoneupdate,
+                      initialValue: widget.data.phoneNumber,
+                      autoValidateMode: AutovalidateMode.onUserInteraction,
+                      keyboard: TextInputType.phone,
+                      validator: (Value) {
+                        return updateprofilecontroller.validphone(Value!);
+                      },
+                      icon: const Icon(FontAwesomeIcons.phone),
+                      labelText: "+ code phone number",
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    // Button to add the clubs and save in database
+
+                    savebutton(
+                      onTap: () async {
+                        updateprofilecontroller.checkbottomsheet();
+                        if (updateprofilecontroller.isformValidated == true) {
+                          try {
+                            await updateprofile();
+                            Get.back();
+                            Get.snackbar(
+                              "Message",
+                              "Profile has been updated.",
+                              backgroundColor: Colors.green,
+                              colorText: Colors.white,
+                            );
+                          } catch (error) {
+                            print("Error updating profile: $error");
+                            Get.snackbar(
+                              "Error",
+                              "Failed to update profile.",
+                              backgroundColor: Colors.red,
+                              colorText: Colors.white,
+                            );
+                          }
                         }
-                      }
-                    },
-                    child: const Text("Save changes"),
-                  ),
-                ],
+                      },
+                      child: const Text("Save changes"),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

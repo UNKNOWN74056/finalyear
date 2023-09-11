@@ -42,6 +42,7 @@ class _profileState extends State<playerprofile> {
       child: Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         floatingActionButton: FloatingActionButton.extended(
+          backgroundColor: Colors.blueGrey,
           onPressed: () {
             functions.pickVideo(context);
           },

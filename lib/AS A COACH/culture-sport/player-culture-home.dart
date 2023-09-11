@@ -27,70 +27,74 @@ class _playerculturehomeState extends State<playerculturehome> {
   Widget build(BuildContext context) => SafeArea(
         child: DefaultTabController(
           length: 4,
-          child: Scaffold(
-            body: NestedScrollView(
-              floatHeaderSlivers: true,
-              headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                SliverAppBar(
-                  actions: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20),
-                      child: IconButton(
-                          onPressed: () {
-                            Get.to(usersearchengine());
-                          },
-                          icon: const Icon(
-                            Icons.search,
-                            color: Colors.white,
-                          )),
+          child: SafeArea(
+            child: Scaffold(
+              body: NestedScrollView(
+                floatHeaderSlivers: true,
+                headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                  SliverAppBar(
+                    actions: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: IconButton(
+                            onPressed: () {
+                              Get.to(usersearchengine());
+                            },
+                            icon: const Icon(
+                              Icons.search,
+                              color: Colors.white,
+                            )),
+                            
+                      ),
+                    ],
+                    automaticallyImplyLeading: false,
+                    expandedHeight: 200,
+                    pinned: true,
+                    floating: true,
+                    snap: true,
+                    title: const Text(
+                      "CULTURE",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.white),
                     ),
-                  ],
-                  automaticallyImplyLeading: false,
-                  expandedHeight: 200,
-                  pinned: true,
-                  floating: true,
-                  snap: true,
-                  title: const Text(
-                    "CULTURE",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.white),
-                  ),
-                  flexibleSpace: FlexibleSpaceBar(
-                    background: Swiper(
-                      autoplay: true,
-                      itemBuilder: (BuildContext context, int index) {
-                        return ClipRRect(
-                          borderRadius: BorderRadius.circular(5),
-                          child: Image(
-                            image: AssetImage(images[index]),
-                            fit: BoxFit.cover,
-                          ),
-                        );
-                      },
-                      itemCount: 4,
+                    flexibleSpace: FlexibleSpaceBar(
+                      background: Swiper(
+                        autoplay: true,
+                        itemBuilder: (BuildContext context, int index) {
+                          return ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: Image(
+                              image: AssetImage(images[index]),
+                              fit: BoxFit.cover,
+                            ),
+                          );
+                        },
+                        itemCount: 4,
+                      ),
                     ),
-                  ),
-                  bottom: const TabBar(
-                      indicatorColor: Colors.orange,
-                      indicatorWeight: 5,
-                      unselectedLabelColor: Color.fromARGB(255, 194, 203, 208),
-                      labelColor: Colors.white,
-                      isScrollable: true,
-                      labelStyle: TextStyle(fontSize: 20),
-                      tabs: [
-                        Text("Archery"),
-                        Text("Kabaddi"),
-                        Text("Tent pagging"),
-                        Text("Gymnastic"),
-                      ]),
-                )
-              ],
-              body: const TabBarView(children: [
-                playerculturearchery(),
-                playerculturekabaddi(),
-                playerculturetentpagging(),
-                playerculturegymnastic()
-              ]),
+                    bottom: const TabBar(
+                        indicatorColor: Colors.orange,
+                        indicatorWeight: 5,
+                        unselectedLabelColor:
+                            Color.fromARGB(255, 194, 203, 208),
+                        labelColor: Colors.white,
+                        isScrollable: true,
+                        labelStyle: TextStyle(fontSize: 20),
+                        tabs: [
+                          Text("Archery"),
+                          Text("Kabaddi"),
+                          Text("Tent pagging"),
+                          Text("Gymnastic"),
+                        ]),
+                  )
+                ],
+                body: const TabBarView(children: [
+                  playerculturearchery(),
+                  playerculturekabaddi(),
+                  playerculturetentpagging(),
+                  playerculturegymnastic()
+                ]),
+              ),
             ),
           ),
         ),
