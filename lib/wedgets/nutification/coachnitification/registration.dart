@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
@@ -129,7 +130,12 @@ class _registrationState extends State<registration> {
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
-            return const Center(child: Text("Loading..."));
+            return const Center(
+              child: SpinKitFadingCircle(
+                color: Colors.green, // Set the color of the SpinKit indicator
+                size: 50.0, // Set the size of the indicator as needed
+              ),
+            );
           }
         },
       ),
