@@ -153,7 +153,7 @@ class TournamentsRegistration extends GetxController {
   }
 
   String? validphonenumber(String value) {
-    String regexPattern = r'^(?:\+92)?[0-9]{9}$';
+    String regexPattern = r'^(?:\+92|92)?[0-9]{10}$';
     var regExp = RegExp(regexPattern);
 
     if (value.isEmpty) {
