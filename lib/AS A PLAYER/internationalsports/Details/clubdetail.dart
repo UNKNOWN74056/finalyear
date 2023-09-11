@@ -81,6 +81,8 @@ class _clubdetailState extends State<clubdetail> {
         .update({
       'rating': ratingavg.toString(),
     });
+    Get.snackbar("Message", "Thanks for rating.",
+        colorText: Colors.white, backgroundColor: Colors.green);
   }
 
   //dispose
@@ -99,7 +101,7 @@ class _clubdetailState extends State<clubdetail> {
         child: Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
-         backgroundColor: Colors.blueGrey,
+          backgroundColor: Colors.blueGrey,
           onPressed: () {
             showModalBottomSheet(
                 isScrollControlled: true,

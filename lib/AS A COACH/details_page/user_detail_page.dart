@@ -79,6 +79,8 @@ class _coachdetailState extends State<user_detail_page> {
         .update({
       'rating': ratingavg,
     });
+    Get.snackbar("Message", "Thanks for rating.",
+        colorText: Colors.white, backgroundColor: Colors.green);
   }
 
   void checkRatingStatus() {

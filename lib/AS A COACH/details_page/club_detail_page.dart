@@ -58,6 +58,8 @@ class _clubdetailState extends State<club_detail_page> {
         .update({
       'rating': ratingavg.toString(),
     });
+    Get.snackbar("Message", "Thanks for rating.",
+        colorText: Colors.white, backgroundColor: Colors.green);
   }
 
   final currentuser = FirebaseAuth.instance.currentUser!.email;

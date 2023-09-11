@@ -48,7 +48,7 @@ class _coachdetailState extends State<coachdetail> {
     }).then((_) => {
               setState(() {
                 hasRated = true;
-              })
+              }),
             });
 
     var querySnapshot = await FirebaseFirestore.instance
@@ -78,6 +78,8 @@ class _coachdetailState extends State<coachdetail> {
         .update({
       'rating': ratingavg,
     });
+    Get.snackbar("Message", "Thanks for rating.",
+        colorText: Colors.white, backgroundColor: Colors.green);
   }
 
   void checkRatingStatus() {
@@ -106,7 +108,7 @@ class _coachdetailState extends State<coachdetail> {
     return SafeArea(
         child: Scaffold(
             floatingActionButton: FloatingActionButton(
-               backgroundColor: Colors.blueGrey,
+              backgroundColor: Colors.blueGrey,
               onPressed: () {
                 showModalBottomSheet(
                     isScrollControlled: true,
