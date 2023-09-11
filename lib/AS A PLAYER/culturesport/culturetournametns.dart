@@ -34,9 +34,15 @@ class _culturetournamentsState extends State<culturetournaments> {
                 pinned: true,
                 floating: true,
                 snap: true,
-                title: const Text(
-                  "Tournaments",
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                title: const Padding(
+                  padding: EdgeInsets.only(right: 50),
+                  child: Text(
+                    "Tournaments",
+                    style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
                 ),
                 flexibleSpace: FlexibleSpaceBar(
                   background: Swiper(
@@ -58,6 +64,8 @@ class _culturetournamentsState extends State<culturetournaments> {
                 bottom: const TabBar(
                     indicatorColor: Colors.orange,
                     indicatorWeight: 5,
+                    unselectedLabelColor: Color.fromARGB(255, 194, 203, 208),
+                    labelColor: Colors.white,
                     isScrollable: true,
                     labelStyle: TextStyle(fontSize: 20),
                     tabs: [

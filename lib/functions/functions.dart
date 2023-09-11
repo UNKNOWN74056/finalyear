@@ -12,6 +12,7 @@ import 'package:finalyear/pages/loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../AS A PLAYER/internationalsports/dashboard/tournaments.dart';
@@ -47,13 +48,19 @@ class functionservices {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          content: Row(
-            children: const [
-              CircularProgressIndicator(),
-              SizedBox(width: 16),
-              Text("Uploading..."),
-            ],
+        return const AlertDialog(
+          content: SizedBox(
+            height: 50,
+            child: Row(
+              children: [
+                SpinKitFadingCircle(
+                  color: Colors.red, // Set the color of the SpinKit indicator
+                  size: 50.0, // Set the size of the indicator as needed
+                ),
+                SizedBox(width: 16),
+                Text("Uploading..."),
+              ],
+            ),
           ),
         );
       },

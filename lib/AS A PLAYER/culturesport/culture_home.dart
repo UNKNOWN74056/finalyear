@@ -43,7 +43,10 @@ class _culturehomeState extends State<culturehome>
                           onPressed: () {
                             Get.to(usersearchengine());
                           },
-                          icon: const Icon(Icons.search)),
+                          icon: const Icon(
+                            Icons.search,
+                            color: Colors.white,
+                          )),
                     ),
                   ],
                   automaticallyImplyLeading: false,
@@ -53,7 +56,8 @@ class _culturehomeState extends State<culturehome>
                   snap: true,
                   title: const Text(
                     "CULTURE",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white),
                   ),
                   flexibleSpace: FlexibleSpaceBar(
                     background: Swiper(
@@ -73,6 +77,8 @@ class _culturehomeState extends State<culturehome>
                   bottom: const TabBar(
                       indicatorColor: Colors.orange,
                       indicatorWeight: 5,
+                      unselectedLabelColor: Color.fromARGB(255, 194, 203, 208),
+                      labelColor: Colors.white,
                       isScrollable: true,
                       labelStyle: TextStyle(fontSize: 20),
                       tabs: [

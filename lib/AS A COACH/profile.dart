@@ -51,6 +51,49 @@ class _profileState extends State<playerprofile> {
           ),
           label: const Text("Add videos"),
         ),
+        appBar: PreferredSize(
+          preferredSize:
+              const Size.fromHeight(65), // Adjust this value as needed
+          child: AppBar(
+            automaticallyImplyLeading: false,
+            elevation: 0,
+            backgroundColor: Colors.white,
+            titleSpacing: 0,
+            title: const Padding(
+              padding: EdgeInsets.only(left: 40),
+              child: Text(
+                "Profile",
+                style: TextStyle(color: Colors.black, fontSize: 30),
+              ),
+            ),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 25),
+                child: InkWell(
+                  onTap: () async {
+                    functions.transfer_request_email();
+                  },
+                  child: const Icon(
+                    FontAwesomeIcons.rightLeft,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 20),
+                child: InkWell(
+                  onTap: () {
+                    Get.to(() => const adminapprove());
+                  },
+                  child: const Icon(
+                    FontAwesomeIcons.bell,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
         body: GetBuilder(
           init: FetchDataFirebase(),
           builder: (controller) {
@@ -71,40 +114,6 @@ class _profileState extends State<playerprofile> {
                             (element) => Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    const Padding(
-                                      padding:
-                                          EdgeInsets.only(top: 20, left: 10),
-                                      child: Text(
-                                        "Profile",
-                                        style: TextStyle(fontSize: 40),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 130),
-                                      child: InkWell(
-                                        onTap: () async {
-                                          functions.transfer_request_email();
-                                        },
-                                        child: const Icon(
-                                            FontAwesomeIcons.rightLeft),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 10),
-                                      child: InkWell(
-                                        onTap: () {
-                                          Get.to(const adminapprove());
-                                        },
-                                        child:
-                                            const Icon(FontAwesomeIcons.bell),
-                                      ),
-                                    ),
-                                  ],
-                                ),
                                 Container(
                                   padding: const EdgeInsets.all(20),
                                   child: Row(

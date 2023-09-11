@@ -52,12 +52,15 @@ class _tournamentsState extends State<tournaments> {
                 pinned: true,
                 floating: true,
                 snap: true,
-                title: const Text(
-                  "Tournaments",
-                  style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
+                title: const Padding(
+                  padding: EdgeInsets.only(right: 50),
+                  child: Text(
+                    "Tournaments",
+                    style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
                 ),
                 flexibleSpace: FlexibleSpaceBar(
                   background: Swiper(
@@ -73,7 +76,6 @@ class _tournamentsState extends State<tournaments> {
                     },
                     itemCount: 6,
                   ),
-                  centerTitle: true,
                 ),
                 centerTitle: true,
                 bottom: const TabBar(

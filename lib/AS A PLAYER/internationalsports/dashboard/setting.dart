@@ -25,14 +25,14 @@ class _settingState extends State<setting> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(
-                height: 20,
+                height: 10,
               ),
               const Text(
                 "Settings",
-                style: TextStyle(fontSize: 40),
+                style: TextStyle(fontSize: 35),
               ),
               const SizedBox(
-                height: 20,
+                height: 10,
               ),
               const Divider(
                 color: Colors.black,

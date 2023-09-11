@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class loginpage extends StatefulWidget {
   //route
@@ -37,7 +38,10 @@ class _loginpageState extends State<loginpage> {
         context: context,
         builder: (context) {
           return const Center(
-            child: CircularProgressIndicator(color: Colors.red),
+            child: SpinKitFadingCircle(
+              color: Colors.green, // Set the color of the SpinKit indicator
+              size: 50.0, // Set the size of the indicator as needed
+            ),
           );
         },
       );
@@ -99,145 +103,148 @@ class _loginpageState extends State<loginpage> {
         SystemNavigator.pop();
         return true;
       },
-      child: Scaffold(
-          body: SingleChildScrollView(
-        child: Form(
-          key: controller.keyForm,
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: Container(
-                  child: const Text(
-                    "LOGIN ",
-                    style: TextStyle(
-                      fontSize: 30,
+      child: SafeArea(
+        child: Scaffold(
+            body: SingleChildScrollView(
+          child: Form(
+            key: controller.keyForm,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: Container(
+                    child: const Text(
+                      "LOGIN ",
+                      style: TextStyle(
+                        fontSize: 30,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              const Center(
-                child: Padding(
-                  padding: EdgeInsets.only(top: 40),
-                  child: CircleAvatar(
-                    radius: 80,
-                    backgroundImage: AssetImage("assets/mixsport.jpeg"),
+                const Center(
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 40),
+                    child: CircleAvatar(
+                      radius: 80,
+                      backgroundImage: AssetImage("assets/mixsport.jpeg"),
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(15),
-                child: Column(
-                  children: [
-                    reusebletextfield(
-                      keyboard: TextInputType.emailAddress,
-                      autoValidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) {
-                        return controller.validEmail(value!);
-                      },
-                      labelText: "Enter your email",
-                      icon: const Icon(
-                        FontAwesomeIcons.solidEnvelope,
-                        color: Color.fromARGB(255, 4, 45, 119),
+                Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Column(
+                    children: [
+                      reusebletextfield(
+                        keyboard: TextInputType.emailAddress,
+                        autoValidateMode: AutovalidateMode.onUserInteraction,
+                        validator: (value) {
+                          return controller.validEmail(value!);
+                        },
+                        labelText: "Enter your email",
+                        icon: const Icon(
+                          FontAwesomeIcons.solidEnvelope,
+                          color: Color.fromARGB(255, 4, 45, 119),
+                        ),
+                        controller: controller.emailController,
                       ),
-                      controller: controller.emailController,
-                    ),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    reusebletextfield(
-                      keyboard: TextInputType.emailAddress,
-                      validator: (value) {
-                        return controller.validPassword(value!);
-                      },
-                      autoValidateMode: AutovalidateMode.onUserInteraction,
-                      controller: controller.passwordController,
-                      obscureText: _isObscured,
-                      labelText: "Enter your password",
-                      icon: const Icon(
-                        Icons.lock,
-                        color: Color.fromARGB(255, 4, 45, 119),
+                      const SizedBox(
+                        height: 25,
                       ),
-                      sufixicon: GestureDetector(
-                        onTap: (() {
-                          setState(() {
-                            _isObscured = !_isObscured;
-                          });
-                        }),
-                        child: Icon(
-                          _isObscured
-                              ? FontAwesomeIcons.eyeSlash
-                              : FontAwesomeIcons.eye,
-                          color: Colors.black,
-                          size: 21,
+                      reusebletextfield(
+                        keyboard: TextInputType.emailAddress,
+                        validator: (value) {
+                          return controller.validPassword(value!);
+                        },
+                        autoValidateMode: AutovalidateMode.onUserInteraction,
+                        controller: controller.passwordController,
+                        obscureText: _isObscured,
+                        labelText: "Enter your password",
+                        icon: const Icon(
+                          Icons.lock,
+                          color: Color.fromARGB(255, 4, 45, 119),
+                        ),
+                        sufixicon: GestureDetector(
+                          onTap: (() {
+                            setState(() {
+                              _isObscured = !_isObscured;
+                            });
+                          }),
+                          child: Icon(
+                            _isObscured
+                                ? FontAwesomeIcons.eyeSlash
+                                : FontAwesomeIcons.eye,
+                            color: Colors.black,
+                            size: 21,
+                          ),
                         ),
                       ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 13),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, forgotpassword.routname);
+                          },
+                          child: const Text(
+                            "Forgot password",
+                            style: TextStyle(color: Colors.blue),
+                          )),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 15),
+
+                //this is login button
+                loginbutton(
+                    onTap: () {
+                      controller.checkLogin();
+                      if (controller.isformValidated == true) {
+                        loginuser();
+                      }
+                    },
+                    child: const Text(
+                      "Login",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16),
+                    )),
+
+                const SizedBox(
+                  height: 20,
+                ),
+                //this is the signup button
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(right: 3),
+                      child: Text("Do not have an account!"),
+                    ),
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, signuppage.routname);
+                        },
+                        child: const Text(
+                          "SIGNUP",
+                          style: TextStyle(color: Colors.blue),
+                        )),
+                    const SizedBox(
+                      height: 20,
                     ),
                   ],
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 13),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, forgotpassword.routname);
-                        },
-                        child: const Text(
-                          "Forgot password",
-                          style: TextStyle(color: Colors.blue),
-                        )),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 15),
-
-              //this is login button
-              loginbutton(
-                  onTap: () {
-                    controller.checkLogin();
-                    if (controller.isformValidated == true) {
-                      loginuser();
-                    }
-                  },
-                  child: const Text(
-                    "Login",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16),
-                  )),
-
-              const SizedBox(
-                height: 20,
-              ),
-              //this is the signup button
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.only(right: 3),
-                    child: Text("Do not have an account!"),
-                  ),
-                  GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, signuppage.routname);
-                      },
-                      child: const Text(
-                        "SIGNUP",
-                        style: TextStyle(color: Colors.blue),
-                      )),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                ],
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      )),
+        )),
+      ),
     ));
   }
 }

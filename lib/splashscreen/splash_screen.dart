@@ -1,5 +1,6 @@
 import 'package:finalyear/splashscreen/splashservices.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class splashscreen extends StatefulWidget {
   //route name
@@ -23,11 +24,16 @@ class _splashscreenState extends State<splashscreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
+    return const Scaffold(
+      body: SizedBox(
           width: double.infinity,
           height: double.infinity,
-          child: const Center(child: Text("Loading...."))),
+          child: Center(
+            child: SpinKitFadingCircle(
+              color: Colors.red, // Set the color of the SpinKit indicator
+              size: 50.0, // Set the size of the indicator as needed
+            ),
+          )),
     );
   }
 }

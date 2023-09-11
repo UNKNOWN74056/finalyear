@@ -56,12 +56,16 @@ class _profileState extends State<profile> {
           preferredSize:
               const Size.fromHeight(65), // Adjust this value as needed
           child: AppBar(
+            automaticallyImplyLeading: false,
             elevation: 0,
             backgroundColor: Colors.white,
             titleSpacing: 0,
-            title: const Text(
-              "Profile",
-              style: TextStyle(color: Colors.black, fontSize: 30),
+            title: const Padding(
+              padding: EdgeInsets.only(left: 40),
+              child: Text(
+                "Profile",
+                style: TextStyle(color: Colors.black, fontSize: 30),
+              ),
             ),
             actions: [
               Padding(

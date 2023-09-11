@@ -9,6 +9,7 @@ import 'package:finalyear/wedgets/reusebletextfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -147,7 +148,10 @@ class _signuppageState extends State<signuppage> {
           context: context,
           builder: (context) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: SpinKitFadingCircle(
+                color: Colors.green, // Set the color of the SpinKit indicator
+                size: 50.0, // Set the size of the indicator as needed
+              ),
             );
           });
 
