@@ -1,5 +1,5 @@
+import 'package:finalyear/API/footballApi/soccer.dart';
 import 'package:finalyear/GETX/tournamentdata.dart';
-import 'package:finalyear/ap/fetturescreen.dart';
 import 'package:finalyear/wedgets/data/Tournament-Data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -32,7 +32,7 @@ class _footballtourState extends State<footballtour> {
                   .where((e) => e.tournamentsport == 'football')
                   .map((element) => GestureDetector(
                         onTap: () {
-                          Get.to(() => const FixturesScreen());
+                          Get.to(() => const SoccerApp());
                         },
                         child: TournamentCard(
                           tournamentName: element.tournamentname,
