@@ -3,6 +3,8 @@ import 'package:finalyear/API/footballApi/pagebody.dart';
 import 'package:flutter/material.dart';
 
 class SoccerApp extends StatefulWidget {
+  const SoccerApp({super.key});
+
   @override
   _SoccerAppState createState() => _SoccerAppState();
 }

@@ -21,7 +21,7 @@ class SoccerApi {
   static const headers = {
     'x-rapidapi-host': "v3.football.api-sports.io",
     //Always make sure to check the api key and the limit of a request in a free api
-    'x-rapidapi-key': "140ee45a666a430ce41bcc2943253b1e"
+    'x-rapidapi-key': "83af101ef9681058b081308caba6a3b8"
   };
 
   //Now we will create our method
