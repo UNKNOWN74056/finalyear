@@ -144,7 +144,9 @@ class _clubdetailState extends State<club_detail_page> {
                 const SizedBox(height: 10),
                 Row(
                   children: [
-                    const Text("Sports: ", style: TextStyle(fontSize: 18)),
+                    const Text("Sports: ",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold)),
                     Text(
                       widget.post.sport,
                       style: const TextStyle(fontSize: 18),
@@ -154,7 +156,9 @@ class _clubdetailState extends State<club_detail_page> {
                 const SizedBox(height: 10),
                 Row(
                   children: [
-                    const Text("Contact: ", style: TextStyle(fontSize: 18)),
+                    const Text("Contact: ",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold)),
                     Text(
                       widget.post.phonenumber,
                       style: const TextStyle(fontSize: 18),
@@ -164,13 +168,28 @@ class _clubdetailState extends State<club_detail_page> {
                 const SizedBox(height: 10),
                 Row(
                   children: [
-                    const Text("Email: ", style: TextStyle(fontSize: 18)),
+                    const Text("Email: ",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold)),
                     Text(
                       widget.post.email,
                       style: const TextStyle(fontSize: 18),
                     ),
                   ],
                 ),
+                const SizedBox(height: 10),
+                Row(
+                  children: [
+                    const Text("Location: ",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold)),
+                    Text(
+                      widget.post.location,
+                      style: const TextStyle(fontSize: 18),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
                 Row(
                   children: [
                     Container(
