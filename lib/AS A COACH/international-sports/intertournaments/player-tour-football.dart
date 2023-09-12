@@ -29,13 +29,13 @@ class _playertourfootballState extends State<playertourfootball> {
                   .where((e) => e.tournamentsport == 'football')
                   .map((element) => GestureDetector(
                         onTap: () {
-                          Get.to(SoccerApp());
+                          Get.to(const SoccerApp());
                         },
                         child: TournamentCard(
-                            tournamentName: element.tournamentName,
+                            tournamentname: element.tournamentname,
                             tournamentlocation: element.tournamentlocation,
-                            startDate: element.startDate,
-                            endDate: element.endDate,
+                            startdate: element.startdate,
+                            enddate: element.enddate,
                             price: element.price,
                             tournamentimage: element.tournamentimage),
                       ))

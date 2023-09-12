@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 class TournamentCard extends StatefulWidget {
-  final dynamic tournamentName;
+  final dynamic tournamentname;
   final dynamic tournamentlocation;
-  final dynamic startDate;
-  final dynamic endDate;
+  final dynamic startdate;
+  final dynamic enddate;
   final dynamic price;
   final dynamic tournamentimage;
   const TournamentCard({
     super.key,
-    required this.tournamentName,
+    required this.tournamentname,
     required this.tournamentlocation,
-    required this.startDate,
-    required this.endDate,
+    required this.startdate,
+    required this.enddate,
     required this.price,
     required this.tournamentimage,
   });
@@ -143,7 +143,7 @@ class _TournamentCardState extends State<TournamentCard> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              widget.tournamentName,
+                              widget.tournamentname,
                               style: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -175,7 +175,7 @@ class _TournamentCardState extends State<TournamentCard> {
                         ),
                         const SizedBox(width: 5),
                         Text(
-                          widget.startDate,
+                          widget.startdate,
                         ),
                       ],
                     ),
@@ -194,7 +194,7 @@ class _TournamentCardState extends State<TournamentCard> {
                           ),
                         ),
                         const SizedBox(width: 5),
-                        Text(widget.endDate),
+                        Text(widget.enddate),
                       ],
                     ),
                     const SizedBox(height: 10),

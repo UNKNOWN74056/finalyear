@@ -83,18 +83,23 @@ class _interclubState extends State<interclub> {
             body: GetBuilder(
                 init: Getclubdata(),
                 builder: (clubcontroller) {
-                  return Obx(
-                    () => SingleChildScrollView(
-                      child: Column(
-                        children: clubcontroller.clublist
-                            .map((element) => ClubCard(
-                                  clubname: element.clubname,
-                                  clubimage: element.clubimage,
-                                  location: element.location,
-                                  onTap: () =>
-                                      Get.to(club_detail_page(post: element)),
-                                ))
-                            .toList(),
+                  return RefreshIndicator(
+                    onRefresh: () async {
+                      await clubcontroller.Getclubdatafirebase();
+                    },
+                    child: Obx(
+                      () => SingleChildScrollView(
+                        child: Column(
+                          children: clubcontroller.clublist
+                              .map((element) => ClubCard(
+                                    clubname: element.clubname,
+                                    clubimage: element.clubimage,
+                                    location: element.location,
+                                    onTap: () =>
+                                        Get.to(club_detail_page(post: element)),
+                                  ))
+                              .toList(),
+                        ),
                       ),
                     ),
                   );

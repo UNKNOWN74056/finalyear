@@ -35,10 +35,10 @@ class _footballtourState extends State<footballtour> {
                           Get.to(() => const SoccerApp());
                         },
                         child: TournamentCard(
-                          tournamentName: element.tournamentname,
+                          tournamentname: element.tournamentname,
                           tournamentlocation: element.tournamentlocation,
-                          startDate: element.startdate,
-                          endDate: element.enddate,
+                          startdate: element.startdate,
+                          enddate: element.enddate,
                           price: element.price,
                           tournamentimage: element.tournamentimage,
                         ),
