@@ -3,6 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class usersearchengine extends StatefulWidget {
+  const usersearchengine({super.key});
+
   @override
   _usersearchengineState createState() => _usersearchengineState();
 }
@@ -22,7 +24,7 @@ class _usersearchengineState extends State<usersearchengine> {
           },
           decoration: const InputDecoration(
             hintText: 'Search...',
-            hintStyle: TextStyle(color: Colors.white),
+            hintStyle: TextStyle(color: Colors.black),
           ),
           cursorHeight: 25.0,
           cursorColor: Colors.black,
@@ -32,7 +34,7 @@ class _usersearchengineState extends State<usersearchengine> {
         stream: FirebaseFirestore.instance
             .collection('users')
             .where('fullname', isGreaterThanOrEqualTo: _searchQuery)
-            .where('fullname', isLessThanOrEqualTo: _searchQuery + '\uf8ff')
+            .where('fullname', isLessThanOrEqualTo: '$_searchQuery\uf8ff')
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {

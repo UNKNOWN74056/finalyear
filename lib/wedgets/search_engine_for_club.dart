@@ -22,7 +22,7 @@ class _clubsearchengineState extends State<clubsearchengine> {
           },
           decoration: const InputDecoration(
             hintText: 'Search...',
-            hintStyle: TextStyle(color: Colors.white),
+            hintStyle: TextStyle(color: Colors.black),
           ),
           cursorHeight: 25.0,
           cursorColor: Colors.black,
