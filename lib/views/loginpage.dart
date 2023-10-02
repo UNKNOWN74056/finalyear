@@ -4,7 +4,7 @@ import 'package:finalyear/views/forgotpassword.dart';
 import 'package:finalyear/views/homedbforcoache.dart';
 import 'package:finalyear/views/homedbforplayer.dart';
 import 'package:finalyear/views/signuppage.dart';
-import 'package:finalyear/service/internet_connection.dart';
+import 'package:finalyear/view_model/service/internet_connection.dart';
 import 'package:finalyear/components/loginbutton.dart';
 import 'package:finalyear/components/reusebletextfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';

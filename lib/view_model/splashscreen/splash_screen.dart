@@ -1,4 +1,4 @@
-import 'package:finalyear/splashscreen/splashservices.dart';
+import 'package:finalyear/view_model/splashscreen/splashservices.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 

@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/GETX/SignupGetX.dart';
 import 'package:finalyear/GETX/dropdown.dart';
 import 'package:finalyear/views/loginpage.dart';
-import 'package:finalyear/service/internet_connection.dart';
+import 'package:finalyear/view_model/service/internet_connection.dart';
 import 'package:finalyear/components/loginbutton.dart';
 import 'package:finalyear/components/reusebletextfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';

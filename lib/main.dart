@@ -8,7 +8,7 @@ import 'package:finalyear/views/AS%20A%20PLAYER/internationalsports/dashboard/da
 import 'package:finalyear/views/forgotpassword.dart';
 import 'package:finalyear/views/loginpage.dart';
 import 'package:finalyear/views/signuppage.dart';
-import 'package:finalyear/splashscreen/splash_screen.dart';
+import 'package:finalyear/view_model/splashscreen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
