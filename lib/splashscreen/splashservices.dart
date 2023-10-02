@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:finalyear/functions/functions.dart';
-import 'package:finalyear/pages/loginpage.dart';
+import 'package:finalyear/views/loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
