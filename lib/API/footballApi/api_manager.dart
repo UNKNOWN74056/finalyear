@@ -29,20 +29,28 @@ class SoccerApi {
 
   //Now we finished with our Model
   Future<List<SoccerMatch>?> getAllMatches() async {
-    http.Response res = await http.get(Uri.parse(apiUrl), headers: headers);
-    var body;
+    try {
+      http.Response res = await http.get(Uri.parse(apiUrl), headers: headers);
+      var body;
 
-    if (res.statusCode == 200) {
-      // this mean that we are connected to the data base
-      body = jsonDecode(res.body);
-      List<dynamic> matchesList = body['response'];
-      print("Api service: $body"); // to debug
-      List<SoccerMatch> matches = matchesList
-          .map((dynamic item) => SoccerMatch.fromJson(item))
-          .toList();
-
-      return matches;
+      if (res.statusCode == 200) {
+        // this mean that we are connected to the data base
+        body = jsonDecode(res.body);
+        List<dynamic> matchesList = body['response'];
+        print("this is data");
+        print("Api service: $body"); // to debug
+        List<SoccerMatch> matches = matchesList
+            .map((dynamic item) => SoccerMatch.fromJson(item))
+            .toList();
+        print("this is data");
+        print(matches);
+        return matches;
+      }
+      return null;
+    } catch (e, stackTrace) {
+      print("Error: $e");
+      print("Stack Trace: $stackTrace");
+      return null;
     }
-    return null;
   }
 }

@@ -33,6 +33,10 @@ class _SoccerAppState extends State<SoccerApp> {
           if (snapshot.hasData) {
             print((snapshot.data)?.length);
             return PageBody(snapshot.data!);
+          } else if (snapshot.hasError) {
+            return const Center(
+              child: Text("Error"),
+            );
           } else {
             return const Center(
               child: CircularProgressIndicator(),
