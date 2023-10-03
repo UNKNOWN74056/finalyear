@@ -7,7 +7,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 class forgotpassword extends StatefulWidget {
-  static const String routname = 'forgot_password';
   const forgotpassword({super.key});
 
   @override

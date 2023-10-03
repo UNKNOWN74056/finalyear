@@ -1,24 +1,27 @@
-import 'package:finalyear/views/AS%20A%20PLAYER/culturesport/culture_home.dart';
-import 'package:finalyear/views/AS%20A%20PLAYER/culturesport/culturetournametns.dart';
+import 'package:finalyear/views/AS%20A%20PLAYER/internationalsports/dashboard/clubs.dart';
+import 'package:finalyear/views/AS%20A%20PLAYER/internationalsports/dashboard/home.dart';
 import 'package:finalyear/views/AS%20A%20PLAYER/internationalsports/dashboard/profile.dart';
 import 'package:finalyear/views/AS%20A%20PLAYER/internationalsports/dashboard/setting.dart';
+import 'package:finalyear/views/AS%20A%20PLAYER/internationalsports/dashboard/tournaments.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
-class culturedashboard extends StatefulWidget {
-  static const String routname = "culturedashboard";
-  const culturedashboard({super.key});
+class Coach_International_Dashboard extends StatefulWidget {
+  const Coach_International_Dashboard({super.key});
 
   @override
-  State<culturedashboard> createState() => _culturedashboardState();
+  State<Coach_International_Dashboard> createState() =>
+      _Coach_International_DashboardState();
 }
 
-class _culturedashboardState extends State<culturedashboard> {
+class _Coach_International_DashboardState
+    extends State<Coach_International_Dashboard> {
   int currentIndex = 0;
 
   final screens = const [
-    culturehome(),
-    culturetournaments(),
+    home(),
+    clubs(),
+    tournaments(),
     setting(),
     profile(),
   ];
@@ -39,6 +42,10 @@ class _culturedashboardState extends State<culturedashboard> {
               BottomNavigationBarItem(
                 icon: Icon(Ionicons.home),
                 label: "Home",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Ionicons.cloudy),
+                label: "Clubs",
               ),
               BottomNavigationBarItem(
                 icon: Icon(Ionicons.trophy),

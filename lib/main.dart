@@ -1,14 +1,8 @@
 import 'dart:async';
-import 'package:finalyear/views/AS%20A%20COACH/culture-sport/cultureplayerdb.dart';
+import 'package:finalyear/utils/Routes.dart';
+import 'package:finalyear/utils/Routes_Name.dart';
 import 'package:finalyear/views/AS%20A%20COACH/culture-sport/player-culture-home.dart';
 import 'package:finalyear/views/AS%20A%20COACH/international-sports/bottomtabbars/interhome.dart';
-import 'package:finalyear/views/AS%20A%20COACH/international-sports/playerdashboard.dart';
-import 'package:finalyear/views/AS%20A%20PLAYER/culturesport/culture_dashboard.dart';
-import 'package:finalyear/views/AS%20A%20PLAYER/internationalsports/dashboard/dashboard.dart';
-import 'package:finalyear/views/forgotpassword.dart';
-import 'package:finalyear/views/loginpage.dart';
-import 'package:finalyear/views/signuppage.dart';
-import 'package:finalyear/view_model/splashscreen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -47,18 +41,11 @@ class _MyAppState extends State<MyApp> {
           title: 'Mr Sports',
           theme: ThemeData.light().copyWith(useMaterial3: true),
           debugShowCheckedModeBanner: false,
-          home: const splashscreen(),
+          initialRoute: Routesname.splash_screen,
+          onGenerateRoute: Routes.generateRoutes,
           routes: {
-            splashscreen.routname: (context) => const splashscreen(),
-            loginpage.routname: (context) => const loginpage(),
             interhome.routname: (context) => const interhome(),
             playerculturehome.routname: (context) => const playerculturehome(),
-            playerdashboeard.routname: (context) => const playerdashboeard(),
-            cultureplayerdb.routname: (context) => const cultureplayerdb(),
-            forgotpassword.routname: (context) => const forgotpassword(),
-            signuppage.routname: (context) => const signuppage(),
-            dashboard.routname: (context) => const dashboard(),
-            culturedashboard.routname: (context) => const culturedashboard(),
           },
         );
       },

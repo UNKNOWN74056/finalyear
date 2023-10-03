@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/GETX/SignupGetX.dart';
 import 'package:finalyear/GETX/dropdown.dart';
+import 'package:finalyear/utils/Routes_Name.dart';
 import 'package:finalyear/views/loginpage.dart';
 import 'package:finalyear/view_model/service/internet_connection.dart';
 import 'package:finalyear/components/loginbutton.dart';
@@ -15,7 +16,6 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class signuppage extends StatefulWidget {
-  static const String routname = 'sign_up_page';
   const signuppage({super.key});
 
   @override
@@ -578,7 +578,7 @@ class _signuppageState extends State<signuppage> {
                     ),
                     GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, loginpage.routname);
+                          Navigator.pushNamed(context, Routesname.login);
                         },
                         child: const Text(
                           "LOGIN",

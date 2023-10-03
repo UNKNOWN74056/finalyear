@@ -1,5 +1,5 @@
 import 'package:finalyear/functions/functions.dart';
-import 'package:finalyear/views/loginpage.dart';
+import 'package:finalyear/utils/Routes_Name.dart';
 import 'package:finalyear/components/savebutton.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -73,7 +73,7 @@ class _settingState extends State<setting> {
                                       colorText: Colors.white,
                                     );
                                     Navigator.pushNamed(
-                                        context, loginpage.routname);
+                                        context, Routesname.login);
                                   },
                                   child: const Text("Yes")),
                             ],
@@ -107,7 +107,8 @@ class _settingState extends State<setting> {
                                     backgroundColor: Colors.green,
                                     colorText: Colors.white,
                                   );
-                                  Get.offAllNamed(loginpage.routname);
+                                  Navigator.pushNamed(
+                                      context, Routesname.login);
                                 },
                                 child: const Text("Yes")),
                           ],

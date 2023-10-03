@@ -1,8 +1,6 @@
-import 'package:finalyear/views/AS%20A%20PLAYER/culturesport/culture_dashboard.dart';
-import 'package:finalyear/views/AS%20A%20PLAYER/internationalsports/dashboard/dashboard.dart';
+import 'package:finalyear/utils/Routes_Name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 
 class homeforcoach extends StatefulWidget {
   const homeforcoach({super.key});
@@ -32,7 +30,8 @@ class _homeforcoachState extends State<homeforcoach> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Get.to(() => const dashboard());
+                      Navigator.pushNamed(
+                          context, Routesname.Coach_International_Dashboard);
                     },
                     child: Container(
                       margin: const EdgeInsets.only(bottom: 16.0),
@@ -58,7 +57,8 @@ class _homeforcoachState extends State<homeforcoach> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Get.to(() => const culturedashboard());
+                      Navigator.pushNamed(
+                          context, Routesname.Coach_Culture_Dashboard);
                     },
                     child: Container(
                       height: 200,

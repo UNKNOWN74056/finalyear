@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/GETX/LoginGetX.dart';
-import 'package:finalyear/views/forgotpassword.dart';
+import 'package:finalyear/utils/Routes_Name.dart';
 import 'package:finalyear/views/homedbforcoache.dart';
 import 'package:finalyear/views/homedbforplayer.dart';
-import 'package:finalyear/views/signuppage.dart';
 import 'package:finalyear/view_model/service/internet_connection.dart';
 import 'package:finalyear/components/loginbutton.dart';
 import 'package:finalyear/components/reusebletextfield.dart';
@@ -15,8 +14,6 @@ import 'package:get/get.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class loginpage extends StatefulWidget {
-  //route
-  static const String routname = 'login_page';
   const loginpage({super.key});
   @override
   State<loginpage> createState() => _loginpageState();
@@ -189,7 +186,7 @@ class _loginpageState extends State<loginpage> {
                       GestureDetector(
                           onTap: () {
                             Navigator.pushNamed(
-                                context, forgotpassword.routname);
+                                context, Routesname.forgotpassword);
                           },
                           child: const Text(
                             "Forgot password",
@@ -229,7 +226,7 @@ class _loginpageState extends State<loginpage> {
                     ),
                     GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, signuppage.routname);
+                          Navigator.pushNamed(context, Routesname.signup);
                         },
                         child: const Text(
                           "SIGNUP",

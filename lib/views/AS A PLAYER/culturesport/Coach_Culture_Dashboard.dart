@@ -1,29 +1,28 @@
-import 'package:finalyear/views/AS%20A%20COACH/international-sports/bottomtabbars/interclub.dart';
-import 'package:finalyear/views/AS%20A%20COACH/international-sports/bottomtabbars/interhome.dart';
-import 'package:finalyear/views/AS%20A%20COACH/international-sports/bottomtabbars/intertournaments.dart';
-import 'package:finalyear/views/AS%20A%20COACH/profile.dart';
+import 'package:finalyear/views/AS%20A%20PLAYER/culturesport/culture_home.dart';
+import 'package:finalyear/views/AS%20A%20PLAYER/culturesport/culturetournametns.dart';
+import 'package:finalyear/views/AS%20A%20PLAYER/internationalsports/dashboard/profile.dart';
 import 'package:finalyear/views/AS%20A%20PLAYER/internationalsports/dashboard/setting.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
-class playerdashboeard extends StatefulWidget {
-  static const String routname = "playerdashboard";
-  const playerdashboeard({super.key});
+class Coach_culture_Dashboard extends StatefulWidget {
+  const Coach_culture_Dashboard({super.key});
 
   @override
-  State<playerdashboeard> createState() => _playerdashboeardState();
+  State<Coach_culture_Dashboard> createState() =>
+      _Coach_culture_DashboardState();
 }
 
-class _playerdashboeardState extends State<playerdashboeard> {
+class _Coach_culture_DashboardState extends State<Coach_culture_Dashboard> {
   int currentIndex = 0;
 
   final screens = const [
-    interhome(),
-    interclub(),
-    intertournaments(),
+    culturehome(),
+    culturetournaments(),
     setting(),
-    playerprofile()
+    profile(),
   ];
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -40,10 +39,6 @@ class _playerdashboeardState extends State<playerdashboeard> {
               BottomNavigationBarItem(
                 icon: Icon(Ionicons.home),
                 label: "Home",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Ionicons.cloudy),
-                label: "Clubs",
               ),
               BottomNavigationBarItem(
                 icon: Icon(Ionicons.trophy),
