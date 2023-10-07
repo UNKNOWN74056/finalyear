@@ -33,6 +33,7 @@ class _playertabletenisState extends State<playertabletenis> {
                           fullName: element.fullname,
                           imageUrl: element.image_Url,
                           city: element.city,
+                          rating: element.rating,
                           onTap: () => Get.to(user_detail_page(post: element)),
                         ))
                     .toList()),

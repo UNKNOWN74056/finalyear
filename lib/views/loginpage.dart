@@ -28,7 +28,7 @@ class _loginpageState extends State<loginpage> {
   bool _isObscured = true;
 
   //login function for the user
-  loginuser() async {
+  void loginuser() async {
     try {
       checkconnectivity();
       showDialog(
@@ -36,32 +36,66 @@ class _loginpageState extends State<loginpage> {
         builder: (context) {
           return const Center(
             child: SpinKitFadingCircle(
-              color: Colors.green, // Set the color of the SpinKit indicator
-              size: 50.0, // Set the size of the indicator as needed
+              color: Colors.green,
+              size: 50.0,
             ),
           );
         },
       );
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: controller.email.value, password: controller.password.value);
-      FirebaseFirestore.instance
-          .collection("users")
-          .doc(currentUser.currentUser!.email)
-          .get()
-          .then((value) {
-        if (value['profession'] == 'Player') {
-          Get.to(const homeforcoach());
-        } else if (value['profession'] == 'Coache') {
-          Get.to(const homeforplayer());
+        email: controller.email.value,
+        password: controller.password.value,
+      );
+
+      final currentuser = FirebaseAuth.instance.currentUser!.email;
+
+      final userDocRef =
+          FirebaseFirestore.instance.collection('users').doc(currentuser);
+
+      userDocRef.get().then((doc) {
+        if (doc.exists && doc.data() != null) {
+          if (doc.data()!['markedForDeletion'] == true) {
+            Get.snackbar(
+              "Message",
+              "Your account is disabled by admin.",
+              backgroundColor: Colors.red,
+              colorText: Colors.white,
+            );
+            Navigator.of(context).pop();
+          } else {
+            // User is not marked for deletion
+            FirebaseFirestore.instance
+                .collection("users")
+                .doc(currentUser.currentUser!.email)
+                .get()
+                .then((value) {
+              if (value['profession'] == 'Player') {
+                Get.to(const homeforcoach());
+              } else if (value['profession'] == 'Coache') {
+                Get.to(const homeforplayer());
+              } else {
+                // Handle other professions or navigation logic here
+              }
+              Get.snackbar(
+                "Message",
+                "You have logged in successfully.",
+                backgroundColor: Colors.green,
+                colorText: Colors.white,
+              );
+            });
+          }
+        } else {
+          Get.snackbar(
+            "Error",
+            "User document does not exist in Firestore.",
+            backgroundColor: Colors.red,
+            colorText: Colors.white,
+          );
+          Navigator.of(context).pop();
         }
-        Get.snackbar(
-          "Message",
-          "You have login successfully.",
-          backgroundColor: Colors.green,
-          colorText: Colors.white,
-        );
       });
     } on FirebaseAuthException catch (e) {
+      // Handle FirebaseAuth exceptions
       if (e.code == 'user-not-found') {
         Get.snackbar("No User", "No user is found for this Email",
             backgroundColor: Colors.red,
@@ -71,7 +105,7 @@ class _loginpageState extends State<loginpage> {
         Navigator.of(context).pop();
       } else if (e.code == 'wrong-password') {
         Get.snackbar("Your password",
-            "Your password is wrong please correct your password",
+            "Your password is wrong; please correct your password",
             backgroundColor: Colors.red,
             colorText: Colors.white,
             duration: const Duration(seconds: 2),

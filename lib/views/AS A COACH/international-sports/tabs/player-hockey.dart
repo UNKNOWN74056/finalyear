@@ -34,6 +34,7 @@ class _palyerhockeyState extends State<palyerhockey> {
                           fullName: element.fullname,
                           imageUrl: element.image_Url,
                           city: element.city,
+                          rating: element.rating,
                           onTap: () => Get.to(user_detail_page(post: element)),
                         ))
                     .toList()),

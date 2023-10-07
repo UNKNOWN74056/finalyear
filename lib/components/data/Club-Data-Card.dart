@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ClubCard extends StatefulWidget {
   final String clubname;
   final String clubimage;
   final String location;
+  final String rating; // New property for rating
   final Function() onTap;
 
   const ClubCard({
-    super.key,
+    Key? key,
     required this.clubname,
     required this.clubimage,
     required this.location,
+    required this.rating,
     required this.onTap,
-  });
+  }) : super(key: key);
 
   @override
   _ClubCardState createState() => _ClubCardState();
@@ -97,7 +99,24 @@ class _ClubCardState extends State<ClubCard> {
             backgroundImage: NetworkImage(widget.clubimage),
             backgroundColor: Colors.white,
           ),
-          subtitle: Text(widget.location, style: const TextStyle(fontSize: 15)),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  const Icon(
+                    Icons.star,
+                    color: Colors.yellow,
+                  ),
+                  Text(
+                    " ${widget.rating}",
+                    style: const TextStyle(fontSize: 15),
+                  ),
+                ],
+              ),
+              Text(widget.location, style: const TextStyle(fontSize: 15)),
+            ],
+          ),
           trailing: const Icon(
             FontAwesomeIcons.arrowRight,
           ),

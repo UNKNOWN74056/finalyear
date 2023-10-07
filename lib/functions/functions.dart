@@ -144,16 +144,36 @@ class functionservices {
 
   // function to check the login
   loginischeck() {
-    FirebaseFirestore.instance
-        .collection("users")
-        .doc(currentUser.currentUser!.email)
-        .get()
-        .then((value) {
-      if (value['profession'] == 'Player') {
-        Get.to(const homeforcoach());
-        print("as a coach dashboard");
-      } else if (value['profession'] == 'Coache') {
-        Get.to(const homeforplayer());
+    final user = currentUser.currentUser;
+    if (user == null) {
+      // User is not logged in, navigate to the login screen
+      Get.to(const loginpage());
+      return;
+    }
+
+    final userDocRef =
+        FirebaseFirestore.instance.collection('users').doc(user.email);
+    userDocRef.get().then((doc) {
+      if (doc.exists && doc.data() != null) {
+        if (doc.data()!['markedForDeletion'] == true) {
+          // The user is marked for deletion, log them out
+          FirebaseAuth.instance.signOut();
+          Get.to(const loginpage());
+          Get.snackbar(
+            "Message",
+            "Your account has been deleted by admin.",
+            backgroundColor: Colors.red,
+            colorText: Colors.white,
+          );
+        } else {
+          // User is not marked for deletion
+          if (doc.data()!['profession'] == 'Player') {
+            Get.to(const homeforcoach());
+            print("as a coach dashboard");
+          } else if (doc.data()!['profession'] == 'Coache') {
+            Get.to(const homeforplayer());
+          }
+        }
       }
     });
   }
@@ -234,6 +254,30 @@ class functionservices {
         ),
       );
     }
+  }
+
+  void checkAuthenticationState(user) {
+    final currentuser = FirebaseAuth.instance.currentUser!.email;
+    // FirebaseAuth.instance.authStateChanges().listen((User? user) {
+    //   if (user == null) {
+    //     // User is already logged out
+    //     return;
+    //   }
+
+    // Check the user's Firestore document for 'markedForDeletion'
+    final userDocRef =
+        FirebaseFirestore.instance.collection('users').doc(currentuser);
+    userDocRef.get().then((doc) {
+      if (doc.exists && doc.data() != null) {
+        if (doc.data()!['markedForDeletion'] == true) {
+          //  delete();
+          // The user is marked for deletion, log them out
+          FirebaseAuth.instance.signOut();
+          Get.to(const loginpage());
+          Get.snackbar("Message", "Your account has been deleted by admin.");
+        }
+      }
+    });
   }
 }
 

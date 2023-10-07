@@ -95,6 +95,7 @@ class _interclubState extends State<interclub> {
                                     clubname: element.clubname,
                                     clubimage: element.clubimage,
                                     location: element.location,
+                                    rating: element.rating,
                                     onTap: () =>
                                         Get.to(club_detail_page(post: element)),
                                   ))

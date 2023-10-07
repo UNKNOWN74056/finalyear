@@ -5,30 +5,31 @@ class CustomCard extends StatefulWidget {
   final String fullName;
   final String imageUrl;
   final String city;
+  final double rating;
   final Function() onTap;
 
   const CustomCard({
-    super.key,
+    Key? key,
     required this.fullName,
     required this.imageUrl,
     required this.city,
+    required this.rating,
     required this.onTap,
-  });
+  }) : super(key: key);
 
   @override
   _CustomCardState createState() => _CustomCardState();
 }
 
 class _CustomCardState extends State<CustomCard> {
-  bool isLoading = true; // Initially set to true for shimmer loading
+  bool isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    // Simulate data loading delay
     Future.delayed(const Duration(seconds: 2), () {
       setState(() {
-        isLoading = false; // Set to false when data is loaded
+        isLoading = false;
       });
     });
   }
@@ -37,7 +38,7 @@ class _CustomCardState extends State<CustomCard> {
   Widget build(BuildContext context) {
     if (isLoading) {
       return ListView.builder(
-          itemCount: 5, // Number of shimmer items
+          itemCount: 5,
           shrinkWrap: true,
           itemBuilder: (context, i) {
             return Shimmer.fromColors(
@@ -97,7 +98,24 @@ class _CustomCardState extends State<CustomCard> {
             Icons.arrow_forward,
           ),
           onTap: widget.onTap,
-          subtitle: Text(widget.city, style: const TextStyle(fontSize: 15)),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  const Icon(
+                    Icons.star,
+                    color: Colors.yellow,
+                  ),
+                  Text(
+                    " ${widget.rating}",
+                    style: const TextStyle(fontSize: 15),
+                  ),
+                ],
+              ),
+              Text(widget.city, style: const TextStyle(fontSize: 15)),
+            ],
+          ),
         ),
       );
     }
