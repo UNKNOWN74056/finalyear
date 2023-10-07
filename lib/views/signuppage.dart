@@ -123,6 +123,7 @@ class _signuppageState extends State<signuppage> {
 
   //initial rating of a player
   var rating = 0;
+  var club = "";
 
   //options for type of sports
   List sports = [
@@ -178,6 +179,7 @@ class _signuppageState extends State<signuppage> {
         controller.phonenumbercontroller.value.text,
         newUrl.toString(),
         rating.toString(),
+        club.toString(),
       );
       Get.snackbar(
         "Registration",
@@ -222,6 +224,7 @@ class _signuppageState extends State<signuppage> {
     String phone,
     String url,
     String rating,
+    String club,
   ) async {
     await FirebaseFirestore.instance
         .collection('users')
@@ -237,6 +240,7 @@ class _signuppageState extends State<signuppage> {
       'password': password,
       'phoneNumber': phone,
       'rating': rating,
+      'club': club
     });
   }
 

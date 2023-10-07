@@ -9,6 +9,7 @@ class Users {
   final dynamic profession;
   final dynamic rating;
   final dynamic sport;
+  final dynamic club;
 
   Users({
     required this.image_Url,
@@ -21,5 +22,6 @@ class Users {
     required this.profession,
     required this.rating,
     required this.sport,
+    required this.club,
   });
 }

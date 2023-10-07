@@ -5,7 +5,7 @@ class CustomCard extends StatefulWidget {
   final String fullName;
   final String imageUrl;
   final String city;
-  final double rating;
+  final dynamic rating;
   final Function() onTap;
 
   const CustomCard({

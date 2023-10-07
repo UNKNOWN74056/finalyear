@@ -23,6 +23,7 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
   final TextEditingController fullnameupdate = TextEditingController();
   final TextEditingController citynameupdate = TextEditingController();
   final TextEditingController phoneupdate = TextEditingController();
+  final TextEditingController clubupdate = TextEditingController();
   File? _image;
   final ImagePicker picker = ImagePicker();
   final updateprofilecontroller = Get.put(updateuserprofile());
@@ -114,6 +115,7 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
     fullnameupdate.text = widget.data.fullname;
     citynameupdate.text = widget.data.city;
     phoneupdate.text = widget.data.phoneNumber;
+    clubupdate.text = widget.data.club;
   }
 
   // update profile function
@@ -144,6 +146,7 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
       'fullname': fullnameupdate.text.toString(),
       'city': citynameupdate.text.toString(),
       'phoneNumber': phoneupdate.text.toString(),
+      'club': clubupdate.text.toString()
     });
   }
 
@@ -260,6 +263,20 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
                       },
                       icon: const Icon(FontAwesomeIcons.phone),
                       labelText: "+ code phone number",
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    reusebletextfield(
+                      controller: clubupdate,
+                      initialValue: widget.data.club ?? " ",
+                      autoValidateMode: AutovalidateMode.onUserInteraction,
+                      keyboard: TextInputType.emailAddress,
+                      validator: (Value) {
+                        return updateprofilecontroller.validfullname(Value!);
+                      },
+                      icon: const Icon(FontAwesomeIcons.cloud),
+                      labelText: "Enter your club",
                     ),
                     const SizedBox(
                       height: 15,

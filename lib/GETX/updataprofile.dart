@@ -6,12 +6,14 @@ class updateuserprofile extends GetxController {
   var fullname = "".obs;
   var location = "".obs;
   var phone = "".obs;
+  var club = "".obs;
 
   bool isformValidated = false;
 
   late TextEditingController updatefullnamecontroller,
       updatecitycontroller,
-      updatephonecontroller;
+      updatephonecontroller,
+      clubupdatecontroller;
 
   @override
   void onInit() {
@@ -20,6 +22,7 @@ class updateuserprofile extends GetxController {
     updatefullnamecontroller = TextEditingController();
     updatecitycontroller = TextEditingController();
     updatephonecontroller = TextEditingController();
+    clubupdatecontroller = TextEditingController();
   }
 
   final keyForm = GlobalKey<FormState>();
@@ -62,6 +65,7 @@ class updateuserprofile extends GetxController {
       fullname.value = updatefullnamecontroller.value.text;
       location.value = updatecitycontroller.value.text;
       phone.value = updatephonecontroller.value.text;
+      club.value = clubupdatecontroller.value.text;
 
       isformValidated = true;
       // User those values to send our auth request ...

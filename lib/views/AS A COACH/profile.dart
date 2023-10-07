@@ -245,6 +245,23 @@ class _profileState extends State<playerprofile> {
                                                   ),
                                                 ],
                                               ),
+                                              Row(
+                                                children: [
+                                                  const Text(
+                                                    "Club: ",
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                  Text(
+                                                    element.club ?? " ",
+                                                    style: TextStyle(
+                                                      color: Colors.grey[600],
+                                                      fontSize: 16.0,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                               const SizedBox(height: 8.0),
                                               Row(
                                                 children: [
@@ -267,14 +284,17 @@ class _profileState extends State<playerprofile> {
                                                       onTap: () {
                                                         Get.to(CustomBottomSheet(
                                                             data: editprofiledata(
-                                                          fullname:
-                                                              element.fullname,
-                                                          city: element.city,
-                                                          image_Url:
-                                                              element.image_Url,
-                                                          phoneNumber: element
-                                                              .phoneNumber,
-                                                        )));
+                                                                fullname: element
+                                                                    .fullname,
+                                                                city: element
+                                                                    .city,
+                                                                image_Url: element
+                                                                    .image_Url,
+                                                                phoneNumber: element
+                                                                    .phoneNumber,
+                                                                club: element
+                                                                        .club ??
+                                                                    '')));
                                                       },
                                                       icon: Icons.edit,
                                                       child: const Text("Edit"),

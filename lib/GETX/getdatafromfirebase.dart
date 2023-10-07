@@ -18,6 +18,8 @@ class FetchDataFirebase extends GetxController {
 
   // get all the data of users from firebase
   GetDataFirebase() async {
+    // Assuming you have a Users model with the "club" property.
+
     mylist.clear();
     await FirebaseFirestore.instance
         .collection("users")
@@ -35,6 +37,7 @@ class FetchDataFirebase extends GetxController {
           profession: f['profession'],
           rating: f['rating'],
           sport: f['sport'],
+          club: f['club'] ?? " ",
         ));
       }
     });
