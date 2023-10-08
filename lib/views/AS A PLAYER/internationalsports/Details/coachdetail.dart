@@ -335,6 +335,8 @@ class _coachdetailState extends State<coachdetail> {
                   ),
                 ),
               ]),
-            )));
+            )
+            )
+            );
   }
 }
