@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CustomCard extends StatefulWidget {
@@ -6,6 +7,7 @@ class CustomCard extends StatefulWidget {
   final String imageUrl;
   final String city;
   final dynamic rating;
+  final bool isVarified; // Add this property
   final Function() onTap;
 
   const CustomCard({
@@ -14,6 +16,7 @@ class CustomCard extends StatefulWidget {
     required this.imageUrl,
     required this.city,
     required this.rating,
+    required this.isVarified,
     required this.onTap,
   }) : super(key: key);
 
@@ -88,7 +91,17 @@ class _CustomCardState extends State<CustomCard> {
           borderRadius: BorderRadius.circular(10),
         ),
         child: ListTile(
-          title: Text(widget.fullName, style: const TextStyle(fontSize: 20)),
+          title: Row(
+            children: [
+              Text(widget.fullName, style: const TextStyle(fontSize: 20)),
+              if (widget.isVarified) // Conditionally display the checkmark icon
+                const Icon(
+                  FontAwesomeIcons.certificate,
+                  color: Colors.blue,
+                  size: 16,
+                ),
+            ],
+          ),
           leading: CircleAvatar(
             radius: 35,
             backgroundImage: NetworkImage(widget.imageUrl),

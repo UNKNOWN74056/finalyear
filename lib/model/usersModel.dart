@@ -10,6 +10,7 @@ class Users {
   final dynamic rating;
   final dynamic sport;
   final dynamic club;
+  final bool varificaiton;
 
   Users({
     required this.image_Url,
@@ -23,5 +24,6 @@ class Users {
     required this.rating,
     required this.sport,
     required this.club,
+    required this.varificaiton,
   });
 }

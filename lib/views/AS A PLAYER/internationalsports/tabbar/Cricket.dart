@@ -34,6 +34,7 @@ class _CricketState extends State<Cricket> {
                           imageUrl: element.image_Url,
                           city: element.city,
                           rating: element.rating,
+                           isVarified: element.varificaiton,
                           onTap: () => Get.to(() => coachdetail(post: element)),
                         ))
                     .toList()),

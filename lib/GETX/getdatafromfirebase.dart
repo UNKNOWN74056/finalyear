@@ -38,6 +38,7 @@ class FetchDataFirebase extends GetxController {
           rating: f['rating'],
           sport: f['sport'],
           club: f['club'] ?? " ",
+          varificaiton: f['varification'],
         ));
       }
     });

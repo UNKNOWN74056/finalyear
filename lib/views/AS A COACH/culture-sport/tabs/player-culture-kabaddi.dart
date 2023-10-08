@@ -34,6 +34,7 @@ class _playerculturekabaddiState extends State<playerculturekabaddi> {
                           imageUrl: element.image_Url,
                           city: element.city,
                           rating: element.rating,
+                          isVarified: element.varificaiton,
                           onTap: () => Get.to(coachdetail(post: element)),
                         ))
                     .toList()),

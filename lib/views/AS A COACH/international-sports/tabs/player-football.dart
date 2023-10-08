@@ -34,6 +34,7 @@ class _playerfootballState extends State<playerfootball> {
                           imageUrl: element.image_Url,
                           city: element.city,
                           rating: element.rating,
+                           isVarified: element.varificaiton,
                           onTap: () => Get.to(user_detail_page(post: element)),
                         ))
                     .toList()),

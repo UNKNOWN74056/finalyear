@@ -124,6 +124,7 @@ class _signuppageState extends State<signuppage> {
   //initial rating of a player
   var rating = 0;
   var club = "";
+  bool varification = false;
 
   //options for type of sports
   List sports = [
@@ -169,18 +170,18 @@ class _signuppageState extends State<signuppage> {
       await Future.value(uploadTask);
       var newUrl = await refer.ref.getDownloadURL();
       Adduserdeatial(
-        controller.fullnamecontroller.value.text,
-        dropcontroller.Frofession.value,
-        dropcontroller.Gender.value,
-        dropcontroller.Sport.value,
-        controller.citycontroller.value.text,
-        controller.emailController.value.text,
-        controller.passwordcontroller.value.text,
-        controller.phonenumbercontroller.value.text,
-        newUrl.toString(),
-        rating.toString(),
-        club.toString(),
-      );
+          controller.fullnamecontroller.value.text,
+          dropcontroller.Frofession.value,
+          dropcontroller.Gender.value,
+          dropcontroller.Sport.value,
+          controller.citycontroller.value.text,
+          controller.emailController.value.text,
+          controller.passwordcontroller.value.text,
+          controller.phonenumbercontroller.value.text,
+          newUrl.toString(),
+          rating.toString(),
+          club.toString(),
+          varification);
       Get.snackbar(
         "Registration",
         "Your account has been register succefully please login again.",
@@ -225,6 +226,7 @@ class _signuppageState extends State<signuppage> {
     String url,
     String rating,
     String club,
+    bool varification,
   ) async {
     await FirebaseFirestore.instance
         .collection('users')
@@ -240,7 +242,8 @@ class _signuppageState extends State<signuppage> {
       'password': password,
       'phoneNumber': phone,
       'rating': rating,
-      'club': club
+      'club': club,
+      'varification': varification
     });
   }
 

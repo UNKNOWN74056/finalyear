@@ -34,6 +34,7 @@ class _playertabletenisState extends State<playertabletenis> {
                           imageUrl: element.image_Url,
                           city: element.city,
                           rating: element.rating,
+                           isVarified: element.varificaiton,
                           onTap: () => Get.to(user_detail_page(post: element)),
                         ))
                     .toList()),

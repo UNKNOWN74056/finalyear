@@ -280,6 +280,26 @@ class functionservices {
       }
     });
   }
+
+  Future<void> sendEmailVerification() async {
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null && !user.emailVerified) {
+      try {
+        await user.sendEmailVerification();
+        Get.snackbar("Message", "please check your email.",
+            backgroundColor: Colors.green, colorText: Colors.white);
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(currentuser)
+            .update({
+          'varification': true,
+        });
+      } catch (e) {
+        print('Failed to send email verification: $e');
+      }
+    }
+  }
 }
 
 var functions = functionservices();

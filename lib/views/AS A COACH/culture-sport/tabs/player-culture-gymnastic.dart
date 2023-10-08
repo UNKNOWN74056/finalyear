@@ -35,6 +35,7 @@ class _playerculturegymnasticState extends State<playerculturegymnastic> {
                           imageUrl: element.image_Url,
                           city: element.city,
                           rating: element.rating,
+                           isVarified: element.varificaiton,
                           onTap: () => Get.to(coachdetail(post: element)),
                         ))
                     .toList()),
