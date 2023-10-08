@@ -18,6 +18,7 @@ class TournamentRegistrationRequest {
   String player10;
   String player11;
   String player12;
+  String sport;
   bool isApproved;
   String sentby;
 
@@ -41,6 +42,7 @@ class TournamentRegistrationRequest {
     required this.player10,
     required this.player11,
     required this.player12,
+    required this.sport,
     this.isApproved = false,
     required this.sentby,
   });
@@ -65,34 +67,35 @@ class TournamentRegistrationRequest {
       'player9': player9,
       'player10': player10,
       'player11': player11,
+      'sport': sport,
       'isApproved': isApproved,
-      'email' : sentby,
+      'email': sentby,
     };
   }
 
   factory TournamentRegistrationRequest.fromJson(Map<String, dynamic> json) {
     return TournamentRegistrationRequest(
-      teamName: json['teamName'],
-      captainName: json['captainName'],
-      address: json['address'],
-      city: json['city'],
-      contactEmail: json['contactEmail'],
-      sportevent: json['sportevent'],
-      contact: json['contact'],
-      player1: json['player1'],
-      player2: json['player2'],
-      player3: json['player3'],
-      player4: json['player4'],
-      player5: json['player5'],
-      player6: json['player6'],
-      player7: json['player7'],
-      player8: json['player8'],
-      player9: json['player9'],
-      player10: json['player10'],
-      player11: json['player11'],
-      player12: json['player12'],
-      isApproved: json['isApproved'],
-      sentby: json['email']
-    );
+        teamName: json['teamName'],
+        captainName: json['captainName'],
+        address: json['address'],
+        city: json['city'],
+        contactEmail: json['contactEmail'],
+        sportevent: json['sportevent'],
+        contact: json['contact'],
+        player1: json['player1'],
+        player2: json['player2'],
+        player3: json['player3'],
+        player4: json['player4'],
+        player5: json['player5'],
+        player6: json['player6'],
+        player7: json['player7'],
+        player8: json['player8'],
+        player9: json['player9'],
+        player10: json['player10'],
+        player11: json['player11'],
+        player12: json['player12'],
+        sport: json['sport'],
+        isApproved: json['isApproved'],
+        sentby: json['email']);
   }
 }

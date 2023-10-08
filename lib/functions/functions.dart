@@ -207,6 +207,7 @@ class functionservices {
         player10: regicontroller.player10controller.text,
         player11: regicontroller.player11controller.text,
         player12: regicontroller.player12controller.text,
+        sport: regicontroller.sportcontroller.text,
         sentby: currentuser.toString());
 
     try {

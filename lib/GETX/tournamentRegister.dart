@@ -21,6 +21,7 @@ class TournamentsRegistration extends GetxController {
   var player10 = "".obs;
   var player11 = "".obs;
   var player12 = "".obs;
+  var sport = "".obs;
   bool isformValidated = false;
 
 //controllers
@@ -42,7 +43,8 @@ class TournamentsRegistration extends GetxController {
       player9controller,
       player10controller,
       player11controller,
-      player12controller;
+      player12controller,
+      sportcontroller;
 
   @override
   void onInit() {
@@ -67,6 +69,7 @@ class TournamentsRegistration extends GetxController {
     player10controller = TextEditingController();
     player11controller = TextEditingController();
     player12controller = TextEditingController();
+    sportcontroller = TextEditingController();
   }
 
   // form key for validaiton
@@ -194,6 +197,7 @@ class TournamentsRegistration extends GetxController {
       player10.value = player10controller.value.text;
       player11.value = player11controller.value.text;
       player12.value = player12controller.value.text;
+      sport.value = sportcontroller.value.text;
       isformValidated = true;
       // User those values to send our auth request ...
     }

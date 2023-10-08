@@ -44,6 +44,7 @@ class _registrationState extends State<registration> {
     controller.player10controller.text = "";
     controller.player11controller.text = "";
     controller.player12controller.text = "";
+    controller.sportcontroller.text = "";
   }
 
   Map<String, dynamic>? paymentIntentData;
@@ -235,6 +236,18 @@ class _registrationState extends State<registration> {
                   },
                   icon: const Icon(FontAwesomeIcons.futbol),
                   labelText: "Enter your sport event corractly"),
+              const SizedBox(
+                height: 10,
+              ),
+              reusebletextfield(
+                  controller: controller.sportcontroller,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  keyboard: TextInputType.emailAddress,
+                  validator: (Value) {
+                    return controller.validsportname(Value!);
+                  },
+                  icon: const Icon(FontAwesomeIcons.futbol),
+                  labelText: "Enter your sport name"),
               const SizedBox(
                 height: 10,
               ),
