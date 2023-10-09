@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:finalyear/GETX/Deletion_Status.dart';
 import 'package:finalyear/utils/Routes.dart';
 import 'package:finalyear/utils/Routes_Name.dart';
 import 'package:finalyear/views/AS%20A%20COACH/culture-sport/player-culture-home.dart';
@@ -10,9 +11,14 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp();
+  // Initialize GetX
+  await Get.putAsync(() async => DeletionStatusController());
   Stripe.publishableKey =
       "pk_test_51NY1EmL4v0vSdiaO9Bfhg7tWPfSMo4fF3SzSS7OWZ7p06Bbyb41oxQYEOWHGutvwezpqCP3wa5iiLdkWoyRLst7G00n0q1DeAr";
+  // Initialize the deletion status listener
+
   runApp(const MyApp());
 }
 

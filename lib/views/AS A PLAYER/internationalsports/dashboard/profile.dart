@@ -60,6 +60,7 @@ class _profileState extends State<profile> {
         isLoading = false; // Set to false when data is loaded
       });
     });
+    checkAccountVerificationStatus();
   }
 
   @override

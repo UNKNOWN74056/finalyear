@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/GETX/getdatafromfirebase.dart';
 import 'package:finalyear/functions/functions.dart';
 import 'package:finalyear/components/data/Profile-Shimmer-Ui.dart';
@@ -24,6 +25,28 @@ class _profileState extends State<playerprofile> {
   final vidcontroller = Get.put(FetchVideoFirebase());
   final currentuser = FirebaseAuth.instance.currentUser!.email;
   bool isLoading = true; // Initially set to true for shimmer loading
+  bool isAccountVerified = false; // Add a variable to track verification status
+
+  void checkAccountVerificationStatus() {
+    final firestore = FirebaseFirestore.instance;
+
+    firestore
+        .collection('users')
+        .where('email', isEqualTo: currentuser)
+        .get()
+        .then((querySnapshot) {
+      if (querySnapshot.docs.isNotEmpty) {
+        final userData = querySnapshot.docs.first.data();
+        final isVerified = userData['varification'] ?? false;
+
+        setState(() {
+          isAccountVerified = isVerified;
+        });
+      }
+    }).catchError((error) {
+      print('Error checking account verification status: $error');
+    });
+  }
 
   @override
   void initState() {
@@ -34,6 +57,7 @@ class _profileState extends State<playerprofile> {
         isLoading = false; // Set to false when data is loaded
       });
     });
+    checkAccountVerificationStatus();
   }
 
   @override
@@ -105,6 +129,7 @@ class _profileState extends State<playerprofile> {
                 onRefresh: () async {
                   vidcontroller.Getallvideos();
                   controller.GetDataFirebase();
+                  checkAccountVerificationStatus();
                 },
                 child: Obx(() => ListView(
                       children: controller.mylist
@@ -115,6 +140,36 @@ class _profileState extends State<playerprofile> {
                             (element) => Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                if (!isAccountVerified)
+                                  Center(
+                                    child: Container(
+                                      color: Colors
+                                          .yellow, // Customize the color as needed
+                                      padding: const EdgeInsets.all(10),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          const Text(
+                                            "Please verify your account",
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                              width:
+                                                  10), // Add some spacing between the message and the button
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              functions.sendEmailVerification();
+                                            },
+                                            child: const Text("Verify"),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
                                 Container(
                                   padding: const EdgeInsets.all(20),
                                   child: Row(

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:finalyear/GETX/allvideos.dart';
@@ -94,13 +95,13 @@ class functionservices {
   }
 
   //logout function
-  Future signout() async {
+  Future<void> signout() async {
     await FirebaseAuth.instance.signOut();
   }
 
   //delete accuont function
   Future delete() async {
-    FirebaseFirestore.instance
+    await FirebaseFirestore.instance
         .collection("users")
         .doc(currentUser.currentUser!.email)
         .delete();
@@ -298,6 +299,43 @@ class functionservices {
       } catch (e) {
         print('Failed to send email verification: $e');
       }
+    }
+  }
+
+  void submitDeletionRequest(String fullname, String image, requesterby,
+      String profession, String sport) {
+    FirebaseFirestore.instance
+        .collection('deletionRequests')
+        .doc(currentuser)
+        .set({
+      'fullname': fullname,
+      'image': image,
+      'requesterby': requesterby,
+      'profession': profession,
+      'sport': sport,
+      'timestamp': FieldValue.serverTimestamp(),
+    });
+  }
+
+  Future<void> submitDeletionRequestWithUserData() async {
+    // Retrieve user data
+    final requesterId = FirebaseAuth.instance.currentUser?.email;
+    DocumentSnapshot userDataSnapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(requesterId)
+        .get();
+
+    if (userDataSnapshot.exists) {
+      // Extract the user's data
+      String profession = userDataSnapshot.get('profession');
+      String sport = userDataSnapshot.get('sport');
+      String fullname = userDataSnapshot.get('fullname');
+      String image = userDataSnapshot.get('Imageurl');
+      // Call the submitDeletionRequest function with the retrieved data
+      submitDeletionRequest(fullname, image, requesterId, profession, sport);
+    } else {
+      // Handle the case where user data is not found
+      Get.snackbar("Error", "User not found");
     }
   }
 }

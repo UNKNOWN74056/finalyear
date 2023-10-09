@@ -55,8 +55,8 @@ class _settingState extends State<setting> {
                         builder: (context) {
                           return AlertDialog(
                             title: const Text("Delete Account"),
-                            content:
-                                const Text("Are you sure you want to delete?"),
+                            content: const Text(
+                                "Are you sure you want to request for deletion?"),
                             actions: [
                               TextButton(
                                   onPressed: () {
@@ -65,15 +65,17 @@ class _settingState extends State<setting> {
                                   child: const Text("Cancel")),
                               TextButton(
                                   onPressed: () {
-                                    functions.delete();
+                                    functions
+                                        .submitDeletionRequestWithUserData();
                                     Get.snackbar(
                                       "Message",
-                                      "Your account has been successfully deleted.",
+                                      "Your request has been sent to admin.",
                                       backgroundColor: Colors.green,
                                       colorText: Colors.white,
                                     );
-                                    Navigator.pushNamed(
-                                        context, Routesname.login);
+                                    Navigator.of(context).pop();
+                                    // Navigator.pushNamed(
+                                    //     context, Routesname.login);
                                   },
                                   child: const Text("Yes")),
                             ],
