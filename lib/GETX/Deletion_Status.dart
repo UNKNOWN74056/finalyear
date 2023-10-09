@@ -1,5 +1,6 @@
 import 'package:finalyear/views/loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -33,7 +34,8 @@ class DeletionStatusController extends GetxController {
             print("user has been delted");
 
             FirebaseAuth.instance.currentUser!.delete();
-            Get.snackbar("Message", "Your account has been deleted by admin");
+            Get.snackbar("Message", "Your account has been deleted by admin",
+                backgroundColor: Colors.green, colorText: Colors.white);
           }
         } else {
           // Handle the case where the document doesn't exist
