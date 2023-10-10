@@ -19,7 +19,8 @@ class _usersearchengineState extends State<usersearchengine> {
         title: TextField(
           onChanged: (value) {
             setState(() {
-              _searchQuery = value;
+              // Convert the search query to lowercase
+              _searchQuery = value.toLowerCase();
             });
           },
           decoration: const InputDecoration(
@@ -31,22 +32,26 @@ class _usersearchengineState extends State<usersearchengine> {
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance
-            .collection('users')
-            .where('fullname', isGreaterThanOrEqualTo: _searchQuery)
-            .where('fullname', isLessThanOrEqualTo: '$_searchQuery\uf8ff')
-            .snapshots(),
+        stream: FirebaseFirestore.instance.collection('users').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
             return const Center(child: CircularProgressIndicator());
           }
 
+          // Perform a case-insensitive search and filter results based on the searchQuery
+          final filteredDocs = snapshot.data!.docs
+              .where((document) =>
+                  document['fullname'].toLowerCase().contains(_searchQuery))
+              .toList();
+
           return ListView.builder(
-            itemCount: snapshot.data!.docs.length,
+            itemCount: filteredDocs.length,
             itemBuilder: (BuildContext context, int index) {
-              final document = snapshot.data!.docs[index];
+              final document = filteredDocs[index];
               return GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  // Handle the tap on the user item.
+                },
                 child: ListTile(
                   leading: CircleAvatar(
                     backgroundImage: NetworkImage(document['Imageurl']),
