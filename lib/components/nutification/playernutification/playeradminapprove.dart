@@ -1,3 +1,4 @@
+import 'package:finalyear/components/nutification/playernutification/Deletion_Request.dart';
 import 'package:finalyear/components/nutification/playernutification/playeroffer.dart';
 import 'package:finalyear/components/nutification/playernutification/playerregistration.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ class _adminapproveState extends State<playeradminapprove> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 2,
+        length: 3,
         child: SafeArea(
           child: Scaffold(
             appBar: AppBar(
@@ -22,11 +23,14 @@ class _adminapproveState extends State<playeradminapprove> {
               bottom: const TabBar(
                 indicatorColor: Colors.black,
                 indicatorWeight: 3,
-                tabs: [Text("Registration"), Text("Offers")],
+                tabs: [Text("Registration"), Text("Offers"), Text("Deletion")],
               ),
             ),
-            body: const TabBarView(
-                children: [playerregidtration(), playeroffer()]),
+            body: const TabBarView(children: [
+              playerregidtration(),
+              playeroffer(),
+              Deletion_Request()
+            ]),
           ),
         ));
   }
