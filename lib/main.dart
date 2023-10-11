@@ -17,7 +17,6 @@ Future main() async {
   await Get.putAsync(() async => DeletionStatusController());
   Stripe.publishableKey =
       "pk_test_51NY1EmL4v0vSdiaO9Bfhg7tWPfSMo4fF3SzSS7OWZ7p06Bbyb41oxQYEOWHGutvwezpqCP3wa5iiLdkWoyRLst7G00n0q1DeAr";
-  // Initialize the deletion status listener
 
   runApp(const MyApp());
 }

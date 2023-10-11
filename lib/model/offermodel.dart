@@ -6,6 +6,8 @@ class offerrequest {
   String name;
   String profession;
   String sport;
+  String fullname;
+  String image;
   offerrequest({
     required this.amount,
     this.isApproved = false,
@@ -14,6 +16,8 @@ class offerrequest {
     required this.name,
     required this.profession,
     required this.sport,
+    required this.fullname,
+    required this.image,
   });
 
   Map<String, dynamic> toJson() {
@@ -24,18 +28,23 @@ class offerrequest {
       'email': email,
       'coach': name,
       'profession': profession,
-      'sport': sport
+      'sport': sport,
+      'fullname': fullname,
+      'image': image,
     };
   }
 
   factory offerrequest.fromJson(Map<String, dynamic> json) {
     return offerrequest(
-        amount: json['amount'],
-        isApproved: json['isApproved'],
-        sentby: json['sentby'],
-        email: json['email'],
-        name: json['coach'],
-        profession: json['profession'],
-        sport: json['sport']);
+      amount: json['amount'],
+      isApproved: json['isApproved'],
+      sentby: json['sentby'],
+      email: json['email'],
+      name: json['coach'],
+      profession: json['profession'],
+      sport: json['sport'],
+      fullname: json['fullname'],
+      image: json['image'],
+    );
   }
 }

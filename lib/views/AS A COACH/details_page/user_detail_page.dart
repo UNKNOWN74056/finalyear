@@ -121,6 +121,8 @@ class _coachdetailState extends State<user_detail_page> {
         amount: offercontroller.amountcontroller.text,
         sentby: currentuser.toString(),
         email: widget.post.email,
+        fullname: widget.post.fullname,
+        image: widget.post.image_Url,
         name: name.toString(),
         profession: profession.toString(),
         sport: sport.toString());
