@@ -130,7 +130,7 @@ class TournamentsRegistration extends GetxController {
 
   String? validsportname(String value) {
     if (value.isEmpty) {
-      return "Please enter a sport event name";
+      return "Please enter a sport name";
     } else if (!_isTextOnly(value)) {
       return "Please enter a valid name with only letters";
     }

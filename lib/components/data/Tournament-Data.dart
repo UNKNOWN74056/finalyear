@@ -213,7 +213,7 @@ class _TournamentCardState extends State<TournamentCard> {
                         ),
                         const SizedBox(width: 5),
                         Text(
-                          widget.price,
+                          widget.price.toString(),
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,

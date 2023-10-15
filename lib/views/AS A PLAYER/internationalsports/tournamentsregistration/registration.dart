@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/GETX/tournamentRegister.dart';
 import 'package:finalyear/components/loginbutton.dart';
 import 'package:finalyear/components/reusebletextfield.dart';
@@ -8,7 +9,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import '../../../../functions/functions.dart';
 
 class registration extends StatefulWidget {
@@ -20,6 +21,7 @@ class registration extends StatefulWidget {
 
 final controller = Get.put(TournamentsRegistration());
 final currentuser = FirebaseAuth.instance.currentUser!.email;
+final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
 class _registrationState extends State<registration> {
   @override
@@ -74,6 +76,20 @@ class _registrationState extends State<registration> {
     } catch (e, s) {
       print('Payment exception:$e$s');
     }
+  }
+
+  Future<List<String>> getSportEventSuggestions() async {
+    // Replace this with your Firestore query to fetch sport event names
+    QuerySnapshot snapshot =
+        await FirebaseFirestore.instance.collection("tournaments").get();
+    List<String> suggestions = [];
+
+    for (var doc in snapshot.docs) {
+      // Assuming sport event names are stored in a field named "sportevent"
+      suggestions.add(doc["tournamentname"] as String);
+    }
+
+    return suggestions;
   }
 
   displayPaymentSheet() async {
@@ -227,15 +243,43 @@ class _registrationState extends State<registration> {
               const SizedBox(
                 height: 10,
               ),
-              reusebletextfield(
+              // Dropdown menu for sport event
+              TypeAheadField<String>(
+                textFieldConfiguration: TextFieldConfiguration(
                   controller: controller.sporteventcontroller,
-                  autoValidateMode: AutovalidateMode.onUserInteraction,
-                  keyboard: TextInputType.emailAddress,
-                  validator: (Value) {
-                    return controller.validsportname(Value!);
-                  },
-                  icon: const Icon(FontAwesomeIcons.futbol),
-                  labelText: "Enter your sport event corractly"),
+                  decoration: const InputDecoration(
+                    labelText: "Enter Sport Event",
+                    labelStyle: TextStyle(
+                        color: Colors.black), // Customize label text color
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Colors.black), // Black outline border
+                    ),
+                    prefixIcon: Icon(FontAwesomeIcons.futbol,
+                        color: Colors.black), // Icon inside the text field
+                  ),
+                ),
+                suggestionsCallback: (pattern) async {
+                  List<String> suggestions = await getSportEventSuggestions();
+                  return suggestions
+                      .where((event) =>
+                          event.toLowerCase().contains(pattern.toLowerCase()))
+                      .toList();
+                },
+                itemBuilder: (context, suggestion) {
+                  return ListTile(
+                    title: Text(suggestion),
+                  );
+                },
+                onSuggestionSelected: (suggestion) {
+                  setState(() {
+                    controller.sporteventcontroller.text = suggestion;
+                  });
+                },
+              ),
+
               const SizedBox(
                 height: 10,
               ),
