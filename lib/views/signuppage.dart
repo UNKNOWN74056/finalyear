@@ -2,8 +2,10 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/GETX/SignupGetX.dart';
 import 'package:finalyear/GETX/dropdown.dart';
+import 'package:finalyear/GETX/imageGetx.dart';
+import 'package:finalyear/components/colors.dart';
 import 'package:finalyear/utils/Routes_Name.dart';
-import 'package:finalyear/views/loginpage.dart';
+import 'package:finalyear/utils/Utils.dart';
 import 'package:finalyear/view_model/service/internet_connection.dart';
 import 'package:finalyear/components/loginbutton.dart';
 import 'package:finalyear/components/reusebletextfield.dart';
@@ -26,10 +28,10 @@ class _signuppageState extends State<signuppage> {
   //GETX contoller
   final controller = Get.put(sighnupcontroller());
   final dropcontroller = Get.put(dropdownmanu());
-  File? _image;
   final ImagePicker picker = ImagePicker();
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
+  final imagecontroller = Get.put(ImageController());
 
 //pick image from gallery
   Future getImageGallery() async {
@@ -37,7 +39,7 @@ class _signuppageState extends State<signuppage> {
 
     setState(() {
       if (pickedFile != null) {
-        _image = File(pickedFile.path);
+        imagecontroller.image = File(pickedFile.path);
       } else {
         print("No Image Selected");
       }
@@ -50,7 +52,7 @@ class _signuppageState extends State<signuppage> {
 
     setState(() {
       if (pickedFile != null) {
-        _image = File(pickedFile.path);
+        imagecontroller.image = File(pickedFile.path);
       } else {
         print("No Image Selected");
       }
@@ -165,7 +167,7 @@ class _signuppageState extends State<signuppage> {
       var refer = await FirebaseStorage.instance
           .ref("/MrSport$email")
           .child('images')
-          .putFile(_image!.absolute);
+          .putFile(imagecontroller.image!.absolute);
       TaskSnapshot uploadTask = refer;
       await Future.value(uploadTask);
       var newUrl = await refer.ref.getDownloadURL();
@@ -182,18 +184,14 @@ class _signuppageState extends State<signuppage> {
           rating.toString(),
           club.toString(),
           varification);
-      Get.snackbar(
-        "Registration",
-        "Your account has been register succefully please login again.",
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
-      );
+      utils.flutter_toast(
+          "Your account has been register succefully please login again.",
+          AppColors.green);
       Navigator.of(context).pop();
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => const loginpage()),
-          (Route<dynamic> route) => false);
+      Navigator.pushNamed(context, Routesname.login);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
+        utils.flutter_toast("Password is too weak!", AppColors.red);
         Get.snackbar(
           "Password weak",
           "Password is too weak!",
@@ -202,12 +200,9 @@ class _signuppageState extends State<signuppage> {
         );
         Navigator.of(context).pop();
       } else if (e.code == 'email-already-in-use') {
-        Get.snackbar(
-          "Email",
-          "This email is already in use please try a valid email!",
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
-        );
+        utils.flutter_toast(
+            "This email is already in use please try a valid email!",
+            AppColors.red);
         Navigator.of(context).pop();
       }
     }
@@ -296,7 +291,7 @@ class _signuppageState extends State<signuppage> {
                     dialogAlert(context);
                   },
                   child: Container(
-                    child: _image == null
+                    child: imagecontroller.image == null
                         ? CircleAvatar(
                             radius: 60,
                             child: Image.asset(
@@ -305,7 +300,7 @@ class _signuppageState extends State<signuppage> {
                               fit: BoxFit.cover,
                             ))
                         : Image.file(
-                            _image!.absolute,
+                            imagecontroller.image!.absolute,
                             height: 100,
                             width: 100,
                             fit: BoxFit.cover,
@@ -552,7 +547,7 @@ class _signuppageState extends State<signuppage> {
                 loginbutton(
                   onTap: () async {
                     controller.checksignup();
-                    if (_image == null) {
+                    if (imagecontroller.image == null) {
                       // Show an error message that the user needs to select an image first.
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(

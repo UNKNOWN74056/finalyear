@@ -27,7 +27,7 @@ class _loginpageState extends State<loginpage> {
   //putting getx controller her
   final controller = Get.put(LoginController());
   // State variable for password visibility toggle
-  bool _isObscured = true;
+  ValueNotifier<bool> obsecuretext = ValueNotifier<bool>(true);
 
   //login function for the user
   void loginuser() async {
@@ -168,33 +168,33 @@ class _loginpageState extends State<loginpage> {
                       const SizedBox(
                         height: 25,
                       ),
-                      reusebletextfield(
-                        keyboard: TextInputType.emailAddress,
-                        validator: (value) {
-                          return controller.validPassword(value!);
+                      ValueListenableBuilder(
+                        valueListenable: obsecuretext,
+                        builder: (BuildContext context, dynamic value,
+                            Widget? child) {
+                          return reusebletextfield(
+                            keyboard: TextInputType.emailAddress,
+                            validator: (value) {
+                              return controller.validPassword(value!);
+                            },
+                            autoValidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            controller: controller.passwordController,
+                            obscureText: obsecuretext.value,
+                            labelText: "Enter your password",
+                            icon: const Icon(
+                              Icons.lock,
+                              color: Color.fromARGB(255, 4, 45, 119),
+                            ),
+                            sufixicon: InkWell(
+                                onTap: () {
+                                  obsecuretext.value = !obsecuretext.value;
+                                },
+                                child: Icon(obsecuretext.value
+                                    ? Icons.visibility_off
+                                    : Icons.visibility)),
+                          );
                         },
-                        autoValidateMode: AutovalidateMode.onUserInteraction,
-                        controller: controller.passwordController,
-                        obscureText: _isObscured,
-                        labelText: "Enter your password",
-                        icon: const Icon(
-                          Icons.lock,
-                          color: Color.fromARGB(255, 4, 45, 119),
-                        ),
-                        sufixicon: GestureDetector(
-                          onTap: (() {
-                            setState(() {
-                              _isObscured = !_isObscured;
-                            });
-                          }),
-                          child: Icon(
-                            _isObscured
-                                ? FontAwesomeIcons.eyeSlash
-                                : FontAwesomeIcons.eye,
-                            color: Colors.black,
-                            size: 21,
-                          ),
-                        ),
                       ),
                     ],
                   ),

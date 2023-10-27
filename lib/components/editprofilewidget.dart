@@ -1,8 +1,11 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:finalyear/GETX/imageGetx.dart';
+import 'package:finalyear/components/colors.dart';
 import 'package:finalyear/components/reusebletextfield.dart';
 import 'package:finalyear/components/savebutton.dart';
 import 'package:finalyear/components/userdataprofileedit.dart';
+import 'package:finalyear/utils/Utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +27,7 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
   final TextEditingController citynameupdate = TextEditingController();
   final TextEditingController phoneupdate = TextEditingController();
   final TextEditingController clubupdate = TextEditingController();
-  File? _image;
+  final imagecontroller = Get.put(ImageController());
   final ImagePicker picker = ImagePicker();
   final updateprofilecontroller = Get.put(updateuserprofile());
   //dailog to select photo from camera or gallery
@@ -70,25 +73,23 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
   //pick image from galler
   Future getImageGallery() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-    setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-      } else {
-        print("No Image Selected");
-      }
-    });
+
+    if (pickedFile != null) {
+      imagecontroller.image = File(pickedFile.path);
+    } else {
+      print("No Image Selected");
+    }
   }
 
 // pick image from camera
   Future getCameraImage() async {
     final pickedFile = await picker.pickImage(source: ImageSource.camera);
-    setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-      } else {
-        print("No Image Selected");
-      }
-    });
+
+    if (pickedFile != null) {
+      imagecontroller.image = File(pickedFile.path);
+    } else {
+      print("No Image Selected");
+    }
   }
 
   //update image function
@@ -97,7 +98,7 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
     var refer = await FirebaseStorage.instance
         .ref("/MrSport$email")
         .child('images')
-        .putFile(_image!.absolute);
+        .putFile(imagecontroller.image!.absolute);
     TaskSnapshot uploadTask = refer;
     await Future.value(uploadTask);
     var newUrl = await refer.ref.getDownloadURL();
@@ -120,13 +121,13 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
 
   // update profile function
   Future updateprofile() async {
-    if (_image != null) {
+    if (imagecontroller.image != null) {
       // Only update the image if a new image is selected
       var email = FirebaseAuth.instance.currentUser!.email;
       var refer = await FirebaseStorage.instance
           .ref("/MrSport$email")
           .child('images')
-          .putFile(_image!.absolute);
+          .putFile(imagecontroller.image!.absolute);
       TaskSnapshot uploadTask = refer;
       await Future.value(uploadTask);
       var newUrl = await refer.ref.getDownloadURL();
@@ -188,30 +189,30 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
                             () {}); // Trigger a rebuild when the image is changed
                       },
                       child: Container(
-                        child:
-                            _image == null // Check if a new image is selected
-                                ? (widget.data.image_Url.isEmpty
-                                    ? CircleAvatar(
-                                        radius: 60,
-                                        child: Image.asset(
-                                          "assets/logo.png",
-                                          height: 90,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      )
-                                    : Image.network(
-                                        widget.data.image_Url,
-                                        height: 100,
-                                        width: 100,
-                                        fit: BoxFit.cover,
-                                      ))
-                                : Image.file(
-                                    // Display the new selected image
-                                    _image!,
+                        child: imagecontroller.image ==
+                                null // Check if a new image is selected
+                            ? (widget.data.image_Url.isEmpty
+                                ? CircleAvatar(
+                                    radius: 60,
+                                    child: Image.asset(
+                                      "assets/logo.png",
+                                      height: 90,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  )
+                                : Image.network(
+                                    widget.data.image_Url,
                                     height: 100,
                                     width: 100,
                                     fit: BoxFit.cover,
-                                  ),
+                                  ))
+                            : Image.file(
+                                // Display the new selected image
+                                imagecontroller.image!,
+                                height: 100,
+                                width: 100,
+                                fit: BoxFit.cover,
+                              ),
                       ),
                     ),
 
@@ -293,20 +294,11 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
                           try {
                             await updateprofile();
                             Get.back();
-                            Get.snackbar(
-                              "Message",
-                              "Profile has been updated.",
-                              backgroundColor: Colors.green,
-                              colorText: Colors.white,
-                            );
+                            utils.flutter_toast(
+                                "Profile has been updated.", AppColors.green);
                           } catch (error) {
-                            print("Error updating profile: $error");
-                            Get.snackbar(
-                              "Error",
-                              "Failed to update profile.",
-                              backgroundColor: Colors.red,
-                              colorText: Colors.white,
-                            );
+                            utils.flutter_toast(
+                                "Failed to update profile.", AppColors.red);
                           }
                         }
                       },
