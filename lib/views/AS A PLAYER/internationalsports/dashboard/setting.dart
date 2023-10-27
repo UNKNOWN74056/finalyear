@@ -69,12 +69,10 @@ class _settingState extends State<setting> {
                                   onPressed: () {
                                     functions
                                         .submitDeletionRequestWithUserData();
-                                    Get.snackbar(
-                                      "Message",
-                                      "Your request has been sent to admin.",
-                                      backgroundColor: Colors.green,
-                                      colorText: Colors.white,
-                                    );
+                                    utils.flutter_toast(
+                                        "YYour request has been sent to admin.",
+                                        AppColors.green);
+
                                     Navigator.of(context).pop();
                                     // Navigator.pushNamed(
                                     //     context, Routesname.login);
@@ -194,12 +192,9 @@ class _settingState extends State<setting> {
                                                 true) {
                                               functions.passwordchange();
                                               Get.back();
-                                              Get.snackbar(
-                                                "Message",
-                                                "Your password has been change",
-                                                backgroundColor: Colors.green,
-                                                colorText: Colors.white,
-                                              );
+                                              utils.flutter_toast(
+                                                  "Your password has been change",
+                                                  AppColors.green);
                                             }
                                           },
                                           child: const Text("Save Changes"))

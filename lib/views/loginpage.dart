@@ -57,12 +57,9 @@ class _loginpageState extends State<loginpage> {
       userDocRef.get().then((doc) {
         if (doc.exists && doc.data() != null) {
           if (doc.data()!['markedForDeletion'] == true) {
-            Get.snackbar(
-              "Message",
-              "Your account is disabled by admin.",
-              backgroundColor: Colors.red,
-              colorText: Colors.white,
-            );
+            utils.flutter_toast(
+                "Your account is disabled by admin.", AppColors.red);
+
             Navigator.of(context).pop();
           } else {
             // User is not marked for deletion
