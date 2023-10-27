@@ -1,7 +1,9 @@
 import 'package:finalyear/utils/Routes_Name.dart';
 import 'package:finalyear/view_model/splashscreen/splash_screen.dart';
 import 'package:finalyear/views/AS%20A%20COACH/culture-sport/Player_Culture_Dashboard.dart';
+import 'package:finalyear/views/AS%20A%20COACH/culture-sport/player-culture-home.dart';
 import 'package:finalyear/views/AS%20A%20COACH/international-sports/Player_International_Dashboard.dart';
+import 'package:finalyear/views/AS%20A%20COACH/international-sports/bottomtabbars/interhome.dart';
 import 'package:finalyear/views/AS%20A%20PLAYER/culturesport/Coach_Culture_Dashboard.dart';
 import 'package:finalyear/views/AS%20A%20PLAYER/internationalsports/dashboard/Coach_International_Dashboard.dart';
 import 'package:finalyear/views/forgotpassword.dart';
@@ -43,6 +45,13 @@ class Routes {
         return MaterialPageRoute(
             builder: (BuildContext context) =>
                 const Player_Culture_Dashboard());
+      case Routesname.Player_internation_home:
+        return MaterialPageRoute(
+            builder: (BuildContext context) =>
+                const Player_international_home());
+      case Routesname.Player_culture_home:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => const player_culture_home());
 
       default:
         return MaterialPageRoute(builder: (_) {

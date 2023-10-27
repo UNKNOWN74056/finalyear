@@ -17,7 +17,7 @@ class _Player_Culture_DashboardState extends State<Player_Culture_Dashboard> {
   int currentIndex = 0;
 
   final screens = const [
-    playerculturehome(),
+    player_culture_home(),
     playerculturetournaments(),
     setting(),
     profile(),

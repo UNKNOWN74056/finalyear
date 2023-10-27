@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalyear/GETX/LoginGetX.dart';
+import 'package:finalyear/components/colors.dart';
 import 'package:finalyear/utils/Routes_Name.dart';
+import 'package:finalyear/utils/Utils.dart';
 import 'package:finalyear/views/homedbforcoache.dart';
 import 'package:finalyear/views/homedbforplayer.dart';
 import 'package:finalyear/view_model/service/internet_connection.dart';
@@ -76,40 +78,28 @@ class _loginpageState extends State<loginpage> {
               } else {
                 // Handle other professions or navigation logic here
               }
-              Get.snackbar(
-                "Message",
-                "You have logged in successfully.",
-                backgroundColor: Colors.green,
-                colorText: Colors.white,
-              );
+              utils.flutter_toast(
+                  "You have logged in successfully.", AppColors.green);
             });
           }
         } else {
-          Get.snackbar(
-            "Error",
-            "User document does not exist in Firestore.",
-            backgroundColor: Colors.red,
-            colorText: Colors.white,
-          );
+          utils.flutter_toast(
+              "User document does not exist in Firestore.", AppColors.red);
+
           Navigator.of(context).pop();
         }
       });
     } on FirebaseAuthException catch (e) {
       // Handle FirebaseAuth exceptions
       if (e.code == 'user-not-found') {
-        Get.snackbar("No User", "No user is found for this Email",
-            backgroundColor: Colors.red,
-            colorText: Colors.white,
-            duration: const Duration(seconds: 2),
-            snackPosition: SnackPosition.BOTTOM);
+        utils.flutter_toast("No user is found for this Email.", AppColors.red);
+
         Navigator.of(context).pop();
       } else if (e.code == 'wrong-password') {
-        Get.snackbar("Your password",
-            "Your password is wrong; please correct your password",
-            backgroundColor: Colors.red,
-            colorText: Colors.white,
-            duration: const Duration(seconds: 2),
-            snackPosition: SnackPosition.BOTTOM);
+        utils.flutter_toast(
+            "Your password is wrong; please correct your password.",
+            AppColors.red);
+
         Navigator.of(context).pop();
       }
     }

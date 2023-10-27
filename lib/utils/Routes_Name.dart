@@ -12,4 +12,6 @@ class Routesname {
   static const String Player_International_Dashborad =
       'Player_International_Dashboard';
   static const String Player_Culture_Dashborad = 'Player_Culture_Dashboard';
+  static const String Player_internation_home = 'player_international_hone';
+  static const String Player_culture_home = 'player_culture_hone';
 }

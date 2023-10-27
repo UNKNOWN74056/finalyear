@@ -1,6 +1,8 @@
+import 'package:finalyear/components/colors.dart';
 import 'package:finalyear/functions/functions.dart';
 import 'package:finalyear/utils/Routes_Name.dart';
 import 'package:finalyear/components/savebutton.dart';
+import 'package:finalyear/utils/Utils.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -103,12 +105,10 @@ class _settingState extends State<setting> {
                             TextButton(
                                 onPressed: () {
                                   functions.signout();
-                                  Get.snackbar(
-                                    "Message",
-                                    "You have successfully logout.",
-                                    backgroundColor: Colors.green,
-                                    colorText: Colors.white,
-                                  );
+                                  utils.flutter_toast(
+                                      "You have successfully logout.",
+                                      AppColors.green);
+
                                   Navigator.pushNamed(
                                       context, Routesname.login);
                                 },

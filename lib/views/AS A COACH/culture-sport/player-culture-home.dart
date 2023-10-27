@@ -7,12 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:card_swiper/card_swiper.dart';
 
-class playerculturehome extends StatefulWidget {
-  static const String routname = "playerculturehome";
-  const playerculturehome({super.key});
+class player_culture_home extends StatefulWidget {
+  const player_culture_home({super.key});
 
   @override
-  State<playerculturehome> createState() => _playerculturehomeState();
+  State<player_culture_home> createState() => _playerculturehomeState();
 }
 
 var images = [
@@ -22,7 +21,7 @@ var images = [
   'assets/culture4.jpg',
 ];
 
-class _playerculturehomeState extends State<playerculturehome> {
+class _playerculturehomeState extends State<player_culture_home> {
   @override
   Widget build(BuildContext context) => SafeArea(
         child: DefaultTabController(

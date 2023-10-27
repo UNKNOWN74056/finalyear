@@ -19,9 +19,10 @@ class _Player_International_DashboradState
   int currentIndex = 0;
 
   final screens = const [
-    interhome(),
+    Player_international_home(),
     interclub(),
     intertournaments(),
+    
     setting(),
     playerprofile()
   ];

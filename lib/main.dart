@@ -2,8 +2,6 @@ import 'dart:async';
 import 'package:finalyear/GETX/Deletion_Status.dart';
 import 'package:finalyear/utils/Routes.dart';
 import 'package:finalyear/utils/Routes_Name.dart';
-import 'package:finalyear/views/AS%20A%20COACH/culture-sport/player-culture-home.dart';
-import 'package:finalyear/views/AS%20A%20COACH/international-sports/bottomtabbars/interhome.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -48,10 +46,6 @@ class _MyAppState extends State<MyApp> {
           debugShowCheckedModeBanner: false,
           initialRoute: Routesname.splash_screen,
           onGenerateRoute: Routes.generateRoutes,
-          routes: {
-            interhome.routname: (context) => const interhome(),
-            playerculturehome.routname: (context) => const playerculturehome(),
-          },
         );
       },
     );

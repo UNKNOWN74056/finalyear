@@ -9,12 +9,11 @@ import 'package:finalyear/views/AS%20A%20COACH/international-sports/tabs/player-
 import 'package:flutter/material.dart';
 import 'package:card_swiper/card_swiper.dart';
 
-class interhome extends StatefulWidget {
-  static const String routname = "interhome";
-  const interhome({super.key});
+class Player_international_home extends StatefulWidget {
+  const Player_international_home({super.key});
 
   @override
-  State<interhome> createState() => _interhomeState();
+  State<Player_international_home> createState() => _interhomeState();
 }
 
 //images for swiper
@@ -27,7 +26,7 @@ var images = [
   'assets/hockey.jpg',
 ];
 
-class _interhomeState extends State<interhome> {
+class _interhomeState extends State<Player_international_home> {
   @override
   Widget build(BuildContext context) => SafeArea(
         child: DefaultTabController(
